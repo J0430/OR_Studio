@@ -1,0 +1,67 @@
+.typingContainer {
+  font-family: "Raleway", sans-serif !important;
+  font-size: 3.23rem;
+  font-weight: 500;
+  color: #a6b7ba;
+  overflow: hidden;
+  white-space: nowrap;
+  width: fit-content; /* Adjusts to the text dynamically */
+  text-align: center;
+  display: inline-block;
+  position: relative;
+}
+
+.typingText {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 2px solid #a6b7ba; /* Simulate a blinking cursor */
+  white-space: nowrap;
+  animation: typing 2s steps(29, end), blink-cursor 1s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%; /* Reveal the full text */
+  }
+}
+
+@keyframes blink-cursor {
+  0% {
+    border-color: #a6b7ba; /* Cursor is visible */
+  }
+  50% {
+    border-color: transparent; /* Cursor disappears */
+  }
+  100% {
+    border-color: #a6b7ba; /* Cursor visible again */
+  }
+}
+
+.typing-text.no-cursor {
+  border-right: none; /* Completely hide the cursor */
+}
+@media (max-width: 768px) {
+  .preloader-logo {
+    width: 6rem; /* Smaller logo */
+    margin-bottom: 1.5rem;
+  }
+
+  .typing-container {
+    font-size: 2rem; /* Smaller text size */
+  }
+}
+.preloader-container {
+  transition: opacity 1.5s ease-in-out;
+}
+@supports not (animation: typing 2s steps(29, end)) {
+  .typing-text {
+    width: 100%; /* Ensure the full text is visible */
+    border-right: none; /* Hide the cursor */
+  }
+}
+.typing-text.completed {
+  animation: none; /* Stops the blinking animation */
+}
