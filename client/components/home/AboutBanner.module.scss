@@ -1,0 +1,64 @@
+.aboutWrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+}
+
+.textContainer {
+  width: 100%;
+  max-width: 100rem;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.description {
+  font-size: 2.5rem;
+  color: #ffffff;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-family: "Raleway", sans-serif;
+}
+
+.linkWrapper {
+  margin-top: 6.5rem;
+}
+
+.link {
+  font-size: 1.9rem;
+  color: #ffffff;
+  border: #ffffff 1px solid;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.3s ease-in-out;
+  padding: 1.5rem;
+  border-radius: 6px;
+
+  &:hover {
+    transform: scale(1.2);
+    border-bottom: 1px solid white;
+  }
+}
+
+@media (max-width: 768px) {
+  .description {
+    font-size: 1.2rem;
+  }
+
+  .link {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .description {
+    font-size: 1rem;
+  }
+
+  .link {
+    font-size: 0.8rem;
+  }
+}
