@@ -1,33 +1,40 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./TypingEffect.module.scss";
 
-const TypingEffect = ({ text }) => {
-  useEffect(() => {
-    const typingElement = document.querySelector(`.${styles.typingText}`);
-    if (!typingElement) return;
+const TypingEffect = ({ text = "", typingSpeed = 70, delay = 4000 }) => {
+  const [displayedText, setDisplayedText] = useState("");
+  const [typingDone, setTypingDone] = useState(false);
 
-    const fullText = text;
+  useEffect(() => {
+    if (!text || typeof text !== "string") return; // Exit if the text is invalid
+
     let index = 0;
-    console.log(fullText.at(-1), typingElement.textContent);
 
     const typeInterval = setInterval(() => {
-      if (index < fullText.length) {
-        typingElement.textContent += fullText[index];
+      if (index + 1 < text.length) {
+        setDisplayedText((prev) => prev + text[index]);
         index++;
       } else {
-        clearInterval(typeInterval); // Detiene el efecto al finalizar
+        clearInterval(typeInterval);
+        setTimeout(() => setTypingDone(true), delay); // Delay after typing is done
       }
-    }, 70);
+    }, typingSpeed);
 
-    return () => clearInterval(typeInterval);
-  }, [text]);
+    return () => clearInterval(typeInterval); // Cleanup on unmount
+  }, [text, typingSpeed, delay]);
 
   return (
     <div className={styles.typingContainer}>
-      <span className={styles.typingText}></span>
-      {} <span className={styles.cursor}></span>
+      <span
+        className={
+          typingDone
+            ? `${styles.typingText} ${styles.noCursor}`
+            : styles.typingText
+        }>
+        {displayedText}
+      </span>
     </div>
   );
 };

@@ -7,21 +7,21 @@
 }
 
 .carouselImage {
+  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  position: absolute;
 }
 
 .carouselDots {
   position: absolute;
   bottom: 8rem;
   left: 50%;
-  transform: translateX(-50%);
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  transform: translateX(-50%);
   gap: 0.5rem; /* Adds consistent spacing between dots */
 }
 
@@ -29,12 +29,12 @@
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  background: #ffffff;
+  background: #fff;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
 
   &:hover {
-    background: #cccccc; /* Slightly dim the dot on hover */
+    background: #ccc; /* Slightly dim the dot on hover */
     transform: scale(1.2); /* Scale up the dot for better feedback */
   }
 }

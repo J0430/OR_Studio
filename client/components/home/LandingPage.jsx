@@ -9,17 +9,16 @@ const LandingPage = ({ images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    if (images.length > 0) {
+    if (images?.length > 0) {
       const intervalId = setInterval(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 4000);
+      }, 5000);
       return () => clearInterval(intervalId);
     }
   }, [images]);
 
   return (
     <motion.div className={styles.bannerWrapper}>
-      {/* Image Transition */}
       <AnimatePresence>
         {images?.length > 0 && (
           <motion.div
@@ -32,8 +31,8 @@ const LandingPage = ({ images }) => {
             <Image
               src={images[currentImageIndex]}
               alt={`Background Image ${currentImageIndex + 1}`}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: "cover" }}
               priority={true}
               className={styles.bannerImage}
             />

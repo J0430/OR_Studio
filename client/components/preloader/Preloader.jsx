@@ -5,17 +5,10 @@ import Image from "next/image";
 import TypingEffect from "./TypingEffect";
 import { Logos } from "../../globals/globals";
 import styles from "../preloader/Preloader.module.scss";
+import useTimeout from "hooks/useTimeout";
 
 const Preloader = () => {
-  const [preloaderDone, setPreloaderDone] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setPreloaderDone(false); // Changes state after the defined time
-    }, 4000); // Adjust the time as needed
-    return () => clearTimeout(timer);
-  }, [setPreloaderDone]);
-
+  const preloaderDone = useTimeout(true, 4000);
   return (
     <div className={styles.preloaderWrapper}>
       <motion.div
@@ -24,7 +17,7 @@ const Preloader = () => {
         animate={{ opacity: 0 }}
         exit={{ opacity: 0, filter: "blur(5px)" }}
         transition={{ duration: 1.5, delay: 3.5 }}>
-        {/* First Image */}
+        {/* Fist Logo */}
         <motion.div
           initial={{ filter: "blur(1rem)", opacity: 0 }}
           animate={{ filter: "blur(0rem)", opacity: 1 }}
@@ -39,15 +32,14 @@ const Preloader = () => {
           }}
           className={styles.preloaderLogo}>
           <Image
-            src={Logos[1]} // First image from the array
+            src={Logos[1]}
             alt="OR Logo"
             width={150}
             height={150}
             priority
           />
         </motion.div>
-
-        {/* Second Image */}
+        {/* Second Logo */}
         <motion.div
           alt="OR Studio Logo"
           initial={{
@@ -80,12 +72,17 @@ const Preloader = () => {
             height={150}
             style={{
               width: "auto",
+              height: "2rem",
             }}
             priority
           />
         </motion.div>
-
-        <TypingEffect text="Architecture Visualization" />
+        {/* Typing Effect */}
+        <TypingEffect
+          text="Architecture Visualization"
+          typingSpeed={70}
+          delay={4000}
+        />
       </motion.div>
     </div>
   );

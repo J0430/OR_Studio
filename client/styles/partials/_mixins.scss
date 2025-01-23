@@ -1,0 +1,19 @@
+@use "sass:math";
+@use "variables" as variables;
+
+@mixin respond-to($breakpoint) {
+  @media (min-width: map-get(variables.$breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+// Center Flex Mixin
+@mixin center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@function rem($pixels, $base: 16) {
+  @return #{math.div($pixels, $base)}rem;
+}
