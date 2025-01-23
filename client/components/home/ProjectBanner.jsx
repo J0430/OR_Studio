@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import styles from "./ProjectBanner.module.scss";
-import ScrollArrow from "../common/ScrollArrow.module.scss";
+import DirectionalButton from "../common/DirectionalButton";
 
 const wrap = (min, max, val) => {
   if (val > max) return min;
@@ -33,7 +33,7 @@ const imageVariants = {
 
 const ProjectBanner = ({ images, nextSectionId }) => {
   const [[page, direction], setPage] = useState([0, 0]); // Page and direction state
-  const imageIndex = wrap(0, images.length - 1, page);
+  const imageIndex = wrap(0, images?.length - 1, page);
   const transitionTime = 4000; // Duration for each slide
   const [autoplayInterval, setAutoplayInterval] = useState(null); // Track the interval ID
 
@@ -43,7 +43,7 @@ const ProjectBanner = ({ images, nextSectionId }) => {
 
   const nextPage = () => {
     setPage(([currentPage]) => {
-      const newPage = (currentPage + 1) % images.length; // Loop back to the first image
+      const newPage = (currentPage + 1) % images?.length; // Loop back to the first image
       return [newPage, 1];
     });
   };
@@ -57,7 +57,7 @@ const ProjectBanner = ({ images, nextSectionId }) => {
     }
 
     return () => clearInterval(autoplayInterval);
-  }, [inView, images.length, transitionTime]);
+  }, [inView, images?.length, transitionTime]);
 
   const handleDotClick = (index) => {
     setPage([index, index > page ? 1 : -1]); // Determine direction based on index
@@ -81,18 +81,20 @@ const ProjectBanner = ({ images, nextSectionId }) => {
             x: { type: "spring", stiffness: 200, damping: 150 },
             opacity: { duration: 0.8 },
           }}>
-          <Image
-            alt={`${images[imageIndex]}`}
-            src={images[imageIndex]}
-            layout="fill"
-            objectFit="cover"
-            priority={true}
-          />
+          {images?.length > 0 && (
+            <Image
+              alt={`Project Image ${imageIndex + 1}`}
+              src={images[imageIndex]} // Fix array indexing
+              fill
+              style={{ objectFit: "cover" }}
+              priority={true}
+            />
+          )}
         </motion.div>
       </AnimatePresence>
-      {nextSectionId && <ScrollArrow targetId={nextSectionId} />}
+
       <div className={styles.carouselDots}>
-        {images.map((_, idx) => (
+        {images?.map((_, idx) => (
           <div
             key={idx}
             className={`${styles.carouselDot} ${

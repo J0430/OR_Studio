@@ -1,0 +1,59 @@
+@use "../partials/variables";
+@use "../partials/mixins";
+
+.banner-wrapper {
+  position: relative;
+  background: variables.$black;
+}
+
+.banner-image {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.banner-title-wrapper {
+  position: absolute;
+  bottom: 20%;
+  left: 8%;
+  z-index: 1;
+  color: variables.$white;
+
+  h1 {
+    margin: 0;
+    font-size: mixins.rem(64);
+    font-weight: bold;
+  }
+
+  p {
+    font-size: mixins.rem(40);
+    margin-top: mixins.rem(8);
+  }
+}
+
+// Responsive Styles
+@include mixins.respond-to("tablet") {
+  .banner-title-wrapper {
+    h1 {
+      font-size: mixins.rem(48); // Adjust size for tablets
+    }
+
+    p {
+      font-size: mixins.rem(28);
+    }
+  }
+}
+
+@include mixins.respond-to("mobile") {
+  .banner-title-wrapper {
+    h1 {
+      font-size: mixins.rem(40); // Adjust size for mobile
+    }
+
+    p {
+      font-size: mixins.rem(22);
+    }
+  }
+}

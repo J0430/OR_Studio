@@ -5,14 +5,14 @@
 .navbar {
   position: fixed;
   top: 0;
-  width: 100%;
   z-index: 1000;
-  background: transparent;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 4rem;
+  justify-content: space-between;
+  width: 100%;
   width: -webkit-fill-available !important;
+  padding: 4.5rem;
+  background: transparent;
 }
 
 .navbarContainer {
@@ -24,40 +24,43 @@
 
 .logo {
   color: #a6b7ba;
-  height: 50px;
   cursor: pointer;
 }
 
 .menuButton {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
   z-index: 1001;
+  border: none;
+  background: none;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.menuButton.noActive {
+  color: transparent;
 }
 
 .menuOverlay {
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 35%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
+  background: rgb(0 0 0 / 80%);
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
 }
 
 .closeButton {
   position: absolute;
-  top: 2rem;
-  right: 3rem;
-  background: none;
+  top: 4.5rem;
+  right: 4.5rem;
   border: none;
-  font-size: 2rem;
+  background: none;
   color: white;
+  font-size: 3rem;
   cursor: pointer;
 }

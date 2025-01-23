@@ -1,0 +1,86 @@
+@use "../../styles/partials/variables" as variables;
+@use "../../styles/partials/mixins" as mixins;
+
+.direction {
+  position: relative;
+  z-index: 10000;
+
+  &.up,
+  &.down,
+  &.left,
+  &.right {
+    .scrollButton {
+      position: absolute;
+      width: mixins.rem(72); // Equivalent to 4.5rem with a base of 16px
+      height: mixins.rem(72);
+      border: 3px solid rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: transparent;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition:
+        background-color 0.3s,
+        transform 0.3s;
+
+      &:hover {
+        background-color: rgba(22, 21, 21, 0.5);
+      }
+
+      .arrow {
+        width: mixins.rem(12);
+        height: mixins.rem(12);
+        border-left: mixins.rem(2) solid white;
+        border-bottom: mixins.rem(2) solid white;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          width: mixins.rem(15);
+          height: mixins.rem(15);
+        }
+      }
+    }
+  }
+
+  &.up .scrollButton {
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .arrow {
+      transform: rotate(135deg);
+    }
+  }
+
+  &.down .scrollButton {
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .arrow {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &.left .scrollButton {
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+
+    .arrow {
+      transform: rotate(-135deg);
+    }
+  }
+
+  &.right .scrollButton {
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+
+    .arrow {
+      transform: rotate(45deg);
+    }
+  }
+}

@@ -1,23 +1,24 @@
 import { useState, useEffect } from "react";
 
 /**
- * Custom hook to manage a delayed state change using a timeout.
+ * A custom hook to manage delayed state changes.
  *
- * @param {number} delay - The delay in milliseconds before setting the state to true.
- * @returns {boolean} - The state indicating if the timeout has completed.
+ * @param {boolean} initialState - The initial state value.
+ * @param {number} delay - The delay in milliseconds before toggling the state.
+ * @returns {boolean} - The current state after the delay.
  */
-const useTimeout = (delay) => {
-  const [isTimeoutDone, setIsTimeoutDone] = useState(false);
+const useTimeout = (initialState, delay) => {
+  const [state, setState] = useState(initialState);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsTimeoutDone(true);
+      setState(!initialState);
     }, delay);
 
-    return () => clearTimeout(timer); // Cleanup the timer when the component unmounts
-  }, [delay]);
+    return () => clearTimeout(timer);
+  }, [initialState, delay]);
 
-  return isTimeoutDone;
+  return state;
 };
 
 export default useTimeout;

@@ -1,3 +1,5 @@
+@use "../partials/variables";
+
 * {
   margin: 0;
   padding: 0;
@@ -8,12 +10,12 @@
 }
 
 body {
-  margin: 0;
   display: flex;
-  flex-direction: column;
   height: 100vh;
+  margin: 0;
+  flex-direction: column;
   overflow-x: hidden;
-  background-color: black;
+  background-color: $black;
 }
 
 section {
@@ -26,6 +28,7 @@ section {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -45,9 +48,9 @@ section {
 }
 
 .section-container {
-  scroll-snap-align: start;
-  height: 100vh;
   width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
 }
 
 /* Landing Banner Styles */
@@ -57,24 +60,24 @@ section {
 }
 
 .banner-image {
-  background-size: cover;
-  background-position: center;
+  position: absolute;
   width: 100%;
   height: 100vh;
-  position: absolute;
+  background-size: cover;
+  background-position: center;
 }
 
 .banner-title-wrapper {
   position: absolute;
   bottom: 20%;
   left: 8%;
-  color: white;
   z-index: 1;
+  color: white;
 
   h1 {
+    margin: 0;
     font-size: 4rem;
     font-weight: bold;
-    margin: 0;
   }
 
   p {
@@ -93,15 +96,15 @@ section {
   background-color: black;
 
   p {
-    font-size: 2.1em;
-    color: white;
     width: 60%;
+    color: white;
+    font-size: 2.1em;
   }
 
   a {
-    margin-top: 1.5em;
-    font-size: 22px;
     color: white;
+    font-size: 22px;
+    margin-top: 1.5em;
     font-weight: 700;
     text-decoration: none;
     transition: transform 0.3s ease-in-out;
@@ -120,38 +123,40 @@ section {
   background-color: black;
 
   .project-wrapper {
-    text-align: center;
     margin: 0 auto;
+    text-align: center;
 
     h2 {
+      color: white;
       font-size: 2.5rem;
       font-weight: bold;
-      color: white;
     }
 
     p {
-      font-size: 1.5rem;
       color: #aaa;
+      font-size: 1.5rem;
       line-height: 1.8;
     }
   }
 }
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .banner-title-wrapper {
     width: 80%;
+
     h1 {
       font-size: 3rem;
     }
+
     p {
       font-size: 1.8rem;
     }
   }
 
   .about-wrapper p {
-    font-size: 1.5em;
     width: 80%;
+    font-size: 1.5em;
   }
 
   .project-wrapper h2 {
@@ -163,7 +168,7 @@ section {
   }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .banner-title-wrapper h1 {
     font-size: 2.5rem;
   }

@@ -2,29 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import TypingEffect from "./TypingEffect";
+import TypingEffect from "components/preloader/TypingEffect";
 import { Logos } from "../../globals/globals";
-import styles from "../preloader/Preloader.module.scss";
+import styles from "../../components/preloader/Preloader.module.scss";
 
 const ContactPage = () => {
-  const [preloaderDone, setPreloaderDone] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setPreloaderDone(false); // Changes state after the defined time
-    }, 4000); // Adjust the time as needed
-    return () => clearTimeout(timer);
-  }, [setPreloaderDone]);
-
   return (
     <div className={styles.preloaderWrapper}>
-      <motion.div
-        className={styles.preloaderContainer}
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 0 }}
-        exit={{ opacity: 0, filter: "blur(5px)" }}
-        transition={{ duration: 1.5, delay: 3.5 }}>
-        {/* First Image */}
+      <motion.div className={styles.preloaderContainer}>
         <motion.div
           initial={{ filter: "blur(1rem)", opacity: 0 }}
           animate={{ filter: "blur(0rem)", opacity: 1 }}
@@ -80,6 +65,7 @@ const ContactPage = () => {
             height={150}
             style={{
               width: "auto",
+              height: "2rem",
             }}
             priority
           />
@@ -91,4 +77,4 @@ const ContactPage = () => {
   );
 };
 
-export default Preloader;
+export default ContactPage;

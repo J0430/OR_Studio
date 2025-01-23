@@ -1,26 +1,26 @@
 .aboutWrapper {
-  width: 100%;
-  height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
   background-color: black;
 }
 
 .textContainer {
   width: 100%;
   max-width: 100rem;
-  text-align: center;
   padding: 0 2rem;
+  text-align: center;
 }
 
 .description {
+  color: #fff;
   font-size: 2.5rem;
-  color: #ffffff;
   line-height: 1.6;
   margin-bottom: 2rem;
-  font-family: "Raleway", sans-serif;
+  font-family: Raleway, sans-serif;
 }
 
 .linkWrapper {
@@ -28,13 +28,13 @@
 }
 
 .link {
+  padding: 1.5rem;
+  border: #fff 1px solid;
+  color: #fff;
   font-size: 1.9rem;
-  color: #ffffff;
-  border: #ffffff 1px solid;
   font-weight: 600;
   text-decoration: none;
   transition: transform 0.3s ease-in-out;
-  padding: 1.5rem;
   border-radius: 6px;
 
   &:hover {
@@ -43,7 +43,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .description {
     font-size: 1.2rem;
   }
@@ -53,7 +53,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .description {
     font-size: 1rem;
   }

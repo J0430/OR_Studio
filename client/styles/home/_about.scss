@@ -1,0 +1,36 @@
+@use "../partials/variables" as variables;
+@use "../partials/mixins" as mixins;
+
+.about-wrapper {
+  padding: mixins.rem(32);
+  color: variables.$white;
+  background-color: variables.$black;
+
+  // Responsive styles
+  @include mixins.respond-to("tablet") {
+    padding: mixins.rem(40);
+
+    p {
+      font-size: mixins.rem(18);
+    }
+
+    a {
+      font-size: mixins.rem(20);
+    }
+  }
+
+  p {
+    font-size: mixins.rem(16);
+    margin-bottom: mixins.rem(24);
+  }
+
+  a {
+    color: variables.$white;
+    font-size: mixins.rem(18);
+    margin-top: mixins.rem(12);
+
+    &:hover {
+      color: variables.$gray;
+    }
+  }
+}
