@@ -1,0 +1,106 @@
+@use "sass:map";
+@use "../styles/partials/variables" as v;
+@use "../styles/partials/mixins" as m;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: v.$base-font-size;
+  line-height: v.$line-height;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: v.$font-family-base;
+  background-color: v.$primary-color;
+  color: v.$secondary-color;
+  overflow-x: hidden;
+  -ms-overflow-style: none; /* IE/Edge scrollbar fix */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+  min-height: 100vh;
+}
+
+/* Scrollbar Styling */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+@include m.scrollbar-style(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6));
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* Ensure images scale correctly */
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Prevent issues on mobile (Notch support) */
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Improve touch experience */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix 100vh bug on iOS */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Fix smooth scrolling on Windows */
+@supports (-ms-ime-align: auto) {
+  body {
+    scroll-behavior: smooth !important;
+  }
+}

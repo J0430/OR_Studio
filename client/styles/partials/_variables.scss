@@ -1,9 +1,30 @@
+// ======================================
+// VARIABLES
+// ======================================
+
+// COLORS
 $black: #000;
 $gray: #aaa;
 $white: #fff;
-$font-family-base: "Raleway , sans-serif";
+
+$primary-color: #57606f;
+$secondary-color: #8392a5;
+
+// TYPOGRAPHY
+$font-family-base: "Raleway", sans-serif;
+$base-font-size: 16px; // Default font size (used in global.scss)
+$line-height: 1.5; // Default line height
+
+// BREAKPOINTS (WIDTH)
 $breakpoints: (
+  small-mobile: 380px,
   mobile: 480px,
-  tablet: 768px,
+  tablet: 920px,
   desktop: 1024px,
+);
+
+// BREAKPOINTS (HEIGHT)
+$height-breakpoints: (
+  tall-screen: 1024px,
+  extra-tall-screen: 1400px,
 );

@@ -1,8 +1,11 @@
-@use "../../styles/partials/variables" as variables;
-@use "../../styles/partials/mixins" as mixins;
+@use "../../styles/partials/variables" as v;
+@use "../../styles/partials/mixins" as m;
 
 .direction {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 10000;
 
   &.up,
@@ -11,13 +14,12 @@
   &.right {
     .scrollButton {
       position: absolute;
-      width: mixins.rem(72); // Equivalent to 4.5rem with a base of 16px
-      height: mixins.rem(72);
-      border: 3px solid rgba(255, 255, 255, 0.7);
+      width: var(--button-width, 3.5rem);
+      height: var(--button-height, 3.5rem);
+      border: m.rem(3) solid rgba(255, 255, 255, 0.7);
       border-radius: 50%;
       cursor: pointer;
       background-color: transparent;
-      outline: none;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -30,15 +32,15 @@
       }
 
       .arrow {
-        width: mixins.rem(12);
-        height: mixins.rem(12);
-        border-left: mixins.rem(2) solid white;
-        border-bottom: mixins.rem(2) solid white;
+        width: m.rem(12);
+        height: m.rem(12);
+        border-left: m.rem(2) solid white;
+        border-bottom: m.rem(2) solid white;
         transition: all 0.3s ease-in-out;
 
         &:hover {
-          width: mixins.rem(15);
-          height: mixins.rem(15);
+          width: m.rem(15);
+          height: m.rem(15);
         }
       }
     }
@@ -48,8 +50,8 @@
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-
     .arrow {
+      margin-top: 0.2rem;
       transform: rotate(135deg);
     }
   }
@@ -58,7 +60,6 @@
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-
     .arrow {
       transform: rotate(-45deg);
     }
@@ -68,7 +69,6 @@
     left: 2rem;
     top: 50%;
     transform: translateY(-50%);
-
     .arrow {
       transform: rotate(-135deg);
     }
@@ -78,9 +78,72 @@
     right: 2rem;
     top: 50%;
     transform: translateY(-50%);
-
     .arrow {
       transform: rotate(45deg);
+    }
+  }
+
+  @include m.respond-to("tablet") {
+    .scrollButton {
+      bottom: 1rem !important;
+      width: m.rem(48) !important;
+      height: m.rem(48) !important;
+      border: m.rem(1.5) solid white !important;
+    }
+    .arrow {
+      width: m.rem(10) !important;
+      height: m.rem(10) !important;
+      border-left: m.rem(1.8) solid white !important;
+      border-bottom: m.rem(1.8) solid white !important;
+    }
+
+    &.up .scrollButton {
+      .arrow {
+        margin-top: 0.3rem !important;
+        transform: rotate(135deg);
+      }
+    }
+  }
+
+  @include m.respond-to("mobile") {
+    .scrollButton {
+      bottom: 1rem !important;
+      width: m.rem(40) !important;
+      height: m.rem(40) !important;
+      border: m.rem(1.8) solid white !important;
+    }
+    .arrow {
+      width: m.rem(8) !important;
+      height: m.rem(8) !important;
+      border-left: m.rem(1.8) solid white !important;
+      border-bottom: m.rem(1.8) solid white !important;
+    }
+    &.up .scrollButton {
+      .arrow {
+        margin-top: 0.2rem !important;
+        transform: rotate(135deg);
+      }
+    }
+  }
+
+  @include m.respond-to("small-mobile") {
+    .scrollButton {
+      bottom: 1rem !important;
+      width: m.rem(24) !important;
+      height: m.rem(24) !important;
+      border: m.rem(1.8) solid white !important;
+    }
+    .arrow {
+      width: m.rem(6) !important;
+      height: m.rem(6) !important;
+      border-left: m.rem(1.8) solid white !important;
+      border-bottom: m.rem(1.8) solid white !important;
+    }
+    &.up .scrollButton {
+      .arrow {
+        margin-top: 0.2rem !important;
+        transform: rotate(135deg);
+      }
     }
   }
 }

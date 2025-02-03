@@ -1,3 +1,4 @@
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 *.mov filter=lfs diff=lfs merge=lfs -text
 client/public/assets/categories/Animation/*.mp4 filter=lfs diff=lfs merge=lfs -text
+public/assets/categories/Animation/*.mp4 filter=lfs diff=lfs merge=lfs -text

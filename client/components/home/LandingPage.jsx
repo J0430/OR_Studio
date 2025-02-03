@@ -1,25 +1,29 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import styles from "../home/LandingPage.module.scss";
 
 const LandingPage = ({ images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const intervalRef = useRef(null);
+
+  const updateImageIndex = useCallback(() => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  }, [images.length]);
 
   useEffect(() => {
     if (images?.length > 0) {
-      const intervalId = setInterval(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 5000);
-      return () => clearInterval(intervalId);
+      intervalRef.current = setInterval(updateImageIndex, 5000);
     }
-  }, [images]);
+
+    return () => clearInterval(intervalRef.current);
+  }, [images, updateImageIndex]);
 
   return (
-    <motion.div className={styles.bannerWrapper}>
-      <AnimatePresence>
+    <motion.section className={styles.bannerWrapper}>
+      <AnimatePresence mode="wait">
         {images?.length > 0 && (
           <motion.div
             key={currentImageIndex}
@@ -32,15 +36,14 @@ const LandingPage = ({ images }) => {
               src={images[currentImageIndex]}
               alt={`Background Image ${currentImageIndex + 1}`}
               fill
+              priority={currentImageIndex === 0} // Preload first image
               style={{ objectFit: "cover" }}
-              priority={true}
               className={styles.bannerImage}
             />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Text Animation */}
       <motion.div className={styles.bannerTitleWrapper}>
         <motion.div
           className={styles.titleLineWrapper}
@@ -61,10 +64,10 @@ const LandingPage = ({ images }) => {
           transition={{ delay: 1, duration: 1, ease: "easeOut" }}
           className={styles.bannerSubtitle}>
           Architectural animation and visualization digital production by OR
-          studio
+          Studio
         </motion.p>
       </motion.div>
-    </motion.div>
+    </motion.section>
   );
 };
 

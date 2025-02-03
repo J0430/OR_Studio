@@ -1,19 +1,74 @@
 @use "sass:math";
-@use "variables" as variables;
+@use "sass:map";
+@use "./variables" as v;
+
+/* =========================== */
+/* RESPONSIVENESS MIXINS       */
+/* =========================== */
 
 @mixin respond-to($breakpoint) {
-  @media (min-width: map-get(variables.$breakpoints, $breakpoint)) {
+  @if map.has-key(v.$breakpoints, $breakpoint) {
+    @media (max-width: map.get(v.$breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "⚠️ Breakpoint '#{$breakpoint}' not found in $breakpoints map.";
+  }
+}
+
+/* Special mixin for devices where height is larger than width */
+@mixin respond-to-tall-screen {
+  @media (min-height: 1200px) and (max-width: 1400px) {
     @content;
   }
 }
 
-// Center Flex Mixin
+@function rem($pixels, $base: 16) {
+  @return #{math.div($pixels, $base)}rem;
+}
+
+/* =========================== */
+/* HELPER MIXINS               */
+/* =========================== */
+
 @mixin center-flex {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-@function rem($pixels, $base: 16) {
-  @return #{math.div($pixels, $base)}rem;
+@mixin button-reset {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+}
+
+@mixin overlay-background {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+/* =========================== */
+/* SCROLLBAR STYLE MIXIN       */
+/* =========================== */
+
+@mixin scrollbar-style($color-normal, $color-hover) {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $color-normal;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: $color-hover;
+  }
 }

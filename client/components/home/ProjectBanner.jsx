@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import styles from "./ProjectBanner.module.scss";
-import DirectionalButton from "../common/DirectionalButton";
 
 const wrap = (min, max, val) => {
   if (val > max) return min;
@@ -31,39 +30,39 @@ const imageVariants = {
   }),
 };
 
-const ProjectBanner = ({ images, nextSectionId }) => {
+const ProjectBanner = ({ images }) => {
   const [[page, direction], setPage] = useState([0, 0]); // Page and direction state
   const imageIndex = wrap(0, images?.length - 1, page);
-  const transitionTime = 4000; // Duration for each slide
-  const [autoplayInterval, setAutoplayInterval] = useState(null); // Track the interval ID
+  const [isAutoplayActive, setIsAutoplayActive] = useState(true); // Track autoplay state
+  const [initialView, setInitialView] = useState(true); // Track if the user is entering for the first time
+  const [transitionTime, setTransitionTime] = useState(1500); // Start with 1000ms
 
   const [ref, inView] = useInView({
-    threshold: 0.5, // Adjust as needed
+    threshold: 0.1,
+    triggerOnce: false,
   });
 
   const nextPage = () => {
     setPage(([currentPage]) => {
-      const newPage = (currentPage + 1) % images?.length; // Loop back to the first image
+      const newPage = (currentPage + 1) % images?.length;
       return [newPage, 1];
     });
+    setInitialView(false); // Mark that the user has seen the first slide
+    setTransitionTime(4000); // Change transition time to 4000ms after the first slide
   };
 
   useEffect(() => {
-    if (inView) {
-      const interval = setInterval(nextPage, transitionTime);
-      setAutoplayInterval(interval);
-    } else if (autoplayInterval) {
-      clearInterval(autoplayInterval);
+    let interval;
+    if (inView && isAutoplayActive) {
+      interval = setInterval(nextPage, transitionTime);
     }
-
-    return () => clearInterval(autoplayInterval);
-  }, [inView, images?.length, transitionTime]);
+    return () => clearInterval(interval);
+  }, [inView, isAutoplayActive, images?.length, transitionTime]);
 
   const handleDotClick = (index) => {
-    setPage([index, index > page ? 1 : -1]); // Determine direction based on index
-    if (autoplayInterval) {
-      clearInterval(autoplayInterval); // Stop autoplay on manual navigation
-    }
+    setPage([index, index > page ? 1 : -1]);
+    setIsAutoplayActive(false);
+    setTransitionTime(4000); // Ensure transition time stays at 4000ms when manually clicked
   };
 
   return (
@@ -84,7 +83,7 @@ const ProjectBanner = ({ images, nextSectionId }) => {
           {images?.length > 0 && (
             <Image
               alt={`Project Image ${imageIndex + 1}`}
-              src={images[imageIndex]} // Fix array indexing
+              src={images[imageIndex]}
               fill
               style={{ objectFit: "cover" }}
               priority={true}

@@ -1,8 +1,10 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
 import styles from "./AboutBanner.module.scss";
 
-function AboutBanner() {
+const AboutBanner = () => {
   return (
     <motion.div
       className={styles.aboutWrapper}
@@ -14,13 +16,14 @@ function AboutBanner() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.5 }}>
-        <motion.p className={styles.description}>
+        <p className={styles.description}>
           OR Studio is an end-to-end digital production house with expertise in
           real estate visualization and animation, offering best-in-class
           services ranging from a single photo-realistic render to advanced
           animations, tailor-made interior design services, and state-of-the-art
           post-production.
-        </motion.p>
+        </p>
+
         <motion.div
           className={styles.linkWrapper}
           initial={{ opacity: 0, scale: 0.8 }}
@@ -33,6 +36,6 @@ function AboutBanner() {
       </motion.div>
     </motion.div>
   );
-}
+};
 
 export default AboutBanner;

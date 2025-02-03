@@ -12,11 +12,11 @@ const useTimeout = (initialState, delay) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setState(!initialState);
+      setState(true); // ✅ Now properly updates state
     }, delay);
 
     return () => clearTimeout(timer);
-  }, [initialState, delay]);
+  }, [delay]);
 
   return state;
 };

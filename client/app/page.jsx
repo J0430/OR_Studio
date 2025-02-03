@@ -3,6 +3,7 @@
 import React, { useCallback } from "react";
 import dynamic from "next/dynamic";
 import { usePreloader } from "../contexts/PreloaderContext";
+import { useNav } from "../contexts/NavContext"; // ✅ Use NavContext here
 import styles from "../styles/home.module.scss";
 import Preloader from "../components/preloader/Preloader";
 import DirectionalButton from "../components/common/DirectionalButton";
@@ -16,6 +17,7 @@ const ProjectBanner = dynamic(() => import("../components/home/ProjectBanner"));
 
 export default function Home() {
   const { isPreloaderVisible } = usePreloader();
+  const { isNavOpen } = useNav(); // ✅ Now using NavContext
 
   // Section configuration with dynamic imports
   const sections = [
@@ -56,19 +58,23 @@ export default function Home() {
             className={styles.sectionContainer}>
             {section.component}
 
-            {/* Directional Buttons for Navigation */}
-
-            {index < sections.length - 1 ? (
-              <DirectionalButton
-                direction="down"
-                onClick={() => handleScroll(sections[index + 1]?.id)}
-              />
-            ) : (
-              <DirectionalButton
-                direction="up"
-                onClick={() => handleScroll(sections[0]?.id)}
-              />
-            )}
+            {/* Hide DirectionalButton when Navbar is open */}
+            {!isNavOpen &&
+              (index < sections.length - 1 ? (
+                <DirectionalButton
+                  direction="down"
+                  width={3.5}
+                  height={3.5}
+                  onClick={() => handleScroll(sections[index + 1]?.id)}
+                />
+              ) : (
+                <DirectionalButton
+                  direction="up"
+                  width={3.5}
+                  height={3.5}
+                  onClick={() => handleScroll(sections[0]?.id)}
+                />
+              ))}
           </div>
         ))}
       </div>
