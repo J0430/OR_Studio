@@ -1,44 +1,82 @@
+@use "../../styles/partials/variables" as v;
+@use "../../styles/partials/mixins" as m;
+
 .carouselContainer {
   position: relative;
   width: 100%;
   height: 100vh; /* Full viewport height */
   overflow: hidden;
   background: #000; /* Fallback background color */
-}
 
-.carouselImage {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+  .carouselImage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-.carouselDots {
-  position: absolute;
-  bottom: 8rem;
-  left: 50%;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateX(-50%);
-  gap: 0.5rem; /* Adds consistent spacing between dots */
-}
+  .carouselDots {
+    position: absolute;
+    bottom: 8rem;
+    left: 50%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-50%);
+    gap: 0.5rem;
 
-.carouselDot {
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  background: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+    .carouselDot {
+      width: 1em;
+      height: 1em;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      transition:
+        background-color 0.3s,
+        transform 0.3s;
 
-  &:hover {
-    background: #ccc; /* Slightly dim the dot on hover */
-    transform: scale(1.2); /* Scale up the dot for better feedback */
+      &:hover {
+        background: #ccc; /* Slightly dim the dot on hover */
+        transform: scale(1.2); /* Scale up the dot for better feedback */
+      }
+    }
+
+    .carouselDot.active {
+      background: black;
+    }
   }
 }
 
-.carouselDot.active {
-  background: black;
+@include m.respond-to("tablet") {
+  .carouselDots {
+    bottom: 6rem !important;
+
+    .carouselDot {
+      width: 0.7rem !important;
+      height: 0.7rem !important;
+    }
+  }
+}
+
+@include m.respond-to("mobile") {
+  .carouselDots {
+    bottom: 4.7rem !important;
+
+    .carouselDot {
+      width: 0.7rem !important;
+      height: 0.7rem !important;
+    }
+  }
+}
+
+@include m.respond-to("small-mobile") {
+  .carouselDots {
+    bottom: 3.5rem !important;
+
+    .carouselDot {
+      width: 0.5rem !important;
+      height: 0.5rem !important;
+    }
+  }
 }

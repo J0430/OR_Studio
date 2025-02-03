@@ -1,9 +1,34 @@
+@use "../../styles/partials/variables" as v;
+@use "../../styles/partials/mixins" as m;
+
 .bannerWrapper {
   width: 100%;
   height: 100vh;
   position: relative;
   overflow: hidden;
   background: black;
+
+  .bannerTitleWrapper {
+    position: absolute;
+    bottom: 18%;
+    left: 8%;
+    width: 40%;
+    z-index: 1;
+    color: white;
+
+    .bannerTitle {
+      font-family: "Futura", "Helvetica Neue", sans-serif;
+      font-size: 3rem;
+      margin: 0;
+      z-index: 4;
+    }
+
+    .bannerSubtitle {
+      font-size: 2rem;
+      -webkit-font-smoothing: antialiased;
+      margin-top: 0.5rem;
+    }
+  }
 }
 
 .bannerWrapper::after {
@@ -30,24 +55,47 @@
   height: 100vh;
 }
 
-.bannerTitleWrapper {
-  position: absolute;
-  bottom: 20%;
-  left: 8%;
-  width: 30%;
-  z-index: 1;
-  color: white;
+@include m.respond-to("tablet") {
+  .bannerTitleWrapper {
+    bottom: 12% !important;
+    width: 60% !important;
 
-  .bannerTitle {
-    font-family: "Futura", "Helvetica Neue", sans-serif;
-    font-size: 3.5rem;
-    margin: 0;
-    z-index: 4;
+    .bannerTitle {
+      font-size: m.rem(22) !important;
+    }
+
+    .bannerSubtitle {
+      font-size: 1.4rem !important;
+    }
   }
+}
 
-  .bannerSubtitle {
-    font-size: 2.5rem;
-    -webkit-font-smoothing: antialiased;
-    margin-top: 0.5rem;
+@include m.respond-to("mobile") {
+  .bannerTitleWrapper {
+    bottom: 12% !important;
+    width: 60% !important;
+
+    .bannerTitle {
+      font-size: m.rem(22) !important;
+    }
+
+    .bannerSubtitle {
+      font-size: 1.2rem !important;
+    }
+  }
+}
+
+@include m.respond-to("small-mobile") {
+  .bannerTitleWrapper {
+    bottom: 12% !important;
+    width: 60% !important;
+
+    .bannerTitle {
+      font-size: m.rem(20) !important;
+    }
+
+    .bannerSubtitle {
+      font-size: 1rem !important;
+    }
   }
 }

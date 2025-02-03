@@ -1,68 +1,84 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { useClickOutside } from "hooks/useClickOuside";
+import React, { useRef } from "react";
+import { useNav } from "../../contexts/NavContext";
+import { usePreloader } from "../../contexts/PreloaderContext"; // ✅ Corrected import
+import useClickOutside from "hooks/useClickOuside"; // ✅ Corrected import
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import { motion, AnimatePresence } from "framer-motion";
-import { Logos } from "../../globals/globals";
-import { usePreloader } from "contexts/PreloaderContext";
-import useTimeout from "hooks/useTimeout";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import NavbarLinks from "./NavLinks";
-import styles from "./Header.module.scss";
+import styles from "../nav/Header.module.scss";
+import { Logos } from "../../globals/globals";
 
-function Header() {
-  const { isPreloaderVisible } = usePreloader();
-  const [isOpen, setIsOpen] = useState(false);
+const NavbarLinks = dynamic(() => import("./NavLinks"));
+
+const Header = () => {
+  const { isNavOpen, setIsNavOpen } = useNav();
+  const { isPreloaderVisible } = usePreloader(); // ✅ Get preloader state
+
   const menuRef = useRef(null);
 
-  // Close menu when clicking outside
-  useClickOutside(menuRef, () => setIsOpen(false));
+  useClickOutside(menuRef, () => setIsNavOpen(false));
 
-  const toggleMenu = () => setIsOpen((prev) => !prev);
+  if (isPreloaderVisible) return null;
 
-  return !isPreloaderVisible ? (
-    <header className={styles.navbar}>
-      <div onClick={() => setIsOpen(false)} className={styles.logoContainer}>
+  return (
+    <motion.div
+      className={styles.navbar}
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}>
+      <div className={styles.navContent}>
         <Link href="/" passHref>
           <Image
             src={Logos[2]}
             alt="OR Studio Logo"
             className={styles.logo}
-            width={70}
-            height={70}
+            width={50}
+            height={55}
+            priority
+            onClick={() => setIsNavOpen(false)}
           />
         </Link>
-      </div>
 
-      {/* Menu Button */}
-      <motion.button
-        aria-label="Toggle navigation menu"
-        aria-expanded={isOpen}
-        whileHover={{ scale: 1.2 }}
-        whileTap={{ scale: 0.9 }}
-        className={styles.menuButton}
-        onClick={toggleMenu}>
-        {isOpen ? <CloseOutlined /> : <MenuOutlined />}
-      </motion.button>
+        {/* Toggle Menu Button */}
+        <motion.button
+          aria-label="Toggle navigation menu"
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+          className={`${styles.menuButton} ${isNavOpen ? styles.hidden : ""}`}
+          onClick={() => setIsNavOpen((prev) => !prev)}>
+          {!isNavOpen ? <MenuOutlined key="menu" /> : null}
+        </motion.button>
+      </div>
 
       {/* Menu Overlay */}
       <AnimatePresence>
-        {isOpen && (
+        {isNavOpen && (
           <motion.nav
             ref={menuRef}
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
+            initial={{ opacity: 0, y: "100%" }} // ✅ Opens from bottom to top
+            animate={{ opacity: 1, y: "0%" }}
+            exit={{ opacity: 0, y: "100%" }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
             className={styles.menuOverlay}>
-            <NavbarLinks setIsOpen={setIsOpen} />
+            {/* Close Button (X) - Now Always Visible */}
+            <motion.button
+              className={styles.closeButton}
+              onClick={() => setIsNavOpen(false)}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}>
+              <CloseOutlined key="close" />
+            </motion.button>
+
+            <NavbarLinks />
           </motion.nav>
         )}
       </AnimatePresence>
-    </header>
-  ) : null;
-}
+    </motion.div>
+  );
+};
 
 export default Header;

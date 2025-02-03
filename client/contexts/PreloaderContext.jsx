@@ -8,8 +8,11 @@ export const PreloaderProvider = ({ children }) => {
   const [isPreloaderVisible, setIsPreloaderVisible] = useState(true);
 
   useEffect(() => {
+    const navigationEntry = performance.getEntriesByType("navigation")[0] || {}; // Modern API
     const navigationType =
-      performance.getEntriesByType("navigation")[0]?.type || "navigate";
+      navigationEntry?.type ||
+      window.performance?.navigation?.type ||
+      "navigate"; // Fallback for older browsers
     const hasVisited = sessionStorage.getItem("hasVisited");
 
     if (navigationType === "reload" || !hasVisited) {

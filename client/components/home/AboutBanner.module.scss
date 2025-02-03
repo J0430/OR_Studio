@@ -1,64 +1,76 @@
+@use "../../styles/partials/variables" as v;
+@use "../../styles/partials/mixins" as m;
+
 .aboutWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.center-flex;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
-  flex-direction: column;
-  background-color: black;
-}
+  background-color: v.$black;
 
-.textContainer {
-  width: 100%;
-  max-width: 100rem;
-  padding: 0 2rem;
-  text-align: center;
-}
+  .textContainer {
+    width: 100%;
+    max-width: m.rem(1000);
+    padding: 0 m.rem(32);
+    text-align: center;
 
-.description {
-  color: #fff;
-  font-size: 2.5rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  font-family: Raleway, sans-serif;
-}
+    .description {
+      color: v.$white;
+      font-size: m.rem(40);
+      line-height: 1.6;
+      margin-bottom: m.rem(32);
+      font-weight: 100;
+      font-family: v.$font-family-base;
+    }
+  }
 
-.linkWrapper {
-  margin-top: 6.5rem;
-}
+  .linkWrapper {
+    margin-top: m.rem(48);
 
-.link {
-  padding: 1.5rem;
-  border: #fff 1px solid;
-  color: #fff;
-  font-size: 1.9rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 0.3s ease-in-out;
-  border-radius: 6px;
+    .link {
+      padding: m.rem(24);
+      border: v.$white 1px solid;
+      color: v.$white;
+      font-size: m.rem(30);
+      font-weight: 400;
+      text-decoration: none;
+      transition: transform 0.3s ease-in-out;
+      border-radius: m.rem(8);
 
-  &:hover {
-    transform: scale(1.2);
-    border-bottom: 1px solid white;
+      &:hover {
+        transform: scale(1.1);
+        border-bottom: 1px solid v.$white;
+      }
+    }
   }
 }
 
-@media (width <= 768px) {
+@include m.respond-to("tablet") {
   .description {
-    font-size: 1.2rem;
+    font-size: m.rem(32) !important;
   }
-
-  .link {
-    font-size: 0.9rem;
+  .linkWrapper .link {
+    font-size: m.rem(24) !important;
+    padding: m.rem(20) !important;
   }
 }
 
-@media (width <= 480px) {
+@include m.respond-to("mobile") {
   .description {
-    font-size: 1rem;
+    font-size: m.rem(24) !important;
   }
+  .linkWrapper .link {
+    font-size: m.rem(18) !important;
+    padding: m.rem(16) !important;
+  }
+}
 
-  .link {
-    font-size: 0.8rem;
+@include m.respond-to("small-mobile") {
+  .description {
+    font-size: m.rem(18) !important;
+  }
+  .linkWrapper .link {
+    font-size: m.rem(14) !important;
+    padding: m.rem(12) !important;
   }
 }

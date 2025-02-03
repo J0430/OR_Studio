@@ -1,12 +1,13 @@
+@use "../../styles/partials/variables" as v;
+@use "../../styles/partials/mixins" as m;
+
 .navContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.center-flex;
+  flex-direction: column;
   width: 100%;
   height: 80%;
-  margin: 2rem;
-  flex-direction: column;
-  gap: 2rem;
+  margin: m.rem(32);
+  gap: m.rem(32);
 }
 
 .navList {
@@ -16,13 +17,13 @@
 }
 
 .navItem {
-  color: white;
-  font-size: 3rem;
-  font-family: Raleway, sans-serif;
+  color: v.$white;
+  font-size: m.rem(25);
+  font-family: v.$font-family-base;
   text-transform: uppercase;
   cursor: pointer;
   transition: color 0.3s ease;
-  margin-bottom: 4rem;
+  margin-bottom: m.rem(64);
 
   a {
     text-decoration: none;
@@ -30,6 +31,31 @@
   }
 
   &:hover {
-    color: #a6b7ba;
+    color: v.$gray;
+  }
+
+  &.active {
+    color: v.$gray;
+    font-weight: bold;
+  }
+}
+
+@include m.respond-to("tablet") {
+  .navItem {
+    font-size: m.rem(24);
+  }
+}
+
+@include m.respond-to("mobile") {
+  .navItem {
+    font-size: m.rem(21);
+    margin-bottom: m.rem(32);
+  }
+}
+
+@include m.respond-to("small-mobile") {
+  .navItem {
+    font-size: m.rem(20);
+    margin-bottom: m.rem(16);
   }
 }
