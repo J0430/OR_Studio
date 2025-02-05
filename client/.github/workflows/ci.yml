@@ -3,7 +3,7 @@ name: Deploy to Netlify
 on:
   push:
     branches:
-      - main # Deploy when changes are pushed to the main branch
+      - main
   pull_request:
     branches:
       - main
@@ -33,7 +33,8 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2
         with:
-          publish-dir: ./out # This is where Next.js exports static files
+          publish-dir: ./out
+
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
