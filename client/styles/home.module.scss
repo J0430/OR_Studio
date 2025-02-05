@@ -8,7 +8,7 @@
   flex-direction: column;
   position: relative;
   overflow-x: hidden;
-  overflow-y: auto; /* Fix for extra scrollbars */
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
   scroll-snap-type: y mandatory;
@@ -30,15 +30,6 @@
     flex-direction: column;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-  }
-}
-
-/* Responsive Fix for Tall Screens */
-@include m.respond-to-tall-screen {
-  .homePage {
-    .sectionContainer {
-      height: 89dvh !important; /* Fixes layout for very tall devices */
-    }
   }
 }
 

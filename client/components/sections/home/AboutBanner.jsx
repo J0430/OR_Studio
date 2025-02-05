@@ -28,7 +28,11 @@ const AboutBanner = () => {
           className={styles.linkWrapper}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 1.5 }}>
+          transition={{ duration: 0.8, delay: 1.5 }}
+          whileHover={{
+            scale: 1.1,
+            transition: { duration: 0.2 },
+          }}>
           <Link href="/about" className={styles.link}>
             More about us
           </Link>

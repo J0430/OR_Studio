@@ -1,5 +1,5 @@
-@use "../../styles/partials/variables" as v;
-@use "../../styles/partials/mixins" as m;
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
 
 .bannerWrapper {
   width: 100%;
@@ -10,21 +10,21 @@
 
   .bannerTitleWrapper {
     position: absolute;
-    bottom: 18%;
-    left: 8%;
+    bottom: 13%;
+    left: 3%;
     width: 40%;
     z-index: 1;
     color: white;
 
     .bannerTitle {
       font-family: "Futura", "Helvetica Neue", sans-serif;
-      font-size: 3rem;
+      font-size: 2.3rem;
       margin: 0;
       z-index: 4;
     }
 
     .bannerSubtitle {
-      font-size: 2rem;
+      font-size: 1.5rem;
       -webkit-font-smoothing: antialiased;
       margin-top: 0.5rem;
     }

@@ -2,10 +2,13 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["client/components/*"],
-      "@pages/*": ["app/pages/*"],
-      "@styles/*": ["client/styles/*"],
-      "@globals/*": ["client/globals/*"]
+      "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
+      "@utils/*": ["utils/*"],
+      "@styles/*": ["styles/*"],
+      "@contexts/*": ["contexts/*"],
+      "@public/*": ["public/*"],
+      "@app/*": ["app/*"]
     }
   }
 }

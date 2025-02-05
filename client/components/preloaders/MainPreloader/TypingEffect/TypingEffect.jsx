@@ -29,11 +29,11 @@ const TypingEffect = ({ text = "", typingSpeed = 70, delay = 4000 }) => {
     <div className={styles.typingContainer}>
       <span
         className={
-          typingDone
+          typingDone || displayedText.length === 0
             ? `${styles.typingText} ${styles.noCursor}`
             : styles.typingText
         }>
-        {displayedText}
+        &nbsp;{displayedText}
       </span>
     </div>
   );

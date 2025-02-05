@@ -1,36 +1,35 @@
-import "../styles/globals.scss";
-import { PreloaderProvider } from "../contexts/PreloaderContext";
-import { NavProvider } from "../contexts/NavContext"; // ✅ Import Nav Context
-import Header from "../components/nav/Header";
+import "@styles/globals.scss";
+import { PreloaderProvider } from "@contexts/MainPreloaderContext";
+import { NavProvider } from "@contexts/NavContext";
+import Header from "@components/nav/Header";
+import localFont from "next/font/local";
+
+const raleway = localFont({
+  src: [
+    { path: "fonts/Raleway-Regular.woff2", weight: "400", style: "normal" },
+    { path: "fonts/Raleway-Bold.woff2", weight: "700", style: "normal" },
+    { path: "fonts/Raleway-Light.woff2", weight: "300", style: "normal" },
+  ],
+  variable: "--font-raleway",
+  display: "swap",
+});
 
 export const metadata = {
   title: "OR Studio",
   description: "Architectural Visualization Website",
   icons: { icon: "/favicon.ico" },
 };
-
 export default function RootLayout({ children }) {
   return (
-    <PreloaderProvider>
-      <NavProvider>
-        {/* ✅ Ensures the context is available everywhere */}
-        <html lang="en">
-          <head>
-            <link
-              rel="preload"
-              href="/assets/fonts/Raleway-Regular.ttf"
-              as="font"
-              type="font/ttf"
-              crossOrigin="anonymous"
-            />
-          </head>
-          <body>
+    <html lang="en" className={raleway.variable}>
+      <body>
+        <PreloaderProvider>
+          <NavProvider>
             <Header />
-
             {children}
-          </body>
-        </html>
-      </NavProvider>
-    </PreloaderProvider>
+          </NavProvider>
+        </PreloaderProvider>
+      </body>
+    </html>
   );
 }

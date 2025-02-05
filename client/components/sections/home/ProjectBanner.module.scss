@@ -1,5 +1,5 @@
-@use "../../styles/partials/variables" as v;
-@use "../../styles/partials/mixins" as m;
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
 
 .carouselContainer {
   position: relative;
@@ -17,7 +17,7 @@
 
   .carouselDots {
     position: absolute;
-    bottom: 8rem;
+    bottom: 6rem;
     left: 50%;
     z-index: 10;
     display: flex;
