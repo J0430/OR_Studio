@@ -1,5 +1,5 @@
-@use "../../styles/partials/variables" as v;
-@use "../../styles/partials/mixins" as m;
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
 
 .direction {
   position: relative;
@@ -16,7 +16,7 @@
       position: absolute;
       width: var(--button-width, 3.5rem);
       height: var(--button-height, 3.5rem);
-      border: m.rem(3) solid rgba(255, 255, 255, 0.7);
+      border: m.rem(2.2) solid rgba(255, 255, 255, 0.7);
       border-radius: 50%;
       cursor: pointer;
       background-color: transparent;
@@ -34,8 +34,8 @@
       .arrow {
         width: m.rem(12);
         height: m.rem(12);
-        border-left: m.rem(2) solid white;
-        border-bottom: m.rem(2) solid white;
+        border-left: m.rem(1.5) solid white;
+        border-bottom: m.rem(1.5) solid white;
         transition: all 0.3s ease-in-out;
 
         &:hover {
@@ -51,7 +51,7 @@
     left: 50%;
     transform: translateX(-50%);
     .arrow {
-      margin-top: 0.2rem;
+      margin-top: 0.4rem;
       transform: rotate(135deg);
     }
   }
@@ -61,6 +61,7 @@
     left: 50%;
     transform: translateX(-50%);
     .arrow {
+      margin-bottom: 0.1rem;
       transform: rotate(-45deg);
     }
   }

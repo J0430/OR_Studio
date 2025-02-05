@@ -1,5 +1,5 @@
-@use "../../styles/partials/variables" as v;
-@use "../../styles/partials/mixins" as m;
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
 .noNavbar {
   display: none;
 }
@@ -25,7 +25,7 @@
   border: none;
   background: none;
   color: v.$white;
-  font-size: 2.4rem;
+  font-size: 1.9rem;
   cursor: pointer;
   z-index: 1001;
   transition:
@@ -52,12 +52,12 @@
 /* ✅ Close (X) button is now visible inside menu */
 .closeButton {
   position: absolute;
-  top: m.rem(32);
-  right: m.rem(32);
+  top: m.rem(50);
+  right: m.rem(50);
   background: none;
   border: none;
   color: v.$white;
-  font-size: 2.5rem;
+  font-size: 1.9rem;
   cursor: pointer;
   z-index: 1100; // ✅ Ensures it's above everything
 
@@ -71,8 +71,11 @@
   .navContent {
     padding: 2.7rem;
   }
+  .navLogo {
+    max-width: m.rem(30); // ✅ Allows flexible resizing
+  }
   .menuButton {
-    font-size: m.rem(32);
+    font-size: m.rem(30);
   }
 }
 
@@ -80,14 +83,20 @@
   .navContent {
     padding: 1.7rem;
   }
+  .navLogo {
+    max-width: m.rem(25); // ✅ Allows flexible resizing
+  }
   .menuButton {
-    font-size: m.rem(26);
+    font-size: m.rem(25);
   }
 }
 
 @include m.respond-to("small-mobile") {
   .menuButton {
-    font-size: m.rem(20);
+    font-size: m.rem(22);
+  }
+  .navLogo {
+    max-width: m.rem(22); // ✅ Allows flexible resizing
   }
   .navContent {
     padding: 1.7rem;

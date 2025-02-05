@@ -1,6 +1,5 @@
-@use "sass:map";
-@use "../styles/partials/variables" as v;
-@use "../styles/partials/mixins" as m;
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
 
 *,
 *::before,

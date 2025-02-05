@@ -47,7 +47,11 @@ const NavbarLinks = ({ setIsOpen }) => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className={`${styles.navItem} ${isActive ? styles.active : ""}`}>
-              <Link href={href} onClick={() => setIsOpen(false)}>
+              <Link
+                href={href}
+                scroll={false}
+                className={styles.navLink}
+                onClick={() => setIsOpen(false)}>
                 {link}
               </Link>
             </motion.li>
@@ -58,4 +62,4 @@ const NavbarLinks = ({ setIsOpen }) => {
   );
 };
 
-export default NavbarLinks;
+export default NavbarLinks; // ✅ Keep only one export

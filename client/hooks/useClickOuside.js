@@ -1,8 +1,10 @@
+"use client";
+
 import { useEffect } from "react";
 
 const useClickOutside = (ref, callback) => {
   useEffect(() => {
-    if (!ref?.current) return;
+    if (!ref) return;
 
     const handleClickOutside = (event) => {
       if (ref.current && !ref.current.contains(event.target)) {
@@ -26,4 +28,4 @@ const useClickOutside = (ref, callback) => {
   }, [ref, callback]);
 };
 
-export default useClickOutside; // ✅ Use default export
+export default useClickOutside;

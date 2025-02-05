@@ -1,0 +1,57 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+.typingContainer {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  color: #a6b7ba;
+  font-size: 2.1rem;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 1;
+
+  .typingText {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 0.02em solid #a6b7ba; // ✅ Reduced thickness for better proportion
+    white-space: nowrap;
+    animation:
+      typing 2s steps(29, end),
+      blink-cursor 1s step-end infinite;
+    line-height: 1;
+    padding-right: m.rem(8);
+    vertical-align: middle;
+    height: 2rem;
+  }
+
+  .typingText.noCursor {
+    border-right: none;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%; /* Reveal the full text */
+  }
+}
+
+@keyframes blink-cursor {
+  0% {
+    border-color: #a6b7ba;
+  }
+  50% {
+    border-color: transparent;
+  }
+  100% {
+    border-color: #a6b7ba;
+  }
+}
+.typing-text.no-cursor {
+  border-right: none;
+}
