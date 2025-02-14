@@ -12,10 +12,15 @@ export const PreloaderProvider = ({ children }) => {
     const navigationEntry = performance.getEntriesByType("navigation")[0] || {};
     const navigationType = navigationEntry.type || "navigate";
 
-    // ✅ Ensure `hasVisited` is properly assigned before checking
+    // Get whether the user has visited before
     const hasVisited = sessionStorage.getItem("hasVisited") || "false";
 
-    if (navigationType === "reload" || hasVisited === "false") {
+    // Handle preloader visibility based on navigation type and sessionStorage
+    if (
+      navigationType === "reload" ||
+      navigationType === "navigate" ||
+      hasVisited === "false"
+    ) {
       sessionStorage.setItem("hasVisited", "true"); // ✅ Store visit status
       setIsPreloaderVisible(true);
     } else {
@@ -23,18 +28,20 @@ export const PreloaderProvider = ({ children }) => {
     }
   }, []);
 
-  // ✅ Ensure preloader disappears even if images don't trigger `onImageLoad`
+  // Ensure preloader disappears after images are loaded
   useEffect(() => {
     if (imagesLoaded >= totalImages) {
-      setTimeout(() => setIsPreloaderVisible(false), 1500);
+      setTimeout(() => setIsPreloaderVisible(false), 4000); // Auto-hide after 4s
     }
   }, [imagesLoaded]);
 
+  // Ensure preloader disappears after 4 seconds regardless
   useEffect(() => {
-    const timeout = setTimeout(() => setIsPreloaderVisible(false), 3500); // ✅ Auto-hide after 4s
-    return () => clearTimeout(timeout);
+    const timeout = setTimeout(() => setIsPreloaderVisible(false), 4000);
+    return () => clearTimeout(timeout); // Cleanup timeout
   }, []);
 
+  // Increment the count of loaded images
   const onImageLoad = () => {
     setImagesLoaded((prev) => prev + 1);
   };

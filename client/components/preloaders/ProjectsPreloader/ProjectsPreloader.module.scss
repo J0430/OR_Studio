@@ -1,19 +1,17 @@
 .preloaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  transition: opacity 1s ease-in-out;
+  background-color: #000; // Dark background for visibility
+  z-index: 1000; // Ensure it overlays other content
 }
 
 .logo {
-  stroke-width: 2;
-  stroke: white;
-  fill: none;
+  width: 100px;
+  height: auto;
 }
