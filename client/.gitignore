@@ -11,7 +11,7 @@
 !.yarn/versions
 
 # Ignore everything in the .vscode folder
-.vscode/*
+.vscode
 
 # Except for project-specific files
 !.vscode/settings.json
