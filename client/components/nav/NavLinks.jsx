@@ -7,7 +7,7 @@ import Link from "next/link";
 import styles from "./NavLinks.module.scss";
 
 const NavbarLinks = ({ setIsOpen }) => {
-  const pathname = usePathname();
+  const pathname = usePathname(); // ✅ Get current path
   const links = ["Home", "Projects", "Contact", "Services", "About"];
 
   const containerVariants = {
@@ -62,4 +62,4 @@ const NavbarLinks = ({ setIsOpen }) => {
   );
 };
 
-export default NavbarLinks; // ✅ Keep only one export
+export default NavbarLinks;

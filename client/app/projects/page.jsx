@@ -1,8 +1,14 @@
 "use client";
 
 import React from "react";
-import ProjectsLayout from "@components/sections/projects/ProjectsLayout";
+import ProjectsPreloader from "@components/preloaders/ProjectsPreloader/ProjectsPreloader";
+import { ProjectsPreloaderProvider } from "@contexts/ProjectsPreloaderContext";
 
-export default function Projects() {
-  return <ProjectsLayout />; // ✅ Only calls the structure
+export default function Projects({ children }) {
+  return (
+    <ProjectsPreloaderProvider>
+      <ProjectsPreloader />
+      <main>{children}</main>
+    </ProjectsPreloaderProvider>
+  );
 }

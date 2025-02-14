@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import TypingEffect from "@components/preloaders/MainPreloader/TypingEffect/TypingEffect";
-import { Logos } from "../../utils/globals";
-import styles from "../../components/preloader/Preloader.module.scss";
+import { Logos } from "@utils/globals";
+import styles from "@components/preloaders/MainPreloader/MainPreloader.module.scss";
 
 const ContactPage = () => {
   return (
