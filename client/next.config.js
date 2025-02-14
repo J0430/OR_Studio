@@ -4,24 +4,25 @@ const path = require("path");
 const nextConfig = {
   reactStrictMode: true,
 
-  // ✅ Ensure static export is enabled
   output: "export",
 
   sassOptions: {
-    includePaths: [path.join(__dirname, "styles")], // If using SCSS
+    includePaths: [path.join(__dirname, "styles")],
   },
 
   images: {
-    unoptimized: true, // ✅ Required for static exports
+    unoptimized: true, // Required for static export
   },
 
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ["@svgr/webpack"], // ✅ Ensures SVGs work correctly in Next.js
+      use: ["@svgr/webpack"], // Allows SVG imports as React components
     });
     return config;
   },
+
+  swcMinify: true, // Optional: Minifies the code for smaller builds
 };
 
 module.exports = nextConfig;
