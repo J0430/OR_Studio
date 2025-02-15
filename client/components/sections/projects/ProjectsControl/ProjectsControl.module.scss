@@ -1,0 +1,118 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+.projectsControl {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 30vh;
+  width: 100%;
+  z-index: 1;
+  background: transparent;
+  @include m.scrollbar-style(v.$gray, v.$white);
+}
+
+.projectsTitleBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 15vh;
+  margin-top: m.rem(100);
+  padding-bottom: m.rem(15);
+  width: 100%;
+  border-bottom: 0.8px solid rgba(v.$white, 0.566);
+
+  .projectsTitle {
+    margin: 0;
+    width: 50%;
+    font-size: m.rem(56);
+    font-weight: 300;
+    letter-spacing: -0.625px;
+    line-height: m.rem(50);
+    color: v.$white; // Ensure consistent color
+  }
+}
+
+.projectsTabsBox {
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
+  width: 100%;
+
+  .projectsTabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: m.rem(16); // Unified gap for rows and columns
+    margin-top: m.rem(40);
+
+    .tab {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: m.rem(48);
+      padding: 0 m.rem(23);
+      width: m.rem(144);
+      font-size: m.rem(16);
+      text-transform: capitalize;
+      color: v.$white;
+      background-color: v.$black;
+      border: 0.8px solid v.$gray;
+      border-radius: m.rem(25);
+      cursor: pointer;
+      user-select: none;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease; // Smooth hover transition
+
+      &:hover {
+        background: rgba(v.$white, 0.2);
+      }
+
+      &.active {
+        background: v.$primary-color;
+        color: v.$white;
+      }
+
+      &:focus {
+        outline: 2px solid v.$secondary-color;
+        outline-offset: m.rem(2);
+      }
+    }
+  }
+}
+
+.separator {
+  border-top: 1px solid v.$black;
+  margin-top: m.rem(24);
+}
+
+/* =========================== */
+/* RESPONSIVENESS              */
+/* =========================== */
+
+@include m.respond-to("tablet") {
+  .projectsTitle {
+    font-size: m.rem(48);
+  }
+
+  .tab {
+    width: m.rem(120); // Narrower tabs
+    font-size: m.rem(14); // Adjust font size
+  }
+}
+
+@include m.respond-to("mobile") {
+  .projectsControl {
+    height: 40vh; // Increase height for better mobile spacing
+  }
+
+  .projectsTitle {
+    font-size: m.rem(36); // Smaller font size for mobile
+  }
+
+  .tab {
+    width: 100%; // Tabs take full width on mobile
+    height: m.rem(40); // Smaller height for tabs
+    font-size: m.rem(14); // Adjust font size
+  }
+}

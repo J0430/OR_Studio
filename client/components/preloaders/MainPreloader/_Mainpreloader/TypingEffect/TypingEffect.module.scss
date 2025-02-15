@@ -1,0 +1,48 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+.typingContainer {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  color: v.$gray;
+  font-size: m.rem(34);
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 1;
+
+  .typingText {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 0.02em solid v.$gray;
+    animation:
+      typing 2s steps(29, end),
+      blink-cursor 1s step-end infinite;
+    line-height: 1;
+    padding-right: m.rem(8);
+  }
+
+  .noCursor {
+    border-right: none;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-cursor {
+  0%,
+  100% {
+    border-color: v.$gray;
+  }
+  50% {
+    border-color: transparent;
+  }
+}

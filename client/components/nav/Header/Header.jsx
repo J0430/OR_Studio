@@ -1,0 +1,84 @@
+"use client";
+
+import React, { useRef } from "react";
+import { useNav } from "@contexts/NavContext";
+import { usePreloader } from "@contexts/MainPreloaderContext";
+import useClickOutside from "hooks/useClickOuside";
+import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import { motion, AnimatePresence } from "framer-motion";
+import { logos } from "@utils/globals";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./Header.module.scss";
+
+const NavbarLinks = dynamic(() => import("../NavLinks/NavLinks"));
+
+const Header = () => {
+  const { isNavOpen, setIsNavOpen } = useNav();
+  const { isPreloaderVisible } = usePreloader();
+
+  const menuRef = useRef(null);
+
+  useClickOutside(menuRef, () => setIsNavOpen(false));
+
+  if (isPreloaderVisible) return null;
+
+  return (
+    <motion.div
+      className={styles.navbar}
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}>
+      <div className={styles.navContent}>
+        <Link href="/" passHref>
+          <Image
+            src={logos[2]}
+            alt="OR Studio Logo"
+            className={styles.logo}
+            width={50}
+            height={55}
+            priority
+            onClick={() => setIsNavOpen(false)}
+          />
+        </Link>
+
+        {/* Toggle Menu Button */}
+        <motion.button
+          aria-label="Toggle navigation menu"
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+          className={`${styles.menuButton} ${isNavOpen ? styles.hidden : ""}`}
+          onClick={() => setIsNavOpen((prev) => !prev)}>
+          {!isNavOpen ? <MenuOutlined key="menu" /> : null}
+        </motion.button>
+      </div>
+
+      {/* Menu Overlay */}
+      <AnimatePresence>
+        {isNavOpen && (
+          <motion.nav
+            ref={menuRef}
+            initial={{ opacity: 0, y: "100%" }} // ✅ Opens from bottom to top
+            animate={{ opacity: 1, y: "0%" }}
+            exit={{ opacity: 0, y: "100%" }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className={styles.menuOverlay}>
+            {/* Close Button (X) - Now Always Visible */}
+            <motion.button
+              className={styles.closeButton}
+              onClick={() => setIsNavOpen(false)}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}>
+              <CloseOutlined key="close" />
+            </motion.button>
+
+            <NavbarLinks />
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+export default Header;

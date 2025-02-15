@@ -1,7 +1,7 @@
 import "@styles/globals.scss";
 import { PreloaderProvider } from "@contexts/MainPreloaderContext";
 import { NavProvider } from "@contexts/NavContext";
-import Header from "@components/nav/Header";
+import Header from "@components/nav/Header/Header";
 import localFont from "next/font/local";
 
 const raleway = localFont({
