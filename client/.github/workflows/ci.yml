@@ -24,11 +24,22 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set environment variables
+        run: echo "NEXT_PUBLIC_API_URL=https://api.example.com" >> .env.local
+
+      - name: Clean previous builds
+        run: rm -rf out/ .next/
+
       - name: Run tests
         run: npm test
 
       - name: Build project
         run: npm run build
+
+      - name: Copy Netlify Config Files
+        run: |
+          cp public/_redirects out/ || echo "No _redirects file to copy."
+          cp public/_headers out/ || echo "No _headers file to copy."
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2
