@@ -7,7 +7,7 @@ import { usePreloader } from "@contexts/MainPreloaderContext";
 import { useNav } from "@contexts/NavContext";
 import { useFetchData } from "@hooks/useFetchData";
 import styles from "@styles/pages/home.module.scss";
-import MainPreloader from "@components/preloaders/Mainpreloader/_MainPreloader/MainPreloader";
+import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/MainPreloader";
 import DirectionalButton from "@components/common/DirectionalButton";
 import Head from "next/head";
 
