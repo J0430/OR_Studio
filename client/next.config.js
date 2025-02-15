@@ -6,7 +6,6 @@ const nextConfig = {
 
   // Enables static site generation/export
   output: "export",
-
   sassOptions: {
     // Include the styles directory for SCSS/SASS resolution
     includePaths: [path.join(__dirname, "styles")],
