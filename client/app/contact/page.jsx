@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import TypingEffect from "@components/preloaders/MainPreloader/_Mainpreloader/TypingEffect/TypingEffect";
-import { Logos } from "@utils/api";
+import { logos } from "@utils/globals";
 import styles from "@components/preloaders/MainPreloader/_Mainpreloader/MainPreloader.module.scss";
 
 const ContactPage = () => {
@@ -24,7 +24,7 @@ const ContactPage = () => {
           }}
           className={styles.preloaderLogo}>
           <Image
-            src={Logos[1]} // First image from the array
+            src={logos[1]} // First image from the array
             alt="OR Logo"
             width={150}
             height={150}
@@ -59,7 +59,7 @@ const ContactPage = () => {
           }}
           className={styles.preloaderLogo}>
           <Image
-            src={Logos[0]} // Second image from the array
+            src={logos[0]} // Second image from the array
             alt="OR Studio Logo"
             width={150}
             height={150}
