@@ -1,0 +1,69 @@
+{
+  "category": "Urban Planning",
+  "projects": [
+    {
+      "id": "up_project1",
+      "title": "Sustainable Urban Living",
+      "frontImage": "/assets/projects/categories/UrbanPlanningg/up_project1/1.jpg",
+      "images": [
+        "/assets/projects/categories/UrbanPlanning/up_project1/1.jpg",
+        "/assets/projects/categories/UrbanPlanning/up_project1/3_1.jpg",
+        "/assets/projects/categories/UrbanPlanning/up_project1/4.jpg"
+      ],
+      "description": "A visionary urban design blending modern residential towers with lush green spaces. It represents the perfect harmony of urban development and environmental sustainability."
+    },
+    {
+      "id": "up_project2",
+      "title": "Community-Centric Urban Plan",
+      "frontImage": "/assets/projects/categories/UrbanPlanning/up_project2/10.jpg",
+      "images": [
+        "/assets/projects/categories/UrbanPlanning/up_project2/10.jpg",
+        "/assets/projects/categories/UrbanPlanning/up_project2/11.jpg",
+        "/assets/projects/categories/UrbanPlanning/up_project2/12.jpg",
+        "/assets/projects/categories/UrbanPlanning/up_project2/13.jpg"
+      ],
+      "description": "Designed to foster community interaction, this urban project features integrated green areas and modern architecture, creating an ideal balance between urban functionality and social connectivity."
+    },
+    {
+      "id": "up_project3",
+      "title": "Eco-Friendly Residential Cluster",
+      "frontImage": "/assets/projects/categories/UrbanPlanning/up_project3/4_2.jpg",
+      "images": [
+        "/assets/projects/categories/UrbanPlanning/up_project3/4_2.jpg",
+        "/assets/projects/categories/UrbanPlanning/up_project3/5_5.jpg",
+        "/assets/projects/categories/UrbanPlanning/up_project3/8.jpg"
+      ],
+      "description": "This project emphasizes eco-conscious living by incorporating sustainable materials and energy-efficient designs within a thoughtfully planned residential community."
+    },
+    {
+      "id": "up_project4",
+      "title": "Urban Forest Integration",
+      "frontImage": "/assets/projects/categories/UrbanPlanning/up_project4/6.jpg",
+      "images": [
+        "/assets/projects/categories/UrbanPlanning/up_project4/6.jpg",
+        "/assets/projects/categories/UrbanPlanning/up_project4/7.jpg"
+      ],
+      "description": "A large-scale urban project that seamlessly integrates forested areas into a modern cityscape, creating a serene environment with a focus on green living."
+    },
+    {
+      "id": "up_project5",
+      "title": "Vertical Garden Residences",
+      "frontImage": "/assets/projects/categories/UrbanPlanning/up_project5/5.jpg",
+      "images": [
+        "/assets/projects/categories/UrbanPlanning/up_project5/5.jpg",
+        "/assets/projects/categories/UrbanPlanning/up_project5/6.jpg"
+      ],
+      "description": "A collection of high-rise residential buildings with vertical gardens, aiming to redefine urban living with green, innovative designs and cutting-edge architecture."
+    },
+    {
+      "id": "up_project6",
+      "title": "Eco-Innovative Business Hub",
+      "frontImage": "/assets/projects/categories/UrbanPlanning/up_project6/1.jpg",
+      "images": [
+        "/assets/projects/categories/UrbanPlanning/up_project6/1.jpg",
+        "/assets/projects/categories/UrbanPlanning/up_project6/2.jpg"
+      ],
+      "description": "A business hub that combines state-of-the-art office spaces with green, sustainable design elements, offering an innovative workspace for the modern professional."
+    }
+  ]
+}

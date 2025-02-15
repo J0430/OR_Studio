@@ -71,7 +71,7 @@
     top: 50%;
     transform: translateY(-50%);
     .arrow {
-      transform: rotate(-135deg);
+      transform: rotate(45deg);
     }
   }
 
@@ -80,7 +80,7 @@
     top: 50%;
     transform: translateY(-50%);
     .arrow {
-      transform: rotate(45deg);
+      transform: rotate(-135deg);
     }
   }
 
@@ -105,6 +105,10 @@
       }
     }
   }
+
+  /* =========================== */
+  /* RESPONSIVENESS              */
+  /* =========================== */
 
   @include m.respond-to("mobile") {
     .scrollButton {

@@ -1,0 +1,17 @@
+{
+  "logos": [
+    "/assets/logos/OR Studio.png",
+    "/assets/logos/OR.png",
+    "/assets/logos/OR_white.png",
+    "/assets/logos/OR.svg"
+  ],
+  "categories": [
+    "All",
+    "Residential",
+    "Commercial",
+    "Urban Planning",
+    "Office",
+    "Animation"
+  ],
+  "preloader": ["/assets/logos/OR Studio.png", "/assets/logos/OR.png"]
+}

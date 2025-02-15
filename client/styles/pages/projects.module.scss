@@ -1,0 +1,11 @@
+@use "@styles/partials/mixins" as m;
+
+.projectsPage {
+  @include m.full-page-layout;
+
+  & {
+    display: flex;
+    flex-direction: column;
+    padding: 0 6.7vw;
+  }
+}
