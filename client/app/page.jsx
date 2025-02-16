@@ -23,6 +23,7 @@ const ProjectBanner = dynamic(
 
 export default function Home() {
   const { data: homeData, loading, error } = useFetchData("homeData.json");
+  console.log("Home Data:", homeData);
   const { isPreloaderVisible, onImageLoad } = usePreloader();
   const { isNavOpen } = useNav();
 
