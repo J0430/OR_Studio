@@ -6,6 +6,7 @@ import Image from "next/image";
 import styles from "./LandingPage.module.scss";
 
 const LandingPage = ({ images }) => {
+  console.log("Images:", images);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef(null);
 
@@ -35,7 +36,8 @@ const LandingPage = ({ images }) => {
             <Image
               src={images[currentImageIndex]}
               alt={`Background Image ${currentImageIndex + 1}`}
-              fill
+              width={800} // Replace with your desired width
+              height={600} // Replace with your desired height
               priority={currentImageIndex === 0} // Preload first image
               style={{ objectFit: "cover" }}
               className={styles.bannerImage}
