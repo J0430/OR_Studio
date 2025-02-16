@@ -11,6 +11,7 @@ import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
 import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/MainPreloader";
 import DirectionalButton from "@components/common/DirectionalButton";
+import ErrorBoundary from "@components/ErrorBoundary"; // Import ErrorBoundary component
 
 const LandingPage = dynamic(
   () => import("@components/sections/home/LandingPage/LandingPage"),
@@ -32,6 +33,14 @@ export default function Home() {
 
   const [isPageReady, setIsPageReady] = useState(false);
 
+  // Set isPageReady when loading and preloader visibility change
+  useEffect(() => {
+    if (!loading && !isPreloaderVisible) {
+      setIsPageReady(true);
+    }
+  }, [loading, isPreloaderVisible]);
+
+  // Preload images when homeData is available
   useEffect(() => {
     if (homeData) {
       preloadImages(
@@ -44,11 +53,14 @@ export default function Home() {
         onImageLoad
       );
     }
-  }, [homeData, isPreloaderVisible, onImageLoad]);
+  }, [homeData, onImageLoad]);
 
-  if (!loading && !isPreloaderVisible) {
-    setIsPageReady(true);
-  }
+  const handleScroll = useCallback((targetId) => {
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
 
   if (!isPageReady) {
     return <MainPreloader />;
