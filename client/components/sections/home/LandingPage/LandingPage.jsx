@@ -6,7 +6,6 @@ import Image from "next/image";
 import styles from "./LandingPage.module.scss";
 
 const LandingPage = ({ images }) => {
-  console.log("Images:", images);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef(null);
 
