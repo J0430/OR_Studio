@@ -52,9 +52,20 @@ export default function Home() {
       </div>
     );
   }
+  if (!homeData) {
+    return (
+      <div>
+        <h2>Loading...</h2>
+      </div>
+    );
+  }
 
-  const { HomePictures, Even_Yehuda, Hevron8, City69 } = homeData;
-  console.log("Loading:", loading, "Error:", error, "Data:", homeData);
+  const {
+    HomePictures = [],
+    Even_Yehuda = [],
+    Hevron8 = [],
+    City69 = [],
+  } = homeData;
 
   const sections = [
     { component: <LandingPage images={HomePictures} />, id: "landingPage" },

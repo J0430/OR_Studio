@@ -6,17 +6,24 @@ export const useFetchData = (endpoint) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { onImageLoad } = usePreloader(); // Track image loading globally
+  const { onImageLoad } = usePreloader();
 
   useEffect(() => {
     const loadData = async () => {
       try {
         setLoading(true);
-        const result = await fetchData(endpoint);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/data/${endpoint}`
+        );
+        if (!res.ok) {
+          throw new Error(`Failed to fetch ${endpoint}: ${res.statusText}`);
+        }
 
-        // Track all images in the data for the preloader
-        if (result && Array.isArray(result.images)) {
-          result.images.forEach((image) => {
+        const result = await res.json();
+
+        // Preload images
+        if (result && Array.isArray(result.HomePictures)) {
+          result.HomePictures.forEach((image) => {
             const img = new Image();
             img.src = image;
             img.onload = () => onImageLoad();
