@@ -54,6 +54,7 @@ export default function Home() {
   }
 
   const { HomePictures, Even_Yehuda, Hevron8, City69 } = homeData;
+  console.log("HomePictures", HomePictures);
 
   const sections = [
     { component: <LandingPage images={HomePictures} />, id: "landingPage" },
