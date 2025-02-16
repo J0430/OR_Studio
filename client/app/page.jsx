@@ -11,7 +11,6 @@ import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
 import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/MainPreloader";
 import DirectionalButton from "@components/common/DirectionalButton";
-import ErrorBoundary from "@components/ErrorBoundary"; // Import ErrorBoundary component
 
 const LandingPage = dynamic(
   () => import("@components/sections/home/LandingPage/LandingPage"),
@@ -33,7 +32,6 @@ export default function Home() {
 
   const [isPageReady, setIsPageReady] = useState(false);
 
-  // Set isPageReady when loading and preloader visibility change
   useEffect(() => {
     if (!loading && !isPreloaderVisible) {
       setIsPageReady(true);
