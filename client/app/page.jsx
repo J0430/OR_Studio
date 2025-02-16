@@ -1,45 +1,54 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useCallback, useEffect, useState, Suspense } from "react";
+import { motion } from "framer-motion";
 import { usePreloader } from "@contexts/MainPreloaderContext";
 import { useNav } from "@contexts/NavContext";
 import { useFetchData } from "@hooks/useFetchData";
+import { preloadImages } from "@utils/imageUtils";
+import dynamic from "next/dynamic";
+import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
 import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/MainPreloader";
 import DirectionalButton from "@components/common/DirectionalButton";
-import Head from "next/head";
 
 const LandingPage = dynamic(
-  () => import("@components/sections/home/LandingPage/LandingPage")
+  () => import("@components/sections/home/LandingPage/LandingPage"),
+  { suspense: true }
 );
 const AboutBanner = dynamic(
-  () => import("@components/sections/home/AboutBanner/AboutBanner")
+  () => import("@components/sections/home/AboutBanner/AboutBanner"),
+  { suspense: true }
 );
 const ProjectBanner = dynamic(
-  () => import("@components/sections/home/ProjectBanner/ProjectBanner")
+  () => import("@components/sections/home/ProjectBanner/ProjectBanner"),
+  { suspense: true }
 );
 
 export default function Home() {
   const { data: homeData, loading, error } = useFetchData("homeData.json");
-  console.log("Home Data:", homeData);
   const { isPreloaderVisible, onImageLoad } = usePreloader();
   const { isNavOpen } = useNav();
 
   const [isPageReady, setIsPageReady] = useState(false);
-  useEffect(() => {
-    if (!loading && !isPreloaderVisible) {
-      setIsPageReady(true);
-    }
-  }, [loading, isPreloaderVisible]);
 
-  const handleScroll = useCallback((targetId) => {
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    if (homeData) {
+      preloadImages(
+        [
+          ...homeData.HomePictures,
+          ...homeData.Even_Yehuda,
+          ...homeData.Hevron8,
+          ...homeData.City69,
+        ],
+        onImageLoad
+      );
     }
-  }, []);
+  }, [homeData, isPreloaderVisible, onImageLoad]);
+
+  if (!loading && !isPreloaderVisible) {
+    setIsPageReady(true);
+  }
 
   if (!isPageReady) {
     return <MainPreloader />;
@@ -53,6 +62,7 @@ export default function Home() {
       </div>
     );
   }
+
   if (!homeData) {
     return (
       <div>
@@ -84,6 +94,17 @@ export default function Home() {
           name="description"
           content="Architectural visualization by OR Studio."
         />
+        <meta
+          property="og:title"
+          content="OR Studio - Architectural Visualization"
+        />
+        <meta
+          property="og:description"
+          content="Architectural visualization by OR Studio."
+        />
+        <meta property="og:image" content="/assets/social-preview.png" />
+        <meta property="og:url" content="https://orstudio.com" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
       <motion.div
@@ -94,29 +115,30 @@ export default function Home() {
         exit={{ opacity: 0, scale: 0.9, transition: { duration: 1.5 } }}
         transition={{ duration: 1.5, ease: "easeOut" }}>
         {sections.map((section, index) => (
-          <div
-            id={section.id}
-            key={section.id}
-            className={styles.sectionContainer}>
-            {section.component}
+          <ErrorBoundary key={section.id}>
+            <div id={section.id} className={styles.sectionContainer}>
+              <Suspense fallback={<div>Loading Section...</div>}>
+                {section.component}
+              </Suspense>
 
-            {!isNavOpen &&
-              (index < sections.length - 1 ? (
-                <DirectionalButton
-                  direction="down"
-                  width={3}
-                  height={3}
-                  onClick={() => handleScroll(sections[index + 1]?.id)}
-                />
-              ) : (
-                <DirectionalButton
-                  direction="up"
-                  width={3}
-                  height={3}
-                  onClick={() => handleScroll(sections[0]?.id)}
-                />
-              ))}
-          </div>
+              {!isNavOpen &&
+                (index < sections.length - 1 ? (
+                  <DirectionalButton
+                    direction="down"
+                    width={3}
+                    height={3}
+                    onClick={() => handleScroll(sections[index + 1]?.id)}
+                  />
+                ) : (
+                  <DirectionalButton
+                    direction="up"
+                    width={3}
+                    height={3}
+                    onClick={() => handleScroll(sections[0]?.id)}
+                  />
+                ))}
+            </div>
+          </ErrorBoundary>
         ))}
       </motion.div>
     </>
