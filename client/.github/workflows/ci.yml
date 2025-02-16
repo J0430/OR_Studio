@@ -13,31 +13,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Step 2: Set up Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
+      # Step 4: Set environment variables (if needed)
       - name: Set environment variables
         run: echo "NEXT_PUBLIC_API_URL=https://api.example.com" >> .env.local
 
+      # Step 5: Clean previous builds
+      - name: Clean previous builds
+        run: rm -rf out/ .next/
+
+      # Step 6: Run tests (optional)
       - name: Run tests
         run: npm test
 
+      # Step 7: Build the project
       - name: Build project
         run: npm run build
 
+      # Step 8: Copy Netlify config files
       - name: Copy Netlify Config Files
         run: |
-          if [ -f public/_redirects ]; then cp public/_redirects out/; fi
-          if [ -f public/_headers ]; then cp public/_headers out/; fi
+          cp public/_redirects out/ || echo "No _redirects file to copy."
+          cp public/_headers out/ || echo "No _headers file to copy."
 
+      # Step 9: Deploy to Netlify
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2
         env:
