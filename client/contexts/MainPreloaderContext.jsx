@@ -42,8 +42,14 @@ export const PreloaderProvider = ({ children }) => {
   }, []);
 
   // Increment the count of loaded images
+
   const onImageLoad = () => {
-    setImagesLoaded((prev) => prev + 1);
+    setImagesLoaded((prev) => {
+      if (prev < totalImages) {
+        return prev + 1;
+      }
+      return prev; // Prevent exceeding totalImages
+    });
   };
 
   return (
