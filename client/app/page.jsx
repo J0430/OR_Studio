@@ -12,16 +12,13 @@ import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/Ma
 import DirectionalButton from "@components/common/DirectionalButton";
 
 const LandingPage = dynamic(
-  () => import("@components/sections/home/LandingPage/LandingPage"),
-  { suspense: true }
+  () => import("@components/sections/home/LandingPage/LandingPage")
 );
 const AboutBanner = dynamic(
-  () => import("@components/sections/home/AboutBanner/AboutBanner"),
-  { suspense: true }
+  () => import("@components/sections/home/AboutBanner/AboutBanner")
 );
 const ProjectBanner = dynamic(
-  () => import("@components/sections/home/ProjectBanner/ProjectBanner"),
-  { suspense: true }
+  () => import("@components/sections/home/ProjectBanner/ProjectBanner")
 );
 
 export default function Home() {
@@ -115,9 +112,7 @@ export default function Home() {
             id={section.id}
             key={section.id}
             className={styles.sectionContainer}>
-            <Suspense fallback={<div>Loading Section...</div>}>
-              {section.component}
-            </Suspense>
+            {section.component}
 
             {!isNavOpen &&
               (index < sections.length - 1 ? (
