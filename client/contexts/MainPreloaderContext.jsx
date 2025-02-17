@@ -31,13 +31,13 @@ export const PreloaderProvider = ({ children }) => {
   // Ensure preloader disappears after images are loaded
   useEffect(() => {
     if (imagesLoaded >= totalImages) {
-      setTimeout(() => setIsPreloaderVisible(false), 4000); // Auto-hide after 4s
+      setTimeout(() => setIsPreloaderVisible(false), 4500); // Auto-hide after 4s
     }
   }, [imagesLoaded]);
 
   // Ensure preloader disappears after 4 seconds regardless
   useEffect(() => {
-    const timeout = setTimeout(() => setIsPreloaderVisible(false), 4000);
+    const timeout = setTimeout(() => setIsPreloaderVisible(false), 4500);
     return () => clearTimeout(timeout); // Cleanup timeout
   }, []);
 

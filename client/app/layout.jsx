@@ -3,7 +3,7 @@ import { PreloaderProvider } from "@contexts/MainPreloaderContext";
 import { NavProvider } from "@contexts/NavContext";
 import Header from "@components/nav/Header/Header";
 import localFont from "next/font/local";
-import ErrorBoundary from "@components/ErrorBoundary/ErrorBoundary";
+import ErrorBoundary from "@components/errorBoundary/ErrorBoundary";
 const raleway = localFont({
   src: [
     { path: "fonts/Raleway-Regular.woff2", weight: "400", style: "normal" },
