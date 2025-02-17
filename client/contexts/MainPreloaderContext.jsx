@@ -12,10 +12,8 @@ export const PreloaderProvider = ({ children }) => {
     const navigationEntry = performance.getEntriesByType("navigation")[0] || {};
     const navigationType = navigationEntry.type || "navigate";
 
-    // Get whether the user has visited before
     const hasVisited = sessionStorage.getItem("hasVisited") || "false";
 
-    // Handle preloader visibility based on navigation type and sessionStorage
     if (
       navigationType === "reload" ||
       navigationType === "navigate" ||
