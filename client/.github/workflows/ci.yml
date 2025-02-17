@@ -29,7 +29,7 @@ jobs:
 
       # Step 4: Set environment variables
       - name: Set environment variables
-        run: echo "NEXT_PUBLIC_BASE_URL=https://api.example.com" >> .env.local
+        run: echo "NEXT_PUBLIC_BASE_URL=https://monumental-kleicha-0d19a2.netlify.app" >> .env.local
 
       # Step 5: Clean previous builds
       - name: Clean previous builds
@@ -39,9 +39,10 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # Step 7: Copy Netlify config files
+      # Step 7: Copy Netlify config files (_redirects and _headers)
       - name: Copy Netlify Config Files
         run: |
+          mkdir -p out
           cp public/_redirects out/ || echo "No _redirects file to copy."
           cp public/_headers out/ || echo "No _headers file to copy."
 
