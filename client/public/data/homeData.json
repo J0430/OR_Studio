@@ -1,26 +1,53 @@
 {
-  "HomePictures": [
-    "/assets/home/Home Pictures/Front 3.jpg",
-    "/assets/home/Home Pictures/Front Page 1.jpg",
-    "/assets/home/Home Pictures/Front Page 2.jpg",
-    "/assets/home/Home Pictures/Front Page 5.jpg"
-  ],
-  "Even_Yehuda": [
-    "/assets/home/Even_Yehuda/4.png",
-    "/assets/home/Even_Yehuda/5.png",
-    "/assets/home/Even_Yehuda/7.png",
-    "/assets/home/Even_Yehuda/8.png"
-  ],
-  "Hevron8": [
-    "/assets/home/Hevron 8 Penthouse Rooftop/Hevron_003-View2_PS.jpg",
-    "/assets/home/Hevron 8 Penthouse Rooftop/Hevron_003-View3_PS.jpg",
-    "/assets/home/Hevron 8 Penthouse Rooftop/Hevron_003-View4_PS.jpg",
-    "/assets/home/Hevron 8 Penthouse Rooftop/Hevron_003-View5_PS.jpg"
-  ],
-  "City69": [
-    "/assets/home/City69/13.png",
-    "/assets/home/City69/10.png",
-    "/assets/home/City69/11.png",
-    "/assets/home/City69/12.png"
+  "category": "Home",
+  "projects": [
+    {
+      "id": "LandingPictures",
+      "title": "Landing Pictures",
+      "frontImage": "",
+      "images": [
+        "/assets/home/Home Pictures/Front 3.jpg",
+        "/assets/home/Home Pictures/Front Page 1.jpg",
+        "/assets/home/Home Pictures/Front Page 2.jpg",
+        "/assets/home/Home Pictures/Front Page 5.jpg"
+      ],
+      "description": ""
+    },
+    {
+      "id": "EvenYehuda",
+      "title": "Even Yehuda",
+      "frontImage": "",
+      "images": [
+        "/assets/home/Even_Yehuda/4.png",
+        "/assets/home/Even_Yehuda/5.png",
+        "/assets/home/Even_Yehuda/7.png",
+        "/assets/home/Even_Yehuda/8.png"
+      ],
+      "description": ""
+    },
+    {
+      "id": "Hevron8PenthouseRooftop",
+      "title": "Hevron 8 Penthouse Rooftop",
+      "frontImage": "",
+      "images": [
+        "/assets/home/Hevron 8 Penthouse Rooftop/Hevron_003-View2_PS.jpg",
+        "/assets/home/Hevron 8 Penthouse Rooftop/Hevron_003-View3_PS.jpg",
+        "/assets/home/Hevron 8 Penthouse Rooftop/Hevron_003-View4_PS.jpg",
+        "/assets/home/Hevron 8 Penthouse Rooftop/Hevron_003-View5_PS.jpg"
+      ],
+      "description": ""
+    },
+    {
+      "id": "City69",
+      "title": "City69",
+      "frontImage": "",
+      "images": [
+        "/assets/home/City69/13.png",
+        "/assets/home/City69/10.png",
+        "/assets/home/City69/11.png",
+        "/assets/home/City69/12.png"
+      ],
+      "description": ""
+    }
   ]
 }

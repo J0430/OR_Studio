@@ -3,7 +3,7 @@ import { PreloaderProvider } from "@contexts/MainPreloaderContext";
 import { NavProvider } from "@contexts/NavContext";
 import Header from "@components/nav/Header/Header";
 import localFont from "next/font/local";
-
+import ErrorBoundary from "@components/ErrorBoundary";
 const raleway = localFont({
   src: [
     { path: "fonts/Raleway-Regular.woff2", weight: "400", style: "normal" },
@@ -26,7 +26,9 @@ export default function RootLayout({ children }) {
         <PreloaderProvider>
           <NavProvider>
             <Header />
-            {children}
+            <ErrorBoundary>
+              {children} {/* ✅ Wrap children with ErrorBoundary */}
+            </ErrorBoundary>
           </NavProvider>
         </PreloaderProvider>
       </body>

@@ -4,8 +4,7 @@ import React, { useCallback, useEffect, useState, Suspense } from "react";
 import { motion } from "framer-motion";
 import { usePreloader } from "@contexts/MainPreloaderContext";
 import { useNav } from "@contexts/NavContext";
-import { useFetchData } from "@hooks/useFetchData";
-import { preloadImages } from "@utils/imageUtils";
+import { useFetchData } from "@hooks/useFetchData"; // ✅ Already preloads images
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
@@ -27,7 +26,8 @@ const ProjectBanner = dynamic(
 
 export default function Home() {
   const { data: homeData, loading, error } = useFetchData("homeData.json");
-  const { isPreloaderVisible, onImageLoad } = usePreloader();
+
+  const { isPreloaderVisible } = usePreloader();
   const { isNavOpen } = useNav();
 
   const [isPageReady, setIsPageReady] = useState(false);
@@ -37,21 +37,6 @@ export default function Home() {
       setIsPageReady(true);
     }
   }, [loading, isPreloaderVisible]);
-
-  // Preload images when homeData is available
-  useEffect(() => {
-    if (homeData) {
-      preloadImages(
-        [
-          ...homeData.HomePictures,
-          ...homeData.Even_Yehuda,
-          ...homeData.Hevron8,
-          ...homeData.City69,
-        ],
-        onImageLoad
-      );
-    }
-  }, [homeData, onImageLoad]);
 
   const handleScroll = useCallback((targetId) => {
     const targetElement = document.getElementById(targetId);
@@ -80,18 +65,19 @@ export default function Home() {
       </div>
     );
   }
+  const projectsMap = Object.fromEntries(
+    homeData?.projects.map((project) => [project.id, project.images]) || []
+  );
 
-  const {
-    HomePictures = [],
-    Even_Yehuda = [],
-    Hevron8 = [],
-    City69 = [],
-  } = homeData;
+  const LandingPictures = projectsMap["LandingPictures"] || [];
+  const EvenYehuda = projectsMap["EvenYehuda"] || [];
+  const Hevron8 = projectsMap["Hevron8PenthouseRooftop"] || [];
+  const City69 = projectsMap["City69"] || [];
 
   const sections = [
-    { component: <LandingPage images={HomePictures} />, id: "landingPage" },
+    { component: <LandingPage images={LandingPictures} />, id: "landingPage" },
     { component: <AboutBanner />, id: "aboutBanner" },
-    { component: <ProjectBanner images={Even_Yehuda} />, id: "evenYehuda" },
+    { component: <ProjectBanner images={EvenYehuda} />, id: "evenYehuda" },
     { component: <ProjectBanner images={Hevron8} />, id: "hevron8" },
     { component: <ProjectBanner images={City69} />, id: "last-section" },
   ];
@@ -120,35 +106,36 @@ export default function Home() {
       <motion.div
         key="homePage"
         className={styles.homePage}
-        initial={{ opacity: 0, scale: 1.1 }}
+        initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.9, transition: { duration: 1.5 } }}
-        transition={{ duration: 1.5, ease: "easeOut" }}>
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}>
         {sections.map((section, index) => (
-          <ErrorBoundary key={section.id}>
-            <div id={section.id} className={styles.sectionContainer}>
-              <Suspense fallback={<div>Loading Section...</div>}>
-                {section.component}
-              </Suspense>
+          <div
+            id={section.id}
+            key={section.id}
+            className={styles.sectionContainer}>
+            <Suspense fallback={<div>Loading Section...</div>}>
+              {section.component}
+            </Suspense>
 
-              {!isNavOpen &&
-                (index < sections.length - 1 ? (
-                  <DirectionalButton
-                    direction="down"
-                    width={3}
-                    height={3}
-                    onClick={() => handleScroll(sections[index + 1]?.id)}
-                  />
-                ) : (
-                  <DirectionalButton
-                    direction="up"
-                    width={3}
-                    height={3}
-                    onClick={() => handleScroll(sections[0]?.id)}
-                  />
-                ))}
-            </div>
-          </ErrorBoundary>
+            {!isNavOpen &&
+              (index < sections.length - 1 ? (
+                <DirectionalButton
+                  direction="down"
+                  width={3}
+                  height={3}
+                  onClick={() => handleScroll(sections[index + 1]?.id)}
+                />
+              ) : (
+                <DirectionalButton
+                  direction="up"
+                  width={3}
+                  height={3}
+                  onClick={() => handleScroll(sections[0]?.id)}
+                />
+              ))}
+          </div>
         ))}
       </motion.div>
     </>

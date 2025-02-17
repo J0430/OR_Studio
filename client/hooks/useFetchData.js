@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { fetchData } from "@utils/api";
-import { usePreloader } from "@contexts/MainPreloaderContext"; // Use preloader context
+import { usePreloader } from "@contexts/MainPreloaderContext";
+import { preloadImages } from "@utils/imageUtils";
 
 export const useFetchData = (endpoint) => {
   const [data, setData] = useState(null);
@@ -14,32 +15,26 @@ export const useFetchData = (endpoint) => {
     const loadData = async () => {
       try {
         setLoading(true);
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/data/${endpoint}`
+        const result = await fetchData(endpoint);
+
+        if (!result || !result.projects) {
+          throw new Error("No valid data received");
+        }
+
+        // **Extract and preload images from projects array**
+        const allImages = result.projects.flatMap(
+          (project) => project.images || []
         );
-        if (!res.ok) {
-          throw new Error(`Failed to fetch ${endpoint}: ${res.statusText}`);
-        }
-
-        const result = await res.json();
-
-        // Preload images
-        if (result && Array.isArray(result.HomePictures)) {
-          result.HomePictures.forEach((image) => {
-            const img = new Image();
-            img.src = image;
-            img.onload = () => onImageLoad();
-          });
-        }
+        preloadImages(allImages, onImageLoad);
 
         setData(result);
       } catch (err) {
-        console.error(err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
+
     loadData();
   }, [endpoint, onImageLoad]);
 

@@ -2,6 +2,8 @@ export const preloadImages = (images = [], onImageLoad = () => {}) => {
   if (!Array.isArray(images)) return;
 
   images.forEach((image) => {
+    if (!image) return;
+
     const img = new Image();
     img.src = image;
     img.onload = () => onImageLoad();
