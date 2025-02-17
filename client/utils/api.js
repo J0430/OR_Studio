@@ -4,28 +4,32 @@ export async function fetchData(endpoint) {
     console.log(`Fetching: ${url}`);
 
     const res = await fetch(url);
-
-    console.log("Response Status:", res.status, res.statusText);
+    console.log("Response Status:", res.status);
 
     if (!res.ok) {
-      const errorMessage = `Failed to fetch ${endpoint}: ${res.statusText} (Status: ${res.status})`;
-      console.error(errorMessage);
-      throw new Error(errorMessage);
+      throw new Error(`Failed to fetch ${endpoint}: ${res.statusText}`);
     }
 
+    // Validate response content type
     const contentType = res.headers.get("content-type");
+    console.log("Content-Type:", contentType);
+
     if (!contentType || !contentType.includes("application/json")) {
-      console.warn(`Expected JSON but received: ${contentType}`);
-      const rawResponse = await res.text();
-      console.warn("Raw Response:", rawResponse);
-      throw new Error(`Invalid JSON response for ${endpoint}`);
+      throw new Error(`Expected JSON but received ${contentType}`);
     }
 
-    const data = await res.json();
-    console.log("Fetched Data:", data); // ✅ Debugging fetched data
+    // Ensure JSON parsing is safe
+    let data;
+    try {
+      data = await res.json();
+    } catch (jsonError) {
+      throw new Error(`Failed to parse JSON for ${endpoint}`);
+    }
+
+    console.log("Fetched Data:", data);
     return data;
   } catch (error) {
     console.error(`Fetch error for ${endpoint}:`, error.message);
-    return null; // Prevents app from crashing
+    return { error: error.message }; // Return an error object instead of null
   }
 }
