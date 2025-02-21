@@ -3,7 +3,7 @@
   "projects": {
     "o_project1": {
       "title": "Beacon Towers",
-      "frontImage": "/assets/categories/Office/Project1/09.jpg",
+      "frontImage": "/assets/categories/Office/Project1/09.webp",
       "images": [
         "/assets/categories/Office/Project1/09.webp",
         "/assets/categories/Office/Project1/051.webp",
@@ -14,11 +14,11 @@
     },
     "o_project2": {
       "title": "Urban Living Complex",
-      "frontImage": "/assets/categories/Office/project2/2.jpg",
+      "frontImage": "/assets/categories/Office/project2/2.webp",
       "images": [
-        "/assets/categories/Office/project2/2.jpg",
-        "/assets/categories/Office/project2/3.jpg",
-        "/assets/categories/Office/project2/6.jpg"
+        "/assets/categories/Office/project2/2.webp",
+        "/assets/categories/Office/project2/3.webp",
+        "/assets/categories/Office/project2/6.webp"
       ],
       "description": "The Urban Living Complex introduces a dynamic residential and retail hub at the heart of the city. The project combines elegant apartments with green spaces and retail outlets, emphasizing community living. With a contemporary design and innovative urban planning, it reflects a perfect balance of comfort and modernity."
     },
