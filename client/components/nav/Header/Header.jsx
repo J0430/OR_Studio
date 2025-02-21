@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import { useNav } from "@contexts/NavContext";
 import { usePreloader } from "@contexts/MainPreloaderContext";
-import useClickOutside from "hooks/useClickOuside";
 import { motion, AnimatePresence } from "framer-motion";
 import { logos } from "@utils/globals";
+import useClickOutside from "hooks/useClickOuside";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";

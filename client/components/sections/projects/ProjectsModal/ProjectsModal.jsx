@@ -69,9 +69,8 @@ function ProjectsModal({ selectedImage, project, onClose }) {
             src={project.images[currentImageIndex]}
             alt={`Project Image ${currentImageIndex + 1}`}
             className={styles.modalImage}
-            layout="responsive"
-            width={1000}
-            height={800}
+            width={1200}
+            height={1000}
             style={{ objectFit: "cover" }}
           />
 
