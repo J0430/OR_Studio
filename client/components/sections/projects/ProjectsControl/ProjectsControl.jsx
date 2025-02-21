@@ -1,4 +1,3 @@
-import React from "react";
 import { useMediaQuery } from "react-responsive";
 import CategoryTab from "@components/common/CategoryTab/CategoryTab";
 import styles from "../ProjectsControl/ProjectsControl.module.scss";

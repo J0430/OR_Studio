@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { adjustGridItems } from "@utils/gridUtils";
-import Image from "next/image";
 import { useInView } from "react-intersection-observer";
+import Image from "next/image";
 import styles from "../ProjectsGrid/ProjectsGrid.module.scss";
 
 // 🔹 Child component to safely use hooks
