@@ -1,13 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { preloader } from "@utils/globals";
-import { usePreloader } from "@contexts/MainPreloaderContext";
 import Image from "next/image";
+import TypingEffect from "./TypingEffect/TypingEffect";
+import { preloader } from "@utils/globals";
 import styles from "./MainPreloader.module.scss";
-
-const TypingEffect = dynamic(
-  () => import("../mainpreloader/TypingEffect/TypingEffect"),
-  { ssr: false }
-);
+import { usePreloader } from "@contexts/MainPreloaderContext";
 
 const MainPreloader = () => {
   const { isPreloaderVisible, onImageLoad } = usePreloader();

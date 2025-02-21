@@ -9,7 +9,10 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.scss";
 
-const NavbarLinks = dynamic(() => import("../NavLinks/NavLinks"));
+const NavbarLinks = dynamic(() => import("../NavLinks/NavLinks"), {
+  loading: () => <div>Loading Modal...</div>,
+  ssr: false,
+});
 const CloseOutlined = dynamic(() => import("@ant-design/icons/CloseOutlined"), {
   ssr: false,
 });
