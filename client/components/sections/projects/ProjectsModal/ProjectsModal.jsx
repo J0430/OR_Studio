@@ -72,6 +72,8 @@ function ProjectsModal({ selectedImage, project, onClose }) {
             width={1200}
             height={1000}
             style={{ objectFit: "cover" }}
+            quality={80}
+            priority
           />
 
           <DirectionalButton

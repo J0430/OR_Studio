@@ -5,7 +5,6 @@ import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import styles from "../ProjectsGrid/ProjectsGrid.module.scss";
 
-// 🔹 Child component to safely use hooks
 const GridItem = ({
   imagePath,
   index,
@@ -40,8 +39,9 @@ const GridItem = ({
           alt={`Project ${index + 1}`}
           width={400}
           height={400}
-          priority
           className="loaded"
+          quality={75}
+          priority
         />
       ) : (
         <div

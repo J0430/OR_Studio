@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { fetchData } from "@utils/api";
 import { AnimatePresence } from "framer-motion";
+import { consumeDynamicAccess } from "next/dist/server/app-render/dynamic-rendering";
 import {
   useProjectsPreloader,
   ProjectsPreloaderProvider,
@@ -10,9 +11,7 @@ import { fisherYatesShuffle, interleaveArrays } from "@utils/utils";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import style from "@styles/pages/projects.module.scss";
-import { consumeDynamicAccess } from "next/dist/server/app-render/dynamic-rendering";
 
-// 🔹 Dynamic Imports with Loading Placeholders
 const ProjectsModal = dynamic(
   () => import("@components/sections/projects/ProjectsModal/ProjectsModal"),
   { loading: () => <div>Loading Modal...</div>, ssr: false }
