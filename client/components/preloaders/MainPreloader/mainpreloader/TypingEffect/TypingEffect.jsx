@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./TypingEffect.module.scss";
 
 const TypingEffect = ({ text = "" }) => {
