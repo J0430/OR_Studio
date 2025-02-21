@@ -1,0 +1,154 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+.direction {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+
+  &.up,
+  &.down,
+  &.left,
+  &.right {
+    .scrollButton {
+      position: absolute;
+      width: var(--button-width, 3.5rem);
+      height: var(--button-height, 3.5rem);
+      border: m.rem(2.2) solid rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition:
+        background-color 0.3s,
+        transform 0.3s;
+
+      &:hover {
+        background-color: rgba(22, 21, 21, 0.5);
+      }
+
+      .arrow {
+        width: m.rem(12);
+        height: m.rem(12);
+        border-left: m.rem(1.5) solid white;
+        border-bottom: m.rem(1.5) solid white;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          width: m.rem(15);
+          height: m.rem(15);
+        }
+      }
+    }
+  }
+
+  &.up .scrollButton {
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    .arrow {
+      margin-top: 0.4rem;
+      transform: rotate(135deg);
+    }
+  }
+
+  &.down .scrollButton {
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    .arrow {
+      margin-bottom: 0.1rem;
+      transform: rotate(-45deg);
+    }
+  }
+
+  &.left .scrollButton {
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    .arrow {
+      transform: rotate(45deg);
+    }
+  }
+
+  &.right .scrollButton {
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    .arrow {
+      transform: rotate(-135deg);
+    }
+  }
+
+  @include m.respond-to("tablet") {
+    .scrollButton {
+      bottom: 1rem !important;
+      width: m.rem(48) !important;
+      height: m.rem(48) !important;
+      border: m.rem(1.5) solid white !important;
+    }
+    .arrow {
+      width: m.rem(10) !important;
+      height: m.rem(10) !important;
+      border-left: m.rem(1.8) solid white !important;
+      border-bottom: m.rem(1.8) solid white !important;
+    }
+
+    &.up .scrollButton {
+      .arrow {
+        margin-top: 0.3rem !important;
+        transform: rotate(135deg);
+      }
+    }
+  }
+
+  /* =========================== */
+  /* RESPONSIVENESS              */
+  /* =========================== */
+
+  @include m.respond-to("mobile") {
+    .scrollButton {
+      bottom: 1rem !important;
+      width: m.rem(40) !important;
+      height: m.rem(40) !important;
+      border: m.rem(1.8) solid white !important;
+    }
+    .arrow {
+      width: m.rem(8) !important;
+      height: m.rem(8) !important;
+      border-left: m.rem(1.8) solid white !important;
+      border-bottom: m.rem(1.8) solid white !important;
+    }
+    &.up .scrollButton {
+      .arrow {
+        margin-top: 0.2rem !important;
+        transform: rotate(135deg);
+      }
+    }
+  }
+
+  @include m.respond-to("small-mobile") {
+    .scrollButton {
+      bottom: 1rem !important;
+      width: m.rem(24) !important;
+      height: m.rem(24) !important;
+      border: m.rem(1.8) solid white !important;
+    }
+    .arrow {
+      width: m.rem(6) !important;
+      height: m.rem(6) !important;
+      border-left: m.rem(1.8) solid white !important;
+      border-bottom: m.rem(1.8) solid white !important;
+    }
+    &.up .scrollButton {
+      .arrow {
+        margin-top: 0.2rem !important;
+        transform: rotate(135deg);
+      }
+    }
+  }
+}

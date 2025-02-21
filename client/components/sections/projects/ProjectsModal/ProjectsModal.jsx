@@ -1,39 +1,39 @@
-"use client";
-
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import useClickOutside from "@hooks/useClickOuside";
-import DirectionalButton from "@components/common/DirectionalButton";
+import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import styles from "./ProjectsModal.module.scss";
 import Image from "next/image";
 
 function ProjectsModal({ selectedImage, project, onClose }) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(
-    project.allImages?.indexOf(selectedImage)
-  );
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (project && selectedImage) {
+      const index = project.images?.indexOf(selectedImage);
+      if (index !== -1) {
+        setCurrentImageIndex(index);
+      }
+    }
+  }, [project, selectedImage]);
 
   const modalContentRef = useRef(null);
-
   useClickOutside(modalContentRef, onClose);
 
   const handleNext = () => {
     setCurrentImageIndex((prev) =>
-      prev === project.allImages?.length - 1 ? 0 : prev + 1
+      prev === project.images.length - 1 ? 0 : prev + 1
     );
   };
 
   const handlePrevious = () => {
     setCurrentImageIndex((prev) =>
-      prev === 0 ? project.allImages?.length - 1 : prev - 1
+      prev === 0 ? project.images.length - 1 : prev - 1
     );
   };
 
   const handleThumbnailClick = (index) => {
     setCurrentImageIndex(index);
-  };
-
-  const closeModal = () => {
-    onClose();
   };
 
   return (
@@ -42,50 +42,52 @@ function ProjectsModal({ selectedImage, project, onClose }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}>
-      <div className={styles.modalBackdrop} onClick={closeModal} />
+      <div className={styles.modalBackdrop} onClick={onClose} />
       <motion.div
         className={styles.modalContent}
         initial={{ scale: 0.8 }}
         animate={{ scale: 1 }}
-        exit={{ scale: 0.8 }}>
+        exit={{ scale: 0.8 }}
+        ref={modalContentRef}>
         <button
           className={styles.closeButton}
-          onClick={closeModal}
+          onClick={onClose}
           aria-label="Close Modal">
           ✕
         </button>
-        <motion.div
-          className={styles.imageWrapper}
-          layoutid={selectedImage}
-          initial={{ scale: 0.8 }}
-          animate={{ scale: 1 }}
-          exit={{ scale: 0.8 }}>
+
+        <motion.div className={styles.imageWrapper} layoutid={selectedImage}>
           <DirectionalButton
             direction="left"
+            width={3}
+            height={3}
             onClick={handlePrevious}
             className={styles.leftButton}
           />
 
           <Image
-            src={project.allImages[currentImageIndex]}
-            alt="Project Image"
+            src={project.images[currentImageIndex]}
+            alt={`Project Image ${currentImageIndex + 1}`}
             className={styles.modalImage}
-            width={1500}
-            height={1300}
+            layout="responsive"
+            width={1000}
+            height={800}
             style={{ objectFit: "cover" }}
           />
+
           <DirectionalButton
             direction="right"
+            width={3}
+            height={3}
             onClick={handleNext}
             className={styles.rightButton}
           />
         </motion.div>
 
-        {/* Bottom Thumbnail Gallery */}
         <div className={styles.thumbnailGallery}>
-          {project.allImages.map((image, index) => (
+          {project.images.map((image, index) => (
             <div
-              key={index}
+              key={image || index}
               className={`${styles.thumbnailWrapper} ${
                 index === currentImageIndex ? styles.activeThumbnail : ""
               }`}
@@ -93,9 +95,9 @@ function ProjectsModal({ selectedImage, project, onClose }) {
               <Image
                 src={image}
                 alt={`Thumbnail ${index + 1}`}
+                layout="responsive"
                 width={100}
                 height={75}
-                className={styles.thumbnailImage}
               />
             </div>
           ))}
@@ -104,5 +106,4 @@ function ProjectsModal({ selectedImage, project, onClose }) {
     </motion.div>
   );
 }
-
 export default ProjectsModal;

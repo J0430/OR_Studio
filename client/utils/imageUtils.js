@@ -1,12 +1,14 @@
-export const preloadImages = (images = [], onImageLoad = () => {}) => {
-  if (!Array.isArray(images)) return;
+// @utils/imageUtils.js
 
-  images.forEach((image) => {
-    if (!image) return;
-
-    const img = new Image();
-    img.src = image;
-    img.onload = () => onImageLoad();
-    img.onerror = () => console.error(`Failed to preload image: ${image}`);
-  });
+export const preloadImages = async (imageUrls) => {
+  return Promise.all(
+    imageUrls.map((url) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+    })
+  );
 };

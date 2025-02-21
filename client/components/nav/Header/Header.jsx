@@ -1,10 +1,7 @@
-"use client";
-
 import React, { useRef } from "react";
 import { useNav } from "@contexts/NavContext";
 import { usePreloader } from "@contexts/MainPreloaderContext";
 import useClickOutside from "hooks/useClickOuside";
-import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { logos } from "@utils/globals";
 import dynamic from "next/dynamic";
@@ -13,10 +10,16 @@ import Link from "next/link";
 import styles from "./Header.module.scss";
 
 const NavbarLinks = dynamic(() => import("../NavLinks/NavLinks"));
+const CloseOutlined = dynamic(() => import("@ant-design/icons/CloseOutlined"), {
+  ssr: false,
+});
+const MenuOutlined = dynamic(() => import("@ant-design/icons/MenuOutlined"), {
+  ssr: false,
+});
 
 const Header = () => {
   const { isNavOpen, setIsNavOpen } = useNav();
-  const { isPreloaderVisible } = usePreloader();
+  const { isPreloaderVisible = false } = usePreloader();
 
   const menuRef = useRef(null);
 

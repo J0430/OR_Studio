@@ -1,53 +1,49 @@
 {
   "category": "Home",
-  "projects": [
-    {
-      "id": "LandingPictures",
+  "projects": {
+    "LandingPictures": {
       "title": "Landing Pictures",
-      "frontImage": "",
+      "frontImage": "/assets/home/HomePictures/Front 3.jpg",
+      "description": "",
       "images": [
-        "/assets/home/Home Pictures/Front 3.jpg",
-        "/assets/home/Home Pictures/Front Page 1.jpg",
-        "/assets/home/Home Pictures/Front Page 2.jpg",
-        "/assets/home/Home Pictures/Front Page 5.jpg"
-      ],
-      "description": ""
+        "/assets/home/HomePictures/Front 3.jpg",
+        "/assets/home/HomePictures/Front Page 1.jpg",
+        "/assets/home/HomePictures/Front Page 2.jpg",
+        "/assets/home/HomePictures/Front Page 5.jpg"
+      ]
     },
-    {
-      "id": "EvenYehuda",
+    "EvenYehuda": {
       "title": "Even Yehuda",
-      "frontImage": "",
+      "frontImage": "/assets/home/EvenYehuda/4.png",
+      "description": "",
       "images": [
-        "/assets/home/Even_Yehuda/4.png",
-        "/assets/home/Even_Yehuda/5.png",
-        "/assets/home/Even_Yehuda/7.png",
-        "/assets/home/Even_Yehuda/8.png"
-      ],
-      "description": ""
+        "/assets/home/EvenYehuda/4.png",
+        "/assets/home/EvenYehuda/5.png",
+        "/assets/home/EvenYehuda/7.png",
+        "/assets/home/EvenYehuda/8.png"
+      ]
     },
-    {
-      "id": "Hevron8PenthouseRooftop",
+    "Hevron8PenthouseRooftop": {
       "title": "Hevron 8 Penthouse Rooftop",
-      "frontImage": "",
+      "frontImage": "/assets/home/Hevron8PenthouseRooftop/Hevron_003-View2_PS.jpg",
+      "description": "",
       "images": [
-        "/assets/home/Hevron 8 Penthouse Rooftop/Hevron_003-View2_PS.jpg",
-        "/assets/home/Hevron 8 Penthouse Rooftop/Hevron_003-View3_PS.jpg",
-        "/assets/home/Hevron 8 Penthouse Rooftop/Hevron_003-View4_PS.jpg",
-        "/assets/home/Hevron 8 Penthouse Rooftop/Hevron_003-View5_PS.jpg"
-      ],
-      "description": ""
+        "/assets/home/Hevron8PenthouseRooftop/Hevron_003-View2_PS.jpg",
+        "/assets/home/Hevron8PenthouseRooftop/Hevron_003-View3_PS.jpg",
+        "/assets/home/Hevron8PenthouseRooftop/Hevron_003-View4_PS.jpg",
+        "/assets/home/Hevron8PenthouseRooftop/Hevron_003-View5_PS.jpg"
+      ]
     },
-    {
-      "id": "City69",
+    "City69": {
       "title": "City69",
-      "frontImage": "",
+      "frontImage": "/assets/home/City69/13.png",
+      "description": "",
       "images": [
         "/assets/home/City69/13.png",
         "/assets/home/City69/10.png",
         "/assets/home/City69/11.png",
         "/assets/home/City69/12.png"
-      ],
-      "description": ""
+      ]
     }
-  ]
+  }
 }

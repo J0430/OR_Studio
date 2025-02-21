@@ -1,23 +1,18 @@
 {
   "category": "Commercial",
-  "projects": [
-    {
-      "id": "c_project1",
+  "projects": {
+    "c_project1": {
       "title": "",
-      "frontImage": "/assets/projects/categories/Commercial/c_project1/Front Pic.jpg",
-      "images": [
-        "/assets/projects/categories/Commercial/c_project1/Front Pic.jpg"
-      ],
+      "frontImage": "/assets/categories/Commercial/c_project1/Front Pic.jpg",
+      "images": ["/assets/categories/Commercial/c_project1/Front Pic.jpg"],
       "description": ""
     },
-    {
-      "id": "c_project2",
+
+    "c_project2": {
       "title": "",
-      "frontImage": "/assets/projects/categories/Commercial/c_project2/project2.jpg",
-      "images": [
-        "/assets/projects/categories/Commercial/c_project2/project2.jpg"
-      ],
-      "description": ""
+      "description": "",
+      "frontImage": "/assets/categories/Commercial/c_project2/project2.jpg",
+      "images": ["/assets/categories/Commercial/c_project2/project2.jpg"]
     }
-  ]
+  }
 }
