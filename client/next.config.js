@@ -15,6 +15,7 @@ const nextConfig = {
   reactStrictMode: true, // ✅ Helps identify potential issues
 
   images: {
+    domains: ["monumental-kleicha-0d19a2.netlify.app"],
     unoptimized: true, // ✅ Allows images in static exports without Next.js optimization
   },
 

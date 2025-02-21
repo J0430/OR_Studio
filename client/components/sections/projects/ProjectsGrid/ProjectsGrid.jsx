@@ -38,10 +38,10 @@ const GridItem = ({
         <Image
           src={imagePath}
           alt={`Project ${index + 1}`}
-          width={500}
-          height={500}
+          width={400}
+          height={400}
+          priority
           className="loaded"
-          loading="lazy"
         />
       ) : (
         <div
