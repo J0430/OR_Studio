@@ -1,54 +1,49 @@
 "use client";
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-const PreloaderContext = createContext();
+export const PreloaderContext = createContext();
 
 export const PreloaderProvider = ({ children }) => {
   const [isPreloaderVisible, setIsPreloaderVisible] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(0);
-  const totalImages = 5; // ✅ Update this based on actual images
+  const totalImages = 5; // Adjust as needed.
 
   useEffect(() => {
-    const navigationEntry = performance.getEntriesByType("navigation")[0] || {};
-    const navigationType = navigationEntry.type || "navigate";
+    if (typeof window !== "undefined") {
+      const navigationEntry =
+        performance.getEntriesByType("navigation")[0] || {};
+      const navigationType = navigationEntry.type || "navigate";
 
-    const hasVisited = sessionStorage.getItem("hasVisited") || "false";
+      const hasVisited = sessionStorage.getItem("hasVisited") || "false";
 
-    if (
-      navigationType === "reload" ||
-      navigationType === "navigate" ||
-      hasVisited === "false"
-    ) {
-      sessionStorage.setItem("hasVisited", "true"); // ✅ Store visit status
-      setIsPreloaderVisible(true);
-    } else {
-      setIsPreloaderVisible(false);
+      if (
+        navigationType === "reload" ||
+        navigationType === "navigate" ||
+        hasVisited === "false"
+      ) {
+        sessionStorage.setItem("hasVisited", "true");
+        setIsPreloaderVisible(true);
+      } else {
+        setIsPreloaderVisible(false);
+      }
     }
   }, []);
 
-  // Ensure preloader disappears after images are loaded
   useEffect(() => {
     if (imagesLoaded >= totalImages) {
-      setTimeout(() => setIsPreloaderVisible(false), 4500); // Auto-hide after 4s
+      const timer = setTimeout(() => setIsPreloaderVisible(false), 4500);
+      return () => clearTimeout(timer);
     }
   }, [imagesLoaded]);
 
-  // Ensure preloader disappears after 4 seconds regardless
   useEffect(() => {
     const timeout = setTimeout(() => setIsPreloaderVisible(false), 4500);
-    return () => clearTimeout(timeout); // Cleanup timeout
+    return () => clearTimeout(timeout);
   }, []);
 
-  // Increment the count of loaded images
-
-  const onImageLoad = () => {
-    setImagesLoaded((prev) => {
-      if (prev < totalImages) {
-        return prev + 1;
-      }
-      return prev; // Prevent exceeding totalImages
-    });
-  };
+  const onImageLoad = () =>
+    setImagesLoaded((prev) => Math.min(prev + 1, totalImages));
 
   return (
     <PreloaderContext.Provider value={{ isPreloaderVisible, onImageLoad }}>
@@ -57,4 +52,16 @@ export const PreloaderProvider = ({ children }) => {
   );
 };
 
-export const usePreloader = () => useContext(PreloaderContext);
+export const usePreloader = () => {
+  const context = useContext(PreloaderContext);
+
+  if (!context) {
+    console.warn("usePreloader must be used within a PreloaderProvider");
+    return {
+      isPreloaderVisible: false,
+      onImageLoad: () => {},
+    };
+  }
+
+  return context;
+};

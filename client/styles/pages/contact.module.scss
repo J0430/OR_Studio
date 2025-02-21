@@ -1,0 +1,475 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+/*=========================== */
+/* CONTACT PAGE STYLES         */
+/* =========================== */
+
+.contactPage {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  overflow: hidden !important;
+  text-align-last: left;
+  z-index: 0;
+  background-image: url("/assets/projects/categories/Residential/r_project12/4.jpg")
+    no-repeat center center / cover;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image:
+      linear-gradient(to right, rgba(v.$black, 1) 40%, rgba(v.$black, 0) 70%),
+      linear-gradient(to left, rgba(v.$black, 1) 0%, rgba(v.$black, 0) 8%);
+    z-index: 1;
+  }
+  .content {
+    font-family: v.$font-family-base, "Hiragino Sans GB";
+    color: v.$white;
+    width: 50%;
+    height: 65vh;
+    align-self: center;
+    text-align: center;
+    overflow: visible;
+    margin-left: m.rem(48);
+    z-index: 10;
+
+    > h2 {
+      font-family: v.$font-family-base, "Hiragino Sans GB";
+      font-weight: 500;
+      color: v.$white;
+      font-size: m.rem(48);
+      text-align-last: left;
+      margin-left: m.rem(64);
+    }
+
+    > p {
+      font-family: v.$font-family-base, "Hiragino Sans GB";
+      color: v.$white;
+      font-size: m.rem(22);
+      font-weight: 400;
+      text-align-last: left;
+      margin-left: m.rem(64);
+    }
+  }
+}
+.ant-form-item {
+  margin-bottom: 6px;
+}
+
+.ant-input {
+  border-radius: 0;
+  border-color: black;
+  font-family: "Raleway", "Hiragino Sans GB";
+  color: white;
+  font-size: 23px;
+}
+.ant-input::placeholder {
+  font-size: 23px;
+  color: rgba(255, 255, 255, 0.706);
+}
+.ant-input:focus {
+  background-color: transparent;
+  border-bottom: 1px solid #58aae9 !important;
+}
+.ant-input:hover {
+  border-bottom: 1px solid #58aae9 !important;
+}
+
+.ant-form-item-control-input-content > .ant-btn-primary {
+  overflow-y: hidden;
+  background-color: transparent;
+  height: 2.5rem;
+  width: 10rem;
+  border: white 1px solid;
+  color: rgba(255, 255, 255, 0.706);
+  border-radius: 6px;
+  font-family: "Teko", sans-serif;
+  text-align-last: center;
+  font-size: 20px;
+  font-family: "Raleway", "Hiragino Sans GB";
+}
+
+.ant-form-item-control-input-content > .ant-btn-primary:hover {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+:where(.css-dev-only-do-not-override-42nv3w).ant-form {
+  width: 100% !important;
+  padding: 4rem;
+  height: 100vh;
+  padding-top: 2rem;
+}
+
+:where(.css-dev-only-do-not-override-42nv3w).ant-input-outlined {
+  width: 60%;
+}
+:where(.css-dev-only-do-not-override-42nv3w).ant-input:hover {
+  background-color: transparent;
+}
+
+:where(.css-dev-only-do-not-override-42nv3w).ant-input {
+  height: 2rem;
+  font-size: 23px;
+  background: transparent;
+  width: 70%;
+  margin-bottom: 1rem;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  height: 40px;
+  background: transparent;
+}
+:where(.css-dev-only-do-not-override-42nv3w).ant-input-outlined:focus,
+:where(.css-dev-only-do-not-override-42nv3w).ant-input-outlined:focus-within {
+  border-color: #1677ff;
+  outline: 0;
+  background-color: transparent;
+}
+:where(.css-dev-only-do-not).ant-input-outlined.ant-input-status-error:not(
+    .ant-input-disabled
+  ):focus,
+:where(
+    .css-dev-only-do-not-override-42nv3w
+  ).ant-input-outlined.ant-input-status-error:not(
+    .ant-input-disabled
+  ):focus-within {
+  margin-bottom: 0.3rem;
+  border-color: #ff4d4f;
+  outline: 0;
+  background-color: transparent;
+}
+:where(
+    .css-dev-only-do-not-override-42nv3w
+  ).ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
+  margin: 0;
+  margin-bottom: 0.3rem;
+  background: transparent;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ff4d4f;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+:where(
+    .css-dev-only-do-not-override-42nv3w
+  ).ant-input-outlined.ant-input-status-error:hover(.ant-input-disabled) {
+  background: transparent !important;
+}
+.ant-form-item-control-input-content:hover {
+  background: transparent !important;
+}
+textarea:where(.css-dev-only-do-not-override-42nv3w).ant-input {
+  max-width: 100%;
+  height: 6rem;
+  min-height: 32px;
+  line-height: 1.5714285714285714;
+  vertical-align: bottom;
+  transition:
+    all 0.3s,
+    height 0s;
+  resize: none;
+  margin-bottom: 0;
+}
+:where(.css-dev-only-do-not-override-42nv3w).ant-form-item
+  .ant-form-item-explain-error {
+  background-color: transparent;
+  height: 2.5rem;
+  width: 10rem;
+  border: white 1px solid;
+  color: rgba(255, 255, 255, 0.706);
+  border-radius: 6px;
+  font-family: "Raleway", "Hiragino Sans GB";
+  text-align-last: center;
+  font-size: 20px;
+  overflow-y: hidden !important;
+}
+
+.form-button {
+  font-family: "Raleway", "Hiragino Sans GB";
+  margin-top: 2rem;
+  text-align-last: left;
+  overflow-y: hidden;
+}
+
+:where(.css-dev-only-do-not-override-42nv3w).ant-btn > span {
+  display: block;
+}
+
+/* =========================== */
+/* RESPONSIVENESS FIX          */
+/* =========================== */
+
+@include m.respond-to("tablet") {
+  .contactPage {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .content {
+    width: 80%;
+    margin-left: m.rem(24);
+
+    > h2 {
+      font-size: m.rem(36);
+      margin-left: m.rem(32);
+    }
+
+    > p {
+      font-size: m.rem(18);
+      margin-left: m.rem(32);
+    }
+  }
+}
+
+@include m.respond-to("mobile") {
+  .contactPage {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .content {
+    width: 90%;
+    margin-left: m.rem(16);
+
+    > h2 {
+      font-size: m.rem(28);
+      margin-left: m.rem(16);
+    }
+
+    > p {
+      font-size: m.rem(16);
+      margin-left: m.rem(16);
+    }
+  }
+}
+.contactForm {
+  box-sizing: border-box;
+  display: block;
+  width: m.rem(952.5);
+  height: m.rem(919);
+  margin: 0;
+  padding: m.rem(32) m.rem(4) m.rem(64) 0;
+
+  /* Font settings for consistency across Windows, Mac, Linux */
+  font-family: v.$font-family-base;
+  font-size: m.rem(v.$base-font-size);
+  font-weight: 400;
+  line-height: v.$line-height;
+  text-align: center;
+
+  /* Text rendering optimizations */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Cross-browser color scheme */
+  color: rgba(v.$black, 0.88);
+  color-scheme: light dark;
+
+  /* Additional global styles */
+  list-style: none;
+  unicode-bidi: isolate;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(v.$black, 0);
+}
+
+/* =========================== */
+/* RESPONSIVENESS              */
+/* =========================== */
+
+@include m.respond-to("tablet") {
+  .contactForm {
+    width: m.rem(750);
+    height: auto;
+    padding: m.rem(24);
+  }
+
+  .content {
+    width: 80%;
+    margin-left: m.rem(24);
+  }
+
+  .content > h2 {
+    font-size: m.rem(36);
+    margin-left: m.rem(32);
+  }
+
+  .content > p {
+    font-size: m.rem(18);
+    margin-left: m.rem(32);
+  }
+}
+
+@include m.respond-to("mobile") {
+  .contactForm {
+    width: 100%;
+    padding: m.rem(16);
+  }
+
+  .content {
+    width: 90%;
+    margin-left: m.rem(16);
+  }
+
+  .content > h2 {
+    font-size: m.rem(28);
+    margin-left: m.rem(16);
+  }
+
+  .content > p {
+    font-size: m.rem(16);
+    margin-left: m.rem(16);
+  }
+}
+
+.ant-form-item {
+  margin-bottom: 6px;
+}
+
+.ant-input {
+  border-radius: 0;
+  border-color: black;
+  font-family: "Raleway", "Hiragino Sans GB";
+  color: white;
+  font-size: 23px;
+}
+.ant-input::placeholder {
+  font-size: 23px;
+  color: rgba(255, 255, 255, 0.706);
+}
+.ant-input:focus {
+  background-color: transparent;
+  border-bottom: 1px solid #58aae9 !important;
+}
+.ant-input:hover {
+  border-bottom: 1px solid #58aae9 !important;
+}
+
+.ant-form-item-control-input-content > .ant-btn-primary {
+  overflow-y: hidden;
+  background-color: transparent;
+  height: 2.5rem;
+  width: 10rem;
+  border: white 1px solid;
+  color: rgba(255, 255, 255, 0.706);
+  border-radius: 6px;
+  font-family: "Teko", sans-serif;
+  text-align-last: center;
+  font-size: 20px;
+  font-family: "Raleway", "Hiragino Sans GB";
+}
+
+.ant-form-item-control-input-content > .ant-btn-primary:hover {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+:where(.css-dev-only-do-not-override-42nv3w).ant-form {
+  width: 100% !important;
+  padding: 4rem;
+  height: 100vh;
+  padding-top: 2rem;
+}
+
+:where(.css-dev-only-do-not-override-42nv3w).ant-input-outlined {
+  width: 60%;
+}
+:where(.css-dev-only-do-not-override-42nv3w).ant-input:hover {
+  background-color: transparent;
+}
+
+:where(.css-dev-only-do-not-override-42nv3w).ant-input {
+  height: 2rem;
+  font-size: 23px;
+  background: transparent;
+  width: 70%;
+  margin-bottom: 1rem;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  height: 40px;
+  background: transparent;
+}
+:where(.css-dev-only-do-not-override-42nv3w).ant-input-outlined:focus,
+:where(.css-dev-only-do-not-override-42nv3w).ant-input-outlined:focus-within {
+  border-color: #1677ff;
+  outline: 0;
+  background-color: transparent;
+}
+:where(.css-dev-only-do-not).ant-input-outlined.ant-input-status-error:not(
+    .ant-input-disabled
+  ):focus,
+:where(
+    .css-dev-only-do-not-override-42nv3w
+  ).ant-input-outlined.ant-input-status-error:not(
+    .ant-input-disabled
+  ):focus-within {
+  margin-bottom: 0.3rem;
+  border-color: #ff4d4f;
+  outline: 0;
+  background-color: transparent;
+}
+:where(
+    .css-dev-only-do-not-override-42nv3w
+  ).ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
+  margin: 0;
+  margin-bottom: 0.3rem;
+  background: transparent;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ff4d4f;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+:where(
+    .css-dev-only-do-not-override-42nv3w
+  ).ant-input-outlined.ant-input-status-error:hover(.ant-input-disabled) {
+  background: transparent !important;
+}
+.ant-form-item-control-input-content:hover {
+  background: transparent !important;
+}
+textarea:where(.css-dev-only-do-not-override-42nv3w).ant-input {
+  max-width: 100%;
+  height: 6rem;
+  min-height: 32px;
+  line-height: 1.5714285714285714;
+  vertical-align: bottom;
+  transition:
+    all 0.3s,
+    height 0s;
+  resize: none;
+  margin-bottom: 0;
+}
+:where(.css-dev-only-do-not-override-42nv3w).ant-form-item
+  .ant-form-item-explain-error {
+  background-color: transparent;
+  height: 2.5rem;
+  width: 10rem;
+  border: white 1px solid;
+  color: rgba(255, 255, 255, 0.706);
+  border-radius: 6px;
+  font-family: "Raleway", "Hiragino Sans GB";
+  text-align-last: center;
+  font-size: 20px;
+  overflow-y: hidden !important;
+}
+
+.form-button {
+  font-family: "Raleway", "Hiragino Sans GB";
+  margin-top: 2rem;
+  text-align-last: left;
+  overflow-y: hidden;
+}
+
+:where(.css-dev-only-do-not-override-42nv3w).ant-btn > span {
+  display: block;
+}

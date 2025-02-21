@@ -1,11 +1,30 @@
 @use "@styles/partials/mixins" as m;
 
 .projectsPage {
+  display: flex;
+  flex-direction: column;
+  padding: 0 6.7vw;
+  overflow-x: hidden;
+  overflow-y: hidden;
+
   @include m.full-page-layout;
 
-  & {
-    display: flex;
-    flex-direction: column;
-    padding: 0 6.7vw;
+  .projectsControlWrapper {
+    top: var(--header-height); // Sticks below the header
+    background-color: black;
+    height: 23vh;
+    z-index: 10;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #fff;
+  }
+
+  .projectsGridWrapper {
+    overflow-y: auto; // Enable scroll for grid
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    overflow-x: hidden;
   }
 }

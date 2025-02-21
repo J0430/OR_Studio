@@ -11,7 +11,7 @@ const LandingPage = ({ images }) => {
 
   const updateImageIndex = useCallback(() => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  }, [images.length]);
+  }, [images?.length]);
 
   useEffect(() => {
     if (images?.length > 0) {
@@ -35,8 +35,7 @@ const LandingPage = ({ images }) => {
             <Image
               src={images[currentImageIndex]}
               alt={`Background Image ${currentImageIndex + 1}`}
-              width={800} // Replace with your desired width
-              height={600} // Replace with your desired height
+              fill
               priority={currentImageIndex === 0} // Preload first image
               style={{ objectFit: "cover" }}
               className={styles.bannerImage}
