@@ -35,7 +35,10 @@
     "up_project4": {
       "title": "Urban Forest Integration",
       "frontImage": "/assets/categories/UrbanPlanning/up_project4/up_p4_i1.webp",
-      "images": ["/assets/categories/UrbanPlanning/up_project4/up_p4_i1.webp"],
+      "images": [
+        "/assets/categories/UrbanPlanning/up_project4/up_p4_i1.webp",
+        "/assets/categories/UrbanPlanning/up_project4/up_p4_i2.webp"
+      ],
       "description": "A large-scale urban project that seamlessly integrates forested areas into a modern cityscape, creating a serene environment with a focus on green living."
     },
     "up_project5": {
@@ -49,7 +52,7 @@
     },
     "up_project6": {
       "title": "Eco-Innovative Business Hub",
-      "frontImage": "/assets/categories/UrbanPlanning/up_project6/up_p_i1.webp",
+      "frontImage": "/assets/categories/UrbanPlanning/up_project6/up_p6_i1.webp",
       "images": [
         "/assets/categories/UrbanPlanning/up_project6/up_p6_i1.webp",
         "/assets/categories/UrbanPlanning/up_project6/up_p6_i2.webp"
