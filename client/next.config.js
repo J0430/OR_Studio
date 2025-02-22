@@ -1,6 +1,10 @@
-// next.config.js
-import path from "path";
-import withTM from "next-transpile-modules";
+// next.config.js (CommonJS)
+
+const path = require("path");
+const withTM = require("next-transpile-modules")([
+  "@ant-design/icons",
+  "@ant-design/icons-svg",
+]);
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -13,7 +17,7 @@ const nextConfig = {
 
   images: {
     domains: ["monumental-kleicha-0d19a2.netlify.app"],
-    unoptimized: false,
+    unoptimized: true,
   },
 
   assetPrefix: isProd ? process.env.NEXT_PUBLIC_ASSET_PREFIX || "" : "",
@@ -52,6 +56,4 @@ const nextConfig = {
   },
 };
 
-export default withTM(["@ant-design/icons", "@ant-design/icons-svg"])(
-  nextConfig
-);
+module.exports = withTM(nextConfig);
