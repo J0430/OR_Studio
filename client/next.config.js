@@ -1,40 +1,36 @@
-/** @type {import('next').NextConfig} */
-const path = require("path");
-const withTM = require("next-transpile-modules")([
-  "@ant-design/icons",
-  "@ant-design/icons-svg",
-]); // ✅ Transpile modules
+// next.config.js
+import path from "path";
+import withTM from "next-transpile-modules";
 
 const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig = {
   experimental: {
-    esmExternals: true, // ✅ Ensures CommonJS compatibility
+    esmExternals: true,
   },
-  output: "export", // ✅ Enables static site export
-  reactStrictMode: true, // ✅ Helps identify potential issues
+  output: "export",
+  reactStrictMode: true,
 
   images: {
     domains: ["monumental-kleicha-0d19a2.netlify.app"],
-    unoptimized: true, // ✅ Allows images in static exports without Next.js optimization
+    unoptimized: false,
   },
 
-  assetPrefix: isProd ? process.env.NEXT_PUBLIC_ASSET_PREFIX || "" : "", // ✅ Uses env variable for flexibility
+  assetPrefix: isProd ? process.env.NEXT_PUBLIC_ASSET_PREFIX || "" : "",
 
   sassOptions: {
-    includePaths: [path.join(__dirname, "styles")], // ✅ Simplifies SCSS imports
+    includePaths: [path.join(process.cwd(), "styles")],
   },
 
   eslint: {
-    ignoreDuringBuilds: true, // ✅ Prevents build failures due to ESLint errors
+    ignoreDuringBuilds: true,
   },
 
   typescript: {
-    ignoreBuildErrors: true, // ✅ Prevents build failures due to TypeScript errors
+    ignoreBuildErrors: true,
   },
 
   webpack: (config) => {
-    // ✅ Handle image imports
     config.module.rules.push({
       test: /\.(png|jpe?g|gif|svg)$/i,
       use: [
@@ -42,13 +38,12 @@ const nextConfig = {
         {
           loader: "file-loader",
           options: {
-            name: "[path][name].[ext]", // ✅ Keeps original file paths and names
+            name: "[path][name].[ext]",
           },
         },
       ],
     });
 
-    // ✅ Ensures Node.js 'path' module works in the browser
     config.resolve.fallback = {
       path: require.resolve("path-browserify"),
     };
@@ -57,4 +52,6 @@ const nextConfig = {
   },
 };
 
-module.exports = withTM(nextConfig); // ✅ Wrap config with next-transpile-modules
+export default withTM(["@ant-design/icons", "@ant-design/icons-svg"])(
+  nextConfig
+);
