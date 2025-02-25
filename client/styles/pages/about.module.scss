@@ -1,0 +1,79 @@
+.aboutPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.headerImage,
+.teamImage {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.aboutSection {
+  max-width: 800px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+.quote {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.corePrinciples {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  width: 100%;
+}
+
+.principle {
+  max-width: 250px;
+  text-align: center;
+}
+
+.principle h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.principle p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .corePrinciples {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .headerImage,
+  .teamImage {
+    height: 250px;
+  }
+
+  .aboutSection {
+    padding: 1rem;
+  }
+}

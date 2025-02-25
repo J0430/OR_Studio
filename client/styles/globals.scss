@@ -86,8 +86,10 @@ p {
 img {
   max-width: 100%;
   height: auto;
-  object-fit: cover; /* Prevent distortion */
-  display: block; /* Remove inline spacing */
+  object-fit: cover;
+  display: block;
+  -webkit-transform: translateZ(0); /* Safari hardware acceleration */
+  transform: translateZ(0);
 }
 
 /* Improve touch experience */
