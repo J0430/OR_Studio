@@ -40,7 +40,6 @@ export async function getStaticProps() {
       fetchData("urbanPlanning"),
       fetchData("office"),
     ]);
-
     return {
       props: {
         residential,
@@ -93,9 +92,6 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
 
   const { isPreloaderVisible } = useProjectsPreloader();
 
-  // 🔹 Prepare front images for category selection
-
-  // 🔹 Prepare projects list for the selected category
   const projects = useMemo(() => {
     const selectedImages = categoryDataMap[state.categorySelected] || [];
     return fisherYatesShuffle(selectedImages);
@@ -152,34 +148,30 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
           content="Explore our featured projects in various categories including residential, urban planning, and more."
         />
       </Head>
+      {isPreloaderVisible && <ProjectsPreloader />}
+      <div className={style.projectsPage}>
+        <ProjectsControl
+          categories={categories}
+          selectedCategory={state.categorySelected}
+          onCategorySelect={handleCategoryClick}
+        />
 
-      {isPreloaderVisible ? (
-        <ProjectsPreloader />
-      ) : (
-        <div className={style.projectsPage}>
-          <ProjectsControl
-            categories={categories}
-            selectedCategory={state.categorySelected}
-            onCategorySelect={handleCategoryClick}
-          />
+        <ProjectsGrid
+          projects={projects}
+          category={state.categorySelected}
+          onImageClick={handleImageClick}
+        />
 
-          <ProjectsGrid
-            projects={projects}
-            category={state.categorySelected}
-            onImageClick={handleImageClick}
-          />
-
-          <AnimatePresence>
-            {state.selectedImage && state.selectedProject && (
-              <ProjectsModal
-                selectedImage={state.selectedImage}
-                project={state.selectedProject}
-                onClose={handleCloseModal}
-              />
-            )}
-          </AnimatePresence>
-        </div>
-      )}
+        <AnimatePresence>
+          {state.selectedImage && state.selectedProject && (
+            <ProjectsModal
+              selectedImage={state.selectedImage}
+              project={state.selectedProject}
+              onClose={handleCloseModal}
+            />
+          )}
+        </AnimatePresence>
+      </div>
     </>
   );
 }

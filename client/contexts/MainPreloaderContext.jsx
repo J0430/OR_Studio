@@ -5,6 +5,7 @@ export const PreloaderContext = createContext();
 export const PreloaderProvider = ({ children }) => {
   const [isPreloaderVisible, setIsPreloaderVisible] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(0);
+
   const totalImages = 5; // Adjust as needed.
 
   useEffect(() => {
@@ -44,7 +45,11 @@ export const PreloaderProvider = ({ children }) => {
     setImagesLoaded((prev) => Math.min(prev + 1, totalImages));
 
   return (
-    <PreloaderContext.Provider value={{ isPreloaderVisible, onImageLoad }}>
+    <PreloaderContext.Provider
+      value={{
+        isPreloaderVisible,
+        onImageLoad,
+      }}>
       {children}
     </PreloaderContext.Provider>
   );
