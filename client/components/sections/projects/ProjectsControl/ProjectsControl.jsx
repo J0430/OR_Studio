@@ -26,7 +26,7 @@ const ProjectsControl = ({
   return (
     <div className={styles.projectsControl}>
       <div className={styles.projectsTitleBox}>
-        <h1 className={styles.projectsTitle}>Work</h1>
+        <h1 className={styles.projectsTitle}>Works</h1>
       </div>
 
       <div className={styles.projectsSelectorBox}>

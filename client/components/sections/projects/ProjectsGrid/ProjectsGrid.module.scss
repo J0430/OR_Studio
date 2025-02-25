@@ -1,56 +1,17 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-.projectsOverFlow {
-  overflow-y: hidden;
-}
-.smallProjectsContainer {
-  overflow-y: auto;
-  padding: 1rem;
-  display: flex;
-  flex-direction: row;
-  height: 70;
-  gap: 1rem;
-  overflow-x: hidden;
-  overflow-y: hidden;
-
-  .gridItem {
-    position: relative;
-    overflow: hidden;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 70;
-    flex-shrink: 0; /* Maintain 16:9 aspect ratio */
-    img {
-      align-self: start;
-      width: 100%;
-      height: 60vh;
-      object-fit: cover;
-      transition:
-        opacity 0.6sease,
-        transform 0.3sease;
-      opacity: 1;
-      aspect-ratio: 16/9;
-    }
-  }
-}
-
 .projectsGridContainer {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(350px, 1fr)
-  ); // Dynamic columns
-  gap: m.rem(10); // Spacing between grid items
-  max-height: 80vh; /* Set max height for scrolling */
-  overflow-y: auto; /* Enable vertical scrolling */
-  overflow-x: hidden; /* Disable horizontal scroll */
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: v.$gray v.$black; /* Firefox */
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: m.rem(10);
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: v.$gray v.$black;
 
-  /* For WebKit browsers (Chrome, Safari) */
+  /* WebKit scrollbar */
   &::-webkit-scrollbar {
     width: 8px;
   }
@@ -65,17 +26,19 @@
   }
 
   @include m.respond-to("desktop") {
-    grid-template-columns: repeat(3, 1fr); // 3 columns on desktop
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @include m.respond-to("tablet") {
-    grid-template-columns: repeat(2, 1fr); // 2 columns on tablets
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @include m.respond-to("mobile") {
     grid-template-columns: repeat(auto-fill, minmax(2, 1fr));
   }
 }
+
+/* Grid item with masonry effects */
 .gridItem {
   position: relative;
   overflow: hidden;
@@ -83,12 +46,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 1 / 1; // Maintain square grid items
+  aspect-ratio: 1 / 1;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover; // Ensures image covers the grid item while maintaining aspect ratio
+    object-fit: cover;
     transition:
       opacity 0.6s ease,
       transform 0.3s ease;
@@ -105,15 +71,15 @@
     }
   }
 
-  // Varying item sizes for a masonry effect
+  // Varying sizes for masonry effect
   &:nth-child(1) {
-    grid-column: span 2; // First item spans two columns
-    aspect-ratio: 2 / 1; // Wider
+    grid-column: span 2;
+    aspect-ratio: 2 / 1;
   }
 
   &:nth-child(3n) {
-    grid-row: span 2; // Every 3rd item spans two rows
-    aspect-ratio: 1 / 2; // Taller
+    grid-row: span 2;
+    aspect-ratio: 1 / 2;
   }
 
   .imagePlaceholder {
@@ -133,6 +99,33 @@
     }
     100% {
       opacity: 0.7;
+    }
+  }
+}
+
+/* =========================== */
+/* Safari/iOS Masonry Fix      */
+/* =========================== */
+
+@supports (-webkit-touch-callout: none) {
+  .projectsGridContainer {
+    display: block;
+    column-count: 3;
+    column-gap: m.rem(10);
+  }
+
+  .gridItem {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: m.rem(10);
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+
+    img {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-mask-image: -webkit-radial-gradient(white, black);
     }
   }
 }
