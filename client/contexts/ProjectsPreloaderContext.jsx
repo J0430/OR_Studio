@@ -18,7 +18,7 @@ export const ProjectsPreloaderProvider = ({ children }) => {
 
   // 🔹 Ensure preloader disappears after 4 seconds (fallback)
   useEffect(() => {
-    const timeout = setTimeout(() => setIsPreloaderVisible(false), 5000);
+    const timeout = setTimeout(() => setIsPreloaderVisible(false), 3500);
     return () => clearTimeout(timeout);
   }, []);
 
