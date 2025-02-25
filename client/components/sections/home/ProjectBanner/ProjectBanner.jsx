@@ -1,12 +1,10 @@
 "use client";
-
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import styles from "./ProjectBanner.module.scss";
 
 const ProjectBanner = ({ images }) => {
-  console.log(images);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef(null);
 

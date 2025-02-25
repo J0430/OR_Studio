@@ -11,12 +11,6 @@ import styles from "@styles/pages/home.module.scss";
 
 // Dynamic imports
 
-const ErrorBoundary = dynamic(
-  () => import("@components/ErrorBoundary/ErrorBoundary"),
-  {
-    ssr: false,
-  }
-);
 const LandingPage = dynamic(
   () => import("@components/sections/home/LandingPage/LandingPage")
 );

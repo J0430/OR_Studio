@@ -10,7 +10,7 @@
       "@contexts/*": ["contexts/*"],
       "@public/*": ["public/*"],
       "@data/*": ["public/data/*"],
-      "@app/*": ["app/*"]
+      "@pages/*": ["pages/*"]
     }
   }
 }
