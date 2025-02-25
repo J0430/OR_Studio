@@ -10,8 +10,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
   background: transparent;
+  z-index: 1;
 }
 
 .navContent {
@@ -20,6 +20,7 @@
   justify-content: space-between;
   width: 100%;
   padding: m.rem(48);
+  z-index: -10;
 }
 
 .menuButton {

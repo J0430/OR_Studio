@@ -40,9 +40,7 @@ const GridItem = ({
           width={300}
           height={200}
           className="loaded"
-          placeholder="blur"
           quality={75}
-          loading="lazy"
           priority
         />
       ) : (
