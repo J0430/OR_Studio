@@ -176,7 +176,7 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
   );
 }
 
-function ProjectsPage(props) {
+function WorksPage(props) {
   return (
     <ProjectsPreloaderProvider>
       <ProjectsContent {...props} />
@@ -184,4 +184,4 @@ function ProjectsPage(props) {
   );
 }
 
-export default ProjectsPage;
+export default WorksPage;
