@@ -65,7 +65,7 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
   const [isClient, setIsClient] = useState(false);
 
   const [state, setState] = useState({
-    categorySelected: "Residential" || "All",
+    categorySelected: categories[0] || "All",
     selectedImage: null,
     selectedProject: null,
   });
@@ -176,7 +176,7 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
   );
 }
 
-function WorksPage(props) {
+function ProjectsPage(props) {
   return (
     <ProjectsPreloaderProvider>
       <ProjectsContent {...props} />
@@ -184,4 +184,4 @@ function WorksPage(props) {
   );
 }
 
-export default WorksPage;
+export default ProjectsPage;
