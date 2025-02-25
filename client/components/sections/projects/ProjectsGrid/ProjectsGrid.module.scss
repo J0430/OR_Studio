@@ -6,7 +6,7 @@
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: m.rem(10);
   max-height: 80vh;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: v.$gray v.$black;
@@ -27,14 +27,21 @@
 
   @include m.respond-to("desktop") {
     grid-template-columns: repeat(3, 1fr);
+    overflow-y: scroll !important;
   }
 
   @include m.respond-to("tablet") {
     grid-template-columns: repeat(2, 1fr);
+    overflow-y: scroll !important;
   }
 
   @include m.respond-to("mobile") {
     grid-template-columns: repeat(auto-fill, minmax(2, 1fr));
+    overflow-y: scroll !important;
+  }
+  @include m.respond-to("small-mobile") {
+    grid-template-columns: repeat(auto-fill, minmax(2, 1fr));
+    overflow-y: scroll !important;
   }
 }
 
@@ -110,7 +117,7 @@
 @supports (-webkit-touch-callout: none) {
   .projectsGridContainer {
     display: block;
-    column-count: 4;
+    column-count: 2;
     column-gap: m.rem(10);
   }
 
