@@ -8,7 +8,7 @@
   justify-content: flex-end;
   height: 25vh;
   width: 100%;
-  z-index: 1;
+  z-index: 0;
   background: v.$black;
   @include m.scrollbar-style(v.$gray, v.$white);
   padding: m.rem(16);

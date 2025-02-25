@@ -14,12 +14,12 @@ import style from "@styles/pages/projects.module.scss";
 
 const ProjectsModal = dynamic(
   () => import("@components/sections/projects/ProjectsModal/ProjectsModal"),
-  { loading: () => <div>Loading Modal...</div>, ssr: false }
+  { ssr: false }
 );
 
 const ProjectsPreloader = dynamic(
   () => import("@components/preloaders/ProjectsPreloader/ProjectsPreloader"),
-  { loading: () => <div>Loading Projects...</div>, ssr: false }
+  { ssr: false }
 );
 
 const ProjectsControl = dynamic(
@@ -29,7 +29,7 @@ const ProjectsControl = dynamic(
 
 const ProjectsGrid = dynamic(
   () => import("@components/sections/projects/ProjectsGrid/ProjectsGrid"),
-  { loading: () => <div>Loading Projects...</div>, ssr: false }
+  { ssr: false }
 );
 
 export async function getStaticProps() {
