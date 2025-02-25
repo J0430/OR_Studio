@@ -74,10 +74,6 @@ export default function Home({ homeData }) {
     }
   }, []);
 
-  if (!isPageReady) {
-    return <MainPreloader />;
-  }
-
   // Continue rendering
   const { LandingPictures, EvenYehuda, Hevron8PenthouseRooftop, City69 } =
     homeData.projects || {};
@@ -107,7 +103,7 @@ export default function Home({ homeData }) {
       <Head>
         <title>OR Studio - Home</title>
       </Head>
-
+      {isPreloaderVisible && <MainPreloader />}
       <motion.div
         key="homePage"
         className={styles.homePage}
