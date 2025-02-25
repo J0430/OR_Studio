@@ -65,7 +65,7 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
   const [isClient, setIsClient] = useState(false);
 
   const [state, setState] = useState({
-    categorySelected: categories[0] || "All",
+    categorySelected: "Residential" || "All",
     selectedImage: null,
     selectedProject: null,
   });
