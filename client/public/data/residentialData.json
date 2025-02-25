@@ -3,7 +3,7 @@
   "projects": {
     "r_project1": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project1/4.jpg",
+      "frontImage": "/assets/categories/Residential/r_project1/r_p1_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project1/4.jpg",
@@ -13,7 +13,7 @@
     },
     "r_project2": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project2/2.jpg",
+      "frontImage": "/assets/categories/Residential/r_project2/r_p2_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project2/2.jpg",
@@ -26,7 +26,7 @@
     },
     "r_project3": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project3/\u05d7\u05d6\u05d9\u05ea.jpg",
+      "frontImage": "/assets/categories/Residential/r_project3/r_p3_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project3/\u05d7\u05d6\u05d9\u05ea.jpg",
@@ -35,7 +35,7 @@
     },
     "r_project4": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project4/1 (1).jpg",
+      "frontImage": "/assets/categories/Residential/r_project4/r_p4_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project4/1 (1).jpg",
@@ -44,7 +44,7 @@
     },
     "r_project5": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project5/3 (1).jpg",
+      "frontImage": "/assets/categories/Residential/r_project5/r_p5_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project5/3 (1).jpg",
@@ -55,7 +55,7 @@
     },
     "r_project6": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project6/3.jpg",
+      "frontImage": "/assets/categories/Residential/r_project6/r_p6_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project6/3.jpg",
@@ -64,7 +64,7 @@
     },
     "r_project7": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project7/image1.jpg",
+      "frontImage": "/assets/categories/Residential/r_project7/r_p7_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project7/image1.jpg",
@@ -75,8 +75,9 @@
     },
     "r_project8": {
       "title": "",
-      "frontImage": "",
+      "frontImage": "/assets/categories/Residential/r_project7/r_p8_front.jpg",
       "description": "",
+
       "images": [
         "/assets/categories/Residential/r_project8/2.jpg",
         "/assets/categories/Residential/r_project8/3.jpg"
@@ -84,7 +85,7 @@
     },
     "r_project9": {
       "title": "",
-      "frontImage": "",
+      "frontImage": "/assets/categories/Residential/r_project7/r_p9_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project9/4 (2).jpg",
@@ -93,7 +94,7 @@
     },
     "r_project10": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project10/3.jpg",
+      "frontImage": "/assets/categories/Residential/r_project10/r_p10_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project10/3.jpg",
@@ -102,7 +103,7 @@
     },
     "r_project11": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project11/1.jpg",
+      "frontImage": "/assets/categories/Residential/r_project11/r_p11_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project11/1.jpg",
@@ -112,13 +113,13 @@
     },
     "r_project12": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project12/4.jpg",
+      "frontImage": "/assets/categories/Residential/r_project12/r_p12_front.jpg",
       "description": "",
       "images": ["/assets/categories/Residential/r_project12/4.jpg"]
     },
     "r_project13": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project13/11.jpg",
+      "frontImage": "/assets/categories/Residential/r_project13/r_p13_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project13/11.jpg",
@@ -127,7 +128,7 @@
     },
     "r_project14": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project14/1.jpg",
+      "frontImage": "/assets/categories/Residential/r_project14/r_p14_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project14/1.jpg",
@@ -136,7 +137,7 @@
     },
     "r_project15": {
       "title": "",
-      "frontImage": "/assets/categories/Residential/r_project15/5.jpg",
+      "frontImage": "/assets/categories/Residential/r_project15/r_p15_front.jpg",
       "description": "",
       "images": [
         "/assets/categories/Residential/r_project15/5.jpg",
