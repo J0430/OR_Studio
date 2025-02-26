@@ -13,7 +13,7 @@ const LandingPage = ({ images }) => {
 
   useEffect(() => {
     if (images?.length > 0) {
-      intervalRef.current = setInterval(updateImageIndex, 3000);
+      intervalRef.current = setInterval(updateImageIndex, 4000);
     }
 
     return () => clearInterval(intervalRef.current);
@@ -28,7 +28,7 @@ const LandingPage = ({ images }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.8 }}
             className={styles.bannerImageWrapper}>
             <Image
               src={images[currentImageIndex]}

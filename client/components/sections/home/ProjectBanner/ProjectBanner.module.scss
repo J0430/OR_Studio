@@ -7,6 +7,9 @@
   height: 100vh;
   overflow: hidden;
   background: v.$black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .carouselImage {
@@ -17,67 +20,53 @@
   transition: transform 0.5s ease-in-out;
 }
 
-/* ✅ Carousel Dots */
-.carouselDots {
+/* ✅ Progress Bar Container */
+.progressContainer {
   position: absolute;
-  bottom: 6.1rem; // Reduced padding for better visibility
-  left: 50%;
-  z-index: 10;
+  top: 0;
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateX(-50%);
-  gap: 0.5rem;
+  justify-content: space-between;
+  padding: 10px;
+  z-index: 10;
+}
 
-  .carouselDot {
-    width: 0.8rem;
-    height: 0.8rem;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.6);
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+.progressBar {
+  height: 5px;
+  flex-grow: 1;
+  margin: 0 2px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: width 0.4s linear;
+}
 
-    &:hover {
-      background: white;
-      transform: scale(1.1);
-    }
-  }
-
-  .carouselDot.active {
-    background: white;
-    width: 1rem;
-    height: 1rem;
-    transform: scale(1.2);
-  }
+.progressBar.active {
+  background: white;
 }
 
 /* ✅ Mobile Optimization */
 @include m.respond-to("tablet") {
-  .carouselDots {
-    bottom: 3rem;
+  .progressContainer {
+    padding: 5px;
   }
-  .carouselDot {
-    width: 0.7rem;
-    height: 0.7rem;
+  .progressBar {
+    height: 4px;
   }
 }
 
 @include m.respond-to("mobile") {
-  .carouselDots {
-    bottom: 3rem;
+  .progressContainer {
+    padding: 3px;
   }
-  .carouselDot {
-    width: 0.6rem;
-    height: 0.6rem;
+  .progressBar {
+    height: 3px;
   }
 }
 
 @include m.respond-to("small-mobile") {
-  .carouselDots {
-    bottom: 3rem;
+  .progressContainer {
+    padding: 2px;
   }
-  .carouselDot {
-    width: 0.5rem;
-    height: 0.5rem;
+  .progressBar {
+    height: 2px;
   }
 }
