@@ -40,7 +40,7 @@ const ProjectBanner = ({ images }) => {
 
   useEffect(() => {
     if (images?.length > 0 && !isPaused) {
-      intervalRef.current = setInterval(updateImageIndex, 1500);
+      intervalRef.current = setInterval(updateImageIndex, 2500);
     }
 
     return () => clearInterval(intervalRef.current);
