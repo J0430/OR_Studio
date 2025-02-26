@@ -3,10 +3,10 @@
 .projectsPage {
   display: flex;
   flex-direction: column;
-  height: 100vh; // Full viewport height
-  max-height: calc(100vh - var(--header-height));
   padding: 0 6.7vw;
   overflow: hidden; // Allow children to scroll instead of the parent
+
+  @include m.full-page-layout;
 
   @include m.respond-to("tablet") {
     padding: 0;
@@ -33,7 +33,7 @@
   .projectsGridWrapper {
     padding: 1rem;
     display: grid;
-    height: calc(100vh - 23vh - var(--header-height)); // Remaining space
+    max-width: calc(100vh - 23vh - var(--header-height)); // Remaining space
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;
     overflow-x: hidden;
