@@ -5,10 +5,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: m.rem(10);
-  height: 100%;
-  max-height: calc(100vh - var(--header-height));
-  overflow-y: auto; /* Allow scrolling */
-  overflow-x: hidden;
+  max-height: 80vh;
+  overflow-y: auto !important;
   scrollbar-width: thin;
   scrollbar-color: v.$gray v.$black;
 
