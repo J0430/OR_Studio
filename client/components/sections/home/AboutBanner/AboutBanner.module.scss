@@ -17,60 +17,62 @@
     .description {
       color: v.$white;
       font-size: m.rem(25);
-      line-height: 1.6;
-      margin-bottom: m.rem(32);
-      font-weight: 100;
+      line-height: 1.5;
+      margin-bottom: m.rem(24);
+      font-weight: 300;
       font-family: v.$font-family-base;
+      opacity: 0.9;
     }
   }
 
   .linkWrapper {
-    margin-top: m.rem(48);
+    margin-top: m.rem(40);
 
     .link {
-      padding: m.rem(16);
+      padding: m.rem(14);
       border: v.$white 0.03rem solid;
       color: v.$white;
-      font-size: m.rem(20);
+      font-size: m.rem(18);
       font-weight: 400;
       text-decoration: none;
-      transition: transform 0.3s ease-in-out;
+      transition: all 0.2s ease-in-out;
       border-radius: m.rem(8);
 
       &:hover {
-        transform: scale(1.1);
-        border-bottom: 1px solid v.$white;
+        transform: scale(1.08);
+        background-color: rgba(255, 255, 255, 0.1);
       }
     }
   }
 }
 
+/* Responsive Font Adjustments */
 @include m.respond-to("tablet") {
   .description {
-    font-size: m.rem(32) !important;
+    font-size: m.rem(24);
   }
   .linkWrapper .link {
-    font-size: m.rem(24) !important;
-    padding: m.rem(20) !important;
+    font-size: m.rem(20);
+    padding: m.rem(16);
   }
 }
 
 @include m.respond-to("mobile") {
   .description {
-    font-size: m.rem(24) !important;
+    font-size: m.rem(20);
   }
   .linkWrapper .link {
-    font-size: m.rem(18) !important;
-    padding: m.rem(16) !important;
+    font-size: m.rem(16);
+    padding: m.rem(14);
   }
 }
 
 @include m.respond-to("small-mobile") {
   .description {
-    font-size: m.rem(18) !important;
+    font-size: m.rem(16);
   }
   .linkWrapper .link {
-    font-size: m.rem(14) !important;
-    padding: m.rem(12) !important;
+    font-size: m.rem(14);
+    padding: m.rem(12);
   }
 }

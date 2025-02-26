@@ -124,19 +124,19 @@
 }
 
 @include m.respond-to("tablet") {
-  .thumbnailImage {
-    margin-bottom: 15%;
+  .thumbnailGallery {
+    margin-bottom: 20%;
   }
 }
 
 @include m.respond-to("mobile") {
-  .thumbnailImage {
-    margin-bottom: 15%;
+  .thumbnailGallery {
+    margin-bottom: 20%;
   }
 }
 
 @include m.respond-to("small-mobile") {
-  .thumbnailWrapper {
-    margin-bottom: 15%;
+  .thumbnailGallery {
+    margin-bottom: 20%;
   }
 }
