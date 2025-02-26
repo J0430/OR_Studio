@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,4 +119,22 @@
   height: 100%;
   object-fit: cover; /* Ensures full coverage */
   border-radius: 4px;
+}
+
+@include m.respond-to("tablet") {
+  .thumbnailImage {
+    margin-bottom: 15%;
+  }
+}
+
+@include m.respond-to("mobile") {
+  .thumbnailImage {
+    margin-bottom: 15%;
+  }
+}
+
+@include m.respond-to("small-mobile") {
+  .thumbnailImage {
+    margin-bottom: 15%;
+  }
 }
