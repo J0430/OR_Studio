@@ -6,9 +6,9 @@
   flex-direction: column;
   position: relative;
   justify-content: flex-end;
-  height: 25vh;
+  height: 20vh;
   width: 100%;
-  z-index: 0;
+  z-index: 1;
   background: v.$black;
   @include m.scrollbar-style(v.$gray, v.$white);
   padding: m.rem(16);
@@ -22,8 +22,6 @@
   align-items: flex-end;
   flex-wrap: wrap; /* Allows wrapping on smaller screens */
   height: auto;
-  margin-top: m.rem(50);
-  padding-bottom: m.rem(15);
   width: 100%;
   border-bottom: 0.8px solid rgba(v.$white, 0.566);
 

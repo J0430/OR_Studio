@@ -3,8 +3,10 @@
 .projectsPage {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  max-height: calc(100vh - var(--header-height)); // Ensure full height
   padding: 0 6.7vw;
-  overflow: hidden; // Allow children to scroll instead of the parent
+  overflow: hidden; // Allow children to scroll // Allow children to scroll instead of the parent
 
   @include m.full-page-layout;
 
@@ -31,12 +33,13 @@
   }
 
   .projectsGridWrapper {
+    flex: 1; // Allows it to take up remaining space
     padding: 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;
-    overflow-x: hidden;
     overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch; // Improves scrolling on Safari
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; // Fix for iOS
   }
 }

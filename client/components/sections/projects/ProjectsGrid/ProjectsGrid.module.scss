@@ -1,12 +1,62 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
+.projectsOverFlow {
+  flex-grow: 1;
+  height: 100%;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; // Fix for Safari smooth scrolling
+
+  @supports (-webkit-touch-callout: none) {
+    max-width: 100% !important; // Prevent Safari cutoff
+    min-height: 100%;
+  }
+  .smallProjectsContainer {
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    height: 70;
+    gap: 1rem;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    .gridItem {
+      position: relative;
+      overflow: hidden;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 70;
+
+      /* Maintain 16:9 aspect ratio */
+
+      img {
+        align-self: start;
+        width: 100%;
+        height: 60vh;
+        object-fit: cover;
+        transition:
+          opacity 0.6sease,
+          transform 0.3sease;
+        opacity: 1;
+      }
+    }
+  }
+}
+
 .projectsGridContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
   gap: m.rem(10);
-  overflow-y: auto;
+  flex-grow: 1;
+  height: auto; // Allow it to grow properly
+  max-height: none; // Prevent clipping in Safari
+  overflow-y: auto !important;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: v.$gray v.$black;
 
@@ -25,24 +75,23 @@
   }
 
   @include m.respond-to("desktop") {
-    grid-template-columns: repeat(3, 1fr);
-    overflow-y: auto !important;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @include m.respond-to("tablet") {
     grid-template-columns: repeat(2, 1fr);
-    overflow-y: auto !important;
   }
 
   @include m.respond-to("mobile") {
     grid-template-columns: repeat(auto-fill, minmax(2, 1fr));
-    overflow-y: auto !important;
   }
+
   @include m.respond-to("small-mobile") {
     grid-template-columns: repeat(auto-fill, minmax(2, 1fr));
-    overflow-y: auto !important;
   }
 }
+
+/* ✅ Special Fix for iOS/Safari */
 
 /* Grid item with masonry effects */
 .gridItem {
@@ -60,7 +109,7 @@
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+
     transition:
       opacity 0.6s ease,
       transform 0.3s ease;
@@ -77,13 +126,12 @@
     }
   }
 
-  // Varying sizes for masonry effect
   &:nth-child(1) {
     grid-column: span 2;
     aspect-ratio: 2 / 1;
   }
 
-  &:nth-child(3n) {
+  &:nth-child(7n) {
     grid-row: span 2;
     aspect-ratio: 1 / 2;
   }
@@ -105,45 +153,6 @@
     }
     100% {
       opacity: 0.7;
-    }
-  }
-}
-
-/* =========================== */
-/* Safari/iOS Masonry Fix      */
-/* =========================== */
-
-@supports (-webkit-touch-callout: none) {
-  .projectsGridContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: m.rem(10);
-    column-gap: m.rem(10);
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: thin;
-    scrollbar-color: v.$gray v.$black;
-  }
-
-  .gridItem {
-    position: relative;
-    overflow: hidden;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1 / 1;
-    will-change: transform;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-
-    img {
-      -webkit-transform: translateZ(0);
-      transform: translateZ(0);
-      -webkit-mask-image: -webkit-radial-gradient(white, black);
     }
   }
 }
