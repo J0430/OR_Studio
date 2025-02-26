@@ -103,8 +103,8 @@ export default function Home({ homeData }) {
         className={styles.homePage}
         initial={{ opacity: 0, scale: 1.1 }}
         animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.9, transition: { duration: 1.5 } }}
-        transition={{ duration: 1.5, ease: "easeOut" }}>
+        exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.6 } }}
+        transition={{ duration: 0.6, ease: "easeOut" }}>
         {sections.map((section, index) => (
           <div
             key={section.id}
