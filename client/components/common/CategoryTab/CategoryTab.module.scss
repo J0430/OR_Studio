@@ -13,7 +13,7 @@
   font-size: m.rem(16);
   text-transform: capitalize;
   color: v.$white;
-  background-color: #313132;
+  background-color: transparent;
   border: m.rem(0.5) solid v.$gray;
   border-radius: m.rem(20);
   cursor: pointer;
@@ -25,7 +25,7 @@
   }
 
   &.active {
-    background: v.$primary-color;
+    background: #3e3e3e;
     color: v.$white;
     text-decoration: underline;
     text-underline-offset: m.rem(6);
