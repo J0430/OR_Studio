@@ -137,7 +137,7 @@
 }
 
 @include m.respond-to("small-mobile") {
-  .thumbnailImage {
+  .thumbnailWrapper {
     margin-bottom: 15%;
   }
 }
