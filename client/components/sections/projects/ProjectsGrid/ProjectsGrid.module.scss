@@ -119,6 +119,10 @@
     display: block;
     column-count: 2;
     column-gap: m.rem(10);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: v.$gray v.$black;
   }
 
   .gridItem {
