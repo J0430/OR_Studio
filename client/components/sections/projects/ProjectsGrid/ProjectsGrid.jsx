@@ -75,7 +75,7 @@ const ProjectGrid = ({ projects, onImageClick }) => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 1, ease: "easeOut" },
     },
   };
 

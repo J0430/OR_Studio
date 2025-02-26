@@ -5,18 +5,51 @@ import styles from "./ProjectBanner.module.scss";
 
 const ProjectBanner = ({ images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
 
   const updateImageIndex = useCallback(() => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  }, [images?.length]);
+    if (!isPaused) {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }
+  }, [images?.length, isPaused]);
+
+  const pauseAutoPlay = () => {
+    setIsPaused(true);
+    clearInterval(intervalRef.current);
+    clearTimeout(timeoutRef.current);
+
+    // Restart autoplay after 5s of inactivity
+    timeoutRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 2000);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "ArrowRight") {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      pauseAutoPlay();
+    } else if (event.key === "ArrowLeft") {
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex - 1 + images.length) % images.length
+      );
+      pauseAutoPlay();
+    }
+  };
 
   useEffect(() => {
-    if (images?.length > 0) {
-      intervalRef.current = setInterval(updateImageIndex, 3000); // ⏩ Faster transitions (3s)
+    if (images?.length > 0 && !isPaused) {
+      intervalRef.current = setInterval(updateImageIndex, 1500);
     }
+
     return () => clearInterval(intervalRef.current);
-  }, [images, updateImageIndex]);
+  }, [images, updateImageIndex, isPaused]);
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <motion.div className={styles.carouselContainer}>
@@ -24,10 +57,9 @@ const ProjectBanner = ({ images }) => {
         {images?.length > 0 && (
           <motion.div
             key={currentImageIndex}
-            initial={{ opacity: 0.3, scale: 1.05 }}
+            initial={{ opacity: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 1.3, ease: "easeOut" }} // ⏩ Faster fade transitions
+            transition={{ duration: 1, ease: "easeOut" }}
             className={styles.carouselImage}>
             <Image
               src={images[currentImageIndex]}
@@ -48,10 +80,10 @@ const ProjectBanner = ({ images }) => {
             className={`${styles.carouselDot} ${
               idx === currentImageIndex ? styles.active : ""
             }`}
-            onClick={() => setCurrentImageIndex(idx)}
-            initial={{ scale: 1 }}
-            whileHover={{ scale: 1.15 }}
-            transition={{ duration: 0.15 }} // ⏩ Faster hover feedback
+            onClick={() => {
+              setCurrentImageIndex(idx);
+              pauseAutoPlay();
+            }}
           />
         ))}
       </motion.div>

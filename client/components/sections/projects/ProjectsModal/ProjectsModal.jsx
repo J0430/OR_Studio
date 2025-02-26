@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import useClickOutside from "@hooks/useClickOuside";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import styles from "./ProjectsModal.module.scss";
@@ -7,6 +7,11 @@ import Image from "next/image";
 
 function ProjectsModal({ selectedImage, project, onClose }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const modalContentRef = useRef(null);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  useClickOutside(modalContentRef, onClose);
 
   useEffect(() => {
     if (project && selectedImage) {
@@ -17,23 +22,52 @@ function ProjectsModal({ selectedImage, project, onClose }) {
     }
   }, [project, selectedImage]);
 
-  const modalContentRef = useRef(null);
-  useClickOutside(modalContentRef, onClose);
-
-  const handleNext = () => {
+  // Function to smoothly transition between images
+  const handleNext = useCallback(() => {
     setCurrentImageIndex((prev) =>
       prev === project.images.length - 1 ? 0 : prev + 1
     );
-  };
+  }, [project.images.length]);
 
-  const handlePrevious = () => {
+  const handlePrevious = useCallback(() => {
     setCurrentImageIndex((prev) =>
       prev === 0 ? project.images.length - 1 : prev - 1
     );
+  }, [project.images.length]);
+
+  // Function to handle keyboard navigation
+  const handleKeyDown = useCallback(
+    (event) => {
+      if (event.key === "ArrowRight") {
+        handleNext();
+      } else if (event.key === "ArrowLeft") {
+        handlePrevious();
+      }
+    },
+    [handleNext, handlePrevious]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
+
+  // Function to handle swipe gestures for mobile/tablets
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
   };
 
-  const handleThumbnailClick = (index) => {
-    setCurrentImageIndex(index);
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const deltaX = touchStartX.current - touchEndX.current;
+    if (deltaX > 50) {
+      handleNext(); // Swipe left to go next
+    } else if (deltaX < -50) {
+      handlePrevious(); // Swipe right to go back
+    }
   };
 
   return (
@@ -43,12 +77,16 @@ function ProjectsModal({ selectedImage, project, onClose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}>
       <div className={styles.modalBackdrop} onClick={onClose} />
+
       <motion.div
         className={styles.modalContent}
+        ref={modalContentRef}
         initial={{ scale: 0.8 }}
         animate={{ scale: 1 }}
         exit={{ scale: 0.8 }}
-        ref={modalContentRef}>
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}>
         <button
           className={styles.closeButton}
           onClick={onClose}
@@ -65,16 +103,25 @@ function ProjectsModal({ selectedImage, project, onClose }) {
             className={styles.leftButton}
           />
 
-          <Image
-            src={project.images[currentImageIndex]}
-            alt={`Project Image ${currentImageIndex + 1}`}
-            className={styles.modalImage}
-            width={1200}
-            height={1000}
-            style={{ objectFit: "cover" }}
-            quality={80}
-            priority
-          />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentImageIndex}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}>
+              <Image
+                src={project.images[currentImageIndex]}
+                alt={`Project Image ${currentImageIndex + 1}`}
+                className={styles.modalImage}
+                width={900}
+                height={700}
+                style={{ objectFit: "cover" }}
+                quality={80}
+                priority
+              />
+            </motion.div>
+          </AnimatePresence>
 
           <DirectionalButton
             direction="right"
@@ -89,11 +136,10 @@ function ProjectsModal({ selectedImage, project, onClose }) {
           {project.images.map((image, index) => (
             <div
               key={image || index}
-              className={`${styles.thumbnailWrapper} ${
-                index === currentImageIndex ? styles.activeThumbnail : ""
-              }`}
-              onClick={() => handleThumbnailClick(index)}>
+              onClick={() => setCurrentImageIndex(index)}
+              className={`${styles.thumbnailWrapper} ${index === currentImageIndex ? styles.activeThumbnail : ""}`}>
               <Image
+                className={styles.thumbnailImage}
                 src={image}
                 alt={`Thumbnail ${index + 1}`}
                 layout="responsive"
@@ -107,4 +153,5 @@ function ProjectsModal({ selectedImage, project, onClose }) {
     </motion.div>
   );
 }
+
 export default ProjectsModal;
