@@ -42,14 +42,12 @@ const Header = () => {
             src={logos[2]}
             alt="OR Studio Logo"
             className={styles.logo}
-            width={50}
-            height={55}
+            width={40}
+            height={45}
             priority
             onClick={() => setIsNavOpen(false)}
           />
         </Link>
-
-        {/* Toggle Menu Button */}
         <motion.button
           aria-label="Toggle navigation menu"
           whileHover={{ scale: 1.2 }}

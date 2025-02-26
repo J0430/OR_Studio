@@ -8,7 +8,7 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
+  z-index: 1000000;
   @include m.center-flex;
   pointer-events: none;
   transition: opacity 1s ease-in-out;

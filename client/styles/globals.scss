@@ -16,6 +16,7 @@ html {
   line-height: v.$line-height; /* Base line height */
   scroll-behavior: smooth; /* Smooth scrolling */
   overflow-x: hidden; /* Prevent horizontal overflow */
+  overflow: hidden;
   -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape on iOS */
   -ms-text-size-adjust: 100%;
 }
@@ -44,7 +45,7 @@ body {
 /* Smooth scrolling support for Windows */
 @supports (-ms-ime-align: auto) {
   body {
-    scroll-behavior: smooth !important;
+    scroll-behavior: smooth;
   }
 }
 
