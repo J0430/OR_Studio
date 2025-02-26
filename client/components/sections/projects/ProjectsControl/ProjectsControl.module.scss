@@ -57,12 +57,13 @@
     /* Dropdown */
     .projectsDropdown {
       position: relative;
-      width: m.rem(240);
-      height: m.rem(40);
+      width: 20rem;
+      height: 3rem;
       padding: m.rem(8);
       color: v.$white;
       padding: m.rem(10);
       border: none;
+      font-size: 1.3rem;
       font-family: sans-serif;
       background-color: #252321;
 

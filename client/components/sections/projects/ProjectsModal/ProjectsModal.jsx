@@ -10,6 +10,7 @@ function ProjectsModal({ selectedImage, project, onClose }) {
   const modalContentRef = useRef(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const thumbnailRef = useRef(null);
 
   useClickOutside(modalContentRef, onClose);
 
@@ -57,16 +58,22 @@ function ProjectsModal({ selectedImage, project, onClose }) {
     touchStartX.current = e.touches[0].clientX;
   };
 
-  const handleTouchMove = (e) => {
-    touchEndX.current = e.touches[0].clientX;
+  const handleTouchEnd = (e) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+
+    const deltaX = touchStartX.current - touchEndX.current;
+
+    if (deltaX > 50) {
+      handleNext(); // Swipe left → next image
+    } else if (deltaX < -50) {
+      handlePrevious(); // Swipe right → previous image
+    }
   };
 
-  const handleTouchEnd = () => {
-    const deltaX = touchStartX.current - touchEndX.current;
-    if (deltaX > 50) {
-      handleNext(); // Swipe left to go next
-    } else if (deltaX < -50) {
-      handlePrevious(); // Swipe right to go back
+  // Function to enable thumbnail scrolling on mobile
+  const handleThumbnailScroll = (e) => {
+    if (thumbnailRef.current) {
+      thumbnailRef.current.scrollLeft += e.deltaY;
     }
   };
 
@@ -85,7 +92,6 @@ function ProjectsModal({ selectedImage, project, onClose }) {
         animate={{ scale: 1 }}
         exit={{ scale: 0.8 }}
         onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}>
         <button
           className={styles.closeButton}
@@ -132,7 +138,11 @@ function ProjectsModal({ selectedImage, project, onClose }) {
           />
         </motion.div>
 
-        <div className={styles.thumbnailGallery}>
+        {/* Scrollable Thumbnail Gallery */}
+        <div
+          className={styles.thumbnailGallery}
+          ref={thumbnailRef}
+          onWheel={handleThumbnailScroll}>
           {project.images.map((image, index) => (
             <div
               key={image || index}
