@@ -6,7 +6,8 @@
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: m.rem(10);
   max-height: 80vh;
-  overflow-y: auto !important;
+  overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: v.$gray v.$black;
 
