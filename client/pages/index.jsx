@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { preloadImages } from "@utils/imageUtils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { usePreloader } from "@contexts/MainPreloaderContext";
 import { useNav } from "@contexts/NavContext";
 import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/MainPreloader";
@@ -10,7 +10,6 @@ import dynamic from "next/dynamic";
 import styles from "@styles/pages/home.module.scss";
 
 // Dynamic imports
-
 const LandingPage = dynamic(
   () => import("@components/sections/home/LandingPage/LandingPage")
 );
@@ -26,7 +25,6 @@ const DirectionalButton = dynamic(
 );
 
 // ✅ getStaticProps - Runs on server during build
-
 export const getStaticProps = async () => {
   try {
     const homeData = await fetchData("home");
@@ -51,9 +49,10 @@ export default function Home({ homeData }) {
   const { isPreloaderVisible, onImageLoad } = usePreloader();
   const [isPageReady, setIsPageReady] = useState(false);
 
+  // Delayed transition to ensure smooth entry
   useEffect(() => {
     if (!isPreloaderVisible) {
-      setIsPageReady(true);
+      setTimeout(() => setIsPageReady(true), 600); // Short delay for smooth transition
     }
   }, [isPreloaderVisible]);
 
@@ -68,7 +67,7 @@ export default function Home({ homeData }) {
     }
   }, []);
 
-  // Continue rendering
+  // Extracting sections data
   const { LandingPictures, EvenYehuda, Hevron8PenthouseRooftop, City69 } =
     homeData.projects || {};
 
@@ -97,34 +96,54 @@ export default function Home({ homeData }) {
       <Head>
         <title>OR Studio - Home</title>
       </Head>
-      {isPreloaderVisible && <MainPreloader />}
-      <motion.div
-        key="homePage"
-        className={styles.homePage}
-        initial={{ opacity: 0, scale: 1.1 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.6 } }}
-        transition={{ duration: 0.6, ease: "easeOut" }}>
-        {sections.map((section, index) => (
-          <div
-            key={section.id}
-            id={section.id}
-            className={styles.sectionContainer}>
-            {section.component}
 
-            {!isNavOpen && !isPreloaderVisible && (
-              <DirectionalButton
-                direction={index < sections.length - 1 ? "down" : "up"}
-                width={3}
-                height={3}
-                onClick={() =>
-                  handleScroll(sections[(index + 1) % sections.length]?.id)
-                }
-              />
-            )}
-          </div>
-        ))}
-      </motion.div>
+      {/* ✅ Smooth transition from Preloader */}
+      <AnimatePresence mode="wait">
+        {isPreloaderVisible && (
+          <motion.div
+            key="preloader"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.1, ease: "easeOut" },
+            }}>
+            <MainPreloader />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence mode="wait">
+        {isPageReady && (
+          <motion.div
+            key="homePage"
+            className={styles.homePage}
+            initial={{ opacity: 0.5, scale: 1.1 }}
+            animate={{ opacity: 0.8, scale: 1 }}
+            exit={{ opacity: 0.5, scale: 0.9, transition: { duration: 0.1 } }}
+            transition={{ duration: 0.3, ease: "easeOut" }}>
+            {sections.map((section, index) => (
+              <div
+                key={section.id}
+                id={section.id}
+                className={styles.sectionContainer}>
+                {section.component}
+
+                {!isNavOpen && !isPreloaderVisible && (
+                  <DirectionalButton
+                    direction={index < sections.length - 1 ? "down" : "up"}
+                    width={3}
+                    height={3}
+                    onClick={() =>
+                      handleScroll(sections[(index + 1) % sections.length]?.id)
+                    }
+                  />
+                )}
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
