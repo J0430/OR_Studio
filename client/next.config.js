@@ -1,5 +1,3 @@
-// next.config.js (CommonJS)
-
 const path = require("path");
 const withTM = require("next-transpile-modules")([
   "@ant-design/icons",
