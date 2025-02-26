@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styles from "./NavLinks.module.scss";
 
-const NavbarLinks = ({ setIsOpen }) => {
+const NavbarLinks = () => {
   const pathname = usePathname(); // ✅ Get current path
   const links = ["Home", "Works", "Contact", "Services", "About"];
 
@@ -45,11 +45,7 @@ const NavbarLinks = ({ setIsOpen }) => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className={`${styles.navItem} ${isActive ? styles.active : ""}`}>
-              <Link
-                href={href}
-                scroll={false}
-                className={styles.navLink}
-                onClick={() => setIsOpen(false)}>
+              <Link href={href} scroll={false} className={styles.navLink}>
                 {link}
               </Link>
             </motion.li>

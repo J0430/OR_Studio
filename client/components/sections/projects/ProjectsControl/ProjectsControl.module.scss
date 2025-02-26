@@ -8,7 +8,7 @@
   justify-content: flex-end;
   height: 20vh;
   width: 100%;
-  z-index: 1;
+  z-index: 0;
   background: v.$black;
   @include m.scrollbar-style(v.$gray, v.$white);
   padding: m.rem(16);
@@ -91,7 +91,11 @@
 /* Tablet View */
 @include m.respond-to("tablet") {
   .projectsControl {
-    height: auto;
+    margin-top: 12%;
+    margin-bottom: 2%;
+    align-self: center;
+    z-index: 0;
+    height: 15vh;
   }
 
   .projectsTitleBox {
@@ -110,16 +114,16 @@
 
 /* Mobile View */
 @include m.respond-to("mobile") {
-  .projectsGridWrapper {
-    display: flex; /* Switch to flex layout */
-    flex-direction: column;
-    gap: m.rem(12); /* Less gap on mobile */
-    padding: m.rem(12);
-
-    .gridItem {
-      width: 100%;
-      height: auto;
-      aspect-ratio: auto; /* Remove forced aspect ratio */
-    }
+  .projectsControl {
+    margin-top: 12%;
+    margin-bottom: 2%;
+    align-self: center;
+    z-index: 0;
+    height: 15vh;
+  }
+  .gridItem {
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto; /* Remove forced aspect ratio */
   }
 }
