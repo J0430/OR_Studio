@@ -20,7 +20,6 @@
       font-family: "Futura", "Helvetica Neue", sans-serif;
       font-size: 2.3rem;
       margin: 0;
-      z-index: 4;
     }
 
     .bannerSubtitle {
@@ -44,7 +43,6 @@
     rgba(0, 0, 0, 0.7) 60%,
     black 100%
   );
-  z-index: 0;
   pointer-events: none;
   animation: fadeInGradient 1.5s ease-in-out;
 }
