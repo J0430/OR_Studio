@@ -54,8 +54,7 @@
   flex-grow: 1;
   height: auto; // Allow it to grow properly
   max-height: none; // Prevent clipping in Safari
-  overflow-y: auto !important;
-  overflow-x: hidden;
+  overflow: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: v.$gray v.$black;
