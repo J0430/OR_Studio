@@ -125,18 +125,18 @@
 
 @include m.respond-to("tablet") {
   .thumbnailGallery {
-    margin-bottom: 20%;
+    margin-bottom: 25%;
   }
 }
 
 @include m.respond-to("mobile") {
   .thumbnailGallery {
-    margin-bottom: 20%;
+    margin-bottom: 25%;
   }
 }
 
 @include m.respond-to("small-mobile") {
   .thumbnailGallery {
-    margin-bottom: 20%;
+    margin-bottom: 25%;
   }
 }
