@@ -112,7 +112,7 @@ export default function Home({ homeData }) {
             className={styles.sectionContainer}>
             {section.component}
 
-            {!isNavOpen && (
+            {!isNavOpen && !isPreloaderVisible && (
               <DirectionalButton
                 direction={index < sections.length - 1 ? "down" : "up"}
                 width={3}

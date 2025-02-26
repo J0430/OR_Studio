@@ -1,9 +1,10 @@
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import TypingEffect from "./TypingEffect/TypingEffect";
-import { preloader } from "@utils/globals";
-import styles from "./MainPreloader.module.scss";
+import { preloaderLogos } from "@utils/globals";
 import { usePreloader } from "@contexts/MainPreloaderContext";
+import TypingEffect from "./TypingEffect/TypingEffect";
+import Image from "next/image";
+
+import styles from "./MainPreloader.module.scss";
 
 const MainPreloader = () => {
   const { isPreloaderVisible, onImageLoad } = usePreloader();
@@ -33,10 +34,10 @@ const MainPreloader = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className={styles.preloaderLogo}>
               <Image
-                src={preloader[1]}
+                src={preloaderLogos[1]}
                 alt="OR Logo"
-                width={70}
-                height={70}
+                width={60}
+                height={60}
                 priority
                 onLoad={onImageLoad}
               />
@@ -59,7 +60,7 @@ const MainPreloader = () => {
               transition={{ duration: 1.5, ease: "easeOut" }}
               className={styles.preloaderLogo}>
               <Image
-                src={preloader[0]}
+                src={preloaderLogos[0]}
                 alt="OR Studio Logo"
                 width={90}
                 height={90}
@@ -70,8 +71,8 @@ const MainPreloader = () => {
 
             <TypingEffect
               text="Architecture Visualization"
-              typingSpeed={70}
-              delay={40000}
+              typingSpeed={50}
+              delay={2500}
             />
           </motion.div>
         </motion.div>

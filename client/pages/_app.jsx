@@ -44,7 +44,7 @@ export default function MyApp({ Component, pageProps }) {
       <PreloaderProvider>
         <NavProvider>
           <Header />
-          <Component {...pageProps} />✅ This renders the current page
+          <Component {...pageProps} />
         </NavProvider>
       </PreloaderProvider>
       {/* </div> */}

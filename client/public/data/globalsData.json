@@ -13,5 +13,5 @@
     "Office",
     "Animation"
   ],
-  "preloader": ["/assets/logos/OR Studio.png", "/assets/logos/OR.png"]
+  "preloaderLogos": ["/assets/logos/OR Studio.png", "/assets/logos/OR.png"]
 }
