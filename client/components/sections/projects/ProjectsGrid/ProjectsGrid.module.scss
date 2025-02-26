@@ -5,7 +5,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: m.rem(10);
-  max-height: 80vh;
+  max-height: 87vh;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
@@ -27,17 +27,21 @@
 
   @include m.respond-to("desktop") {
     grid-template-columns: repeat(3, 1fr);
+    overflow-y: auto !important;
   }
 
   @include m.respond-to("tablet") {
     grid-template-columns: repeat(2, 1fr);
+    overflow-y: auto !important;
   }
 
   @include m.respond-to("mobile") {
     grid-template-columns: repeat(auto-fill, minmax(2, 1fr));
+    overflow-y: auto !important;
   }
   @include m.respond-to("small-mobile") {
     grid-template-columns: repeat(auto-fill, minmax(2, 1fr));
+    overflow-y: auto !important;
   }
 }
 
