@@ -28,4 +28,11 @@
     margin-bottom: 1rem;
     border-bottom: 1px solid #fff;
   }
+
+  .projectsGridWrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    overflow-x: hidden;
+    overflow-y: auto !important;
+  }
 }
