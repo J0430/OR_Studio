@@ -12,7 +12,7 @@ const ProjectBanner = ({ images }) => {
   const timeoutRef = useRef(null);
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
-  const duration = 4000; // 4s per slide
+  const duration = 3500; // Faster transitions (Reduced to 2.5s)
 
   // Updates image index for infinite loop
   const updateImageIndex = useCallback(() => {
@@ -30,7 +30,7 @@ const ProjectBanner = ({ images }) => {
     // Resume autoplay after 5s of inactivity
     timeoutRef.current = setTimeout(() => {
       setIsPaused(false);
-    }, 4000);
+    }, 5000);
   };
 
   // Navigate to specific image when clicking on progress bar
@@ -61,7 +61,7 @@ const ProjectBanner = ({ images }) => {
     }
 
     return () => clearInterval(intervalRef.current);
-  }, [images, updateImageIndex, isPaused]);
+  }, [images, updateImageIndex, isPaused, currentImageIndex]); // Ensure sync with current image index
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -103,13 +103,17 @@ const ProjectBanner = ({ images }) => {
         )}
       </AnimatePresence>
 
-      {/* Static Progress Bar with Click Navigation */}
-      <ProgressBar
-        currentIndex={currentImageIndex}
-        totalImages={images.length}
-        duration={duration}
-        onSelect={handleProgressClick}
-      />
+      {/* Mapped Progress Bars (Only Active One Animates) */}
+      <div className={styles.progressContainer}>
+        {images.map((_, index) => (
+          <ProgressBar
+            key={index}
+            isActive={index === currentImageIndex}
+            duration={duration}
+            onClick={() => handleProgressClick(index)}
+          />
+        ))}
+      </div>
 
       {/* Navigation Buttons */}
       <DirectionalButton
