@@ -5,8 +5,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: m.rem(10);
-  max-height: 80vh;
-  overflow: hidden;
+  height: 100%;
+  max-height: calc(100vh - var(--header-height));
+  overflow-y: auto; /* Allow scrolling */
+  overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: v.$gray v.$black;
 
@@ -26,21 +28,17 @@
 
   @include m.respond-to("desktop") {
     grid-template-columns: repeat(3, 1fr);
-    overflow-y: scroll !important;
   }
 
   @include m.respond-to("tablet") {
     grid-template-columns: repeat(2, 1fr);
-    overflow-y: scroll !important;
   }
 
   @include m.respond-to("mobile") {
     grid-template-columns: repeat(auto-fill, minmax(2, 1fr));
-    overflow-y: scroll !important;
   }
   @include m.respond-to("small-mobile") {
     grid-template-columns: repeat(auto-fill, minmax(2, 1fr));
-    overflow-y: scroll !important;
   }
 }
 
