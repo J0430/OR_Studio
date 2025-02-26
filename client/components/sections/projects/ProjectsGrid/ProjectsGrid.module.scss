@@ -118,7 +118,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: m.rem(10);
-    max-height: 87vh;
     column-gap: m.rem(10);
     overflow-y: auto;
     overflow-x: hidden;
@@ -127,9 +126,16 @@
   }
 
   .gridItem {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: m.rem(10);
+    position: relative;
+    overflow: hidden;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     break-inside: avoid;
     -webkit-column-break-inside: avoid;
     page-break-inside: avoid;
