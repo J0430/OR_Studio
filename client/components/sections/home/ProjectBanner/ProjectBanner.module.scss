@@ -18,6 +18,20 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease-in-out;
+  .direction {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    &.right {
+      right: 1rem;
+    }
+
+    &.left {
+      left: 1rem;
+    }
+  }
 }
 
 /* ✅ Progress Bar Container */
@@ -27,7 +41,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 4px;
   z-index: 10;
 }
 

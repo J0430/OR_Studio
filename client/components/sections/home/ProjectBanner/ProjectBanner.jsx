@@ -12,7 +12,7 @@ const ProjectBanner = ({ images }) => {
   const timeoutRef = useRef(null);
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
-  const duration = 3500; // Faster transitions (Reduced to 2.5s)
+  const duration = 5000; // Faster transitions (Reduced to 2.5s)
 
   // Updates image index for infinite loop
   const updateImageIndex = useCallback(() => {
@@ -116,14 +116,13 @@ const ProjectBanner = ({ images }) => {
       </div>
 
       {/* Navigation Buttons */}
+
       <DirectionalButton
         direction="left"
         width={3}
         height={3}
         onClick={() => {
-          setCurrentImageIndex(
-            (prevIndex) => (prevIndex - 1 + images.length) % images.length
-          );
+          setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
           stopAutoPlay();
         }}
       />
@@ -132,7 +131,9 @@ const ProjectBanner = ({ images }) => {
         width={3}
         height={3}
         onClick={() => {
-          setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+          setCurrentImageIndex(
+            (prevIndex) => (prevIndex - 1 + images.length) % images.length
+          );
           stopAutoPlay();
         }}
       />
