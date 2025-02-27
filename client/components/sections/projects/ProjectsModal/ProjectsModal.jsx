@@ -5,144 +5,153 @@ import DirectionalButton from "@components/common/DirectionalButton/DirectionalB
 import styles from "./ProjectsModal.module.scss";
 import Image from "next/image";
 
-const ProjectBanner = ({ images }) => {
+function ProjectsModal({ selectedImage, project, onClose }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const intervalRef = useRef(null);
-  const timeoutRef = useRef(null);
-  const touchStartX = useRef(null);
-  const touchEndX = useRef(null);
-  const duration = 3500; // Faster transitions (Reduced to 2.5s)
+  const modalContentRef = useRef(null);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
-  // Updates image index for infinite loop
-  const updateImageIndex = useCallback(() => {
-    if (!isPaused) {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  useClickOutside(modalContentRef, onClose);
+
+  useEffect(() => {
+    if (project && selectedImage) {
+      const index = project.images?.indexOf(selectedImage);
+      if (index !== -1) {
+        setCurrentImageIndex(index);
+      }
     }
-  }, [images.length, isPaused]);
+  }, [project, selectedImage]);
 
-  // Stops autoplay when interacting
-  const stopAutoPlay = () => {
-    setIsPaused(true);
-    clearInterval(intervalRef.current);
-    clearTimeout(timeoutRef.current);
+  // Function to smoothly transition between images
+  const handleNext = useCallback(() => {
+    setCurrentImageIndex((prev) =>
+      prev === project.images.length - 1 ? 0 : prev + 1
+    );
+  }, [project.images.length]);
 
-    // Resume autoplay after 5s of inactivity
-    timeoutRef.current = setTimeout(() => {
-      setIsPaused(false);
-    }, 5000);
-  };
+  const handlePrevious = useCallback(() => {
+    setCurrentImageIndex((prev) =>
+      prev === 0 ? project.images.length - 1 : prev - 1
+    );
+  }, [project.images.length]);
 
-  // Navigate to specific image when clicking on progress bar
-  const handleProgressClick = (index) => {
-    setCurrentImageIndex(index);
-    stopAutoPlay();
-  };
-
-  // Keyboard Navigation
+  // Function to handle keyboard navigation
   const handleKeyDown = useCallback(
     (event) => {
       if (event.key === "ArrowRight") {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        stopAutoPlay();
+        handleNext();
       } else if (event.key === "ArrowLeft") {
-        setCurrentImageIndex(
-          (prevIndex) => (prevIndex - 1 + images.length) % images.length
-        );
-        stopAutoPlay();
+        handlePrevious();
       }
     },
-    [images.length]
+    [handleNext, handlePrevious]
   );
-
-  useEffect(() => {
-    if (images.length > 0 && !isPaused) {
-      intervalRef.current = setInterval(updateImageIndex, duration);
-    }
-
-    return () => clearInterval(intervalRef.current);
-  }, [images, updateImageIndex, isPaused, currentImageIndex]); // Ensure sync with current image index
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
-  // SWIPE GESTURE DETECTION
+  // Function to handle swipe gestures for mobile/tablets
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
 
-  const handleTouchEnd = (e) => {
-    touchEndX.current = e.changedTouches[0].clientX;
-    const deltaX = touchStartX.current - touchEndX.current;
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
 
+  const handleTouchEnd = () => {
+    const deltaX = touchStartX.current - touchEndX.current;
     if (deltaX > 50) {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      stopAutoPlay();
+      handleNext(); // Swipe left to go next
     } else if (deltaX < -50) {
-      setCurrentImageIndex(
-        (prevIndex) => (prevIndex - 1 + images.length) % images.length
-      );
-      stopAutoPlay();
+      handlePrevious(); // Swipe right to go back
     }
   };
 
   return (
     <motion.div
-      className={styles.carouselContainer}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}>
-      {/* Image Display with Smooth Transition */}
-      <AnimatePresence mode="wait">
-        {images.length > 0 && (
-          <motion.div
-            key={currentImageIndex}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            className={styles.imageWrapper}>
-            <BannerImage image={images[currentImageIndex]} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      className={styles.modalContainer}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}>
+      <div className={styles.modalBackdrop} onClick={onClose} />
 
-      {/* Mapped Progress Bars (Only Active One Animates) */}
-      <div className={styles.progressContainer}>
-        {images.map((_, index) => (
-          <ProgressBar
-            key={index}
-            isActive={index === currentImageIndex}
-            duration={duration}
-            onClick={() => handleProgressClick(index)}
+      <motion.div
+        className={styles.modalContent}
+        ref={modalContentRef}
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0.8 }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}>
+        <button
+          className={styles.closeButton}
+          onClick={onClose}
+          aria-label="Close Modal">
+          ✕
+        </button>
+
+        <motion.div className={styles.imageWrapper} layoutid={selectedImage}>
+          <DirectionalButton
+            direction="left"
+            width={3}
+            height={3}
+            onClick={handlePrevious}
+            className={styles.leftButton}
           />
-        ))}
-      </div>
 
-      {/* Navigation Buttons */}
-      <DirectionalButton
-        direction="left"
-        width={3}
-        height={3}
-        onClick={() => {
-          setCurrentImageIndex(
-            (prevIndex) => (prevIndex - 1 + images.length) % images.length
-          );
-          stopAutoPlay();
-        }}
-      />
-      <DirectionalButton
-        direction="right"
-        width={3}
-        height={3}
-        onClick={() => {
-          setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-          stopAutoPlay();
-        }}
-      />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentImageIndex}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}>
+              <Image
+                src={project.images[currentImageIndex]}
+                alt={`Project Image ${currentImageIndex + 1}`}
+                className={styles.modalImage}
+                width={900}
+                height={700}
+                style={{ objectFit: "cover" }}
+                quality={80}
+                priority
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          <DirectionalButton
+            direction="right"
+            width={3}
+            height={3}
+            onClick={handleNext}
+            className={styles.rightButton}
+          />
+        </motion.div>
+
+        <div className={styles.thumbnailGallery}>
+          {project.images.map((image, index) => (
+            <div
+              key={image || index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`${styles.thumbnailWrapper} ${index === currentImageIndex ? styles.activeThumbnail : ""}`}>
+              <Image
+                className={styles.thumbnailImage}
+                src={image}
+                alt={`Thumbnail ${index + 1}`}
+                layout="responsive"
+                width={100}
+                height={75}
+              />
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </motion.div>
   );
-};
+}
 
-export default ProjectBanner;
+export default ProjectsModal;
