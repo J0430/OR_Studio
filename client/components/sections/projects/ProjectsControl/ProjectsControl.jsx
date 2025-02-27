@@ -1,21 +1,7 @@
 import { useMediaQuery } from "react-responsive";
+import DropdownMenu from "@components/common/DropdownMenu/DropdownMenu";
 import CategoryTab from "@components/common/CategoryTab/CategoryTab";
 import styles from "../ProjectsControl/ProjectsControl.module.scss";
-
-const Dropdown = ({ categories, selectedCategory, onCategorySelect }) => {
-  return (
-    <select
-      className={styles.projectsDropdown}
-      value={selectedCategory}
-      onChange={(e) => onCategorySelect(e.target.value)}>
-      {categories.map((category) => (
-        <option key={category} value={category}>
-          {category}
-        </option>
-      ))}
-    </select>
-  );
-};
 
 const ProjectsControl = ({
   categories = [],
@@ -23,6 +9,7 @@ const ProjectsControl = ({
   onCategorySelect = () => {},
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
+
   return (
     <div className={styles.projectsControl}>
       <div className={styles.projectsTitleBox}>
@@ -32,7 +19,7 @@ const ProjectsControl = ({
       <div className={styles.projectsSelectorBox}>
         <nav className={styles.projectsSelector}>
           {isMobile ? (
-            <Dropdown
+            <DropdownMenu
               categories={categories}
               selectedCategory={selectedCategory}
               onCategorySelect={onCategorySelect}

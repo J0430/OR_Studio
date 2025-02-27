@@ -6,7 +6,7 @@ import styles from "./NavLinks.module.scss";
 
 const NavbarLinks = () => {
   const pathname = usePathname(); // ✅ Get current path
-  const links = ["Home", "Works", "Contact", "Services", "About"];
+  const links = ["Home", "Works", "Contact", "About"];
 
   const containerVariants = {
     hidden: { opacity: 0 },

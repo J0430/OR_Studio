@@ -12,7 +12,7 @@ const ProjectBanner = ({ images }) => {
   const timeoutRef = useRef(null);
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
-  const duration = 5000; // Faster transitions (Reduced to 2.5s)
+  const duration = 5000; // Transition time per image
 
   // Updates image index for infinite loop
   const updateImageIndex = useCallback(() => {
@@ -93,13 +93,40 @@ const ProjectBanner = ({ images }) => {
       className={styles.carouselContainer}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}>
-      {/* Image Display */}
+      {/* Image Display with Smooth Blurred Transition */}
       <AnimatePresence mode="wait">
         {images.length > 0 && (
-          <BannerImage
+          <motion.div
             key={currentImageIndex}
-            image={images[currentImageIndex]}
-          />
+            initial={{ opacity: 0.5, filter: "blur(200px) scale(1.1)" }}
+            animate={{ opacity: 1, filter: "blur(100px) scale(1)" }}
+            exit={{ opacity: 0.5, filter: "blur(200px) scale(1.1)" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }} // Smooth fade and blur transition
+            className={styles.imageWrapper}>
+            <DirectionalButton
+              direction="right"
+              width={3}
+              height={3}
+              onClick={() => {
+                setCurrentImageIndex(
+                  (prevIndex) => (prevIndex + 1) % images.length
+                );
+                stopAutoPlay();
+              }}
+            />
+            <BannerImage image={images[currentImageIndex]} />
+            <DirectionalButton
+              direction="left"
+              width={3}
+              height={3}
+              onClick={() => {
+                setCurrentImageIndex(
+                  (prevIndex) => (prevIndex - 1 + images.length) % images.length
+                );
+                stopAutoPlay();
+              }}
+            />
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -116,27 +143,6 @@ const ProjectBanner = ({ images }) => {
       </div>
 
       {/* Navigation Buttons */}
-
-      <DirectionalButton
-        direction="left"
-        width={3}
-        height={3}
-        onClick={() => {
-          setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-          stopAutoPlay();
-        }}
-      />
-      <DirectionalButton
-        direction="right"
-        width={3}
-        height={3}
-        onClick={() => {
-          setCurrentImageIndex(
-            (prevIndex) => (prevIndex - 1 + images.length) % images.length
-          );
-          stopAutoPlay();
-        }}
-      />
     </motion.div>
   );
 };

@@ -7,6 +7,7 @@ import Image from "next/image";
 
 function ProjectsModal({ selectedImage, project, onClose }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [swipeDirection, setSwipeDirection] = useState(1); // 1 for right, -1 for left
   const modalContentRef = useRef(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
@@ -24,12 +25,14 @@ function ProjectsModal({ selectedImage, project, onClose }) {
 
   // Function to smoothly transition between images
   const handleNext = useCallback(() => {
+    setSwipeDirection(1);
     setCurrentImageIndex((prev) =>
       prev === project.images.length - 1 ? 0 : prev + 1
     );
   }, [project.images.length]);
 
   const handlePrevious = useCallback(() => {
+    setSwipeDirection(-1);
     setCurrentImageIndex((prev) =>
       prev === 0 ? project.images.length - 1 : prev - 1
     );
@@ -57,16 +60,16 @@ function ProjectsModal({ selectedImage, project, onClose }) {
     touchStartX.current = e.touches[0].clientX;
   };
 
-  const handleTouchMove = (e) => {
-    touchEndX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (e) => {
+    touchEndX.current = e.changedTouches[0].clientX;
     const deltaX = touchStartX.current - touchEndX.current;
+
     if (deltaX > 50) {
-      handleNext(); // Swipe left to go next
+      setSwipeDirection(1); // Swiping left (next image)
+      handleNext();
     } else if (deltaX < -50) {
-      handlePrevious(); // Swipe right to go back
+      setSwipeDirection(-1); // Swiping right (previous image)
+      handlePrevious();
     }
   };
 
@@ -85,7 +88,6 @@ function ProjectsModal({ selectedImage, project, onClose }) {
         animate={{ scale: 1 }}
         exit={{ scale: 0.8 }}
         onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}>
         <button
           className={styles.closeButton}
@@ -106,9 +108,9 @@ function ProjectsModal({ selectedImage, project, onClose }) {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentImageIndex}
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: swipeDirection * 50 }} // Adjust movement based on swipe direction
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
+              exit={{ opacity: 0, x: swipeDirection * -50 }} // Reverse movement for exit
               transition={{ duration: 0.3, ease: "easeInOut" }}>
               <Image
                 src={project.images[currentImageIndex]}
