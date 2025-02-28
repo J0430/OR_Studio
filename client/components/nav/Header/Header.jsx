@@ -40,7 +40,7 @@ const Header = () => {
       <div className={styles.navContent}>
         <Link href="/" passHref>
           <Image
-            src={logos[2]}
+            src={logos[3]}
             alt="OR Studio Logo"
             className={styles.logo}
             width={40}

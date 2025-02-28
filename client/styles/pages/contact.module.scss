@@ -15,103 +15,17 @@
   align-items: center;
   z-index: 0;
   overflow: hidden;
-  margin-left: 3%;
 
   .content {
-    font-family: "Raleway", sans-serif;
-    color: rgba(255, 255, 255, 0.836);
-    width: 25%;
+    color: rgba(255, 255, 255, 0.944);
+    width: 50%;
     height: 65vh;
     align-self: center;
     text-align: left;
     overflow: visible;
-    margin-left: 3rem;
+    margin-left: 10rem;
     z-index: 10;
-    h2 {
-      font-size: 3rem;
-      font-weight: 500;
-      margin-left: 3rem;
-    }
-    p {
-      font-size: 22px;
-      font-weight: 400;
-      margin-left: 3rem;
-    }
-    .contactForm {
-      width: 100%;
-      margin-left: 3rem;
-      padding: 2rem;
-      background: rgba(20, 20, 20, 0.6);
-      box-shadow:
-        rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-        rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-
-      .formGroup {
-        display: flex;
-        flex-direction: column;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-
-        .inputField {
-          font-family: "Raleway", sans-serif;
-          font-weight: 100;
-          color: white;
-          height: 2rem;
-          font-size: 23px;
-          background: transparent;
-          width: 100%;
-          margin-bottom: 1rem;
-          border: 0;
-          border-bottom: 1px solid rgba(60, 59, 59, 0.763);
-          height: 40px;
-          background: transparent;
-        }
-
-        .inputField::placeholder {
-          color: rgba(255, 255, 255, 0.7);
-          font-weight: 100;
-          font-family: "Raleway", sans-serif;
-        }
-
-        .inputField:focus {
-          border-color: #58aae9;
-          outline: none;
-        }
-
-        /* ✅ Error Styling */
-        .error {
-          border-color: #ff4d4f !important;
-        }
-
-        .errorMessage {
-          color: #ff4d4f;
-          font-size: 14px;
-          margin-top: 4px;
-        }
-
-        /* ✅ Submit Button */
-      }
-    }
   }
-}
-
-/* ✅ Form Styling */
-
-.submitButton {
-  background-color: transparent;
-  border: rgba(255, 255, 255, 0.7) 0.013rem solid;
-  color: rgba(255, 255, 255, 0.7);
-  border-radius: 6px;
-  font-size: 20px;
-  width: 25%;
-  padding: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.submitButton:hover {
-  background-color: white;
-  color: black;
 }
 .contactPage::after {
   content: "";
@@ -121,25 +35,46 @@
   bottom: 0;
   left: 0;
   background-image:
-    linear-gradient(to right, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 70%),
+    linear-gradient(to right, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 70%),
     linear-gradient(to left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 8%);
   z-index: 1;
 }
-/* ✅ Mobile Optimization */
+/* ✅ Mobile & Tablet Layout */
+
 @include m.respond-to("tablet") {
-  .contactForm {
-    max-width: 400px;
+  .contactPage {
+    .content {
+      margin-left: 0rem;
+      height: 100vh;
+      width: 100%;
+      align-content: center;
+    }
   }
-  .inputField {
-    font-size: 18px;
+  .contactPage::after {
+    background-image: none;
   }
 }
 
 @include m.respond-to("mobile") {
-  .contactForm {
-    max-width: 300px;
+  .contactPage {
+    .content {
+      margin-top: 2rem;
+      width: 100%;
+      height: 100vh;
+      justify-items: center;
+      align-content: center;
+    }
   }
-  .inputField {
-    font-size: 16px;
+}
+
+@include m.respond-to("small-mobile") {
+  .contactPage {
+    margin-left: 0;
+    .content {
+      margin-top: 2rem;
+      width: 100%;
+      height: 100vh;
+      align-content: center;
+    }
   }
 }
