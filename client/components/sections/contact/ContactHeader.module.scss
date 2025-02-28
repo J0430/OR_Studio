@@ -20,21 +20,18 @@
 
 @include m.respond-to("small-mobile") {
   .contactContainer {
-    margin-left: 2.5rem;
-    width: 90%;
+    width: 60%;
   }
 }
 
 @include m.respond-to("mobile") {
   .contactContainer {
-    margin-left: 2.5rem !important;
-    width: 90%;
+    width: 60%;
   }
 }
 
 @include m.respond-to("tablet") {
   .contactContainer {
-    margin-left: 2.5rem !important;
-    width: 90%;
+    width: 60%;
   }
 }
