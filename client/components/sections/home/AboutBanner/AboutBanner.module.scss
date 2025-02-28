@@ -59,20 +59,20 @@
 
 @include m.respond-to("mobile") {
   .description {
-    font-size: m.rem(20);
+    font-size: m.rem(18);
   }
   .linkWrapper .link {
     font-size: m.rem(16);
-    padding: m.rem(14);
+    padding: m.rem(12);
   }
 }
 
 @include m.respond-to("small-mobile") {
   .description {
-    font-size: m.rem(16);
+    font-size: m.rem(18);
   }
   .linkWrapper .link {
     font-size: m.rem(14);
-    padding: m.rem(12);
+    padding: m.rem(10);
   }
 }

@@ -1,0 +1,40 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+.contactContainer {
+  .contactTitle h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .contactDescription {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+    width: 90%;
+  }
+}
+
+@include m.respond-to("small-mobile") {
+  .contactContainer {
+    margin-left: 2.5rem;
+    width: 90%;
+  }
+}
+
+@include m.respond-to("mobile") {
+  .contactContainer {
+    margin-left: 2.5rem !important;
+    width: 90%;
+  }
+}
+
+@include m.respond-to("tablet") {
+  .contactContainer {
+    margin-left: 2.5rem !important;
+    width: 90%;
+  }
+}
