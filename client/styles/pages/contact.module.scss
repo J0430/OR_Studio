@@ -43,11 +43,12 @@
 
 @include m.respond-to("tablet") {
   .contactPage {
-    padding-left: 2rem;
+    margin-left: 0rem;
+    margin-top: 2rem;
     .content {
       height: 100vh;
       width: 100%;
-      align-content: center;
+      justify-items: center;
     }
   }
   .contactPage::after {
