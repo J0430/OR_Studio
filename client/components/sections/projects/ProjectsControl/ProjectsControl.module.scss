@@ -6,9 +6,8 @@
   flex-direction: column;
   position: relative;
   justify-content: flex-end;
-  height: 25vh;
+  height: 30vh;
   width: 100%;
-  margin-top: 10%;
   background: v.$black;
   @include m.scrollbar-style(v.$gray, v.$white);
   padding: m.rem(16);
@@ -20,16 +19,15 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  flex-wrap: wrap;
   height: auto;
   width: 100%;
-
   border-bottom: 0.8px solid rgba(v.$white, 0.566);
 
   .projectsTitle {
     margin: 0;
-    width: 100%; /* Full width on small screens */
-    font-size: clamp(m.rem(28), 5vw, m.rem(45)); /* Responsive font */
+    width: 100%;
+    font-size: clamp(m.rem(28), 5vw, m.rem(45));
     font-weight: 500;
     letter-spacing: -0.625px;
     line-height: 1.2;
@@ -54,80 +52,49 @@
     width: 100%;
     gap: m.rem(16);
     justify-content: center;
-
-    /* Dropdown */
-    .projectsDropdown {
-      position: relative;
-      width: 20rem;
-      height: 3rem;
-      padding: m.rem(8);
-      color: v.$white;
-      padding: m.rem(10);
-      border: none;
-      font-size: 1.3rem;
-      font-family: sans-serif;
-      background-color: #252321;
-
-      backdrop-filter: blur(25px);
-      border-radius: m.rem(24);
-      transition: all 0.3s ease;
-
-      &:focus {
-        border-color: v.$primary-color;
-      }
-    }
-
-    /* Tabs */
   }
-}
-
-/* Separator */
-.separator {
-  border-top: 1px solid v.$gray;
-  margin-top: m.rem(24);
 }
 
 /* =========================== */
-/* RESPONSIVENESS              */
+/* 📌 MOBILE VIEW (UNDER 500px) */
 /* =========================== */
-
-/* Tablet View */
-
-@include m.respond-to("tablet") {
-  .projectsControl {
-    margin-top: 20%;
-    margin-bottom: 2%;
-    align-self: center;
-    height: 15vh;
-    z-index: 2;
-  }
-
-  .projectsTitleBox {
-    .projectsTitle {
-      font-size: clamp(m.rem(24), 4vw, m.rem(40));
-      text-align: center;
-    }
-  }
-
-  .projectsSelectorBox {
-    .projectsSelector {
-      justify-content: center; /* Center tabs on tablet */
-    }
-  }
-}
-
-/* Mobile View */
-@include m.respond-to("mobile") {
-  .projectsControl {
-    margin-top: 20%;
-    margin-bottom: 2%;
-    align-self: center;
-    height: 15vh;
-    z-index: 1;
-  }
-  .gridItem {
+.mobileProjectsControl {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 13vh;
+  width: 100%;
+  background: v.$black;
+  padding: m.rem(16);
+  box-sizing: border-box;
+  .mobileProjectsTitleBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     width: 100%;
-    height: auto;
-    aspect-ratio: auto; /* Remove forced aspect ratio */
+    margin-top: 1rem;
+
+    h1 {
+      font-size: 1.6rem;
+      font-family: "Raleway", sans-serif;
+      color: rgba(255, 255, 255, 0.899);
+      font-weight: 400;
+    }
+  }
+
+  /* Position dropdown at the bottom */
+  .mobileProjectsSelectorWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: fixed; // Fix it at the bottom of the viewport
+    bottom: 2%; // Position it slightly above the edge
+    left: 50%;
+    transform: translateX(-50%); // Center horizontally
+    z-index: 15; // Ensure it's above other elements
   }
 }
+
+/* Title */

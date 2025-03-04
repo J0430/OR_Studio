@@ -43,7 +43,7 @@
 
 @include m.respond-to("tablet") {
   .contactPage {
-    margin-left: 0rem;
+    margin-left: 0rem !important;
     margin-top: 2rem;
     .content {
       height: 100vh;

@@ -2,6 +2,7 @@
 @use "@styles/partials/mixins" as m;
 
 .contactForm {
+  margin-top: 2rem;
   padding: 2rem;
   border-radius: 0.375rem;
   border: 0.0625rem #3d444db3 solid;
@@ -12,9 +13,8 @@
   flex-direction: column;
   gap: 1.5rem;
 
-  .logoWrapper {
-    display: flex;
-    justify-content: center;
+  img {
+    justify-self: left;
   }
 
   .formRow {
