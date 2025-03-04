@@ -37,7 +37,7 @@ export const PreloaderProvider = ({ children }) => {
   }, [imagesLoaded]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setIsPreloaderVisible(false), 4500);
+    const timeout = setTimeout(() => setIsPreloaderVisible(false), 3000);
     return () => clearTimeout(timeout);
   }, []);
 
