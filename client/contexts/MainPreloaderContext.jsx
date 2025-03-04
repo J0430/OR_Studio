@@ -31,13 +31,13 @@ export const PreloaderProvider = ({ children }) => {
 
   useEffect(() => {
     if (imagesLoaded >= totalImages) {
-      const timer = setTimeout(() => setIsPreloaderVisible(false), 4500);
+      const timer = setTimeout(() => setIsPreloaderVisible(false), 2500);
       return () => clearTimeout(timer);
     }
   }, [imagesLoaded]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setIsPreloaderVisible(false), 3000);
+    const timeout = setTimeout(() => setIsPreloaderVisible(false), 2500);
     return () => clearTimeout(timeout);
   }, []);
 
