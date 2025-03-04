@@ -40,16 +40,22 @@ const ProjectBanner = ({ images }) => {
   };
 
   // Keyboard Navigation
+  // Keyboard Navigation Fix
   const handleKeyDown = useCallback(
     (event) => {
-      if (event.key === "ArrowRight") {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        stopAutoPlay();
-      } else if (event.key === "ArrowLeft") {
-        setCurrentImageIndex(
-          (prevIndex) => (prevIndex - 1 + images.length) % images.length
-        );
-        stopAutoPlay();
+      if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+        event.preventDefault(); // ✅ Prevent browser default behavior
+        event.stopPropagation(); // ✅ Stop event bubbling to parent sections
+
+        if (event.key === "ArrowRight") {
+          setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+          stopAutoPlay();
+        } else if (event.key === "ArrowLeft") {
+          setCurrentImageIndex(
+            (prevIndex) => (prevIndex - 1 + images.length) % images.length
+          );
+          stopAutoPlay();
+        }
       }
     },
     [images.length]
@@ -104,24 +110,24 @@ const ProjectBanner = ({ images }) => {
             transition={{ duration: 0.3, ease: "easeInOut" }} // Smooth fade and blur transition
             className={styles.imageWrapper}>
             <DirectionalButton
-              direction="right"
-              width={3}
-              height={3}
-              onClick={() => {
-                setCurrentImageIndex(
-                  (prevIndex) => (prevIndex + 1) % images.length
-                );
-                stopAutoPlay();
-              }}
-            />
-            <BannerImage image={images[currentImageIndex]} />
-            <DirectionalButton
               direction="left"
               width={3}
               height={3}
               onClick={() => {
                 setCurrentImageIndex(
                   (prevIndex) => (prevIndex - 1 + images.length) % images.length
+                );
+                stopAutoPlay();
+              }}
+            />
+            <BannerImage image={images[currentImageIndex]} />
+            <DirectionalButton
+              direction="right"
+              width={3}
+              height={3}
+              onClick={() => {
+                setCurrentImageIndex(
+                  (prevIndex) => (prevIndex + 1) % images.length
                 );
                 stopAutoPlay();
               }}

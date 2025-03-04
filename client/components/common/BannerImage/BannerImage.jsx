@@ -8,7 +8,7 @@ const BannerImage = ({ image }) => {
       className={styles.imageWrapper}
       initial={{ opacity: 0.8 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      exit={{ opacity: 1 }}
       transition={{ duration: 0.2, ease: "easeOut" }}>
       <Image
         src={image}

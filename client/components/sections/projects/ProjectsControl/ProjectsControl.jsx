@@ -8,18 +8,38 @@ const ProjectsControl = ({
   selectedCategory = "",
   onCategorySelect = () => {},
 }) => {
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isMobile = useMediaQuery({ maxWidth: 500 });
 
   return (
-    <div className={styles.projectsControl}>
-      <div className={styles.projectsTitleBox}>
-        <h1 className={styles.projectsTitle}>Works</h1>
+    <div
+      className={
+        isMobile ? styles.mobileProjectsControl : styles.projectsControl
+      }>
+      <div
+        className={
+          isMobile ? styles.mobileProjectsTitleBox : styles.projectsTitleBox
+        }>
+        <h1
+          className={
+            isMobile ? styles.mobileProjectTitle : styles.projectsTitle
+          }>
+          Works
+        </h1>
       </div>
 
-      <div className={styles.projectsSelectorBox}>
-        <nav className={styles.projectsSelector}>
+      <div
+        className={
+          isMobile
+            ? styles.mobileProjectsSelectorWrapper
+            : styles.projectsSelectorBox
+        }>
+        <nav
+          className={
+            isMobile ? styles.mobileProjectsSelector : styles.projectsSelector
+          }>
           {isMobile ? (
             <DropdownMenu
+              arrowDirection="up"
               categories={categories}
               selectedCategory={selectedCategory}
               onCategorySelect={onCategorySelect}
@@ -36,8 +56,6 @@ const ProjectsControl = ({
           )}
         </nav>
       </div>
-
-      <div className={styles.separator} />
     </div>
   );
 };
