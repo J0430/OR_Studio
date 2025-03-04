@@ -1,9 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { preloaderLogos } from "@utils/globals";
 import { usePreloader } from "@contexts/MainPreloaderContext";
-import TypingEffect from "./TypingEffect/TypingEffect";
+import TypingEffect from "@components/common/TypingEffect/TypingEffect";
 import Image from "next/image";
-
 import styles from "./MainPreloader.module.scss";
 
 const MainPreloader = () => {
@@ -71,8 +70,8 @@ const MainPreloader = () => {
 
             <TypingEffect
               text="Architecture Visualization"
-              typingSpeed={50}
-              delay={2500}
+              typingSpeed={100}
+              delay={2000}
             />
           </motion.div>
         </motion.div>

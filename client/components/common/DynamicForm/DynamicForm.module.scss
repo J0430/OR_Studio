@@ -8,7 +8,7 @@
   border: 0.0625rem #3d444db3 solid;
   background-color: #151b23df;
   width: 100%;
-  max-width: 60%;
+
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -70,44 +70,16 @@
 /* ✅ RESPONSIVENESS WITH `respond-to` */
 /* ================================== */
 
-@include m.respond-to("small-mobile") {
+@include m.respond-to("tablet") {
   .contactForm {
-    max-width: 20rem;
-    padding: 1.2rem;
-  }
-
-  .contactTitle {
-    font-size: 1.2rem;
-  }
-
-  .formRow {
-    flex-direction: column;
-  }
-
-  .formGroup {
-    label {
-      font-size: 0.9rem;
-    }
-
-    .inputField {
-      font-size: 0.85rem;
-      padding: 0.5rem;
-    }
-  }
-
-  .submitButton {
-    font-size: 0.95rem;
+    width: 25rem;
   }
 }
 
 @include m.respond-to("mobile") {
   .contactForm {
-    max-width: 20rem;
-    padding: 1.5rem;
-  }
-
-  .contactTitle {
-    font-size: 1.3rem;
+    width: 20rem;
+    padding: 1rem;
   }
 
   .formRow {
@@ -128,25 +100,5 @@
   .submitButton {
     font-size: 1rem;
     padding: 0.7rem;
-  }
-}
-
-@include m.respond-to("tablet") {
-  .contactForm {
-    width: 35rem;
-  }
-
-  .formRow {
-    flex-direction: row;
-  }
-
-  .contactTitle {
-    font-size: 1.4rem;
-  }
-}
-
-@include m.respond-to("laptop") {
-  .contactForm {
-    width: 40rem;
   }
 }
