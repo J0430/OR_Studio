@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNav } from "@contexts/NavContext";
 import { usePreloader } from "@contexts/MainPreloaderContext";
-import { motion, AnimatePresence } from "framer-motion";
 import { logos } from "@utils/globals";
 import useClickOutside from "hooks/useClickOuside";
 import dynamic from "next/dynamic";
