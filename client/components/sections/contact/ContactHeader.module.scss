@@ -4,12 +4,18 @@
 .contactContainer {
   display: flex;
   flex-direction: column;
+  box-sizing: border-box; // ✅ Prevents layout issues across OS
 
   h2 {
     font-size: 2rem;
     font-weight: 500;
     color: white;
     margin-bottom: 0.2rem;
+
+    // ✅ Ensures smooth font rendering across different OS
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   p {
@@ -18,23 +24,45 @@
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 0.5rem;
     width: 90%;
+    line-height: 1.5;
+
+    // ✅ Prevents text rendering issues on Windows
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
+
+/* ========================= */
+/* ✅ MOBILE STYLES (Under 768px) */
+/* ========================= */
+
 .mobileContactContainer {
   display: flex;
   flex-direction: column;
-  height: 50vh !important;
   width: 75%;
   text-align: left !important;
   justify-self: left !important;
   margin-left: 6%;
   overflow-y: hidden;
+  box-sizing: border-box; // ✅ Prevents unexpected scaling issues
+
+  /* Prevents font resizing on mobile Safari */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 
   h2 {
     font-size: 1.3rem;
     font-weight: 500;
     color: white;
     margin-bottom: 0.2rem;
+
+    // ✅ Ensures consistent font appearance on different platforms
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   p {
@@ -43,5 +71,11 @@
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 0.5rem;
     width: 90%;
+    line-height: 1.4;
+
+    // ✅ Improves readability on Android & Windows
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
