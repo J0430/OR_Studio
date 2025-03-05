@@ -85,14 +85,6 @@ const DynamicForm = ({ schema, title, logo }) => {
                   }
                   placeholder="Enter your first name"
                 />
-                {errors.firstName && (
-                  <span
-                    className={
-                      isMobile ? styles.mobileErrorMessage : styles.errorMessage
-                    }>
-                    {errors.firstName.message}
-                  </span>
-                )}
               </div>
 
               <div
@@ -110,14 +102,6 @@ const DynamicForm = ({ schema, title, logo }) => {
                   }
                   placeholder="Enter your last name"
                 />
-                {errors.lastName && (
-                  <span
-                    className={
-                      isMobile ? styles.mobileErrorMessage : styles.errorMessage
-                    }>
-                    {errors.lastName.message}
-                  </span>
-                )}
               </div>
             </div>
           );
@@ -154,14 +138,6 @@ const DynamicForm = ({ schema, title, logo }) => {
                   }
                   placeholder={`Enter your ${fieldName.toLowerCase()}`}
                 />
-              )}
-              {errors[fieldName] && (
-                <span
-                  className={
-                    isMobile ? styles.mobileErrorMessage : styles.errorMessage
-                  }>
-                  {errors[fieldName].message}
-                </span>
               )}
             </div>
           )
