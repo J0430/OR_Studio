@@ -9,7 +9,7 @@ import * as yup from "yup";
 
 // ✅ Schema with correct field names
 const ContactSchema = yup.object().shape({
-  name: yup.string().required("Enter your first name").min(2, "Too short"),
+  firstName: yup.string().required("Enter your first name").min(2, "Too short"), // ✅ Change "name" to "firstName"
   lastName: yup.string().required("Enter your last name").min(2, "Too short"),
   email: yup.string().required("Enter your email").email("Invalid email"),
   phone: yup
