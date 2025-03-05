@@ -7,7 +7,7 @@
   box-sizing: border-box; // ✅ Prevents layout issues across OS
 
   h2 {
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 500;
     color: white;
     margin-bottom: 0.2rem;
@@ -19,7 +19,7 @@
   }
 
   p {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 0.3rem;
@@ -53,10 +53,10 @@
   text-size-adjust: 100%;
 
   h2 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: white;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.1rem;
 
     // ✅ Ensures consistent font appearance on different platforms
     text-rendering: optimizeLegibility;
