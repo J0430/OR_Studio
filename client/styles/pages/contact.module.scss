@@ -42,7 +42,7 @@
 /* ✅ Input Fields */
 .mobileContactPage {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100dvh;
   width: 100vw;
   background-image: url("https://res.cloudinary.com/dugudxkyu/image/upload/v1728046515/Offir%20projects/Contact%20us/contact_us_uphao8.jpg");
@@ -57,7 +57,7 @@
   overflow-y: hidden !important;
 
   @supports not (height: 100dvh) {
-    .contactContainer {
+    .mobileContactContainer {
       height: calc(
         100vh - env(safe-area-inset-bottom)
       ); // Fallback for older browsers
