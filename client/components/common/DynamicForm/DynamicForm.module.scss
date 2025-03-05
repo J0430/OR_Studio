@@ -137,14 +137,14 @@
 /* ✅ MOBILE STYLES (Under 768px)   */
 /* ================================ */
 .mobileContactForm {
+  margin-top: 0.2% !important;
   padding: 1rem;
   width: 90%;
   text-align-last: left !important;
   box-sizing: border-box; // ✅ Prevents unexpected scaling issues
-  overflow-y: hidden !important;
 
   .logoWrapper {
-    justify-self: left !important;
+    justify-items: left !important;
   }
 
   .mobileFormGroup {
@@ -168,6 +168,7 @@
 
 /* ✅ MOBILE SUBMIT BUTTON */
 .mobileSubmitButton {
+  align-self: left !important;
   padding: 0.6rem;
   width: 30%;
   span {
