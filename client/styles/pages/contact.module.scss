@@ -1,7 +1,7 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-.contactPage .mobileContactPage {
+.contactPage {
   display: flex;
   flex-direction: row;
   height: 100vh;
