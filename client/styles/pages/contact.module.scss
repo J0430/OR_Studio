@@ -1,7 +1,7 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-.contactPage {
+.contactPage .mobileContactPage {
   display: flex;
   flex-direction: row;
   height: 100vh;
@@ -44,15 +44,10 @@
   display: flex;
   flex-direction: column;
   height: 100dvh;
-  width: 100vw;
   background-image: url("https://res.cloudinary.com/dugudxkyu/image/upload/v1728046515/Offir%20projects/Contact%20us/contact_us_uphao8.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  z-index: 0;
   padding-top: 1rem;
   overflow-y: hidden !important;
 
@@ -67,7 +62,7 @@
     padding: 1rem;
     color: rgba(255, 255, 255, 0.944);
     text-align: -webkit-center;
-    align-self: center;
+    align-self: left;
     overflow: hidden;
     z-index: 10;
   }
