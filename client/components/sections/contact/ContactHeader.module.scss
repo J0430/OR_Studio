@@ -23,10 +23,12 @@
 .mobileContactContainer {
   display: flex;
   flex-direction: column;
+  height: 50vh !important;
   width: 75%;
-  text-align: left;
-  justify-self: left;
+  text-align: left !important;
+  justify-self: left !important;
   margin-left: 6%;
+  overflow-y: hidden;
 
   h2 {
     font-size: 1.3rem;

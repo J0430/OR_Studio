@@ -119,7 +119,10 @@
 .mobileContactForm {
   padding: 1rem;
   width: 90%;
-  text-align-last: left;
+  text-align-last: left !important;
+  img {
+    justify-self: left !important;
+  }
   .mobileFormGroup {
     label {
       font-size: 0.9rem;
