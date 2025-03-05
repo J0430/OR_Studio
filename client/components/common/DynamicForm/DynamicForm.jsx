@@ -49,8 +49,8 @@ const DynamicForm = ({ schema, title, logo }) => {
         <div className={styles.logoWrapper}>
           <Image
             src={logo}
-            width={isMobile ? 100 : 125}
-            height={isMobile ? 100 : 125}
+            width={isMobile ? 80 : 100}
+            height={isMobile ? 80 : 100}
             alt="Logo"
           />
         </div>
