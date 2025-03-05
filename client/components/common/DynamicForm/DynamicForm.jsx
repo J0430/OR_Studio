@@ -1,13 +1,14 @@
-import { useForm } from "react-hook-form";
+import { useMediaQuery } from "react-responsive";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { useMediaQuery } from "react-responsive";
 import styles from "./DynamicForm.module.scss";
 import Image from "next/image";
 
 const DynamicForm = ({ schema, title, logo }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isFormLess500px = useMediaQuery({ maxWidth: 469 }); // ✅ Column layout for very small screens
 
   const {
     register,
@@ -40,11 +41,18 @@ const DynamicForm = ({ schema, title, logo }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.contactForm}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={isMobile ? styles.mobileContactForm : styles.contactForm}>
       {/* ✅ Logo */}
       {logo && (
         <div className={styles.logoWrapper}>
-          <Image src={logo} width={125} height={125} alt="Logo" />
+          <Image
+            src={logo}
+            width={isMobile ? 100 : 125}
+            height={isMobile ? 100 : 125}
+            alt="Logo"
+          />
         </div>
       )}
 
@@ -57,32 +65,56 @@ const DynamicForm = ({ schema, title, logo }) => {
 
         if (isFullNameRow && !isMobile) {
           return (
-            <div className={styles.formRow} key={index}>
-              <div className={styles.formGroup}>
+            <div
+              className={
+                isFormLess500px ? styles.columnFormRow : styles.formRow
+              } // ✅ Switch to column if screen is <500px
+              key="fullNameRow">
+              <div
+                className={
+                  isMobile ? styles.mobileFormGroup : styles.formGroup
+                }>
                 <label>First Name</label>
                 <input
                   type="text"
                   {...register("firstName")}
-                  className={`${styles.inputField} ${errors.firstName ? styles.error : ""}`}
+                  className={
+                    isMobile
+                      ? `${styles.mobileInputField} ${errors.firstName ? styles.error : ""}`
+                      : `${styles.inputField} ${errors.firstName ? styles.error : ""}`
+                  }
                   placeholder="Enter your first name"
                 />
                 {errors.firstName && (
-                  <span className={styles.errorMessage}>
+                  <span
+                    className={
+                      isMobile ? styles.mobileErrorMessage : styles.errorMessage
+                    }>
                     {errors.firstName.message}
                   </span>
                 )}
               </div>
 
-              <div className={styles.formGroup}>
+              <div
+                className={
+                  isMobile ? styles.mobileFormGroup : styles.formGroup
+                }>
                 <label>Last Name</label>
                 <input
                   type="text"
                   {...register("lastName")}
-                  className={`${styles.inputField} ${errors.lastName ? styles.error : ""}`}
+                  className={
+                    isMobile
+                      ? `${styles.mobileInputField} ${errors.lastName ? styles.error : ""}`
+                      : `${styles.inputField} ${errors.lastName ? styles.error : ""}`
+                  }
                   placeholder="Enter your last name"
                 />
                 {errors.lastName && (
-                  <span className={styles.errorMessage}>
+                  <span
+                    className={
+                      isMobile ? styles.mobileErrorMessage : styles.errorMessage
+                    }>
                     {errors.lastName.message}
                   </span>
                 )}
@@ -93,14 +125,20 @@ const DynamicForm = ({ schema, title, logo }) => {
 
         return (
           !isLastName && (
-            <div className={styles.formGroup} key={index}>
+            <div
+              className={isMobile ? styles.mobileFormGroup : styles.formGroup}
+              key={index}>
               <label>
                 {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}
               </label>
               {isMessage ? (
                 <textarea
                   {...register(fieldName)}
-                  className={`${styles.inputField} ${errors[fieldName] ? styles.error : ""}`}
+                  className={
+                    isMobile
+                      ? `${styles.mobileInputField} ${errors[fieldName] ? styles.error : ""}`
+                      : `${styles.inputField} ${errors[fieldName] ? styles.error : ""}`
+                  }
                   placeholder="Enter your message"
                   rows={4}
                   style={{ resize: "none" }}
@@ -109,12 +147,19 @@ const DynamicForm = ({ schema, title, logo }) => {
                 <input
                   type="text"
                   {...register(fieldName)}
-                  className={`${styles.inputField} ${errors[fieldName] ? styles.error : ""}`}
+                  className={
+                    isMobile
+                      ? `${styles.mobileInputField} ${errors[fieldName] ? styles.error : ""}`
+                      : `${styles.inputField} ${errors[fieldName] ? styles.error : ""}`
+                  }
                   placeholder={`Enter your ${fieldName.toLowerCase()}`}
                 />
               )}
               {errors[fieldName] && (
-                <span className={styles.errorMessage}>
+                <span
+                  className={
+                    isMobile ? styles.mobileErrorMessage : styles.errorMessage
+                  }>
                   {errors[fieldName].message}
                 </span>
               )}
@@ -126,11 +171,18 @@ const DynamicForm = ({ schema, title, logo }) => {
       {/* ✅ Submit Button */}
       <motion.button
         type="submit"
-        className={styles.submitButton}
-        whileHover={{ scale: 1.05 }}
+        className={isMobile ? styles.mobileSubmitButton : styles.submitButton}
         whileTap={{ scale: 0.95 }}>
-        {isSubmitting ? "Sending..." : "Send"}
+        <span> {isSubmitting ? "Sending..." : "Send"}</span>
       </motion.button>
+
+      {/* ✅ Server Error Handling */}
+      {serverError && <p className={styles.errorMessage}>{serverError}</p>}
+
+      {/* ✅ Success Message */}
+      {success && (
+        <p className={styles.successMessage}>Message sent successfully!</p>
+      )}
     </form>
   );
 };

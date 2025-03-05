@@ -4,36 +4,42 @@
 .contactContainer {
   display: flex;
   flex-direction: column;
+
   h2 {
-    font-size: 1rem;
+    font-size: 2rem;
     font-weight: 500;
     color: white;
     margin-bottom: 0.2rem;
   }
 
   p {
-    font-size: 0.8rem;
+    font-size: 1.3rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 0.5rem;
     width: 90%;
   }
 }
+.mobileContactContainer {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  text-align: left;
+  justify-self: left;
+  margin-left: 6%;
 
-@include m.respond-to("small-mobile") {
-  .contactContainer {
-    width: 60%;
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 0.2rem;
   }
-}
 
-@include m.respond-to("mobile") {
-  .contactContainer {
-    width: 60%;
-  }
-}
-
-@include m.respond-to("tablet") {
-  .contactContainer {
-    width: 60%;
+  p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+    width: 90%;
   }
 }
