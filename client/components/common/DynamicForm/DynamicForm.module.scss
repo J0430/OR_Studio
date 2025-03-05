@@ -18,7 +18,7 @@
   box-sizing: border-box; // ✅ Prevents layout inconsistencies
 
   .logoWrapper {
-    justify-self: left;
+    justify-self: left !important;
   }
 
   /* ✅ STACK FIRST NAME & LAST NAME IN A COLUMN UNDER 469PX */
@@ -143,20 +143,16 @@
   text-align-last: left !important;
   box-sizing: border-box; // ✅ Prevents unexpected scaling issues
 
-  .logoWrapper {
-    justify-items: left !important;
-  }
-
   .mobileFormGroup {
+    margin-bottom: -0.5rem;
     label {
       font-size: 0.9rem;
-      margin-bottom: 0.1rem;
     }
 
     .mobileInputField {
       padding: 0.6rem;
       font-size: 0.8rem;
-      margin-top: 0.2rem;
+      margin-top: 0.1rem;
     }
 
     .mobileFormRow {
@@ -171,6 +167,7 @@
   align-self: left !important;
   padding: 0.6rem;
   width: 30%;
+  margin-top: 0.1rem;
   span {
     font-size: 0.9em;
   }
