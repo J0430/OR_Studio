@@ -22,6 +22,7 @@ const MenuOutlined = dynamic(() => import("@ant-design/icons/MenuOutlined"), {
 });
 
 const Header = () => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const { isNavOpen, setIsNavOpen } = useNav();
   const { isPreloaderVisible = false } = usePreloader();
 
@@ -43,8 +44,8 @@ const Header = () => {
             src={logos[3]}
             alt="OR Studio Logo"
             className={styles.logo}
-            width={40}
-            height={45}
+            width={isMobile ? 25 : 40}
+            height={isMobile ? 30 : 45}
             priority
             onClick={() => setIsNavOpen(false)}
           />
@@ -55,7 +56,9 @@ const Header = () => {
           whileTap={{ scale: 0.9 }}
           className={`${styles.menuButton} ${isNavOpen ? styles.hidden : ""}`}
           onClick={() => setIsNavOpen((prev) => !prev)}>
-          {!isNavOpen ? <MenuOutlined key="menu" /> : null}
+          {!isNavOpen ? (
+            <MenuOutlined key="menu" style={{ fontSize: isMobile ? 23 : 40 }} />
+          ) : null}
         </motion.button>
       </div>
 
