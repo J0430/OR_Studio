@@ -40,9 +40,9 @@
 .mobileContactContainer {
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: 89%;
   text-align: left !important;
-  justify-self: left !important;
+  align-self: anchor-center;
   overflow-y: hidden;
   box-sizing: border-box !important; // ✅ Prevents unexpected scaling issues
 

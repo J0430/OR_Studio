@@ -16,6 +16,9 @@
   z-index: 0;
   overflow: hidden;
 }
+.mobileContactPage {
+  justify-content: center;
+}
 
 .content,
 .mobileContent {
@@ -29,9 +32,13 @@
 }
 
 .mobileContent {
+  display: flex;
+  flex-direction: column;
   width: 90%;
-
-  margin-left: 5%;
+  min-width: 20rem;
+  margin-left: 0;
+  justify-content: center;
+  text-align: -webkit-center;
 }
 
 /* ✅ FIXED ERROR STYLING */
