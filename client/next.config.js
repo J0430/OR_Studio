@@ -9,6 +9,7 @@ const isProd = process.env.NODE_ENV === "production";
 const nextConfig = {
   experimental: {
     esmExternals: true,
+    turbo: true,
   },
   output: "export",
   reactStrictMode: true,
