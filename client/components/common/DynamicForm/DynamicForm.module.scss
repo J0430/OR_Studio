@@ -18,6 +18,8 @@
   box-sizing: border-box;
 }
 .mobileContactForm {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   text-align: -webkit-left;
 }
 /* ✅ Default row for desktop */
@@ -42,7 +44,8 @@
 }
 
 /* ✅ Form Group Styling */
-.formGroup {
+.formGroup,
+.mobileContactForm {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -90,7 +93,7 @@
   margin-top: 1rem;
   font-size: 1.1rem;
   padding: 0.6rem;
-  width: 25%;
+  width: 40%;
   border: none;
   display: flex;
   justify-content: center;

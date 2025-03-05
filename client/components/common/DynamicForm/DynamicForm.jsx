@@ -94,7 +94,7 @@ const DynamicForm = ({ schema, title, logo }) => {
                   {...register(fieldName)}
                   className={`${styles.inputField} ${errors[fieldName] ? styles.error : ""}`}
                   placeholder="Enter your message"
-                  rows={3}
+                  rows={isMobile ? 2 : 3}
                 />
               ) : (
                 <input
