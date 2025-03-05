@@ -43,9 +43,8 @@
   width: 75%;
   text-align: left !important;
   justify-self: left !important;
-  margin-left: 6%;
   overflow-y: hidden;
-  box-sizing: border-box; // ✅ Prevents unexpected scaling issues
+  box-sizing: border-box !important; // ✅ Prevents unexpected scaling issues
 
   /* Prevents font resizing on mobile Safari */
   -webkit-text-size-adjust: 100%;
