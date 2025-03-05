@@ -50,7 +50,7 @@ const DynamicForm = ({ schema, title, logo }) => {
           <Image
             src={logo}
             width={isMobile ? 80 : 100}
-            height={isMobile ? 80 : 100}
+            height={isMobile ? 100 : 100}
             alt="Logo"
           />
         </div>
@@ -58,48 +58,33 @@ const DynamicForm = ({ schema, title, logo }) => {
 
       {/* ✅ Loop through schema fields */}
       {Object.keys(schema.fields).map((fieldName, index, fields) => {
-        const isLastName = fieldName.toLowerCase().includes("last");
-        const isFirstName = fieldName.toLowerCase().includes("first");
+        const isLastName = fieldName.toLowerCase() === "lastName";
+        const isFirstName = fieldName.toLowerCase() === "name";
         const isMessage = fieldName.toLowerCase() === "message";
         const isFullNameRow = isFirstName && fields.includes("lastName");
 
-        if (isFullNameRow && !isMobile) {
+        // ✅ Render first & last name in a row unless screen is < 500px
+        if (isFullNameRow && !isFormLess500px) {
           return (
-            <div
-              className={
-                isFormLess500px ? styles.columnFormRow : styles.formRow
-              } // ✅ Switch to column if screen is <500px
-              key="fullNameRow">
-              <div
-                className={
-                  isMobile ? styles.mobileFormGroup : styles.formGroup
-                }>
-                <label>First Name</label>
+            <div className={styles.formRow} key="fullNameRow">
+              {/* First Name */}
+              <div className={styles.formGroup}>
+                <label>Name</label>
                 <input
                   type="text"
-                  {...register("firstName")}
-                  className={
-                    isMobile
-                      ? `${styles.mobileInputField} ${errors.firstName ? styles.error : ""}`
-                      : `${styles.inputField} ${errors.firstName ? styles.error : ""}`
-                  }
+                  {...register("name")}
+                  className={`${styles.inputField} ${errors.firstName ? styles.error : ""}`}
                   placeholder="Enter your first name"
                 />
               </div>
 
-              <div
-                className={
-                  isMobile ? styles.mobileFormGroup : styles.formGroup
-                }>
+              {/* Last Name */}
+              <div className={styles.formGroup}>
                 <label>Last Name</label>
                 <input
                   type="text"
                   {...register("lastName")}
-                  className={
-                    isMobile
-                      ? `${styles.mobileInputField} ${errors.lastName ? styles.error : ""}`
-                      : `${styles.inputField} ${errors.lastName ? styles.error : ""}`
-                  }
+                  className={`${styles.inputField} ${errors.lastName ? styles.error : ""}`}
                   placeholder="Enter your last name"
                 />
               </div>
@@ -107,22 +92,32 @@ const DynamicForm = ({ schema, title, logo }) => {
           );
         }
 
+        // ✅ If screen is small (<500px), render Last Name like the others
+        if (isLastName && isFormLess500px) {
+          return (
+            <div className={styles.formGroup} key={index}>
+              <label>Last Name</label>
+              <input
+                type="text"
+                {...register("lastName")}
+                className={`${styles.inputField} ${errors.lastName ? styles.error : ""}`}
+                placeholder="Enter your last name"
+              />
+            </div>
+          );
+        }
+
+        // ✅ Render other fields normally (message, email, etc.)
         return (
           !isLastName && (
-            <div
-              className={isMobile ? styles.mobileFormGroup : styles.formGroup}
-              key={index}>
+            <div className={styles.formGroup} key={index}>
               <label>
                 {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}
               </label>
               {isMessage ? (
                 <textarea
                   {...register(fieldName)}
-                  className={
-                    isMobile
-                      ? `${styles.mobileInputField} ${errors[fieldName] ? styles.error : ""}`
-                      : `${styles.inputField} ${errors[fieldName] ? styles.error : ""}`
-                  }
+                  className={`${styles.inputField} ${errors[fieldName] ? styles.error : ""}`}
                   placeholder="Enter your message"
                   rows={4}
                   style={{ resize: "none" }}
@@ -131,11 +126,7 @@ const DynamicForm = ({ schema, title, logo }) => {
                 <input
                   type="text"
                   {...register(fieldName)}
-                  className={
-                    isMobile
-                      ? `${styles.mobileInputField} ${errors[fieldName] ? styles.error : ""}`
-                      : `${styles.inputField} ${errors[fieldName] ? styles.error : ""}`
-                  }
+                  className={`${styles.inputField} ${errors[fieldName] ? styles.error : ""}`}
                   placeholder={`Enter your ${fieldName.toLowerCase()}`}
                 />
               )}

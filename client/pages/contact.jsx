@@ -7,8 +7,9 @@ import ContactHeader from "@components/sections/contact/ContactHeader";
 import { logos } from "@utils/globals";
 import * as yup from "yup";
 
+// ✅ Schema with correct field names
 const ContactSchema = yup.object().shape({
-  firstname: yup.string().required("Enter your name").min(2, "Too short"),
+  name: yup.string().required("Enter your first name").min(2, "Too short"),
   lastName: yup.string().required("Enter your last name").min(2, "Too short"),
   email: yup.string().required("Enter your email").email("Invalid email"),
   phone: yup
@@ -23,6 +24,7 @@ const ContactSchema = yup.object().shape({
 
 export default function ContactPage() {
   const isMobile = useMediaQuery({ maxWidth: 768 });
+
   return (
     <>
       {/* ✅ SEO Metadata */}

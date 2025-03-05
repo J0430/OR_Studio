@@ -1,7 +1,8 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-.contactPage {
+.contactPage,
+.mobileContactPage {
   display: flex;
   flex-direction: row;
   height: 100vh;
@@ -10,20 +11,62 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  position: relative;
   justify-content: flex-start;
+  align-items: center;
   z-index: 0;
   overflow: hidden;
+}
 
-  .content {
-    color: rgba(255, 255, 255, 0.944);
-    width: 40%;
-    height: 80dvh;
-    align-self: center;
-    text-align: left;
-    overflow: visible;
-    margin-left: 10rem;
-    z-index: 10;
+.content,
+.mobileContent {
+  color: rgba(255, 255, 255, 0.944);
+  width: 40%;
+  min-width: 32rem;
+  text-align: left;
+  margin-left: 10rem;
+  z-index: 10;
+  overflow: visible;
+}
+
+.mobileContent {
+  width: 90%;
+
+  margin-left: 5%;
+}
+
+/* ✅ FIXED ERROR STYLING */
+.inputField,
+.mobileInputField {
+  background: rgba(0, 0, 0, 0.68);
+  color: white;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.3);
+  padding: 0.8rem;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  margin-top: 0.2rem;
+  transition:
+    border 0.3s ease-in-out,
+    color 0.3s ease-in-out;
+
+  /* ✅ Prevent Autofill Background */
+  &:-webkit-autofill {
+    background-color: transparent !important;
+    box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.9) inset !important;
+    -webkit-text-fill-color: white !important;
+  }
+
+  &:focus {
+    border-color: #58aae9;
+    outline: none;
+  }
+
+  /* ✅ When error occurs */
+  &.error {
+    border-color: rgba(255, 0, 0, 0.7);
+  }
+
+  &.error::placeholder {
+    color: rgba(255, 0, 0, 0.7);
   }
 }
 .contactPage::after {
@@ -33,39 +76,10 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-image:
-    linear-gradient(to right, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 90%),
-    linear-gradient(to left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 8%);
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.85) 45%,
+    rgba(0, 0, 0, 0) 100%
+  );
   z-index: 1;
-}
-
-/* ✅ Input Fields */
-.mobileContactPage {
-  display: flex;
-  flex-direction: column;
-  height: 100dvh;
-  background-image: url("https://res.cloudinary.com/dugudxkyu/image/upload/v1728046515/Offir%20projects/Contact%20us/contact_us_uphao8.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  padding-top: 1rem;
-  overflow-y: hidden !important;
-
-  @supports not (height: 100dvh) {
-    .mobileContactContainer {
-      height: calc(
-        100vh - env(safe-area-inset-bottom)
-      ); // Fallback for older browsers
-    }
-  }
-  .mobileContent {
-    color: rgba(255, 255, 255, 0.944);
-    text-align: -webkit-center;
-    align-self: left;
-    overflow: hidden;
-    z-index: 10;
-  }
-}
-.mombileContactPage::after {
-  background-image: none;
 }
