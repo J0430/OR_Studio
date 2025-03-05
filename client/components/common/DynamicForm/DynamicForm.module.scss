@@ -1,47 +1,19 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-/* ================================ */
-/* ✅ GENERAL FORM STYLES           */
-/* ================================ */
 .contactForm,
 .mobileContactForm {
-  margin-top: 1rem;
-  padding: 1.5rem;
-  padding-bottom: 0.8rem;
-  padding-bottom: 0.8rem;
+  padding: 2rem;
   border-radius: 0.375rem;
   border: 0.0625rem solid rgba(61, 68, 77, 0.7);
   background-color: rgba(21, 27, 35, 0.87);
   width: 90%;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  box-sizing: border-box; // ✅ Prevents layout inconsistencies
+  gap: 0.5rem;
+  box-sizing: border-box;
 
-  .logoWrapper {
-    justify-self: flex-start;
-  }
-
-  /* ✅ STACK FIRST NAME & LAST NAME IN A COLUMN UNDER 469PX */
-  .columnFormRow {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  /* ✅ DEFAULT ROW LAYOUT FOR LARGER SCREENS */
-  .formRow,
-  .mobileFormRow {
-    display: flex;
-    gap: 1rem;
-  }
-
-  /* ================================ */
-  /* ✅ FORM INPUTS & LABELS          */
-  /* ================================ */
-  .formGroup,
-  .mobileFormGroup {
+  .formGroup {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -51,31 +23,19 @@
       font-size: 1rem;
       font-weight: 500;
       color: rgba(255, 255, 255, 0.8);
-
-      /* ✅ Ensures smooth font rendering across OS */
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      margin-bottom: 0.1rem;
     }
 
-    .inputField,
-    .mobileInputField {
-      margin-left: -0.2rem;
-      margin-bottom: -1rem;
+    .inputField {
       background: rgba(0, 0, 0, 0.68);
       color: white;
-      border: 0.0625rem solid rgba(61, 68, 77, 0.7);
+      border: 0.0625rem solid rgba(255, 255, 255, 0.3);
       padding: 0.8rem;
       border-radius: 0.375rem;
       font-size: 1rem;
-      margin-top: 0.2rem;
-      transition: border 0.3s ease-in-out;
-      box-sizing: border-box;
-
-      &::placeholder {
-        color: rgba(255, 255, 255, 0.5); // Default placeholder color
-        transition: color 0.3s ease-in-out;
-      }
+      transition:
+        border 0.3s ease-in-out,
+        color 0.3s ease-in-out;
 
       &:focus {
         border-color: #58aae9;
@@ -83,32 +43,41 @@
       }
 
       &.error {
-        border-color: rgba(
-          255,
-          0,
-          0,
-          0.541
-        ); // Change border color to red when error
+        border-color: rgba(255, 0, 0, 0.7);
       }
 
-      /* ✅ Modify Placeholder Color on Error */
       &.error::placeholder {
-        color: rgba(
-          255,
-          0,
-          0,
-          0.763
-        ); // Change placeholder color to red when error occurs
+        color: rgba(255, 0, 0, 0.7);
       }
     }
 
-    /* ✅ ERROR MESSAGE STYLING */
+    /* ✅ Textarea Styling */
+    textarea {
+      min-height: 150px;
+      resize: none;
+      transition: all 0.3s ease-in-out;
+
+      /* ✅ When screen is in mobile view, reduce height */
+      @media (max-width: 768px) {
+        max-height: 100px;
+      }
+    }
   }
 }
 
-/* ================================ */
-/* ✅ SUBMIT BUTTON                 */
-/* ================================ */
+/* ✅ Mobile Form Adjustments */
+.mobileContactForm {
+  padding: 1rem;
+  width: 95%;
+  text-align-last: left !important;
+  box-sizing: border-box;
+
+  textarea {
+    min-height: 25px !important;
+  }
+}
+
+/* ✅ Submit Button */
 .submitButton,
 .mobileSubmitButton {
   margin-top: 0.7%;
@@ -129,7 +98,6 @@
   span {
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
-    z-index: 1000 !important;
   }
 
   &:hover {
@@ -137,45 +105,5 @@
     span {
       color: black;
     }
-  }
-}
-
-/* ================================ */
-/* ✅ MOBILE STYLES (Under 768px)   */
-/* ================================ */
-.mobileContactForm {
-  margin-top: 0.2% !important;
-  padding: 1rem;
-  width: 90%;
-  text-align-last: left !important;
-  box-sizing: border-box; // ✅ Prevents unexpected scaling issues
-
-  .mobileFormGroup {
-    margin-bottom: 0;
-    label {
-      font-size: 1rem;
-    }
-
-    .mobileInputField {
-      padding: 0.7rem;
-      font-size: 0.8rem;
-      margin-top: 0;
-    }
-
-    .mobileFormRow {
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-  }
-}
-
-/* ✅ MOBILE SUBMIT BUTTON */
-.mobileSubmitButton {
-  align-self: left !important;
-  padding: 0.6rem;
-  width: 30%;
-  margin-top: 0.1rem;
-  span {
-    font-size: 0.9em;
   }
 }
