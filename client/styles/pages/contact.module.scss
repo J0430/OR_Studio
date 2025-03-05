@@ -43,7 +43,7 @@
 .mobileContactPage {
   display: flex;
   flex-direction: row;
-  height: 100vhd;
+  height: 100dvh;
   width: 100vw;
   background-image: url("https://res.cloudinary.com/dugudxkyu/image/upload/v1728046515/Offir%20projects/Contact%20us/contact_us_uphao8.jpg");
   background-size: cover;
@@ -56,6 +56,13 @@
   padding-top: 1rem;
   overflow-y: hidden !important;
 
+  @supports not (height: 100dvh) {
+    .contactContainer {
+      height: calc(
+        100vh - env(safe-area-inset-bottom)
+      ); // Fallback for older browsers
+    }
+  }
   .mobileContent {
     padding: 1rem;
     color: rgba(255, 255, 255, 0.944);
