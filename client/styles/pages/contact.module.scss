@@ -1,7 +1,11 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-.contactPage {
+/* ================================ */
+/* ✅ DESKTOP & MOBILE LAYOUT       */
+/* ================================ */
+.contactPage,
+.mobileContactPage {
   display: flex;
   flex-direction: row;
   height: 100vh;
@@ -15,63 +19,48 @@
   z-index: 0;
   overflow: hidden;
 
-  .content {
-    color: rgba(255, 255, 255, 0.944);
-    width: 40%;
-    height: 65vh;
-    align-self: center;
-    text-align: left;
-    overflow: visible;
-    margin-left: 10rem;
-    z-index: 10;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image:
+      linear-gradient(to right, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 90%),
+      linear-gradient(to left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 8%);
+    z-index: 1;
   }
 }
-.contactPage::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image:
-    linear-gradient(to right, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 90%),
-    linear-gradient(to left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 8%);
-  z-index: 1;
-}
 
-/* ✅ Input Fields */
+/* ✅ FIXED: Remove Background for Mobile */
 .mobileContactPage {
-  display: flex;
-  flex-direction: row;
-  height: 100dvh;
-  width: 100vw;
-  background-image: url("https://res.cloudinary.com/dugudxkyu/image/upload/v1728046515/Offir%20projects/Contact%20us/contact_us_uphao8.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  z-index: 0;
-  padding-top: 1rem;
-  overflow-y: hidden !important;
-
-  @supports not (height: 100dvh) {
-    .contactContainer {
-      height: calc(
-        100vh - env(safe-area-inset-bottom)
-      ); // Fallback for older browsers
-    }
-  }
-  .mobileContent {
-    padding: 1rem;
-    color: rgba(255, 255, 255, 0.944);
-    text-align: -webkit-center;
-    align-self: center;
-    overflow: hidden;
-    z-index: 10;
+  &::after {
+    background-image: none;
   }
 }
-.mombileContactPage::after {
-  background-image: none;
+
+/* ================================ */
+/* ✅ CONTENT AREA                 */
+/* ================================ */
+.content {
+  color: rgba(255, 255, 255, 0.944);
+  width: 40%;
+  height: 65vh;
+  align-self: left;
+  text-align: left;
+  overflow: visible;
+  margin-left: 10rem;
+  z-index: 10;
+}
+
+/* ✅ FIXED: Mobile Content Adjustments */
+.mobileContent {
+  flex-direction: column;
+  display: flex;
+  align-self: center;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  width: 100%;
+  margin-left: 0;
 }
