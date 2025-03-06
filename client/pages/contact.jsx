@@ -1,12 +1,18 @@
+import * as yup from "yup";
 import { useMediaQuery } from "react-responsive";
 import { motion } from "framer-motion";
+import { logos } from "@utils/globals";
 import Head from "next/head";
 import styles from "@styles/pages/contact.module.scss";
-import DynamicForm from "@components/common/DynamicForm/DynamicForm";
-import ContactHeader from "@components/sections/contact/ContactHeader";
-import { logos } from "@utils/globals";
-import * as yup from "yup";
+import dynamic from "next/dynamic";
 
+// Dynamic imports
+const ContactHeader = dynamic(
+  () => import("@components/sections/contact/ContactHeader")
+);
+const DynamicForm = dynamic(
+  () => import("@components/common/DynamicForm/DynamicForm")
+);
 // ✅ Schema with correct field names
 const ContactSchema = yup.object().shape({
   firstName: yup.string().required("Enter your first name").min(2, "Too short"), // ✅ Change "name" to "firstName"
