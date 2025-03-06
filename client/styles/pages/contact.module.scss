@@ -8,6 +8,7 @@
   height: 100dvh;
   width: 100vw;
   background-image: url("https://res.cloudinary.com/dugudxkyu/image/upload/v1728046515/Offir%20projects/Contact%20us/contact_us_uphao8.jpg");
+  background-position: 10% left;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -23,9 +24,11 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-image:
-      linear-gradient(to right, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 90%),
-      linear-gradient(to left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 8%);
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.9) 35%,
+      rgba(0, 0, 0, 0) 90%
+    );
     z-index: 1;
   }
   .content {
@@ -59,9 +62,9 @@
   flex-direction: column;
   display: flex;
   align-self: center;
-  padding-top: 1.1rem;
-  padding-right: 2rem;
-  padding-left: 2rem;
+  padding-top: 1.4rem;
+  padding-right: 1.2rem;
+  padding-left: 1.2rem;
   width: 100%;
   margin-left: 0;
 }
