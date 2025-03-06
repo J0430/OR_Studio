@@ -28,6 +28,19 @@
       linear-gradient(to left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 8%);
     z-index: 1;
   }
+  .content {
+    display: flex;
+    flex-direction: column;
+    color: rgba(255, 255, 255, 0.944);
+    width: 45%;
+    height: 65dvh;
+    align-self: center;
+    align-self: left;
+    text-align: left;
+    overflow: visible;
+    margin-left: 10rem;
+    z-index: 10;
+  }
 }
 
 /* ✅ FIXED: Remove Background for Mobile */
@@ -40,23 +53,13 @@
 /* ================================ */
 /* ✅ CONTENT AREA                 */
 /* ================================ */
-.content {
-  color: rgba(255, 255, 255, 0.944);
-  width: 40%;
-  height: 65vh;
-  align-self: left;
-  text-align: left;
-  overflow: visible;
-  margin-left: 10rem;
-  z-index: 10;
-}
 
 /* ✅ FIXED: Mobile Content Adjustments */
 .mobileContent {
   flex-direction: column;
   display: flex;
   align-self: center;
-  padding-top: 0.8rem;
+  padding-top: 1.1rem;
   padding-right: 2rem;
   padding-left: 2rem;
   width: 100%;
