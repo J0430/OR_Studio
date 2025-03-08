@@ -1,13 +1,21 @@
-@use "@styles/partials/variables" as v;
-@use "@styles/partials/mixins" as m;
-
 .navbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   background: transparent;
-  z-index: 1000; // ✅ Higher than other elements, but not blocking content
+  z-index: 10; // ✅ Ensures the nav is above content
+  pointer-events: none; // ✅ Allows clicks to pass through
+}
+
+.navGhostContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px; // ✅ Adjust based on your header height
+  pointer-events: none; // ✅ Allows clicking through this container
+  z-index: 100;
 }
 
 .navContent {
@@ -15,24 +23,22 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: m.rem(48);
+  padding: 1.5rem;
   pointer-events: none; // ✅ Prevents blocking interactions
-
-  z-index: auto; // ✅ Ensures it doesn't cover everything
 }
 
 .logo,
 .menuButton {
-  pointer-events: all; // ✅ Restores clickability only for these elements
-  z-index: 1100; // ✅ Higher so they remain interactive
+  pointer-events: all; // ✅ Restores clickability for these elements
+  z-index: 1100;
 }
 
 .menuButton {
   border: none;
   background: none;
-  color: v.$white;
+  color: white;
   cursor: pointer;
-  z-index: 1100; // ✅ Higher so it remains clickable
+  z-index: 1100;
   transition:
     opacity 0.3s ease-in-out,
     visibility 0.3s ease-in-out;
@@ -49,46 +55,25 @@
   z-index: 1000;
   width: 100%;
   height: 100%;
-  @include m.center-flex;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
   background: rgba(0, 0, 0, 0.9);
-  pointer-events: all; // ✅ Ensures it’s clickable when open
+  pointer-events: all; // ✅ Ensures the menu is clickable when open
 }
 
 .closeButton {
   position: absolute;
-  top: m.rem(50);
-  right: m.rem(50);
+  top: 50px;
+  right: 50px;
   background: none;
   border: none;
-  color: v.$white;
-  font-size: m.rem(30);
+  color: white;
+  font-size: 30px;
   cursor: pointer;
   z-index: 1100;
 
   &:hover {
-    color: v.$gray;
-  }
-}
-
-/* =========================== */
-/* RESPONSIVENESS              */
-/* =========================== */
-
-@include m.respond-to("tablet") {
-  .navContent {
-    padding: m.rem(32);
-  }
-}
-
-@include m.respond-to("mobile") {
-  .navContent {
-    padding: m.rem(24);
-  }
-}
-
-@include m.respond-to("small-mobile") {
-  .menuButton {
-    font-size: m.rem(24);
+    color: gray;
   }
 }

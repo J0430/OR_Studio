@@ -104,6 +104,15 @@
         transform: rotate(135deg);
       }
     }
+    &.right .scrollButton {
+      // margin-left: 10rem !important;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      .arrow {
+        transform: rotate(-135deg);
+      }
+    }
   }
 
   /* =========================== */

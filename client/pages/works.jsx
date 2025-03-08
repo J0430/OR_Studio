@@ -1,11 +1,10 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { fetchData } from "@utils/api";
 import { AnimatePresence } from "framer-motion";
-import { consumeDynamicAccess } from "next/dist/server/app-render/dynamic-rendering";
 import {
   useProjectsPreloader,
   ProjectsPreloaderProvider,
-} from "@contexts/ProjectsPreloaderContext";
+} from "@contexts/ProjectsPreloaderContext"; // ✅ Import Provider
 import { categories } from "@utils/globals";
 import { fisherYatesShuffle, interleaveArrays } from "@utils/utils";
 import dynamic from "next/dynamic";
@@ -34,18 +33,16 @@ const ProjectsGrid = dynamic(
 
 export async function getStaticProps() {
   try {
-    const [residential, commercial, urbanPlanning, office] = await Promise.all([
-      fetchData("residential"),
-      fetchData("commercial"),
-      fetchData("urbanPlanning"),
-      fetchData("office"),
-    ]);
+    const categoriesData = await Promise.all(
+      ["residential", "commercial", "urbanPlanning", "office"].map(fetchData)
+    );
+
     return {
       props: {
-        residential,
-        commercial,
-        urbanPlanning,
-        office,
+        residential: categoriesData[0],
+        commercial: categoriesData[1],
+        urbanPlanning: categoriesData[2],
+        office: categoriesData[3],
       },
     };
   } catch (error) {
@@ -62,17 +59,13 @@ export async function getStaticProps() {
 }
 
 function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
-  const [isClient, setIsClient] = useState(false);
+  const { isPreloaderVisible } = useProjectsPreloader(); // ✅ Now it's inside the Provider
 
   const [state, setState] = useState({
-    categorySelected: categories[0] || "All",
+    categorySelected: categories[0] || "Works",
     selectedImage: null,
     selectedProject: null,
   });
-
-  useEffect(() => {
-    setIsClient(true); // Ensures the code only runs on the client
-  }, []);
 
   const categoryDataMap = useMemo(
     () => ({
@@ -80,7 +73,7 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
       "Urban Planning": urbanPlanning?.frontImages,
       Commercial: commercial?.frontImages,
       Office: office?.frontImages,
-      All: interleaveArrays([
+      Works: interleaveArrays([
         residential?.frontImages || [],
         urbanPlanning?.frontImages || [],
         commercial?.frontImages || [],
@@ -90,11 +83,8 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
     [residential, urbanPlanning, commercial, office]
   );
 
-  const { isPreloaderVisible } = useProjectsPreloader();
-
   const projects = useMemo(() => {
-    const selectedImages = categoryDataMap[state.categorySelected] || [];
-    return fisherYatesShuffle(selectedImages);
+    return fisherYatesShuffle(categoryDataMap[state.categorySelected] || []);
   }, [state.categorySelected, categoryDataMap]);
 
   const handleCategoryClick = useCallback((categoryName) => {
@@ -103,7 +93,6 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
 
   const handleImageClick = useCallback(
     (imageSrc) => {
-      // Merge all projects from different categories
       const allProjects = {
         ...residential?.projects,
         ...urbanPlanning?.projects,
@@ -111,24 +100,21 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
         ...office?.projects,
       };
 
-      // Find the project that matches the clicked front image
       const matchedProject = Object.values(allProjects).find(
         (project) => project?.frontImage === imageSrc
       );
 
       if (matchedProject) {
-        // Update state to open modal with the matched project
         setState((prevState) => ({
           ...prevState,
           selectedImage: imageSrc,
-          selectedProject: matchedProject, // Pass entire project data
+          selectedProject: matchedProject,
         }));
-      } else {
-        console.log("No project matched the image source:", imageSrc);
       }
     },
-    [residential?.data, urbanPlanning?.data, commercial?.data, office?.data]
+    [residential, urbanPlanning, commercial, office]
   );
+
   const handleCloseModal = useCallback(() => {
     setState((prevState) => ({
       ...prevState,
@@ -137,19 +123,13 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
     }));
   }, []);
 
-  if (!isClient) return null;
-
   return (
     <>
       <Head>
         <title>OR Studio | Work</title>
-        <meta
-          name="description"
-          content="Explore our featured projects in various categories including residential, urban planning, and more."
-        />
       </Head>
       {isPreloaderVisible && <ProjectsPreloader />}
-      <div className={style.projectsPage}>
+      <main className={style.projectsPage}>
         <ProjectsControl
           categories={categories}
           selectedCategory={state.categorySelected}
@@ -171,17 +151,17 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
             />
           )}
         </AnimatePresence>
-      </div>
+      </main>
     </>
   );
 }
 
-function ProjectsPage(props) {
+export default function ProjectsPage(props) {
   return (
     <ProjectsPreloaderProvider>
+      {" "}
+      {/* ✅ Wrap component inside provider */}
       <ProjectsContent {...props} />
     </ProjectsPreloaderProvider>
   );
 }
-
-export default ProjectsPage;

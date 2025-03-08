@@ -1,58 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { adjustGridItems } from "@utils/gridUtils";
 import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import styles from "../ProjectsGrid/ProjectsGrid.module.scss";
+import { useMediaQuery } from "react-responsive";
 
-const GridItem = ({
-  imagePath,
-  index,
-  onImageClick,
-  showImages,
-  imageVariants,
-}) => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+const GridItem = ({ imagePath, index, onImageClick, showImages }) => {
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <motion.div
+    <motion.article
       ref={ref}
       className={styles.gridItem}
-      key={imagePath || `project-${index}`}
+      key={`${imagePath || "default"}-${index}`}
       layoutId={imagePath}
       onClick={() => onImageClick(imagePath)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") onImageClick(imagePath);
-      }}
       tabIndex={0}
       role="button"
       aria-label={`Open modal for Project ${index + 1}`}
-      variants={imageVariants}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}>
+      initial={{ opacity: 0, y: 75 }}
+      animate={
+        inView
+          ? { opacity: 1, y: 0, transition: { duration: 1.3, ease: "easeOut" } }
+          : {}
+      }>
       {showImages ? (
         <Image
           src={imagePath}
           alt={`Project ${index + 1}`}
           width={300}
           height={200}
+          loading="lazy"
           className="loaded"
           quality={75}
-          priority
         />
       ) : (
-        <div
-          className={styles.imagePlaceholder}
-          aria-label="Loading image..."
-        />
+        <div className={styles.imagePlaceholder} />
       )}
-    </motion.div>
+    </motion.article>
   );
 };
-
 const ProjectGrid = ({ projects, onImageClick }) => {
   if (!projects || projects.length === 0) {
     return <div>No projects available at this time.</div>;
@@ -60,49 +47,35 @@ const ProjectGrid = ({ projects, onImageClick }) => {
 
   const [showImages, setShowImages] = useState(false);
   useEffect(() => {
-    let timeout;
-    if (typeof window !== "undefined") {
-      timeout = setTimeout(() => {
-        adjustGridItems(`.${styles.gridItem}`);
-        setShowImages(true); // Ensures images load only on the client
-      }, 400);
-    }
+    let timeout = setTimeout(() => {
+      setShowImages(true); // Ensures images load only on the client
+    }, 4000);
     return () => clearTimeout(timeout);
   }, []);
 
-  const imageVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 1, ease: "easeOut" },
-    },
-  };
-
-  // Detect if category has fewer than 4 projects
-  const isSmallCategory = projects.length < 4;
-  const gridClass = isSmallCategory
-    ? styles.smallProjectsContainer
-    : styles.projectsGridContainer;
+  // ✅ Use `useMediaQuery` for dynamic grid layout
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const gridColumns = isMobile ? "repeat(2, 1fr)" : "repeat(3, 1fr)"; // ✅ 3 columns on desktop, 2 on mobile
 
   return (
-    <motion.div
+    <motion.section
       className={styles.projectsOverFlow}
       aria-label="Project Grid"
       role="region">
-      <div className={gridClass}>
+      <div
+        className={styles.projectsGridContainer}
+        style={{ display: "grid", gridTemplateColumns: gridColumns }}>
         {projects.map((imagePath, index) => (
           <GridItem
-            key={imagePath || `project-${index}`}
+            key={`${imagePath || "default"}-${index}`} // ✅ Unique Key Fix
             imagePath={imagePath}
             index={index}
             onImageClick={onImageClick}
             showImages={showImages}
-            imageVariants={imageVariants}
           />
         ))}
       </div>
-    </motion.div>
+    </motion.section>
   );
 };
 

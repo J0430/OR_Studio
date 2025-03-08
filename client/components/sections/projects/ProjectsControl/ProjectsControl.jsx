@@ -1,4 +1,5 @@
 import { useMediaQuery } from "react-responsive";
+import { SlArrowDown } from "react-icons/sl";
 import DropdownMenu from "@components/common/DropdownMenu/DropdownMenu";
 import CategoryTab from "@components/common/CategoryTab/CategoryTab";
 import styles from "../ProjectsControl/ProjectsControl.module.scss";
@@ -8,25 +9,13 @@ const ProjectsControl = ({
   selectedCategory = "",
   onCategorySelect = () => {},
 }) => {
-  const isMobile = useMediaQuery({ maxWidth: 500 });
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   return (
     <div
       className={
         isMobile ? styles.mobileProjectsControl : styles.projectsControl
       }>
-      <div
-        className={
-          isMobile ? styles.mobileProjectsTitleBox : styles.projectsTitleBox
-        }>
-        <h1
-          className={
-            isMobile ? styles.mobileProjectTitle : styles.projectsTitle
-          }>
-          Works
-        </h1>
-      </div>
-
       <div
         className={
           isMobile
@@ -45,6 +34,11 @@ const ProjectsControl = ({
               onCategorySelect={onCategorySelect}
             />
           ) : (
+            <div className={styles.mobileProjectsTitleBox}>
+              <div className={styles.mobileProjectTitle}>Works</div>
+            </div>
+          )}
+          {!isMobile &&
             categories.map((category) => (
               <CategoryTab
                 key={category}
@@ -52,8 +46,7 @@ const ProjectsControl = ({
                 selectedCategory={selectedCategory}
                 onCategorySelect={onCategorySelect}
               />
-            ))
-          )}
+            ))}
         </nav>
       </div>
     </div>
