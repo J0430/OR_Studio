@@ -126,8 +126,29 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
   return (
     <>
       <Head>
-        <title>OR Studio | Work</title>
+        <title>Contact Us | OR Studio</title>
+        <meta
+          name="description"
+          content="Get in touch with OR Studio to bring your architectural vision to life. Contact us today!"
+        />
+        <meta
+          name="keywords"
+          content="Architecture, Visualization, Contact, OR Studio"
+        />
+        <meta name="author" content="OR Studio" />
+        <meta property="og:title" content="Contact Us | OR Studio" />
+        <meta
+          property="og:description"
+          content="Get in touch with OR Studio to bring your architectural vision to life."
+        />
+        <meta
+          property="og:image"
+          content="https://res.cloudinary.com/dugudxkyu/image/upload/v1728046515/Offir%20projects/Contact%20us/contact_us_uphao8.jpg"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
+
       {isPreloaderVisible && <ProjectsPreloader />}
       <main className={style.projectsPage}>
         <ProjectsControl

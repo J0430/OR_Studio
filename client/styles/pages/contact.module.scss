@@ -1,6 +1,6 @@
-/* ================================ */
-/* ✅ DESKTOP & MOBILE LAYOUT       */
-/* ================================ */
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
 .contactPage,
 .mobileContactPage {
   display: flex;
@@ -8,37 +8,34 @@
   height: 100dvh;
   width: 100vw;
   background-image: url("https://res.cloudinary.com/dugudxkyu/image/upload/v1728046515/Offir%20projects/Contact%20us/contact_us_uphao8.jpg");
-  background-position: 10% left;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
   position: relative;
   justify-content: flex-start;
   z-index: 0;
   overflow: hidden;
 
+  /* ✅ Gradient overlay for better readability */
   &::after {
     content: "";
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-image: linear-gradient(
+    inset: 0;
+    background: linear-gradient(
       to right,
       rgba(0, 0, 0, 0.9) 35%,
       rgba(0, 0, 0, 0) 90%
     );
     z-index: 1;
   }
+
   .content {
     display: flex;
     flex-direction: column;
     color: rgba(255, 255, 255, 0.944);
     width: 45%;
-    height: 65dvh;
+    height: auto;
     align-self: center;
-    align-self: left;
     text-align: left;
     overflow: visible;
     margin-left: 10rem;
@@ -46,25 +43,18 @@
   }
 }
 
-/* ✅ FIXED: Remove Background for Mobile */
+/* ✅ Mobile fixes: Remove gradient and adjust content */
 .mobileContactPage {
   &::after {
     background-image: none;
   }
 }
 
-/* ================================ */
-/* ✅ CONTENT AREA                 */
-/* ================================ */
-
-/* ✅ FIXED: Mobile Content Adjustments */
 .mobileContent {
   flex-direction: column;
   display: flex;
   align-self: center;
-  padding-top: 1.4rem;
-  padding-right: 1.2rem;
-  padding-left: 1.2rem;
+  padding: 1.4rem 1.2rem;
   width: 100%;
   margin-left: 0;
 }
