@@ -4,14 +4,14 @@
 .projectsControl {
   display: flex;
   flex-direction: column;
-  position: relative;
   justify-content: flex-end;
-  height: 30vh;
+  height: 0vh;
   width: 100%;
   background: v.$black;
   @include m.scrollbar-style(v.$gray, v.$white);
   padding: m.rem(16);
   box-sizing: border-box;
+  z-index: 10;
 }
 
 /* Title Section */
@@ -62,39 +62,21 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 13vh;
   width: 100%;
-  background: v.$black;
-  padding: m.rem(16);
+  background: transparent;
   box-sizing: border-box;
-  .mobileProjectsTitleBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    margin-top: 1rem;
-
-    h1 {
-      font-size: 1.6rem;
-      font-family: "Raleway", sans-serif;
-      color: rgba(255, 255, 255, 0.899);
-      font-weight: 400;
-    }
-  }
 
   /* Position dropdown at the bottom */
   .mobileProjectsSelectorWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    position: fixed; // Fix it at the bottom of the viewport
-    bottom: 2%; // Position it slightly above the edge
+    width: -moz-fit-content;
+    width: fit-content;
+    position: absolute;
+    top: 1.7%;
     left: 50%;
-    transform: translateX(-50%); // Center horizontally
-    z-index: 15; // Ensure it's above other elements
+    transform: translateX(-50%);
+    z-index: 100000;
   }
 }
-
-/* Title */

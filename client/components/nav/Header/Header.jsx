@@ -25,7 +25,6 @@ const Header = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const { isNavOpen, setIsNavOpen } = useNav();
   const { isPreloaderVisible = false } = usePreloader();
-
   const menuRef = useRef(null);
 
   useClickOutside(menuRef, () => setIsNavOpen(false));
@@ -37,29 +36,36 @@ const Header = () => {
       className={styles.navbar}
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}>
-      <div className={styles.navContent}>
-        <Link href="/" passHref>
-          <Image
-            src={logos[3]}
-            alt="OR Studio Logo"
-            className={styles.logo}
-            width={isMobile ? 25 : 40}
-            height={isMobile ? 30 : 45}
-            priority
-            onClick={() => setIsNavOpen(false)}
-          />
-        </Link>
-        <motion.button
-          aria-label="Toggle navigation menu"
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-          className={`${styles.menuButton} ${isNavOpen ? styles.hidden : ""}`}
-          onClick={() => setIsNavOpen((prev) => !prev)}>
-          {!isNavOpen ? (
-            <MenuOutlined key="menu" style={{ fontSize: isMobile ? 23 : 40 }} />
-          ) : null}
-        </motion.button>
+      transition={{ duration: 0.1 }}>
+      {/* ✅ Ghost container (allows clicks to pass through) */}
+      <div className={styles.navGhostContainer}>
+        <div className={styles.navContent}>
+          <Link href="/" passHref>
+            <Image
+              src={logos[3]}
+              alt="OR Studio Logo"
+              className={styles.logo}
+              width={isMobile ? 25 : 40}
+              height={isMobile ? 30 : 45}
+              priority
+              onClick={() => setIsNavOpen(false)}
+            />
+          </Link>
+
+          <motion.button
+            aria-label="Toggle navigation menu"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            className={`${styles.menuButton} ${isNavOpen ? styles.hidden : ""}`}
+            onClick={() => setIsNavOpen((prev) => !prev)}>
+            {!isNavOpen ? (
+              <MenuOutlined
+                key="menu"
+                style={{ fontSize: isMobile ? 23 : 40 }}
+              />
+            ) : null}
+          </motion.button>
+        </div>
       </div>
 
       {/* Menu Overlay */}
@@ -67,12 +73,11 @@ const Header = () => {
         {isNavOpen && (
           <motion.nav
             ref={menuRef}
-            initial={{ opacity: 0, y: "100%" }} // ✅ Opens from bottom to top
+            initial={{ opacity: 0, y: "100%" }}
             animate={{ opacity: 1, y: "0%" }}
             exit={{ opacity: 0, y: "100%" }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
             className={styles.menuOverlay}>
-            {/* Close Button (X) - Now Always Visible */}
             <motion.button
               className={styles.closeButton}
               onClick={() => setIsNavOpen(false)}

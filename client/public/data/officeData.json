@@ -3,31 +3,31 @@
   "projects": {
     "o_project1": {
       "title": "Beacon Towers",
-      "frontImage": "/assets/categories/Office/Project1/09.jpg",
+      "frontImage": "/assets/works/categories/office/Project1/09.jpg",
       "images": [
-        "/assets/categories/Office/Project1/09.jpg",
-        "/assets/categories/Office/Project1/051.jpg",
-        "/assets/categories/Office/Project1/mushi (1).jpg",
-        "/assets/categories/Office/Project1/mushi (2).jpg"
+        "/assets/works/categories/office/Project1/09.jpg",
+        "/assets/works/categories/office/Project1/051.jpg",
+        "/assets/works/categories/office/Project1/mushi (1).jpg",
+        "/assets/works/categories/office/Project1/mushi (2).jpg"
       ],
       "description": "The Beacon Towers is a cutting-edge architectural masterpiece that merges functionality with aesthetics. Featuring a seamless blend of modern glass facades and innovative structural design, the towers redefine urban office spaces. The project embodies sustainable architecture with energy-efficient features, offering a panoramic skyline view while integrating harmoniously into the bustling cityscape. With state-of-the-art facilities and a unique artistic facade, Beacon Towers stands as a beacon of innovation and progress in urban design."
     },
     "o_project2": {
       "title": "Urban Living Complex",
-      "frontImage": "/assets/categories/Office/project2/2.jpg",
+      "frontImage": "/assets/works/categories/office/project2/2.jpg",
       "images": [
-        "/assets/categories/Office/project2/2.jpg",
-        "/assets/categories/Office/project2/3.jpg",
-        "/assets/categories/Office/project2/6.jpg"
+        "/assets/works/categories/office/project2/2.jpg",
+        "/assets/works/categories/office/project2/3.jpg",
+        "/assets/works/categories/office/project2/6.jpg"
       ],
       "description": "The Urban Living Complex introduces a dynamic residential and retail hub at the heart of the city. The project combines elegant apartments with green spaces and retail outlets, emphasizing community living. With a contemporary design and innovative urban planning, it reflects a perfect balance of comfort and modernity."
     },
     "o_project3": {
       "title": "Skyline Tower",
-      "frontImage": "/assets/categories/Office/project3/3.jpg",
+      "frontImage": "/assets/works/categories/office/project3/3.jpg",
       "images": [
-        "/assets/categories/Office/project3/3.jpg",
-        "/assets/categories/Office/project3/21.jpg"
+        "/assets/works/categories/office/project3/3.jpg",
+        "/assets/works/categories/office/project3/21.jpg"
       ],
       "description": "Skyline Tower is an iconic high-rise structure that defines luxury office space in the metropolitan skyline. With a minimalist design, open terraces, and energy-efficient materials, this project showcases the future of urban architecture."
     }

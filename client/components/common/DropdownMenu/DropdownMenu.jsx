@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { RiArrowDownSLine } from "react-icons/ri";
 import styles from "../DropdownMenu/DropdownMenu.module.scss";
 
-const DropdownMenu = ({
-  arrowDirection,
-  categories,
-  selectedCategory,
-  onCategorySelect,
-}) => {
+const DropdownMenu = ({ categories, selectedCategory, onCategorySelect }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -17,13 +13,18 @@ const DropdownMenu = ({
         className={styles.dropdownButton}
         onClick={() => setIsOpen(!isOpen)}
         whileTap={{ scale: 0.95 }}>
-        <span className={styles.categoryText}>{selectedCategory || "All"}</span>
-        <span
-          className={
-            arrowDirection == "up" ? styles.arrowUp : styles.arrowIcon
-          }>
-          &#8964;
-        </span>
+        <div className={styles.buttonContent}>
+          <span className={styles.categoryText}>
+            {selectedCategory || "Works"}
+          </span>
+          {/* ✅ Animated Arrow */}
+          <motion.span
+            className={styles.arrow}
+            animate={{ rotate: isOpen ? 180 : 0 }} // ✅ Rotate when open
+            transition={{ duration: 0.3, ease: "easeInOut" }}>
+            <RiArrowDownSLine />
+          </motion.span>
+        </div>
       </motion.button>
 
       {/* Dropdown Menu */}
@@ -38,7 +39,9 @@ const DropdownMenu = ({
             {categories.map((category) => (
               <motion.div
                 key={category}
-                className={styles.dropdownItem}
+                className={`${styles.dropdownItem} ${
+                  selectedCategory === category ? styles.activeItem : ""
+                }`}
                 whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
                 onClick={() => {
                   onCategorySelect(category);

@@ -11,14 +11,16 @@
   background: rgba(0, 0, 0, 0.8);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 12px 20px;
+  padding: 8px 12px; // ✅ Increased horizontal padding for better spacing
   border-radius: 30px;
-  font-size: 18px;
+  font-size: 1rem; // ✅ Responsive font size
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 14rem;
+  min-width: 12rem; // ✅ Ensures it never goes smaller than 12rem
+  max-width: 100%; // ✅ Allows it to fit within its container
+  flex: 0 1 auto; // ✅ Prevents unnecessary stretching
 
   &:hover {
     background: rgba(0, 0, 0, 0.8);
@@ -27,20 +29,28 @@
     flex-grow: 1;
     text-align: left;
   }
+  .buttonContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    .categoryText {
+      flex-grow: 1;
+      text-align: left;
+      margin-left: 0.7rem;
+    }
+    .arrow {
+      display: flex;
+      flex-basis: fit-content;
+    }
 
-  .arrowDown {
-    font-size: 1.5rem;
-    position: absolute;
-    right: 6.5rem;
-    top: 1.1rem;
-  }
+    // .arrowUp {
+    //   font-size: 1.5rem;
 
-  .arrowUp {
-    font-size: 1.5rem;
-    position: absolute;
-    right: 6.5rem;
-    top: 1.1rem;
-    transform: rotate(180deg);
+    //   right: 6.5rem;
+    //   top: 1.1rem;
+    //   transform: rotate(180deg);
+    // }
   }
 }
 
@@ -51,20 +61,25 @@
 
 .dropdownContent {
   position: absolute;
-  bottom: 120%; // This pushes the dropdown up when opened
+  top: 120%;
+  left: 0%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.8);
   border-radius: 15px;
-  padding: 10px 0;
-  width: 220px;
+  padding: 0.5em 0.5em;
+  min-width: 12rem; // ✅ Ensures it never goes smaller than 12rem
+  max-width: 100%; // ✅ Allows it to fit within its container
+  flex: 0 1 auto; // ✅ Prevents unnecessary stretching
   display: flex;
   flex-direction: column;
   box-shadow:
     0 2px 4px rgba(0, 0, 0, 0.2),
     0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .dropdownItem {
-  padding: 12px 20px;
+  padding: m.rem(2) m.rem(10);
+  margin-bottom: m.rem(4);
   font-size: 16px;
   color: rgba(255, 255, 255, 0.9);
   text-align: center;
@@ -76,4 +91,8 @@
     background: rgba(255, 255, 255, 0.713);
     color: black;
   }
+}
+.activeItem {
+  background-color: #343c48b0 !important; // ✅ Ensure it stays active
+  font-weight: bold;
 }
