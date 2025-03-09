@@ -42,7 +42,7 @@
 
   /* ✅ Positioning for different directions */
   &.up .scrollButton {
-    bottom: 2rem;
+    bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
     .arrow {
@@ -52,7 +52,7 @@
   }
 
   &.down .scrollButton {
-    bottom: 2rem;
+    bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
     .arrow {
@@ -62,7 +62,7 @@
   }
 
   &.left .scrollButton {
-    left: 2rem;
+    left: 1rem;
     top: 50%;
     transform: translateY(-50%);
     .arrow {
@@ -72,7 +72,7 @@
   }
 
   &.right .scrollButton {
-    right: 2rem;
+    right: 1rem;
     top: 50%;
     transform: translateY(-50%);
     .arrow {

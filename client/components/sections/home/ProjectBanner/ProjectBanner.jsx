@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useMediaQuery } from "react-responsive";
 import { AnimatePresence, motion } from "framer-motion";
 import BannerImage from "@components/common/BannerImage/BannerImage";
 import ProgressBar from "@components/common/ProgressBar/ProgressBar";
@@ -6,6 +7,7 @@ import DirectionalButton from "@components/common/DirectionalButton/DirectionalB
 import styles from "../ProjectBanner/ProjectBanner.module.scss";
 
 const ProjectBanner = ({ images }) => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef(null);
@@ -111,8 +113,8 @@ const ProjectBanner = ({ images }) => {
             className={styles.imageWrapper}>
             <DirectionalButton
               direction="left"
-              width={3}
-              height={3}
+              width={isMobile ? 2 : 3}
+              height={isMobile ? 2 : 3}
               onClick={() => {
                 setCurrentImageIndex(
                   (prevIndex) => (prevIndex - 1 + images.length) % images.length
