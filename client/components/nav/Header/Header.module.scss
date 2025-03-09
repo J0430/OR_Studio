@@ -1,79 +1,57 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
 .navbar {
+  position: fixed; // ✅ Keeps navbar fixed at the top
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent; // ✅ No background so it doesn't block content
+  z-index: 1000; // ✅ Ensures it's above other elements
+  pointer-events: none; // ✅ Makes the navbar itself non-interactive
+}
+
+/* ✅ This container is just a structure, but not blocking content */
+.navGhostContainer {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  background: transparent;
-  z-index: 10; // ✅ Ensures the nav is above content
-  pointer-events: none; // ✅ Allows clicks to pass through
-}
-
-.navGhostContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px; // ✅ Adjust based on your header height
-  pointer-events: none; // ✅ Allows clicking through this container
-  z-index: 100;
-}
-
-.navContent {
+  height: auto; // ✅ No fixed height so it adapts dynamically
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  pointer-events: none; // ✅ Ensures this div doesn’t block interactions
+}
+
+/* ✅ Ensures only the logo and menu button are interactive */
+.navContent {
   width: 100%;
-  padding: 1.5rem;
-  pointer-events: none; // ✅ Prevents blocking interactions
+  display: flex;
+  justify-content: space-between; // ✅ Keeps items aligned correctly
+  align-items: center;
+  padding: 2rem; // ✅ Adjust spacing to your needs
+  pointer-events: none; // ✅ This makes the whole div non-clickable
 }
 
-.logo,
-.menuButton {
-  pointer-events: all; // ✅ Restores clickability for these elements
-  z-index: 1100;
+/* ✅ Logo remains clickable */
+.logo {
+  pointer-events: all; // ✅ Allows clicking on the logo
+  z-index: 1100; // ✅ Ensures it's on top
+  cursor: pointer;
 }
 
+/* ✅ Menu button remains clickable */
 .menuButton {
   border: none;
   background: none;
   color: white;
   cursor: pointer;
+  pointer-events: all; // ✅ Allows clicking on the menu button
   z-index: 1100;
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 
   &.hidden {
     display: none;
-  }
-}
-
-.menuOverlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 1000;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.9);
-  pointer-events: all; // ✅ Ensures the menu is clickable when open
-}
-
-.closeButton {
-  position: absolute;
-  top: 50px;
-  right: 50px;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-  z-index: 1100;
-
-  &:hover {
-    color: gray;
   }
 }

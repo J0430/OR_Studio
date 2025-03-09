@@ -10,8 +10,10 @@
 
   .textContainer {
     width: 100%;
-    max-width: m.rem(1000);
-    padding: 0 m.rem(32);
+    max-width: 62.5rem;
+    max-width: 100%;
+    margin-bottom: 1%;
+    padding: 2rem;
     text-align: center;
 
     .description {

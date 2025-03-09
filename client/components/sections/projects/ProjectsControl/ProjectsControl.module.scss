@@ -1,14 +1,14 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-/* 🔹 Ensures layout remains the same across OS */
+/* 🔹 Main Section */
 .projectsControl {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: auto; // ✅ Avoids vh inconsistencies on mobile
-  min-height: 10vh; // ✅ Ensures it's always visible
-  max-height: 15vh; // ✅ Prevents stretching on some OS
+  height: auto;
+  min-height: 10vh;
+  max-height: 15vh;
   width: 100%;
   background: v.$black;
   @include m.scrollbar-style(v.$gray, v.$white);
@@ -17,30 +17,18 @@
   z-index: 10;
 }
 
-/* 🔹 Title Section - Ensures text stays the same on all devices */
-.projectsTitleBox {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  height: auto;
-  width: 100%;
-  border-bottom: 0.8px solid rgba(v.$white, 0.566);
-
-  .projectsTitle {
-    margin: 0;
-    width: 100%;
-    font-size: clamp(m.rem(28), 5vw, m.rem(45));
-    font-weight: 500;
-    letter-spacing: -0.625px;
-    line-height: 1.2;
-    color: v.$white;
-    text-align: left;
-    margin-bottom: 3%;
-  }
+/* 🔹 Title Styling */
+.projectsTitle {
+  font-size: clamp(m.rem(28), 5vw, m.rem(45));
+  font-weight: 500;
+  letter-spacing: -0.625px;
+  line-height: 1.2;
+  color: v.$white;
+  text-align: left;
+  margin-bottom: 3%;
 }
 
-/* 🔹 Selector Section */
+/* 🔹 Desktop Selector */
 .projectsSelectorBox {
   display: flex;
   flex-direction: column;
@@ -51,83 +39,39 @@
   .projectsSelector {
     display: flex;
     flex-wrap: wrap;
-    align-self: center;
+    justify-content: center;
     width: 100%;
     gap: m.rem(16);
-    justify-content: center;
   }
 }
 
-/* 🔹 Ensures header stays clickable while background is a ghost container */
-.navbar {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: transparent;
-  z-index: 1; // ✅ Higher than other elements, but doesn't block interactions
-}
-
-.navContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: m.rem(48);
-  pointer-events: none; // ✅ Prevents blocking interactions
-  z-index: auto;
-}
-
-.logo,
-.menuButton {
-  pointer-events: all; // ✅ Restores clickability only for these elements
-  z-index: 1100; // ✅ Ensures interactivity
-}
-
-.menuButton {
-  border: none;
-  background: none;
-  color: v.$white;
-  cursor: pointer;
-  z-index: 1100;
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
-
-  &.hidden {
-    display: none;
-  }
-}
-
-/* 🔹 Mobile Dropdown Fix */
+/* 🔹 Mobile Styles */
 .mobileProjectsControl {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   background: transparent;
   box-sizing: border-box;
 
-  /* 🔹 Position dropdown properly */
   .mobileProjectsSelectorWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     width: fit-content;
-    max-width: 90vw; // ✅ Prevents overflowing on smaller devices
+    max-width: 90vw;
     position: fixed;
     top: 1.4rem;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 100000;
+    z-index: 1000; // ✅ Ensures dropdown is above other elements
   }
 }
 
-/* 🔹 Ensures scrolling is consistent across all platforms */
+/* 🔹 Smooth Scrolling */
 .projectsOverFlow {
   overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch; // ✅ Ensures smooth scrolling on iOS
-  scrollbar-width: thin; // ✅ Standardized for Firefox
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
   scrollbar-color: v.$gray v.$black;
 
   &::-webkit-scrollbar {

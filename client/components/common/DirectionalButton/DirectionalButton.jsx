@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { IoIosArrowBack } from "react-icons/io"; // ✅ Import arrow icon
 import styles from "./DirectionalButton.module.scss";
 
 const DirectionalButton = ({
@@ -19,7 +20,7 @@ const DirectionalButton = ({
       onClick={onClick}
       aria-label={`Scroll ${direction}`}>
       <button className={styles.scrollButton}>
-        <span className={styles.arrow} />
+        <IoIosArrowBack className={styles.arrow} />
       </button>
     </motion.div>
   );

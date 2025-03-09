@@ -39,6 +39,7 @@
       text-align: left;
       margin-left: 0.7rem;
     }
+
     .arrow {
       display: flex;
       flex-basis: fit-content;
@@ -60,7 +61,7 @@
 }
 
 .dropdownContent {
-  position: absolute;
+  position: relative;
   top: 120%;
   left: 0%;
   transform: translateX(-50%);

@@ -1,5 +1,5 @@
 import { useMediaQuery } from "react-responsive";
-import { SlArrowDown } from "react-icons/sl";
+import { useNav } from "@contexts/NavContext";
 import DropdownMenu from "@components/common/DropdownMenu/DropdownMenu";
 import CategoryTab from "@components/common/CategoryTab/CategoryTab";
 import styles from "../ProjectsControl/ProjectsControl.module.scss";
@@ -10,46 +10,50 @@ const ProjectsControl = ({
   onCategorySelect = () => {},
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const { isNavOpen } = useNav();
 
   return (
-    <div
+    <section
       className={
         isMobile ? styles.mobileProjectsControl : styles.projectsControl
-      }>
-      <div
-        className={
-          isMobile
-            ? styles.mobileProjectsSelectorWrapper
-            : styles.projectsSelectorBox
-        }>
-        <nav
+      }
+      aria-label="Project Categories">
+      {/* ✅ Hide dropdown when `NavLinks` is open */}
+      {!isNavOpen && (
+        <div
           className={
-            isMobile ? styles.mobileProjectsSelector : styles.projectsSelector
+            isMobile
+              ? styles.mobileProjectsSelectorWrapper
+              : styles.projectsSelectorBox
           }>
-          {isMobile ? (
-            <DropdownMenu
-              arrowDirection="up"
-              categories={categories}
-              selectedCategory={selectedCategory}
-              onCategorySelect={onCategorySelect}
-            />
-          ) : (
-            <div className={styles.mobileProjectsTitleBox}>
-              <div className={styles.mobileProjectTitle}>Works</div>
-            </div>
-          )}
-          {!isMobile &&
-            categories.map((category) => (
-              <CategoryTab
-                key={category}
-                category={category}
+          <nav
+            className={
+              isMobile ? styles.mobileProjectsSelector : styles.projectsSelector
+            }
+            aria-label="Category Navigation">
+            {isMobile ? (
+              <DropdownMenu
+                categories={categories}
                 selectedCategory={selectedCategory}
                 onCategorySelect={onCategorySelect}
               />
-            ))}
-        </nav>
-      </div>
-    </div>
+            ) : (
+              <h2 className={styles.projectsTitle}>Works</h2>
+            )}
+
+            {!isMobile &&
+              categories.map((category) => (
+                <CategoryTab
+                  key={category}
+                  category={category}
+                  selectedCategory={selectedCategory}
+                  onCategorySelect={onCategorySelect}
+                />
+              ))}
+          </nav>
+        </div>
+      )}
+    </section>
   );
 };
 
