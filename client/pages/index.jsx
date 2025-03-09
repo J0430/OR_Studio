@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { preloadImages } from "@utils/imageUtils";
 import { motion, AnimatePresence } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
 import { usePreloader } from "@contexts/MainPreloaderContext";
 import { useNav } from "@contexts/NavContext";
 import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/MainPreloader";
@@ -45,6 +46,8 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ homeData }) {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
   const { isNavOpen } = useNav();
   const { isPreloaderVisible, onImageLoad } = usePreloader();
   const [isPageReady, setIsPageReady] = useState(false);
@@ -132,8 +135,8 @@ export default function Home({ homeData }) {
                 {!isNavOpen && !isPreloaderVisible && (
                   <DirectionalButton
                     direction={index < sections.length - 1 ? "down" : "up"}
-                    width={3}
-                    height={3}
+                    width={isMobile ? 2.3 : 3}
+                    height={isMobile ? 2.3 : 3}
                     onClick={() =>
                       handleScroll(sections[(index + 1) % sections.length]?.id)
                     }
