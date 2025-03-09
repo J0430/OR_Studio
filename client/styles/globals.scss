@@ -1,7 +1,10 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-/* Reset styles */
+/* =========================== */
+/* ✅ RESET & GLOBAL STYLES    */
+/* =========================== */
+
 *,
 *::before,
 *::after {
@@ -10,30 +13,43 @@
   box-sizing: border-box;
 }
 
-/* HTML defaults */
+/* ✅ Prevent Text Scaling on Mobile */
 html {
-  font-size: v.$base-font-size; /* Base font size */
-  line-height: v.$line-height; /* Base line height */
-  scroll-behavior: smooth; /* Smooth scrolling */
-  overflow-x: hidden; /* Prevent horizontal overflow */
-  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape on iOS */
+  font-size: v.$base-font-size;
+  line-height: v.$line-height;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
-/* Global body styles */
+/* =========================== */
+/* ✅ BODY STYLES              */
+/* =========================== */
 body {
   font-family: v.$font-family-base;
   background-color: v.$primary-color;
   color: v.$secondary-color;
   overflow-x: hidden;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased; /* Improve font rendering on macOS */
-  -moz-osx-font-smoothing: grayscale; /* Improve font rendering on macOS */
-  text-rendering: optimizeSpeed; /* Improve rendering performance */
+  min-height: 100dvh; /* ✅ Fix iOS 100vh issue */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
   margin: 0;
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0)
+    env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
 
-  /* Handle browser-specific scroll issues */
-  -ms-overflow-style: none; /* IE/Edge scrollbar fix */
+  /* ✅ Background Fix */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  /* ✅ Hide Scrollbars */
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
 
   @include m.scrollbar-style(
     rgba(255, 255, 255, 0.3),
@@ -41,33 +57,16 @@ body {
   );
 }
 
-/* Smooth scrolling support for Windows */
-@supports (-ms-ime-align: auto) {
+/* ✅ Fix for iOS Safari’s 100vh issue */
+@supports (-webkit-touch-callout: none) {
   body {
-    scroll-behavior: smooth;
+    min-height: 100dvh;
   }
 }
 
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-/* Override for specific browsers */
-body {
-  scrollbar-width: thin; /* Firefox scrollbar */
-  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-}
-
-body {
-  @include m.scrollbar-style(
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0.6)
-  );
-}
-
-/* Typography defaults */
+/* =========================== */
+/* ✅ TYPOGRAPHY               */
+/* =========================== */
 h1,
 h2,
 h3,
@@ -82,38 +81,24 @@ p {
   margin-bottom: m.rem(16);
 }
 
-/* Image styles */
+/* ✅ Image Fix */
 img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
   display: block;
-  -webkit-transform: translateZ(0); /* Safari hardware acceleration */
+  -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
 
-/* Improve touch experience */
+/* =========================== */
+/* ✅ INTERACTION & MOBILE FIXES */
+/* =========================== */
 button,
 a {
-  -webkit-tap-highlight-color: transparent; /* Remove tap highlights on mobile */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
 }
 
-/* Ensure safe area padding for mobile devices */
-body {
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
-}
-
-/* Fix 100vh bug on iOS */
-@supports (-webkit-touch-callout: none) {
-  body {
-    min-height: -webkit-fill-available;
-  }
-}
-
-/* Default list styling */
 ul,
 ol {
   list-style: none;
@@ -125,14 +110,24 @@ a {
   color: inherit;
 }
 
-/* Forms */
 input,
 textarea,
 button {
   font-family: inherit;
 }
 
-/* Utility classes */
+/* =========================== */
+/* ✅ FORM WIDTH FIX           */
+/* =========================== */
+.form-container {
+  max-width: 90%;
+  width: 100%;
+  margin: auto;
+}
+
+/* =========================== */
+/* ✅ UTILITY CLASSES          */
+/* =========================== */
 .hidden {
   display: none !important;
 }
