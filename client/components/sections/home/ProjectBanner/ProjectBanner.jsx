@@ -123,8 +123,8 @@ const ProjectBanner = ({ images }) => {
             <BannerImage image={images[currentImageIndex]} />
             <DirectionalButton
               direction="right"
-              width={3}
-              height={3}
+              width={3.3}
+              height={3.3}
               onClick={() => {
                 setCurrentImageIndex(
                   (prevIndex) => (prevIndex + 1) % images.length

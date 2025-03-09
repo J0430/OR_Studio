@@ -10,8 +10,8 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.scss";
 
-const NavbarLinks = dynamic(() => import("../NavLinks/NavLinks"), {
-  loading: () => <div>Loading Modal...</div>,
+const NavbarLinks = dynamic(() => import("../NavbarLinks/NavbarLinks"), {
+  loading: () => <div>Loading Menu...</div>,
   ssr: false,
 });
 const CloseOutlined = dynamic(() => import("@ant-design/icons/CloseOutlined"), {
@@ -45,8 +45,8 @@ const Header = () => {
               src={logos[3]}
               alt="OR Studio Logo"
               className={styles.logo}
-              width={isMobile ? 25 : 40}
-              height={isMobile ? 30 : 45}
+              width={isMobile ? 28 : 38}
+              height={isMobile ? 33 : 43}
               priority
               onClick={() => setIsNavOpen(false)}
             />
@@ -61,7 +61,7 @@ const Header = () => {
             {!isNavOpen ? (
               <MenuOutlined
                 key="menu"
-                style={{ fontSize: isMobile ? 23 : 40 }}
+                style={{ fontSize: isMobile ? 25 : 32 }}
               />
             ) : null}
           </motion.button>
