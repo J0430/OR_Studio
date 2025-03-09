@@ -125,8 +125,8 @@ const ProjectBanner = ({ images }) => {
             <BannerImage image={images[currentImageIndex]} />
             <DirectionalButton
               direction="right"
-              width={3.3}
-              height={3.3}
+              width={isMobile ? 2 : 3}
+              height={isMobile ? 2 : 3}
               onClick={() => {
                 setCurrentImageIndex(
                   (prevIndex) => (prevIndex + 1) % images.length
