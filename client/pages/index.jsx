@@ -12,7 +12,7 @@ import styles from "@styles/pages/home.module.scss";
 
 // Dynamic imports
 const LandingPage = dynamic(
-  () => import("@components/sections/homeSections/LandingPage/LandingPage")
+  () => import("@components/sections/homeSections//LandingPage/LandingPage")
 );
 const AboutBanner = dynamic(
   () => import("@components/sections/homeSections/AboutBanner/AboutBanner")

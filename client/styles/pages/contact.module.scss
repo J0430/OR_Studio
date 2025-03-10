@@ -1,8 +1,10 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-.contactPage,
-.mobileContactPage {
+/* ================================ */
+/* ✅ DESKTOP ONLY STYLES           */
+/* ================================ */
+.contactPage {
   display: flex;
   flex-direction: row;
   height: 100dvh;
@@ -16,7 +18,7 @@
   z-index: 0;
   overflow: hidden;
 
-  /* ✅ Gradient overlay for better readability */
+  /* ✅ Gradient only on Desktop */
   &::after {
     content: "";
     position: absolute;
@@ -43,18 +45,36 @@
   }
 }
 
-/* ✅ Mobile fixes: Remove gradient and adjust content */
+/* ================================ */
+/* ✅ MOBILE ONLY STYLES            */
+/* ================================ */
 .mobileContactPage {
-  &::after {
-    background-image: none;
-  }
-}
-
-.mobileContent {
-  flex-direction: column;
   display: flex;
-  align-self: center;
-  padding: 1.4rem 1.2rem;
-  width: 100%;
-  margin-left: 0;
+  flex-direction: column;
+  height: 100dvh;
+  width: 100vw;
+  background-image: url("https://res.cloudinary.com/dugudxkyu/image/upload/v1728046515/Offir%20projects/Contact%20us/contact_us_uphao8.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  justify-content: center; // ✅ Center the form
+  align-items: center; // ✅ Center the form
+  padding: 1rem;
+  overflow: hidden;
+
+  /* ✅ REMOVE Gradient on mobile */
+  &::after {
+    background: none;
+    content: none;
+  }
+
+  .mobileContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 90%; // ✅ Better control of width on mobile
+    padding: 1.4rem 1.2rem;
+    z-index: 10;
+  }
 }
