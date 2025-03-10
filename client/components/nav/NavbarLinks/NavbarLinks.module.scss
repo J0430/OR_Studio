@@ -11,7 +11,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.95); // ✅ Dark overlay
+  background: rgba(0, 0, 0, 0.6); // ✅ Dark overlay
   z-index: 1000; // ✅ Stays above other content
 }
 
@@ -50,6 +50,7 @@
   color: v.$white;
   text-transform: uppercase;
   cursor: pointer;
+  // transition: all 0.1s ease-in-out;
 
   &:hover {
     color: v.$hover-bg;

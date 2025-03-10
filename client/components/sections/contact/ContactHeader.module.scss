@@ -3,6 +3,7 @@
 
 .contactContainer {
   display: flex;
+
   flex-direction: column;
   box-sizing: border-box;
 
@@ -60,7 +61,7 @@
     font-weight: 500;
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 0.5rem;
-    width: 90%;
+    width: 100%;
     line-height: 1.4;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
