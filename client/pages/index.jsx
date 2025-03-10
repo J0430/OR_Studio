@@ -12,13 +12,13 @@ import styles from "@styles/pages/home.module.scss";
 
 // Dynamic imports
 const LandingPage = dynamic(
-  () => import("@components/sections/homeSections//LandingPage/LandingPage")
+  () => import("@components/sections/home/LandingPage/LandingPage")
 );
 const AboutBanner = dynamic(
-  () => import("@components/sections/homeSections/AboutBanner/AboutBanner")
+  () => import("@components/sections/home/AboutBanner/AboutBanner")
 );
 const ProjectBanner = dynamic(
-  () => import("@components/sections/homeSections/ProjectBanner/ProjectBanner")
+  () => import("@components/sections/home/ProjectBanner/ProjectBanner")
 );
 const DirectionalButton = dynamic(
   () => import("@components/common/DirectionalButton/DirectionalButton"),
