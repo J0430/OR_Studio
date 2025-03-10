@@ -8,8 +8,8 @@ const ContactHeader = ({ title, content }) => {
         isMobile ? styles.mobileContactContainer : styles.contactContainer
       }>
       <h2 className>{title}</h2>
-      {content.map((paragraph, index) => (
-        <p key={index}>{paragraph}</p>
+      {content?.map((paragraph, index) => (
+        <p key={index}>{paragraph || ""}</p>
       ))}
     </div>
   );
