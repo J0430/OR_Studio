@@ -7,14 +7,26 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
   z-index: 1000000;
   @include m.center-flex;
   pointer-events: none;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.8s ease-in-out;
+
+  /* ✅ Glassmorphism Blur & Dark Overlay */
+  backdrop-filter: blur(15px); // Controls the blur intensity
+  -webkit-backdrop-filter: blur(15px); // Safari support
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.35
+  ); // Dark semi-transparent overlay like in the image
 }
 
+/* ✅ Adjust logo inside preloader */
 .logo {
   width: m.rem(100);
   height: auto;
+  object-fit: contain;
+  z-index: 10;
 }

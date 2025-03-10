@@ -79,8 +79,8 @@
 }
 
 .dropdownItem {
-  padding: m.rem(2) m.rem(10);
-  margin-bottom: m.rem(4);
+  padding: m.rem(4) m.rem(10);
+  margin-bottom: m.rem(7);
   font-size: 16px;
   color: rgba(255, 255, 255, 0.9);
   text-align: center;
@@ -89,11 +89,11 @@
   border-radius: 10px;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.713);
-    color: black;
+    background: rgba(255, 255, 255, 0.785);
+    color: rgb(255, 255, 255);
   }
 }
 .activeItem {
-  background-color: #343c48b0 !important; // ✅ Ensure it stays active
+  background-color: #343c48e6 !important; // ✅ Ensure it stays active
   font-weight: bold;
 }

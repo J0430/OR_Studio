@@ -5,6 +5,7 @@ import Image from "next/image";
 import styles from "../ProjectsGrid/ProjectsGrid.module.scss";
 import { useMediaQuery } from "react-responsive";
 
+// ✅ Individual Grid Item with Animation
 const GridItem = ({ imagePath, index, onImageClick, showImages }) => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
@@ -18,10 +19,18 @@ const GridItem = ({ imagePath, index, onImageClick, showImages }) => {
       tabIndex={0}
       role="button"
       aria-label={`Open modal for Project ${index + 1}`}
-      initial={{ opacity: 0, y: 75 }}
+      initial={{ opacity: 0, y: 100 }} // ✅ Start from bottom
       animate={
-        inView
-          ? { opacity: 1, y: 0, transition: { duration: 1.3, ease: "easeOut" } }
+        inView && showImages
+          ? {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 0.8,
+                ease: "easeOut",
+                delay: index * 0.08, // ✅ Stagger effect
+              },
+            }
           : {}
       }>
       {showImages ? (
@@ -40,22 +49,23 @@ const GridItem = ({ imagePath, index, onImageClick, showImages }) => {
     </motion.article>
   );
 };
-const ProjectGrid = ({ projects, onImageClick }) => {
-  if (!projects || projects.length === 0) {
-    return <div>No projects available at this time.</div>;
-  }
 
+// ✅ Main Grid Component
+const ProjectGrid = ({ projects, onImageClick }) => {
   const [showImages, setShowImages] = useState(false);
+
+  // ✅ Delay loading until preloader is done
   useEffect(() => {
-    let timeout = setTimeout(() => {
-      setShowImages(true); // Ensures images load only on the client
-    }, 4000);
+    const timeout = setTimeout(() => setShowImages(true), 500);
     return () => clearTimeout(timeout);
   }, []);
 
-  // ✅ Use `useMediaQuery` for dynamic grid layout
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const gridColumns = isMobile ? "repeat(2, 1fr)" : "repeat(3, 1fr)"; // ✅ 3 columns on desktop, 2 on mobile
+  const gridColumns = isMobile ? "repeat(2, 1fr)" : "repeat(3, 1fr)";
+
+  if (!projects || projects.length === 0) {
+    return <div>No projects available at this time.</div>;
+  }
 
   return (
     <motion.section
@@ -67,7 +77,7 @@ const ProjectGrid = ({ projects, onImageClick }) => {
         style={{ display: "grid", gridTemplateColumns: gridColumns }}>
         {projects.map((imagePath, index) => (
           <GridItem
-            key={`${imagePath || "default"}-${index}`} // ✅ Unique Key Fix
+            key={`${imagePath || "default"}-${index}`}
             imagePath={imagePath}
             index={index}
             onImageClick={onImageClick}

@@ -12,13 +12,13 @@ import styles from "@styles/pages/home.module.scss";
 
 // Dynamic imports
 const LandingPage = dynamic(
-  () => import("@components/sections/home/LandingPage/LandingPage")
+  () => import("@components/sections/homeSections/LandingPage/LandingPage")
 );
 const AboutBanner = dynamic(
-  () => import("@components/sections/home/AboutBanner/AboutBanner")
+  () => import("@components/sections/homeSections/AboutBanner/AboutBanner")
 );
 const ProjectBanner = dynamic(
-  () => import("@components/sections/home/ProjectBanner/ProjectBanner")
+  () => import("@components/sections/homeSections/ProjectBanner/ProjectBanner")
 );
 const DirectionalButton = dynamic(
   () => import("@components/common/DirectionalButton/DirectionalButton"),
@@ -47,7 +47,6 @@ export const getStaticProps = async () => {
 
 export default function Home({ homeData }) {
   const isMobile = useMediaQuery({ maxWidth: 768 });
-
   const { isNavOpen } = useNav();
   const { isPreloaderVisible, onImageLoad } = usePreloader();
   const [isPageReady, setIsPageReady] = useState(false);

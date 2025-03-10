@@ -7,24 +7,34 @@
   width: 100%;
   height: 100dvh;
   background-color: v.$black;
+  padding: m.rem(24);
+  text-align: center;
+  overflow: hidden;
 
   .textContainer {
-    width: 100%;
     max-width: 62.5rem;
-    max-width: 100%;
-    margin-bottom: 1%;
     padding: 2rem;
-    text-align: center;
+  }
 
-    .description {
-      color: v.$white;
-      font-size: m.rem(25);
-      line-height: 1.5;
-      margin-bottom: m.rem(24);
-      font-weight: 300;
-      font-family: v.$font-family-base;
-      opacity: 0.9;
-    }
+  .description {
+    font-size: m.rem(25);
+    font-weight: 500;
+    line-height: 1.6;
+    font-family: v.$font-family-base;
+    margin-bottom: m.rem(32);
+    color: v.$white;
+    display: inline-block;
+    text-align: justify;
+  }
+
+  .word {
+    display: inline-block;
+    white-space: nowrap;
+    opacity: 0.8; // ✅ Static initial opacity
+    transform: scale(0.95); // ✅ Static initial smaller size
+    transition:
+      opacity 0.12s ease-out,
+      transform 0.12s ease-out; // ✅ Backup smooth transition
   }
 
   .linkWrapper {
@@ -48,16 +58,10 @@
   }
 }
 
-/* Responsive Font Adjustments */
+/* ✅ Responsive */
 @include m.respond-to("tablet") {
   .description {
-    font-size: m.rem(24);
-  }
-  .linkWrapper {
-    .link {
-      font-size: m.rem(20);
-      padding: m.rem(16);
-    }
+    font-size: m.rem(22);
   }
 }
 
@@ -65,22 +69,10 @@
   .description {
     font-size: m.rem(18);
   }
-  .linkWrapper {
-    .link {
-      font-size: m.rem(16);
-      padding: m.rem(12);
-    }
-  }
 }
 
 @include m.respond-to("small-mobile") {
   .description {
-    font-size: m.rem(18);
-  }
-  .linkWrapper {
-    .link {
-      font-size: m.rem(14);
-      padding: m.rem(10);
-    }
+    font-size: m.rem(16);
   }
 }
