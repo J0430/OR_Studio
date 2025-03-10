@@ -1,10 +1,12 @@
 import { useInView } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import styles from "./AboutBanner.module.scss";
 
 const AboutBanner = () => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const ref = useRef(); // Reference for in-view detection
   const isInView = useInView(ref, { once: true, margin: "-30% 0px" }); // Trigger when 30% in view
 
@@ -13,8 +15,13 @@ const AboutBanner = () => {
   const words = text.split(" "); // Split paragraph into words
 
   return (
-    <div ref={ref} className={styles.aboutWrapper}>
-      <div className={styles.textContainer}>
+    <div
+      ref={ref}
+      className={isMobile ? styles.mobileAboutWrapper : styles.aboutWrapper}>
+      <div
+        className={
+          isMobile ? styles.mobileTextContainer : styles.textContainer
+        }>
         <p className={styles.description}>
           {words.map((word, index) => (
             <motion.span
@@ -26,7 +33,7 @@ const AboutBanner = () => {
                   : { opacity: 0.8, scale: 0.95 }
               } // ✅ Animate to full size and opacity
               transition={{
-                delay: index * 0.25, // ✅ Per word delay (like dictation)
+                delay: index * 0.12, // ✅ Smaller delay for mobile smoothness
                 duration: 0.4, // ✅ Tiny smooth grow effect
               }}
               className={styles.word}>
@@ -42,7 +49,7 @@ const AboutBanner = () => {
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{
             duration: 0.5,
-            delay: words.length * 0.25 + 0.3, // After last word finishes
+            delay: words.length * 0.12 + 0.3, // After last word finishes
           }}
           whileHover={{
             scale: 1.08,
