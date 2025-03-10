@@ -52,9 +52,9 @@ export default function ContactPage() {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      <div className={isMobile ? styles.mobileContactPage : styles.contactPage}>
+      <div className={styles.contactPage}>
         <motion.div
-          className={isMobile ? styles.mobileContent : styles.content}
+          className={styles.content}
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}>
@@ -66,7 +66,9 @@ export default function ContactPage() {
             ]}
           />
 
+          {/* ✅ Form */}
           <motion.div
+            className={styles.formContainer}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}>

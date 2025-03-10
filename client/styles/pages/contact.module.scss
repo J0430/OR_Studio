@@ -1,13 +1,11 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-/* ================================ */
-/* ✅ DESKTOP ONLY STYLES           */
-/* ================================ */
+/* ✅ Main Contact Page */
 .contactPage {
   display: flex;
   flex-direction: row;
-  height: 100dvh;
+  min-height: 100svh; // ✅ FIXED: Respect visible mobile height
   width: 100vw;
   background-image: url("https://res.cloudinary.com/dugudxkyu/image/upload/v1728046515/Offir%20projects/Contact%20us/contact_us_uphao8.jpg");
   background-position: center;
@@ -18,7 +16,7 @@
   z-index: 0;
   overflow: hidden;
 
-  /* ✅ Gradient only on Desktop */
+  /* ✅ Gradient overlay for desktop */
   &::after {
     content: "";
     position: absolute;
@@ -31,6 +29,7 @@
     z-index: 1;
   }
 
+  /* ✅ Desktop Form Content */
   .content {
     display: flex;
     flex-direction: column;
@@ -45,36 +44,35 @@
   }
 }
 
-/* ================================ */
-/* ✅ MOBILE ONLY STYLES            */
-/* ================================ */
-.mobileContactPage {
-  display: flex;
-  flex-direction: column;
-  height: 100dvh;
-  width: 100vw;
-  background-image: url("https://res.cloudinary.com/dugudxkyu/image/upload/v1728046515/Offir%20projects/Contact%20us/contact_us_uphao8.jpg");
-  background-position: center;
-  background-size: 120%;
-  background-repeat: no-repeat;
-  position: relative;
-  justify-content: center; // ✅ Center the form
-  align-items: center; // ✅ Center the form
-  padding: 1rem;
-  overflow: hidden;
+/* ✅ Mobile fixes */
+@media screen and (max-width: 768px) {
+  .contactPage {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.4rem 1.2rem; // ✅ Avoid fixed height
+    min-height: 100svh; // ✅ Respect visible height (modern mobile browsers) // ✅ Add some space around form
+    background-position: center; // ✅ Keep image centered
 
-  /* ✅ REMOVE Gradient on mobile */
-  &::after {
-    background: none;
-    content: none;
+    /* ✅ Remove gradient */
+    &::after {
+      background: none;
+    }
+
+    .content {
+      width: 100%;
+      margin: 0;
+      padding: 1rem 0;
+      align-items: center;
+      text-align: center;
+    }
   }
-
-  .mobileContent {
-    margin-top: 3%;
+  .formContainer {
+    width: 100%; // Full width by default
+    margin: 0 auto; // ✅ Center horizontally
+    padding: 0; // ✅ Internal spacing
     display: flex;
     flex-direction: column;
-    max-width: 80%; // ✅ Better control of width on mobile
-    padding: 1.4rem 1.2rem;
-    z-index: 10;
+    align-items: center; // Center form fields
   }
 }
