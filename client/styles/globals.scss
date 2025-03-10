@@ -12,6 +12,17 @@
   padding: 0;
   box-sizing: border-box;
 }
+// In globals.scss
+* {
+  caret-color: transparent;
+}
+
+/* Keep caret where it belongs */
+input,
+textarea,
+[contenteditable="true"] {
+  caret-color: auto;
+}
 
 /* ✅ Prevent Text Scaling on Mobile */
 html {

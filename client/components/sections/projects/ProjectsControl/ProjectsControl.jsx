@@ -31,14 +31,12 @@ const ProjectsControl = ({
               isMobile ? styles.mobileProjectsSelector : styles.projectsSelector
             }
             aria-label="Category Navigation">
-            {isMobile ? (
+            {isMobile && (
               <DropdownMenu
                 categories={categories}
                 selectedCategory={selectedCategory}
                 onCategorySelect={onCategorySelect}
               />
-            ) : (
-              <h2 className={styles.projectsTitle}>Works</h2>
             )}
 
             {!isMobile &&

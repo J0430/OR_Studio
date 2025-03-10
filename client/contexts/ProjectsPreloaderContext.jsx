@@ -7,7 +7,7 @@ const ProjectsPreloaderContext = createContext();
 export const ProjectsPreloaderProvider = ({ children }) => {
   const [isPreloaderVisible, setIsPreloaderVisible] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(0);
-  const totalImages = 50; // Adjust based on your project needs.
+  const totalImages = 10; // Adjust based on your project needs.
 
   // 🔹 Hide preloader once all images are loaded
   useEffect(() => {
@@ -18,7 +18,7 @@ export const ProjectsPreloaderProvider = ({ children }) => {
 
   // 🔹 Ensure preloader disappears after 4 seconds (fallback)
   useEffect(() => {
-    const timeout = setTimeout(() => setIsPreloaderVisible(false), 3500);
+    const timeout = setTimeout(() => setIsPreloaderVisible(false), 2800);
     return () => clearTimeout(timeout);
   }, []);
 
