@@ -29,7 +29,7 @@ export default function ContactPage() {
     <>
       {/* ✅ SEO Metadata */}
       <Head>
-        <title>Contact Us | OR Studio</title>
+        <title>OR Studio | Contact Us</title>
         <meta
           name="description"
           content="Get in touch with OR Studio to bring your architectural vision to life. Contact us today!"
