@@ -59,12 +59,7 @@ export default function ContactPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}>
           {/* ✅ Contact Header */}
-          <ContactHeader
-            title="Let’s Get Started!"
-            content={[
-              "Ready to transform your architectural ideas into stunning visuals?",
-            ]}
-          />
+          <ContactHeader title="Let’s Get Started!" />
 
           {/* ✅ Form */}
           <motion.div
