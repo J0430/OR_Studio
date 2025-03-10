@@ -126,7 +126,7 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
   return (
     <>
       <Head>
-        <title>Contact Us | OR Studio</title>
+        <title>OR Studio | Works </title>
         <meta
           name="description"
           content="Get in touch with OR Studio to bring your architectural vision to life. Contact us today!"

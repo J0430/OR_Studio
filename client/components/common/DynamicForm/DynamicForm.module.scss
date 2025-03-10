@@ -2,8 +2,8 @@
 @use "@styles/partials/mixins" as m;
 
 /* ✅ General Form Styling */
-.contactForm,
-.mobileContactForm {
+.mobileContactForm,
+.contactForm {
   padding: 2rem;
   border-radius: 0.375rem;
   border: 1px solid rgba(61, 68, 77, 0.7);
@@ -16,10 +16,8 @@
   box-sizing: border-box;
 }
 
-/* ✅ Mobile-specific adjustments */
-.mobileContactForm {
-  padding: 1rem;
-  text-align: left;
+.mobileContactForm .logoWrapper {
+  margin-bottom: 0.5rem;
 }
 
 .logoWrapper {
@@ -38,6 +36,10 @@
 
 /* ✅ Stack inputs on mobile */
 @media (max-width: 768px) {
+  .mobileContactForm {
+    padding: 1rem;
+    text-align: left;
+  }
   .formRow {
     flex-direction: column;
 
@@ -66,9 +68,9 @@
     background: rgba(0, 0, 0, 0.68);
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 0.6rem;
+    padding: 0.5rem;
     border-radius: 0.375rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
     transition:
       border 0.3s ease-in-out,
       color 0.3s ease-in-out;
@@ -94,29 +96,52 @@
 
 /* ✅ Submit Button */
 .submitButton {
+  position: relative;
   margin-top: 0.5rem;
   font-size: 1.1rem;
   padding: 0.6rem;
   width: 35%;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  background-color: rgb(20, 20, 20);
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  border-radius: 1rem;
-  background-color: rgb(20, 20, 20);
-  transition: all 0.3s ease-in-out;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  overflow: hidden; // Needed for hiding overflow of ::before
+  transition:
+    color 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
 
-  span {
-    color: rgba(255, 255, 255, 0.75);
-    font-weight: 500;
+  // ✅ Filling effect
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0; // Start empty
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9); // Color that fills on hover
+    transition: width 0.4s ease-in-out; // Smooth fill
+    z-index: 0;
+    border-radius: inherit; // Keeps rounded corners
   }
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.9);
-    span {
-      color: black;
-    }
+  span {
+    position: relative;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+  }
+
+  // ✅ Hover effect
+  &:hover::before {
+    width: 100%; // Fill full width
+  }
+
+  &:hover span {
+    color: black; // Optional: make text black when filled
   }
 }
