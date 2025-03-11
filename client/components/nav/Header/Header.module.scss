@@ -111,3 +111,8 @@
   align-items: center;
   pointer-events: all; // ✅ Fully interactive when open
 }
+@media screen and (max-width: 768px) {
+  .navContent {
+    padding: 1rem;
+  }
+}

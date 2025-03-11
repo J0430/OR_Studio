@@ -7,15 +7,13 @@ import styles from "./DynamicForm.module.scss";
 import Image from "next/image";
 
 const DynamicForm = ({ schema, title, logo }) => {
-  const isMobile = useMediaQuery({ maxWidth: 768 });
-
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
   } = useForm({ resolver: yupResolver(schema) });
-
+  const isMobile = useMediaQuery({ maxDeviceWidth: 768 });
   const [serverError, setServerError] = useState("");
   const [success, setSuccess] = useState(false);
 
@@ -40,9 +38,7 @@ const DynamicForm = ({ schema, title, logo }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={isMobile ? styles.mobileContactForm : styles.contactForm}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.contactForm}>
       {/* ✅ Logo */}
       {logo && (
         <div className={styles.logoWrapper}>
@@ -56,7 +52,7 @@ const DynamicForm = ({ schema, title, logo }) => {
       )}
 
       {/* ✅ First Name & Last Name in a Row */}
-      <div className={isMobile ? styles.columnFormRow : styles.formRow}>
+      <div className={styles.formRow}>
         <div className={styles.formGroup}>
           <label>First Name</label>
           <input
