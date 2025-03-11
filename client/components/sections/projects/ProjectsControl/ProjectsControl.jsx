@@ -13,33 +13,20 @@ const ProjectsControl = ({
   const { isNavOpen } = useNav();
 
   return (
-    <section
-      className={
-        isMobile ? styles.mobileProjectsControl : styles.projectsControl
-      }
-      aria-label="Project Categories">
-      {/* ✅ Hide dropdown when `NavLinks` is open */}
+    <section className={styles.projectsControl} aria-label="Project Categories">
+      {/* ✅ Hide selector if NavLinks is open */}
       {!isNavOpen && (
-        <div
-          className={
-            isMobile
-              ? styles.mobileProjectsSelectorWrapper
-              : styles.projectsSelectorBox
-          }>
+        <div className={styles.projectsSelectorBox}>
           <nav
-            className={
-              isMobile ? styles.mobileProjectsSelector : styles.projectsSelector
-            }
+            className={styles.projectsSelector}
             aria-label="Category Navigation">
-            {isMobile && (
+            {isMobile ? (
               <DropdownMenu
                 categories={categories}
                 selectedCategory={selectedCategory}
                 onCategorySelect={onCategorySelect}
               />
-            )}
-
-            {!isMobile &&
+            ) : (
               categories.map((category) => (
                 <CategoryTab
                   key={category}
@@ -47,7 +34,8 @@ const ProjectsControl = ({
                   selectedCategory={selectedCategory}
                   onCategorySelect={onCategorySelect}
                 />
-              ))}
+              ))
+            )}
           </nav>
         </div>
       )}

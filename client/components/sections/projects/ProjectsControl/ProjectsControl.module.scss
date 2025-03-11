@@ -1,7 +1,7 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-/* 🔹 Main Section */
+/* 🔹 Main Section (for both mobile & desktop) */
 .projectsControl {
   display: flex;
   flex-direction: column;
@@ -14,21 +14,11 @@
   @include m.scrollbar-style(v.$gray, v.$white);
   padding: m.rem(16);
   box-sizing: border-box;
-  z-index: 10;
+  z-index: 100000;
+  position: relative; // to handle any absolute elements inside
 }
 
-/* 🔹 Title Styling */
-.projectsTitle {
-  font-size: clamp(m.rem(28), 5vw, m.rem(45));
-  font-weight: 500;
-  letter-spacing: -0.625px;
-  line-height: 1.2;
-  color: v.$white;
-  text-align: left;
-  margin-bottom: 3%;
-}
-
-/* 🔹 Desktop Selector */
+/* 🔹 Selector Box */
 .projectsSelectorBox {
   display: flex;
   flex-direction: column;
@@ -45,29 +35,7 @@
   }
 }
 
-/* 🔹 Mobile Styles */
-.mobileProjectsControl {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background: transparent;
-  box-sizing: border-box;
-
-  .mobileProjectsSelectorWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    max-width: 90vw;
-    position: fixed;
-    top: 1.3rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000; // ✅ Ensures dropdown is above other elements
-  }
-}
-
-/* 🔹 Smooth Scrolling */
+/* 🔹 Smooth Scrolling for Overflow */
 .projectsOverFlow {
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch;
@@ -85,5 +53,63 @@
   &::-webkit-scrollbar-thumb {
     background-color: v.$gray;
     border-radius: 4px;
+  }
+}
+
+/* 🔹 Title */
+.projectsTitle {
+  font-size: clamp(m.rem(28), 5vw, m.rem(45));
+  font-weight: 500;
+  letter-spacing: -0.625px;
+  line-height: 1.2;
+  color: v.$white;
+  text-align: left;
+  margin-bottom: 3%;
+}
+
+/* ✅ Mobile Adjustments */
+@media (max-width: 768px) {
+  .projectsControl {
+    background: transparent; // ✅ Remove background
+    padding: 0; // ✅ Remove padding for mobile dropdown
+    justify-content: center;
+    min-height: auto;
+    max-height: none;
+  }
+
+  .projectsSelectorBox {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    max-width: 90vw;
+    z-index: 1000; // ✅ Ensure dropdown is above all
+
+    .projectsSelector {
+      flex-wrap: nowrap; // ✅ Horizontal scrolling
+      overflow-x: auto;
+      justify-content: flex-start;
+      padding: 0 m.rem(12);
+      gap: m.rem(12);
+
+      &::-webkit-scrollbar {
+        height: 6px; // ✅ Small horizontal scrollbar
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: v.$gray;
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: v.$black;
+      }
+    }
+  }
+
+  .projectsTitle {
+    text-align: center; // ✅ Center title
+    margin-bottom: m.rem(12); // ✅ Reduce margin
   }
 }

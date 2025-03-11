@@ -26,9 +26,9 @@ const GridItem = ({ imagePath, index, onImageClick, showImages }) => {
               opacity: 1,
               y: 0,
               transition: {
-                duration: 0.8,
+                duration: 0.4,
                 ease: "easeOut",
-                delay: index * 0.08, // ✅ Stagger effect
+                delay: index * 0.006, // ✅ Stagger effect
               },
             }
           : {}
