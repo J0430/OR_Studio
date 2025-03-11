@@ -1,17 +1,26 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
+/* ✅ Unified Contact Container */
 .contactContainer {
   display: flex;
-
   flex-direction: column;
+  width: 100%;
   box-sizing: border-box;
+  align-self: center;
+  text-align: left;
+
+  /* ✅ Avoid text resizing in mobile Safari */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 
   h2 {
     font-size: 1.5rem;
     font-weight: 500;
     color: white;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.5rem;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -28,43 +37,21 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-}
 
-/* ✅ Mobile adjustments */
-.mobileContactContainer {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  text-align: left;
-  align-self: center;
-  overflow-y: hidden;
-  box-sizing: border-box;
+  /* ✅ Mobile responsive adjustments */
+  @media screen and (max-width: 768px) {
+    align-items: left; // ✅ Center content on mobile
+    padding-bottom: 1rem;
 
-  /* Prevents unwanted text resizing on mobile Safari */
-  -webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  text-size-adjust: 100%;
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
 
-  h2 {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: white;
-    margin-bottom: 0.2rem;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  p {
-    font-size: 1rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 0.5rem;
-    width: 100%;
-    line-height: 1.4;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    p {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
   }
 }
