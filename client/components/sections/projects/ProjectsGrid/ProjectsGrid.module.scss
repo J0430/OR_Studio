@@ -6,7 +6,8 @@
   height: 100%;
   overflow-y: inherit;
   overflow-x: hidden;
-  -webkit-overflow-scrolling: touch; // Fix for Safari smooth scrolling
+  -webkit-overflow-scrolling: touch;
+  z-index: 1;
 }
 
 .projectsGridContainer {

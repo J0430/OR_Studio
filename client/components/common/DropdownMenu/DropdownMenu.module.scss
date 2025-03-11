@@ -62,7 +62,7 @@
 
 .dropdownContent {
   position: relative;
-  top: 120%;
+
   left: 0%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.8);
@@ -76,6 +76,7 @@
   box-shadow:
     0 2px 4px rgba(0, 0, 0, 0.2),
     0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
 }
 
 .dropdownItem {
