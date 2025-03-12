@@ -2,6 +2,27 @@
 @use "@styles/partials/mixins" as m;
 
 /* =========================== */
+/* ✅ THEME VARIABLES (CSS VARS) */
+/* =========================== */
+
+:root {
+  --background-color: #121212;
+  --overlay-background: rgba(0, 0, 0, 0.8);
+  --text-color: #ffffff;
+  --border-strong: #ffffff;
+  --text-color-preloader: #a5b7bb;
+  --overlay-background: rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="light"] {
+  --background-color: #ffffff;
+  --overlay-background: rgba(0, 0, 0, 0.1);
+  --text-color: #000000;
+  --border-strong: #000000;
+  --overlay-background: rgba(255, 255, 255, 0.4);
+}
+
+/* =========================== */
 /* ✅ RESET & GLOBAL STYLES    */
 /* =========================== */
 
@@ -11,64 +32,46 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-// In globals.scss
-* {
   caret-color: transparent;
 }
 
-/* Keep caret where it belongs */
 input,
 textarea,
 [contenteditable="true"] {
   caret-color: auto;
 }
 
-/* ✅ Prevent Text Scaling on Mobile */
 html {
   font-size: v.$base-font-size;
   line-height: v.$line-height;
   scroll-behavior: smooth;
   overflow-x: hidden;
-  -webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
-/* =========================== */
-/* ✅ BODY STYLES              */
-/* =========================== */
 body {
   font-family: v.$font-family-base;
-  background-color: v.$primary-color;
-  color: v.$secondary-color;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100dvh;
   overflow-x: hidden;
-  min-height: 100dvh; /* ✅ Fix iOS 100vh issue */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeSpeed;
   margin: 0;
   padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0)
     env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
-
-  /* ✅ Background Fix */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-
-  /* ✅ Hide Scrollbars */
-  -ms-overflow-style: none;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-
   @include m.scrollbar-style(
     rgba(255, 255, 255, 0.3),
     rgba(255, 255, 255, 0.6)
   );
 }
 
-/* ✅ Fix for iOS Safari’s 100vh issue */
 @supports (-webkit-touch-callout: none) {
   body {
     min-height: 100dvh;
@@ -78,6 +81,7 @@ body {
 /* =========================== */
 /* ✅ TYPOGRAPHY               */
 /* =========================== */
+
 h1,
 h2,
 h3,
@@ -92,28 +96,21 @@ p {
   margin-bottom: m.rem(16);
 }
 
-/* ✅ Image Fix */
 img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
   display: block;
-  -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
 
 /* =========================== */
-/* ✅ INTERACTION & MOBILE FIXES */
+/* ✅ INTERACTIONS & FORMS     */
 /* =========================== */
+
 button,
 a {
-  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
-}
-
-ul,
-ol {
-  list-style: none;
-  padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 a {
@@ -127,18 +124,23 @@ button {
   font-family: inherit;
 }
 
-/* =========================== */
-/* ✅ FORM WIDTH FIX           */
-/* =========================== */
-.form-container {
-  max-width: 90%;
-  width: 100%;
-  margin: auto;
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* =========================== */
-/* ✅ UTILITY CLASSES          */
+/* ✅ UTILITIES               */
 /* =========================== */
-.hidden {
+
+.u-hidden {
   display: none !important;
+}
+
+.u-form-wrapper {
+  max-width: 90%;
+  width: 100%;
+  margin: auto;
 }

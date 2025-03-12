@@ -1,8 +1,11 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-/* ✅ Main Contact Page */
+/* =========================== */
+/* ✅ Main Contact Page        */
+/* =========================== */
 .contactPage {
+  /* Layout & Positioning */
   display: flex;
   flex-direction: row;
   min-height: 100svh; // ✅ FIXED: Respect visible mobile height
@@ -50,7 +53,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     padding: 1.4rem 1.2rem; // ✅ Avoid fixed height
     min-height: 100svh; // ✅ Respect visible height (modern mobile browsers) // ✅ Add some space around form
     background-position: center; // ✅ Keep image centered
@@ -68,6 +70,7 @@
       text-align: left;
     }
   }
+
   .formContainer {
     width: 100%; // Full width by default
     margin: 0 auto; // ✅ Center horizontally

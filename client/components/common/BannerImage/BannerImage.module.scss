@@ -1,11 +1,17 @@
+/* =========================== */
+/* ✅ Image Wrapper             */
+/* =========================== */
 .imageWrapper {
   position: absolute;
   width: 100%;
-  height: 100vh;
+  height: 100vh; /* Takes the full viewport height */
 }
 
+/* =========================== */
+/* ✅ Image Style               */
+/* =========================== */
 .image {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+  object-fit: cover; /* Ensures the image fully covers the container */
+  width: 100%; /* Ensures full width */
+  height: 100%; /* Ensures full height */
 }

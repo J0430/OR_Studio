@@ -7,20 +7,23 @@ const LandingPage = ({ images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef(null);
 
+  // Handle image index update for the carousel
   const updateImageIndex = useCallback(() => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
   }, [images?.length]);
 
+  // Set interval to change images every 4 seconds
   useEffect(() => {
     if (images?.length > 0) {
       intervalRef.current = setInterval(updateImageIndex, 4000);
     }
 
-    return () => clearInterval(intervalRef.current);
+    return () => clearInterval(intervalRef.current); // Clear interval on unmount
   }, [images, updateImageIndex]);
 
   return (
     <motion.section className={styles.bannerWrapper}>
+      {/* Animate image transition */}
       <AnimatePresence mode="wait">
         {images?.length > 0 && (
           <motion.div
@@ -37,11 +40,13 @@ const LandingPage = ({ images }) => {
               priority={currentImageIndex === 0} // Preload first image
               style={{ objectFit: "cover" }}
               className={styles.bannerImage}
+              aria-label={`Background image number ${currentImageIndex + 1}`}
             />
           </motion.div>
         )}
       </AnimatePresence>
 
+      {/* Banner Title and Subtitle with smooth animations */}
       <motion.div className={styles.bannerTitleWrapper}>
         <motion.div
           className={styles.titleLineWrapper}

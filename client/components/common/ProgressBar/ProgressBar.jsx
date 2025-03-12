@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import styles from "../ProgressBar/ProgressBar.module.scss";
 
-const ProgressBar = ({ isActive, duration }) => {
+const ProgressBar = ({ isActive, duration, onClick }) => {
   return (
-    <div className={styles.progressWrapper}>
+    <div className={styles.progressWrapper} onClick={onClick}>
       <motion.div
         className={styles.progressBar}
         initial={{ width: "0%" }}

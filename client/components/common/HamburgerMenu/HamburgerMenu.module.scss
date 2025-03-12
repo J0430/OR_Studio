@@ -1,27 +1,96 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+/* =========================== */
+/* ✅ Hamburger Menu Wrapper   */
+/* =========================== */
+
 .hamburger {
+  /* ===== Layout ===== */
+  position: relative;
+  width: m.rem(44); // Increased to balance with logo (desktop)
+  height: m.rem(44);
+
+  /* ===== Alignment ===== */
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  width: 40px;
-  height: 40px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 1000;
 
-  &:focus {
-    outline: none;
+  /* ===== Visual ===== */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  /* ===== Layering ===== */
+  z-index: 1100;
+  pointer-events: all;
+}
+
+/* =========================== */
+/* ✅ Lines Styling            */
+/* =========================== */
+
+.line {
+  /* ===== Layout & Alignment ===== */
+  position: absolute;
+  width: 65%; // Elegant proportion for the lines
+  height: m.rem(3);
+  background: v.$white;
+  border-radius: m.rem(2);
+
+  /* ===== Transitioning ===== */
+  transition:
+    transform 0.3s ease-in-out,
+    top 0.3s ease-in-out,
+    bottom 0.3s ease-in-out,
+    opacity 0.3s ease-in-out;
+
+  &:nth-child(1) {
+    top: m.rem(10); // Spacing for the first line
+    transform-origin: center;
+  }
+
+  &:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: center;
+  }
+
+  &:nth-child(3) {
+    bottom: m.rem(10); // Spacing for the third line
+    transform-origin: center;
   }
 }
 
-.line {
-  width: 30px;
-  height: 3px;
-  background-color: white; // Change to white if dark background
-  border-radius: 3px;
-  display: block;
-  position: relative;
+/* =========================== */
+/* ✅ Hover & Focus States     */
+/* =========================== */
+
+.hamburger:hover .line {
+  background: v.$gray; // Lighter gray when hovered
+}
+
+/* =========================== */
+/* ✅ Responsive Adjustments   */
+/* =========================== */
+
+@media (max-width: 768px) {
+  .hamburger {
+    width: m.rem(36); // Bigger on mobile to match the logo
+    height: m.rem(36);
+  }
+
+  .line {
+    height: m.rem(2); // Thinner for elegance on mobile
+    width: 60%; // Slightly smaller lines on mobile
+  }
+
+  .line:nth-child(1) {
+    top: m.rem(9); // Adjusted for mobile
+  }
+
+  .line:nth-child(3) {
+    bottom: m.rem(9); // Adjusted for mobile
+  }
 }

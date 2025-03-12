@@ -1,19 +1,41 @@
+/* =========================== */
+/* ✅ Typing Effect Container  */
+/* =========================== */
 .typingContainer {
   display: inline-block;
   overflow: hidden;
 
-  border-right: 0.1em solid #a5b7bb;
+  /* Visual */
+  border-right: 0.1em solid var(--text-color-preloader);
   white-space: nowrap;
+
+  /* Motion */
   animation:
     typing 3s steps(40, end),
     blink-caret 0.75s step-end infinite;
 }
 
+/* =========================== */
+/* ✅ Typing Text Style        */
+/* =========================== */
 .typingText {
-  color: #a5b7bb;
+  color: var(--text-color-preloader);
   font-size: 2rem;
+  font-weight: 500;
+
+  transition: opacity 0.3s ease-in-out;
 }
 
+/* =========================== */
+/* ✅ Remove Blinking Cursor When Done */
+/* =========================== */
+.noCursor {
+  border-right: none;
+}
+
+/* =========================== */
+/* ✅ Keyframes Animations     */
+/* =========================== */
 @keyframes typing {
   from {
     width: 0;
@@ -29,6 +51,6 @@
     border-color: transparent;
   }
   50% {
-    border-color: #a5b7bb;
+    border-color: var(--text-color-preloader);
   }
 }

@@ -1,0 +1,90 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+/* =========================== */
+/* ✅ Main Control Wrapper     */
+/* =========================== */
+.worksControl {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: m.rem(20) 0;
+}
+
+/* =========================== */
+/* ✅ Title Box               */
+/* =========================== */
+.worksTitleBox {
+  width: fit-content;
+  position: relative;
+  top: m.rem(15);
+  padding: 0 1rem;
+}
+
+.worksTitle {
+  font-size: clamp(m.rem(20), 4vw, m.rem(32));
+  font-weight: 200;
+  color: var(--text-color); // ✅ Theme color
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* =========================== */
+/* ✅ Selector (Tabs) Box      */
+/* =========================== */
+.worksSelectorBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 2%;
+  padding: 0 m.rem(16);
+  padding-top: m.rem(16); // Space from divider line
+  border-top: m.rem(1) solid rgba(255, 255, 255, 0.3); // Default fallback
+  border-top: m.rem(1) solid rgba(var(--border-strong), 0.3); // ✅ Theme border
+}
+
+.worksSelector {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================== */
+/* ✅ Mobile Dropdown Style    */
+/* =========================== */
+.worksDropdownMobile {
+  display: none; // ✅ Hidden by default
+  padding: 0 m.rem(16);
+}
+
+/* =========================== */
+/* ✅ Responsive Adjustments   */
+/* =========================== */
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .worksTitleBox {
+    display: none; // ✅ Hide title on mobile
+  }
+
+  .worksSelectorBox {
+    display: none; // ✅ Hide tabs on mobile
+  }
+  .worksControl {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 100;
+    left: 29%;
+    width: fit-content;
+    padding: 1.25rem 0;
+  }
+  .worksDropdownMobile {
+    width: 100%;
+    display: flex;
+    justify-content: center; // Center tabs horizontally
+    align-items: center;
+  }
+}

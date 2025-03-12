@@ -1,12 +1,18 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
+/* =========================== */
+/* ✅ Dropdown Container Styling */
+/* =========================== */
 .dropdownContainer {
   display: inline-block;
   width: 100%;
   text-align: center;
 }
 
+/* =========================== */
+/* ✅ Dropdown Button Styling   */
+/* =========================== */
 .dropdownButton {
   background: rgba(0, 0, 0, 0.8);
   color: white;
@@ -44,41 +50,12 @@
       display: flex;
       flex-basis: fit-content;
     }
-
-    // .arrowUp {
-    //   font-size: 1.5rem;
-
-    //   right: 6.5rem;
-    //   top: 1.1rem;
-    //   transform: rotate(180deg);
-    // }
   }
 }
 
-.categoryText {
-  flex-grow: 1;
-  text-align: left;
-}
-
-.dropdownContent {
-  position: relative;
-
-  left: 0%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 15px;
-  padding: 0.5em 0.5em;
-  min-width: 12rem; // ✅ Ensures it never goes smaller than 12rem
-  max-width: 100%; // ✅ Allows it to fit within its container
-  flex: 0 1 auto; // ✅ Prevents unnecessary stretching
-  display: flex;
-  flex-direction: column;
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.2),
-    0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 10000;
-}
-
+/* =========================== */
+/* ✅ Dropdown Item Styling     */
+/* =========================== */
 .dropdownItem {
   padding: m.rem(4) m.rem(10);
   margin-bottom: m.rem(7);
@@ -94,6 +71,7 @@
     color: rgb(255, 255, 255);
   }
 }
+
 .activeItem {
   background-color: #343c48e6 !important; // ✅ Ensure it stays active
   font-weight: bold;

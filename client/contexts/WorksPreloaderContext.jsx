@@ -1,39 +1,37 @@
-"use client";
+import { createContext, useContext, useState, useEffect } from "react";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+const WorksPreloaderContext = createContext();
 
-const ProjectsPreloaderContext = createContext();
-
-export const ProjectsPreloaderProvider = ({ children }) => {
+export const WorksPreloaderProvider = ({ children }) => {
   const [isPreloaderVisible, setIsPreloaderVisible] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(0);
-  const totalImages = 10; // Adjust based on your project needs.
+  const totalImages = 10; // ✅ Adjust as needed for your works
 
-  // 🔹 Hide preloader once all images are loaded
+  // ✅ Hide preloader once all images are loaded
   useEffect(() => {
     if (imagesLoaded >= totalImages) {
       setTimeout(() => setIsPreloaderVisible(false), 1000);
     }
-  }, [imagesLoaded]);
+  }, [imagesLoaded, totalImages]);
 
-  // 🔹 Ensure preloader disappears after 4 seconds (fallback)
+  // ✅ Fallback to hide preloader after 2.8 seconds
   useEffect(() => {
     const timeout = setTimeout(() => setIsPreloaderVisible(false), 2800);
     return () => clearTimeout(timeout);
   }, []);
 
-  // 🔹 Increment image load counter
+  // ✅ Increment image load counter
   const onImageLoad = () => setImagesLoaded((prev) => prev + 1);
 
   return (
-    <ProjectsPreloaderContext.Provider
-      value={{ isPreloaderVisible, onImageLoad }}>
+    <WorksPreloaderContext.Provider value={{ isPreloaderVisible, onImageLoad }}>
       {children}
-    </ProjectsPreloaderContext.Provider>
+    </WorksPreloaderContext.Provider>
   );
 };
 
-export const useProjectsPreloader = () => {
+// ✅ Updated Hook with proper warnings and SSR-safe fallback
+export const useWorksPreloader = () => {
   if (typeof window === "undefined") {
     return {
       isPreloaderVisible: false,
@@ -41,11 +39,11 @@ export const useProjectsPreloader = () => {
     };
   }
 
-  const context = useContext(ProjectsPreloaderContext);
+  const context = useContext(WorksPreloaderContext);
 
   if (!context) {
     console.warn(
-      "useProjectsPreloader must be used within a ProjectsPreloaderProvider"
+      "⚠️ useWorksPreloader must be used within a WorksPreloaderProvider"
     );
     return {
       isPreloaderVisible: false,

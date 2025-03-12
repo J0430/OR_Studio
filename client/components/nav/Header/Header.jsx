@@ -1,16 +1,15 @@
-import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNav } from "@contexts/NavContext";
 import { usePreloader } from "@contexts/MainPreloaderContext";
 import { logos } from "@utils/globals";
 import HamburgerMenu from "@components/common/HamburgerMenu/HamburgerMenu";
-import useClickOutside from "hooks/useClickOuside";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.scss";
 
+// ✅ Lazy load NavbarLinks
 const NavbarLinks = dynamic(() => import("../NavbarLinks/NavbarLinks"), {
   loading: () => <div>Loading Menu...</div>,
   ssr: false,
@@ -24,7 +23,7 @@ const Header = () => {
   if (isPreloaderVisible) return null;
 
   return (
-    <motion.div
+    <motion.header
       className={styles.navbar}
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
@@ -39,11 +38,10 @@ const Header = () => {
               width={isMobile ? 28 : 38}
               height={isMobile ? 33 : 43}
               priority
-              onClick={() => setIsNavOpen(false)}
+              onClick={() => setIsNavOpen(false)} // ✅ Close nav on logo click
             />
           </Link>
 
-          {/* ✅ Hamburger Button Controls Everything */}
           <HamburgerMenu
             isOpen={isNavOpen}
             onToggle={() => setIsNavOpen((prev) => !prev)}
@@ -51,7 +49,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* ✅ Menu Overlay */}
+      {/* ✅ Mobile Menu Overlay */}
       <AnimatePresence>
         {isNavOpen && (
           <motion.nav
@@ -64,7 +62,7 @@ const Header = () => {
           </motion.nav>
         )}
       </AnimatePresence>
-    </motion.div>
+    </motion.header>
   );
 };
 

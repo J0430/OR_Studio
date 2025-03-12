@@ -4,36 +4,41 @@ import { useNav } from "@contexts/NavContext";
 import Link from "next/link";
 import styles from "./NavbarLinks.module.scss";
 
+/* =========================== */
+/* ✅ Animation Variants       */
+/* =========================== */
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.5 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+};
+
 const NavbarLinks = () => {
   const pathname = usePathname();
-  const { setIsNavOpen } = useNav(); // ✅ Controls menu state
+  const { setIsNavOpen } = useNav();
 
   const links = ["Home", "Works", "Contact", "About"];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.5 } },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-  };
 
   return (
     <motion.nav
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className={styles.navContainer}>
+      className={styles.navContainer}
+      role="navigation" // ✅ Optional but good for semantics
+    >
       <motion.ul className={styles.navList}>
-        {links.map((link, index) => {
+        {links.map((link) => {
           const href = link === "Home" ? "/" : `/${link.toLowerCase()}`;
           const isActive = pathname === href;
 
           return (
             <motion.li
-              key={index}
+              key={link} // ✅ Better than index
               variants={itemVariants}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -42,7 +47,8 @@ const NavbarLinks = () => {
                 href={href}
                 scroll={false}
                 className={styles.navLink}
-                onClick={() => setIsNavOpen(false)} // ✅ Close menu when clicking a link
+                aria-current={isActive ? "page" : undefined} // ✅ For accessibility
+                onClick={() => setIsNavOpen(false)} // ✅ Close menu on click
               >
                 {link}
               </Link>

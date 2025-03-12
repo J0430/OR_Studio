@@ -1,44 +1,58 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-/* =============================== */
-/* ✅ DESKTOP LAYOUT               */
-/* =============================== */
+/* =========================== */
+/* ✅ DESKTOP & MOBILE LAYOUT   */
+/* =========================== */
+
 .aboutWrapper {
+  /* Layout & Alignment */
   @include m.center-flex;
   flex-direction: column;
   width: 100%;
-  height: 100dvh;
+  height: 100dvh; /* Dynamic viewport height */
   background-color: v.$black;
   padding: 0 2rem;
   position: relative;
   overflow: hidden;
 
+  /* =========================== */
+  /* ✅ Text Container           */
+  /* =========================== */
   .textContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 65%;
+    max-width: 65%; /* Control width for larger screens */
     text-align: center;
     z-index: 10;
     margin-bottom: 3rem;
 
+    /* =========================== */
+    /* ✅ Description Text        */
+    /* =========================== */
     .description {
       color: v.$white;
-      font-size: m.rem(24);
+      font-size: m.rem(24); /* Font size for larger screens */
+      font-weight: 500;
       line-height: 1.6;
       margin-bottom: m.rem(32);
-      font-weight: 300;
       font-family: v.$font-family-base;
       opacity: 0.9;
     }
   }
 
+  /* =========================== */
+  /* ✅ Link Wrapper            */
+  /* =========================== */
   .linkWrapper {
     display: inline-block;
     align-self: center;
     margin-top: m.rem(40);
 
+    /* =========================== */
+    /* ✅ Link Styling            */
+    /* =========================== */
     .link {
       padding: m.rem(14) m.rem(28);
       border: v.$white 0.03rem solid;
@@ -58,66 +72,36 @@
   }
 }
 
-/* =============================== */
-/* ✅ MOBILE LAYOUT                */
-/* =============================== */
-.mobileAboutWrapper {
-  @include m.center-flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100dvh; // Adapt height to content
-  padding: 1.4rem 1.2rem;
-  background-color: v.$black;
-  overflow: hidden;
-  position: relative;
+/* =========================== */
+/* ✅ RESPONSIVE LAYOUT        */
+/* =========================== */
 
-  .mobileTextContainer {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-    z-index: 10;
-    margin-bottom: 1.5rem;
+@media (max-width: 768px) {
+  .aboutWrapper {
+    padding: m.rem(1) m.rem(1.2); /* Adjust padding for mobile */
+  }
 
-    .description {
-      color: v.$white;
-      font-size: m.rem(18);
-      line-height: 1.6;
-      margin-bottom: m.rem(24);
-      font-weight: 300;
-      font-family: v.$font-family-base;
-      opacity: 0.9;
-    }
+  .textContainer {
+    max-width: 90%; /* Increase width for mobile */
+  }
+
+  .description {
+    font-size: m.rem(18); /* Adjust font size for mobile */
   }
 
   .linkWrapper {
-    display: inline-block;
-    align-self: center;
     margin-top: m.rem(20);
-    margin-bottom: m.rem(10);
+  }
 
-    .link {
-      padding: m.rem(12) m.rem(24);
-      border: v.$white 0.03rem solid;
-      color: v.$white;
-      font-size: m.rem(16);
-      font-weight: 400;
-      text-decoration: none;
-      transition: all 0.2s ease-in-out;
-      border-radius: m.rem(8);
-      background-color: transparent;
-
-      &:hover {
-        transform: scale(1.08);
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-    }
+  .link {
+    font-size: m.rem(16); /* Adjust link font size for mobile */
   }
 }
 
-/* =============================== */
-/* ✅ WORD ANIMATION CLASS         */
-/* =============================== */
+/* =========================== */
+/* ✅ WORD ANIMATION CLASS     */
+/* =========================== */
+
 .word {
   display: inline-block;
   white-space: nowrap;

@@ -1,0 +1,87 @@
+@use "@styles/partials/mixins" as m;
+
+/* =========================== */
+/* ✅ Works Page Main Wrapper  */
+/* =========================== */
+.worksPage {
+  /* ===== Layout ===== */
+  display: flex;
+  flex-direction: column;
+
+  /* ===== Box Model ===== */
+  height: 100dvh;
+  padding: 0 6.7vw;
+
+  /* ===== Visual ===== */
+  background-color: transparent !important; // ✅ Transparent background to show site bg
+
+  /* =========================== */
+  /* ✅ Responsive Adjustments   */
+  /* =========================== */
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+
+  @media (max-width: 500px) {
+    padding: 0;
+  }
+}
+
+/* =========================== */
+/* ✅ Control Panel for Works  */
+/* =========================== */
+.worksControl {
+  /* ===== Box Model ===== */
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  /* ===== Visual ===== */
+  background: var(
+    --overlay-background
+  ); // ✅ Transparent overlay background (theme controlled)
+  border-bottom: 1px solid var(--border-strong); // ✅ Theme border for consistency
+
+  /* ===== Layering ===== */
+  z-index: 10;
+}
+
+/* =========================== */
+/* ✅ Works Grid Wrapper       */
+/* =========================== */
+.worksGrid {
+  /* ===== Layout ===== */
+  display: grid;
+  flex: 1;
+
+  /* ===== Box Model ===== */
+  padding: 1rem;
+  gap: 1em;
+
+  /* ===== Grid Definition ===== */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+  /* ===== Scrolling ===== */
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  /* ===== Motion / Interaction ===== */
+  -webkit-overflow-scrolling: touch; // ✅ Smooth scroll on mobile
+
+  /* =========================== */
+  /* ✅ Responsive Adjustments   */
+  /* =========================== */
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(200px, 1fr)
+    ); // ✅ Tablet smaller cards
+  }
+
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(150px, 1fr)
+    ); // ✅ Mobile smaller cards
+  }
+}
