@@ -76,7 +76,7 @@ const DynamicForm = ({ schema, title, logo }) => {
 
       {/* ✅ Other Fields (Excluding First & Last Name) */}
       {Object.keys(schema.fields)
-        .filter((field) => field !== "firstName" && field !== "lastName") // ❌ Prevent duplicate "Name" input
+        .filter((field) => field !== "firstName" && field !== "lastName")
         .map((fieldName, index) => {
           const isMessage = fieldName.toLowerCase() === "message";
 

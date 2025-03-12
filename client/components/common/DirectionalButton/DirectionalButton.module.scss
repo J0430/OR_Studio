@@ -1,50 +1,56 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
+/* =========================== */
+/* ✅ Main Wrapper             */
+/* =========================== */
 .direction {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
+  z-index: 10;
 
-  &.up,
-  &.down,
-  &.left,
-  &.right {
-    .scrollButton {
-      position: absolute;
-      width: var(--button-width, 3.5rem);
-      height: var(--button-height, 3.5rem);
-      border: m.rem(2.2) solid rgba(255, 255, 255, 0.7);
-      border-radius: 50%;
-      cursor: pointer;
-      background-color: transparent;
-      display: flex;
-      align-items: center; // ✅ Centers the arrow vertically
-      justify-content: center; // ✅ Centers the arrow horizontally
-      transition:
-        background-color 0.3s,
-        transform 0.3s;
+  /* =========================== */
+  /* ✅ Scroll Button Wrapper    */
+  /* =========================== */
+  .scrollButton {
+    position: absolute;
+    width: var(--button-width, 3.5rem);
+    height: var(--button-height, 3.5rem);
+    border: m.rem(2.2) solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background-color 0.3s,
+      transform 0.3s ease-in-out;
 
-      &:hover {
-        background-color: rgba(22, 21, 21, 0.5);
-      }
-
-      /* ✅ Fix the arrow size & centering */
-      .arrow {
-        font-size: m.rem(25); // ✅ Makes sure the icon scales properly
-        color: rgba(255, 255, 255, 0.733);
-        transition: transform 0.3s ease-in-out;
-      }
+    &:hover {
+      background-color: rgba(22, 21, 21, 0.5);
     }
   }
 
-  /* ✅ Positioning for different directions */
+  /* =========================== */
+  /* ✅ Arrow Icon Styles        */
+  /* =========================== */
+  .arrow {
+    font-size: m.rem(25);
+    color: rgba(255, 255, 255, 0.733);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  /* =========================== */
+  /* ✅ Direction Positions      */
+  /* =========================== */
   &.up .scrollButton {
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
+
     .arrow {
       transform: rotate(90deg);
       margin-bottom: 0.15rem;
@@ -55,6 +61,7 @@
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
+
     .arrow {
       transform: rotate(-90deg);
       margin-top: 0.27rem;
@@ -65,6 +72,7 @@
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
+
     .arrow {
       transform: rotate(0deg);
       margin-right: 0.17rem;
@@ -75,41 +83,47 @@
     right: 1rem;
     top: 50%;
     transform: translateY(-50%);
+
     .arrow {
       transform: rotate(180deg);
       margin-left: 0.22rem;
     }
   }
 
-  /* ✅ Responsive Adjustments */
-  @include m.respond-to("tablet") {
+  /* =========================== */
+  /* ✅ Responsive Adjustments   */
+  /* =========================== */
+  @media (max-width: 768px) {
     .scrollButton {
       width: m.rem(48);
       height: m.rem(48);
       border: m.rem(1.5) solid white;
     }
+
     .arrow {
       font-size: m.rem(18);
     }
   }
 
-  @include m.respond-to("mobile") {
+  @media (max-width: 500px) {
     .scrollButton {
       width: m.rem(40);
       height: m.rem(40);
       border: m.rem(1.8) solid white;
     }
+
     .arrow {
       font-size: m.rem(16);
     }
   }
 
-  @include m.respond-to("small-mobile") {
+  @media (max-width: 400px) {
     .scrollButton {
       width: m.rem(32);
       height: m.rem(32);
       border: m.rem(1.5) solid white;
     }
+
     .arrow {
       font-size: m.rem(14);
     }

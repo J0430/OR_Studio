@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useClickOutside from "@hooks/useClickOuside";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
-import styles from "./ProjectsModal.module.scss";
+import styles from "./WorksModal.module.scss"; // ✅ Updated import
 import Image from "next/image";
 
-function ProjectsModal({ selectedImage, project, onClose }) {
+function WorksModal({ selectedImage, work, onClose }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState(1); // 1 for right, -1 for left
   const modalContentRef = useRef(null);
@@ -15,30 +15,31 @@ function ProjectsModal({ selectedImage, project, onClose }) {
   useClickOutside(modalContentRef, onClose);
 
   useEffect(() => {
-    if (project && selectedImage) {
-      const index = project.images?.indexOf(selectedImage);
+    if (work && selectedImage) {
+      const index = work.images?.indexOf(selectedImage);
       if (index !== -1) {
         setCurrentImageIndex(index);
       }
     }
-  }, [project, selectedImage]);
+  }, [work, selectedImage]);
 
-  // Function to smoothly transition between images
+  // ✅ Navigate next image
   const handleNext = useCallback(() => {
     setSwipeDirection(1);
     setCurrentImageIndex((prev) =>
-      prev === project.images.length - 1 ? 0 : prev + 1
+      prev === work.images.length - 1 ? 0 : prev + 1
     );
-  }, [project.images.length]);
+  }, [work.images.length]);
 
+  // ✅ Navigate previous image
   const handlePrevious = useCallback(() => {
     setSwipeDirection(-1);
     setCurrentImageIndex((prev) =>
-      prev === 0 ? project.images.length - 1 : prev - 1
+      prev === 0 ? work.images.length - 1 : prev - 1
     );
-  }, [project.images.length]);
+  }, [work.images.length]);
 
-  // Function to handle keyboard navigation
+  // ✅ Keyboard navigation
   const handleKeyDown = useCallback(
     (event) => {
       if (event.key === "ArrowRight") {
@@ -55,7 +56,7 @@ function ProjectsModal({ selectedImage, project, onClose }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
-  // Function to handle swipe gestures for mobile/tablets
+  // ✅ Touch gestures
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -65,10 +66,10 @@ function ProjectsModal({ selectedImage, project, onClose }) {
     const deltaX = touchStartX.current - touchEndX.current;
 
     if (deltaX > 50) {
-      setSwipeDirection(1); // Swiping left (next image)
+      setSwipeDirection(1);
       handleNext();
     } else if (deltaX < -50) {
-      setSwipeDirection(-1); // Swiping right (previous image)
+      setSwipeDirection(-1);
       handlePrevious();
     }
   };
@@ -108,13 +109,13 @@ function ProjectsModal({ selectedImage, project, onClose }) {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentImageIndex}
-              initial={{ opacity: 0, x: swipeDirection * 50 }} // Adjust movement based on swipe direction
+              initial={{ opacity: 0, x: swipeDirection * 50 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: swipeDirection * -50 }} // Reverse movement for exit
+              exit={{ opacity: 0, x: swipeDirection * -50 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}>
               <Image
-                src={project.images[currentImageIndex]}
-                alt={`Project Image ${currentImageIndex + 1}`}
+                src={work.images[currentImageIndex]}
+                alt={`Work Image ${currentImageIndex + 1}`} // ✅ Updated alt tag
                 className={styles.modalImage}
                 width={900}
                 height={700}
@@ -135,11 +136,13 @@ function ProjectsModal({ selectedImage, project, onClose }) {
         </motion.div>
 
         <div className={styles.thumbnailGallery}>
-          {project.images.map((image, index) => (
+          {work.images.map((image, index) => (
             <div
               key={image || index}
               onClick={() => setCurrentImageIndex(index)}
-              className={`${styles.thumbnailWrapper} ${index === currentImageIndex ? styles.activeThumbnail : ""}`}>
+              className={`${styles.thumbnailWrapper} ${
+                index === currentImageIndex ? styles.activeThumbnail : ""
+              }`}>
               <Image
                 className={styles.thumbnailImage}
                 src={image}
@@ -156,4 +159,4 @@ function ProjectsModal({ selectedImage, project, onClose }) {
   );
 }
 
-export default ProjectsModal;
+export default WorksModal;

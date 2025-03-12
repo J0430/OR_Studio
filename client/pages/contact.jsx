@@ -1,9 +1,9 @@
-import { useMediaQuery } from "react-responsive";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import styles from "@styles/pages/contact.module.scss";
 import DynamicForm from "@components/common/DynamicForm/DynamicForm";
-import ContactHeader from "@components/sections/contact/ContactHeader";
+import ContactHeader from "@components/sections/contact/ContactHeader/ContactHeader";
 import { logos } from "@utils/globals";
 import * as yup from "yup";
 
@@ -23,8 +23,6 @@ const ContactSchema = yup.object().shape({
 });
 
 export default function ContactPage() {
-  const isMobile = useMediaQuery({ maxWidth: 768 });
-
   return (
     <>
       {/* ✅ SEO Metadata */}

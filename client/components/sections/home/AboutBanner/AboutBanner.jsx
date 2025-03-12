@@ -15,38 +15,37 @@ const AboutBanner = () => {
   const words = text.split(" "); // Split paragraph into words
 
   return (
-    <div
-      ref={ref}
-      className={isMobile ? styles.mobileAboutWrapper : styles.aboutWrapper}>
-      <div
-        className={
-          isMobile ? styles.mobileTextContainer : styles.textContainer
-        }>
+    <div ref={ref} className={styles.aboutWrapper}>
+      {" "}
+      {/* This class will handle both desktop and mobile */}
+      <div className={styles.textContainer}>
         <p className={styles.description}>
           {words.map((word, index) => (
             <motion.span
               key={index}
-              initial={{ opacity: 0.6, scale: 0.9 }} // ✅ Start small and semi-transparent
+              initial={{ opacity: 0.6, scale: 0.9 }} // Start small and semi-transparent
               animate={
                 isInView
                   ? { opacity: 1, scale: 1 }
                   : { opacity: 0.8, scale: 0.95 }
-              } // ✅ Animate to full size and opacity
+              } // Animate to full size and opacity
               transition={{
-                delay: index * 0.12, // ✅ Smaller delay for mobile smoothness
-                duration: 0.4, // ✅ Tiny smooth grow effect
+                delay: index * 0.12, // Smaller delay for smoothness
+                duration: 0.4, // Tiny smooth grow effect
               }}
-              className={styles.word}>
+              className={styles.word}
+              aria-label={`word ${word}`}>
+              {" "}
               {word}&nbsp;
             </motion.span>
           ))}
         </p>
 
-        {/* ✅ Button appears AFTER reading */}
+        {/* Button appears AFTER reading */}
         <motion.div
           className={styles.linkWrapper}
           initial={{ opacity: 0.8 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          animate={isInView ? { opacity: 0.8 } : { opacity: 1 }}
           transition={{
             duration: 0.5,
             delay: words.length * 0.12 + 0.3, // After last word finishes
@@ -55,7 +54,10 @@ const AboutBanner = () => {
             scale: 1.08,
             transition: { duration: 0.15 },
           }}>
-          <Link href="/about" className={styles.link}>
+          <Link
+            href="/about"
+            className={styles.link}
+            aria-label="Learn more about OR Studio">
             More about us
           </Link>
         </motion.div>

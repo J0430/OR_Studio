@@ -1,8 +1,9 @@
-import styles from "@components/sections/contact/ContactHeader.module.scss";
+import styles from "../ContactHeader/ContactHeader.module.scss";
+
 const ContactHeader = ({ title, content }) => {
   return (
     <div className={styles.contactContainer}>
-      <h2 className>{title}</h2>
+      <h2>{title}</h2>
       {content?.map((paragraph, index) => (
         <p key={index}>{paragraph || ""}</p>
       ))}

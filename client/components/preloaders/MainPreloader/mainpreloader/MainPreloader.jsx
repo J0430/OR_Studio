@@ -18,10 +18,11 @@ const MainPreloader = () => {
           exit={{
             opacity: 0,
             scale: 1.1,
-            transition: { duration: 1.5, ease: "easeInOut" },
+            transition: { duration: 1.3, ease: "easeInOut" },
           }} // ✅ Smoother transition
-          transition={{ duration: 1.5, ease: "easeOut" }}>
+          transition={{ duration: 1.3, ease: "easeOut" }}>
           <motion.div className={styles.preloaderContainer}>
+            {/* Logo 1 */}
             <motion.div
               initial={{ filter: "blur(1rem)", opacity: 0 }}
               animate={{ filter: "blur(0rem)", opacity: 1 }}
@@ -42,6 +43,7 @@ const MainPreloader = () => {
               />
             </motion.div>
 
+            {/* Logo 2 */}
             <motion.div
               initial={{
                 filter: "blur(1.5rem)",
@@ -56,7 +58,7 @@ const MainPreloader = () => {
                 filter: "blur(1rem)",
                 transition: { duration: 1 },
               }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
+              transition={{ duration: 1.3, ease: "easeOut" }}
               className={styles.preloaderLogo}>
               <Image
                 src={preloaderLogos[0]}
@@ -68,6 +70,7 @@ const MainPreloader = () => {
               />
             </motion.div>
 
+            {/* Typing effect */}
             <TypingEffect
               text="Architecture Visualization"
               typingSpeed={100}

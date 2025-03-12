@@ -1,41 +1,58 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
+/* =========================== */
+/* ✅ Home Page Main Wrapper   */
+/* =========================== */
+
 .homePage {
   width: 100%;
-  height: 100dvh; /* Dynamic Viewport Height Fix */
+  height: 100dvh; // ✅ Dynamic Viewport Height Fix
   display: flex;
   flex-direction: column;
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
-  scroll-snap-type: y mandatory;
   margin: 0;
   padding: 0;
 
-  /* Fix Scrollbar Differences */
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+
+  /* =========================== */
+  /* ✅ Scrollbar Styles         */
+  /* =========================== */
   &::-webkit-scrollbar {
     width: 0px;
-    display: none;
+    display: none; // ✅ Hide scrollbar
   }
 
-  .sectionContainer {
-    width: 100%;
-    height: 100dvh; /* Dynamic Viewport Height for Windows & Mac */
-    @include m.center-flex;
-    position: relative;
-    background-color: v.$black;
-    flex-direction: column;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+  /* =========================== */
+  /* ✅ Windows Smooth Scroll Fix */
+  /* =========================== */
+  @supports (-ms-ime-align: auto) {
+    scroll-behavior: smooth !important;
   }
 }
 
-/* Windows Fix for Scroll Smoothing */
-@supports (-ms-ime-align: auto) {
-  .homePage {
-    scroll-behavior: smooth !important;
-  }
+/* =========================== */
+/* ✅ Section Wrapper           */
+/* =========================== */
+
+.sectionContainer {
+  width: 100%;
+  height: 100dvh; // ✅ Each section takes full height
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+
+  background-color: v.$black;
+  @include m.center-flex;
 }

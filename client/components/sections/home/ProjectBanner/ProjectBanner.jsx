@@ -41,13 +41,11 @@ const ProjectBanner = ({ images }) => {
     stopAutoPlay();
   };
 
-  // Keyboard Navigation
-  // Keyboard Navigation Fix
   const handleKeyDown = useCallback(
     (event) => {
       if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
-        event.preventDefault(); // ✅ Prevent browser default behavior
-        event.stopPropagation(); // ✅ Stop event bubbling to parent sections
+        event.preventDefault(); // Prevent browser default behavior
+        event.stopPropagation(); // Stop event bubbling to parent sections
 
         if (event.key === "ArrowRight") {
           setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -69,7 +67,7 @@ const ProjectBanner = ({ images }) => {
     }
 
     return () => clearInterval(intervalRef.current);
-  }, [images, updateImageIndex, isPaused, currentImageIndex]); // Ensure sync with current image index
+  }, [images, updateImageIndex, isPaused, currentImageIndex]);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -149,8 +147,6 @@ const ProjectBanner = ({ images }) => {
           />
         ))}
       </div>
-
-      {/* Navigation Buttons */}
     </motion.div>
   );
 };

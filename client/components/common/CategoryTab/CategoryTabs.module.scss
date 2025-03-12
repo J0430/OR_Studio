@@ -1,0 +1,93 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+/* =========================== */
+/* ✅ Tabs Wrapper             */
+/* =========================== */
+.tabsWrapper {
+  position: relative;
+  display: flex;
+  gap: m.rem(16);
+  justify-content: center;
+  align-items: center;
+  padding: m.rem(10) 0;
+}
+
+/* =========================== */
+/* ✅ Moving Highlight Pill    */
+/* =========================== */
+.highlight {
+  position: absolute;
+  height: m.rem(36);
+  background: rgba(v.$white, 0.15);
+  border-radius: m.rem(18);
+  z-index: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* =========================== */
+/* ✅ Individual Tab           */
+/* =========================== */
+.categoryTab {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 m.rem(16);
+  height: m.rem(36);
+  min-width: m.rem(130); // ✅ Ensure consistency for smaller screens
+  max-width: m.rem(180); // ✅ Prevent tabs being too wide on big screens
+  border-radius: m.rem(18);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: v.$white;
+  font-size: clamp(m.rem(12), 2vw, m.rem(16));
+  text-transform: capitalize;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  span {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* =========================== */
+/* ✅ Optional Active Styles (if needed for visual feedback) */
+/* =========================== */
+
+/* =========================== */
+/* ✅ Responsive Adjustments   */
+/* =========================== */
+@media (max-width: 768px) {
+  .tabsWrapper {
+    gap: m.rem(12);
+    padding: m.rem(8) 0;
+  }
+
+  .categoryTab {
+    min-width: m.rem(110);
+    font-size: clamp(m.rem(10), 3vw, m.rem(14));
+  }
+
+  .highlight {
+    height: m.rem(32);
+  }
+}
+
+@media (max-width: 500px) {
+  .tabsWrapper {
+    gap: m.rem(10);
+  }
+
+  .categoryTab {
+    min-width: m.rem(90);
+  }
+}

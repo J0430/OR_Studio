@@ -1,28 +1,29 @@
-// ======================================
-// VARIABLES
-// ======================================
+/* =========================== */
+/* TYPOGRAPHY                  */
+/* =========================== */
 
-// COLORS
-$black: #000;
-$gray: #aaa;
-$white: #fff;
+$base-font-size: 16px;
+$line-height: 1.5;
+$font-family-base: "Raleway", sans-serif;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-bold: 600;
 
-$primary-color: #000;
-$secondary-color: #8392a5;
 $overlay-bg: rgba(0, 0, 0, 0.8);
 $hover-bg: rgba(255, 255, 255, 0.9);
 $error-color: #ff4d4f;
 $success-color: #28a745;
 
-// TYPOGRAPHY
-$font-family-base: "Raleway", sans-serif;
-$base-font-size: 16px; // Default font size (used in global.scss)
-$line-height: 1.5; // Default line height
-$font-weight-light: 300;
-$font-weight-regular: 400;
-$font-weight-bold: 600;
+/* =========================== */
+/* SPACING SYSTEM              */
+/* =========================== */
 
-// BREAKPOINTS (WIDTH)
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 2rem;
+$spacing-xl: 4rem;
+
 $breakpoints: (
   small-mobile: 380px,
   mobile: 480px,
@@ -31,22 +32,6 @@ $breakpoints: (
   desktop: 1500px,
 );
 
-// SPACING
-$spacing-sm: 8px;
-$spacing-md: 16px;
-$spacing-lg: 24px;
-$spacing-xl: 32px;
-
-// BORDER RADIUS
-$border-radius-sm: 4px;
-$border-radius-md: 8px;
-$border-radius-lg: 12px;
-
-// SHADOWS
-$box-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-$box-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
-$box-shadow-lg: 0 6px 12px rgba(0, 0, 0, 0.2);
-
-// SCROLLBAR STYLING
-$scrollbar-thumb: rgba(255, 255, 255, 0.3);
-$scrollbar-track: rgba(0, 0, 0, 0);
+$black: #000;
+$gray: #aaa;
+$white: #fff;

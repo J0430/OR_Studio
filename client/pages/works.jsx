@@ -1,36 +1,40 @@
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { fetchData } from "@utils/api";
 import { AnimatePresence } from "framer-motion";
 import {
-  useProjectsPreloader,
-  ProjectsPreloaderProvider,
-} from "@contexts/ProjectsPreloaderContext"; // ✅ Import Provider
+  useWorksPreloader,
+  WorksPreloaderProvider,
+} from "@contexts/WorksPreloaderContext"; // ✅ Updated Provider
 import { categories } from "@utils/globals";
 import { fisherYatesShuffle, interleaveArrays } from "@utils/utils";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import style from "@styles/pages/projects.module.scss";
+import style from "@styles/pages/works.module.scss"; // ✅ Updated SCSS import
 
-const ProjectsModal = dynamic(
-  () => import("@components/sections/projects/ProjectsModal/ProjectsModal"),
+// ✅ Updated Dynamic imports
+const WorksModal = dynamic(
+  () => import("@components/sections/works/WorksModal/WorksModal"),
   { ssr: false }
 );
 
-const ProjectsPreloader = dynamic(
-  () => import("@components/preloaders/ProjectsPreloader/ProjectsPreloader"),
-  { ssr: false }
+const WorksPreloader = dynamic(
+  () => import("@components/preloaders/WorksPreloader/WorksPreloader"),
+  {
+    ssr: false, // 🔥 This is the magic
+  }
 );
 
-const ProjectsControl = dynamic(
-  () => import("@components/sections/projects/ProjectsControl/ProjectsControl"),
+const WorksControl = dynamic(
+  () => import("@components/sections/works/WorksControl/WorksControl"),
   { loading: () => <div>Loading Categories...</div> }
 );
 
-const ProjectsGrid = dynamic(
-  () => import("@components/sections/projects/ProjectsGrid/ProjectsGrid"),
+const WorksGrid = dynamic(
+  () => import("@components/sections/works/WorksGrid/WorksGrid"),
   { ssr: false }
 );
 
+// ✅ Static Props to Fetch Data
 export async function getStaticProps() {
   try {
     const categoriesData = await Promise.all(
@@ -49,22 +53,22 @@ export async function getStaticProps() {
     console.error("Error in getStaticProps:", error.message);
     return {
       props: {
-        residential: { projects: {}, frontImages: [], category: "" },
-        commercial: { projects: {}, frontImages: [], category: "" },
-        urbanPlanning: { projects: {}, frontImages: [], category: "" },
-        office: { projects: {}, frontImages: [], category: "" },
+        residential: { works: {}, frontImages: [], category: "" },
+        commercial: { works: {}, frontImages: [], category: "" },
+        urbanPlanning: { works: {}, frontImages: [], category: "" },
+        office: { works: {}, frontImages: [], category: "" },
       },
     };
   }
 }
 
-function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
-  const { isPreloaderVisible } = useProjectsPreloader(); // ✅ Now it's inside the Provider
+function WorksContent({ residential, commercial, urbanPlanning, office }) {
+  const { isPreloaderVisible } = useWorksPreloader(); // ✅ Updated hook
 
   const [state, setState] = useState({
     categorySelected: categories[0] || "Works",
     selectedImage: null,
-    selectedProject: null,
+    selectedWork: null, // ✅ Updated to "Work"
   });
 
   const categoryDataMap = useMemo(
@@ -83,7 +87,7 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
     [residential, urbanPlanning, commercial, office]
   );
 
-  const projects = useMemo(() => {
+  const works = useMemo(() => {
     return fisherYatesShuffle(categoryDataMap[state.categorySelected] || []);
   }, [state.categorySelected, categoryDataMap]);
 
@@ -93,22 +97,22 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
 
   const handleImageClick = useCallback(
     (imageSrc) => {
-      const allProjects = {
-        ...residential?.projects,
-        ...urbanPlanning?.projects,
-        ...commercial?.projects,
-        ...office?.projects,
+      const allWorks = {
+        ...residential?.works,
+        ...urbanPlanning?.works,
+        ...commercial?.works,
+        ...office?.works,
       };
 
-      const matchedProject = Object.values(allProjects).find(
-        (project) => project?.frontImage === imageSrc
+      const matchedWork = Object.values(allWorks).find(
+        (work) => work?.frontImage === imageSrc
       );
 
-      if (matchedProject) {
+      if (matchedWork) {
         setState((prevState) => ({
           ...prevState,
           selectedImage: imageSrc,
-          selectedProject: matchedProject,
+          selectedWork: matchedWork,
         }));
       }
     },
@@ -119,14 +123,14 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
     setState((prevState) => ({
       ...prevState,
       selectedImage: null,
-      selectedProject: null,
+      selectedWork: null,
     }));
   }, []);
 
   return (
     <>
       <Head>
-        <title>OR Studio | Works </title>
+        <title>OR Studio | Works</title>
         <meta
           name="description"
           content="Get in touch with OR Studio to bring your architectural vision to life. Contact us today!"
@@ -149,25 +153,25 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      {isPreloaderVisible && <ProjectsPreloader />}
-      <main className={style.projectsPage}>
-        <ProjectsControl
+      {isPreloaderVisible && <WorksPreloader />}
+      <main className={style.worksPage}>
+        <WorksControl
           categories={categories}
           selectedCategory={state.categorySelected}
           onCategorySelect={handleCategoryClick}
         />
 
-        <ProjectsGrid
-          projects={projects}
+        <WorksGrid
+          works={works} // ✅ Updated to "works"
           category={state.categorySelected}
           onImageClick={handleImageClick}
         />
 
         <AnimatePresence>
-          {state.selectedImage && state.selectedProject && (
-            <ProjectsModal
+          {state.selectedImage && state.selectedWork && (
+            <WorksModal
               selectedImage={state.selectedImage}
-              project={state.selectedProject}
+              work={state.selectedWork} // ✅ Updated to "work"
               onClose={handleCloseModal}
             />
           )}
@@ -177,12 +181,11 @@ function ProjectsContent({ residential, commercial, urbanPlanning, office }) {
   );
 }
 
-export default function ProjectsPage(props) {
+// ✅ Main Export wrapped in Provider
+export default function WorksPage(props) {
   return (
-    <ProjectsPreloaderProvider>
-      {" "}
-      {/* ✅ Wrap component inside provider */}
-      <ProjectsContent {...props} />
-    </ProjectsPreloaderProvider>
+    <WorksPreloaderProvider>
+      <WorksContent {...props} />
+    </WorksPreloaderProvider>
   );
 }

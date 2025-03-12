@@ -1,12 +1,22 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./TypingEffect.module.scss";
 
-const TypingEffect = ({ text = "", typingSpeed, delay }) => {
+/**
+ * TypingEffect component to display typing animation with optional cursor.
+ * @param {string} text - Text to be typed.
+ * @param {number} typingSpeed - Speed of typing (ms per character).
+ * @param {number} delay - Delay after typing ends before stopping the cursor.
+ */
+const TypingEffect = ({
+  text = "Loading...", // ✅ Safe fallback
+  typingSpeed = 100, // ✅ Safe fallback
+  delay = 2000, // ✅ Safe fallback
+}) => {
   const [displayedText, setDisplayedText] = useState("");
-  const [typingDone, setTypingDone] = useState(false);
+  const [typingDone, setTypingDone] = useState(false); // ✅ Track typing completion
 
   useEffect(() => {
-    if (!text || typeof text !== "string") return; // Exit if the text is invalid
+    if (!text || typeof text !== "string") return; // ✅ Safety check
 
     let index = 0;
 
@@ -16,22 +26,22 @@ const TypingEffect = ({ text = "", typingSpeed, delay }) => {
         index++;
       } else {
         clearInterval(typeInterval);
-        setTimeout(() => setTypingDone(true), delay); // Delay after typing is done
+        setTimeout(() => setTypingDone(true), delay); // ✅ Stop cursor blinking after delay
       }
     }, typingSpeed);
 
-    return () => clearInterval(typeInterval); // Cleanup on unmount
+    return () => clearInterval(typeInterval); // ✅ Cleanup on unmount
   }, [text, typingSpeed, delay]);
 
   return (
     <div className={styles.typingContainer}>
       <span
         className={
-          typingDone || displayedText.length === 0
-            ? `${styles.typingText} ${styles.noCursor}`
+          typingDone
+            ? `${styles.typingText} ${styles.noCursor}` // ✅ Stop cursor when done
             : styles.typingText
         }>
-        &nbsp;{displayedText}
+        {displayedText}
       </span>
     </div>
   );

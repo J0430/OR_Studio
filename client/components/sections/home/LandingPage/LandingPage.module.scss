@@ -1,13 +1,20 @@
 @use "@styles/partials/variables" as v;
-@use "@styles/partials/mixins" as m;
 
+/* =========================== */
+/* ✅ BANNER WRAPPER            */
+/* =========================== */
 .bannerWrapper {
+  /* Layout & Alignment */
   width: 100vw;
   height: 100vh;
   position: relative;
   overflow: hidden;
   background: black;
+  max-width: 100%; /* Optional: To limit the width on very large screens */
 
+  /* =========================== */
+  /* ✅ BANNER TITLE WRAPPER     */
+  /* =========================== */
   .bannerTitleWrapper {
     position: absolute;
     bottom: 13%;
@@ -16,6 +23,9 @@
     z-index: 1;
     color: white;
 
+    /* =========================== */
+    /* ✅ TITLE & SUBTITLE STYLES  */
+    /* =========================== */
     .bannerTitle {
       font-family: "Futura", "Helvetica Neue", sans-serif;
       font-size: 2.3rem;
@@ -30,6 +40,9 @@
   }
 }
 
+/* =========================== */
+/* ✅ BANNER IMAGE GRADIENT    */
+/* =========================== */
 .bannerWrapper::after {
   content: "";
   position: absolute;
@@ -47,19 +60,18 @@
   animation: fadeInGradient 1.5s ease-in-out;
 }
 
-.bannerImage {
-  object-fit: cover;
-  width: 100%;
-  height: 100vh;
-}
+/* =========================== */
+/* ✅ RESPONSIVE BANNER LAYOUT  */
+/* =========================== */
 
-@include m.respond-to("tablet") {
+/* Tablet */
+@media screen and (max-width: 1024px) {
   .bannerTitleWrapper {
     bottom: 12% !important;
     width: 60% !important;
 
     .bannerTitle {
-      font-size: m.rem(22) !important;
+      font-size: 22px !important;
     }
 
     .bannerSubtitle {
@@ -68,13 +80,14 @@
   }
 }
 
-@include m.respond-to("mobile") {
+/* Mobile */
+@media screen and (max-width: 768px) {
   .bannerTitleWrapper {
     bottom: 12% !important;
     width: 60% !important;
 
     .bannerTitle {
-      font-size: m.rem(22) !important;
+      font-size: 22px !important;
     }
 
     .bannerSubtitle {
@@ -83,13 +96,14 @@
   }
 }
 
-@include m.respond-to("small-mobile") {
+/* Small Mobile */
+@media screen and (max-width: 480px) {
   .bannerTitleWrapper {
     bottom: 12% !important;
     width: 60% !important;
 
     .bannerTitle {
-      font-size: m.rem(20) !important;
+      font-size: 20px !important;
     }
 
     .bannerSubtitle {
