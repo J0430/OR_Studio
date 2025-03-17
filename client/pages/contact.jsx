@@ -61,7 +61,6 @@ export default function ContactPage() {
             title="Let’s Get Started!"
             content={[
               "Ready to transform your architectural ideas into stunning visuals?",
-              "Contact us today to discuss how we can bring your vision to life.",
             ]}
           />
 
