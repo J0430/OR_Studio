@@ -12,10 +12,6 @@ export const ContactSchema = yup.object().shape({
   firstName: yup.string().required("Enter your first name").min(2, "Too short"),
   lastName: yup.string().required("Enter your last name").min(2, "Too short"),
   email: yup.string().required("Enter your email").email("Invalid email"),
-  confirmEmail: yup
-    .string()
-    .oneOf([yup.ref("email"), null], "Emails must match")
-    .required("Confirm your email"),
   phone: yup
     .string()
     .matches(/^[+0-9\s\-()]+$/, "Enter a valid phone number")
