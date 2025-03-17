@@ -6,9 +6,10 @@
 .worksGridWrapper {
   /* ===== Layout ===== */
   flex-grow: 1;
+  z-index: 1;
 
   /* ===== Box Model ===== */
-  margin-top: 4rem;
+
   overflow-y: scroll;
   overflow-x: hidden;
 
@@ -24,6 +25,8 @@
 /* =========================== */
 .worksGrid {
   /* ===== Layout ===== */
+  margin-top: 5vh;
+  z-index: 0;
   display: grid;
   padding-top: 2rem;
   grid-auto-rows: 1fr;
