@@ -66,7 +66,7 @@ function WorksContent({ residential, commercial, urbanPlanning, office }) {
   const { isPreloaderVisible } = useWorksPreloader(); // ✅ Updated hook
 
   const [state, setState] = useState({
-    categorySelected: categories[0] || "Works",
+    categorySelected: categories[1] || "Residential",
     selectedImage: null,
     selectedWork: null, // ✅ Updated to "Work"
   });
@@ -171,7 +171,7 @@ function WorksContent({ residential, commercial, urbanPlanning, office }) {
           {state.selectedImage && state.selectedWork && (
             <WorksModal
               selectedImage={state.selectedImage}
-              work={state.selectedWork} // ✅ Updated to "work"
+              work={state.selectedWork}
               onClose={handleCloseModal}
             />
           )}
