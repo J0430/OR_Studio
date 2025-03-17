@@ -44,11 +44,12 @@
   /* ✅ Mobile Responsive Adjustments */
   @media screen and (max-width: 768px) {
     align-items: left; // ✅ Align content to the left on mobile
-    padding-bottom: 1rem;
+    padding-top: 0.5rem
+    padding-bottom: 0.5rem;
 
     h2 {
       font-size: 1.2rem;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.2rem;
     }
 
     p {

@@ -1,8 +1,7 @@
-import { useMediaQuery } from "react-responsive";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./DynamicForm.module.scss";
 import Image from "next/image";
 
@@ -10,10 +9,10 @@ const DynamicForm = ({ schema, title, logo }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, touchedFields },
     reset,
-  } = useForm({ resolver: yupResolver(schema) });
-  const isMobile = useMediaQuery({ maxDeviceWidth: 768 });
+  } = useForm({ resolver: yupResolver(schema), mode: "onChange" });
+
   const [serverError, setServerError] = useState("");
   const [success, setSuccess] = useState(false);
 
@@ -37,74 +36,80 @@ const DynamicForm = ({ schema, title, logo }) => {
     }
   };
 
+  const renderLabel = (fieldName) => (
+    <label>
+      {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}{" "}
+      <span className={styles.required}>*</span>
+    </label>
+  );
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.contactForm}>
-      {/* ✅ Logo */}
       {logo && (
         <div className={styles.logoWrapper}>
-          <Image
-            src={logo}
-            width={isMobile ? 80 : 100}
-            height={isMobile ? 80 : 100}
-            alt="Logo"
-          />
+          <Image src={logo} width={100} height={100} alt="Logo" />
         </div>
       )}
 
-      {/* ✅ First Name & Last Name in a Row */}
+      {/* First + Last Name Row */}
       <div className={styles.formRow}>
-        <div className={styles.formGroup}>
-          <label>First Name</label>
-          <input
-            type="text"
-            {...register("firstName")}
-            className={`${styles.inputField} ${errors.firstName ? styles.error : ""}`}
-            placeholder="Enter your first name"
-          />
-        </div>
-
-        <div className={styles.formGroup}>
-          <label>Last Name</label>
-          <input
-            type="text"
-            {...register("lastName")}
-            className={`${styles.inputField} ${errors.lastName ? styles.error : ""}`}
-            placeholder="Enter your last name"
-          />
-        </div>
+        {["firstName", "lastName"].map((field, index) => (
+          <div className={styles.formGroup} key={index}>
+            {renderLabel(field)}
+            <input
+              type="text"
+              {...register(field)}
+              className={`
+                ${styles.inputField}
+                ${errors[field] ? styles.error : ""}
+                ${touchedFields[field] && !errors[field] ? styles.valid : ""}
+              `}
+              placeholder={`Enter your ${field}`}
+            />
+          </div>
+        ))}
       </div>
 
-      {/* ✅ Other Fields (Excluding First & Last Name) */}
+      {/* Other Fields */}
       {Object.keys(schema.fields)
-        .filter((field) => field !== "firstName" && field !== "lastName")
-        .map((fieldName, index) => {
-          const isMessage = fieldName.toLowerCase() === "message";
-
+        .filter((field) => !["firstName", "lastName"].includes(field))
+        .map((field, index) => {
+          const isMessage = field.toLowerCase() === "message";
           return (
             <div className={styles.formGroup} key={index}>
-              <label>
-                {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}
-              </label>
+              {renderLabel(field)}
               {isMessage ? (
                 <textarea
-                  {...register(fieldName)}
-                  className={`${styles.inputField} ${errors[fieldName] ? styles.error : ""}`}
+                  {...register(field)}
+                  className={`
+                    ${styles.inputField}
+                    ${errors[field] ? styles.error : ""}
+                    ${
+                      touchedFields[field] && !errors[field] ? styles.valid : ""
+                    }
+                  `}
                   placeholder="Enter your message"
-                  rows={isMobile ? 2 : 3}
+                  rows={3}
                 />
               ) : (
                 <input
                   type="text"
-                  {...register(fieldName)}
-                  className={`${styles.inputField} ${errors[fieldName] ? styles.error : ""}`}
-                  placeholder={`Enter your ${fieldName.toLowerCase()}`}
+                  {...register(field)}
+                  className={`
+                    ${styles.inputField}
+                    ${errors[field] ? styles.error : ""}
+                    ${
+                      touchedFields[field] && !errors[field] ? styles.valid : ""
+                    }
+                  `}
+                  placeholder={`Enter your ${field}`}
                 />
               )}
             </div>
           );
         })}
 
-      {/* ✅ Submit Button */}
+      {/* Submit */}
       <motion.button
         type="submit"
         className={styles.submitButton}
@@ -112,10 +117,7 @@ const DynamicForm = ({ schema, title, logo }) => {
         <span>{isSubmitting ? "Sending..." : "Send"}</span>
       </motion.button>
 
-      {/* ✅ Server Error Handling */}
       {serverError && <p className={styles.errorMessage}>{serverError}</p>}
-
-      {/* ✅ Success Message */}
       {success && (
         <p className={styles.successMessage}>Message sent successfully!</p>
       )}

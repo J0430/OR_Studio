@@ -1,56 +1,95 @@
 @use "@styles/partials/variables" as v;
-@use "@styles/partials/mixins" as m;
 
+/* =========================== */
+/* ✅ Modal Container          */
+/* =========================== */
 .modalContainer {
+  /* ===== Positioning ===== */
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1000;
+
+  /* ===== Box Model ===== */
   width: 100vw;
   height: 100vh;
-  background-color: black;
+
+  /* ===== Layout ===== */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+
+  /* ===== Visual ===== */
+  background-color: var(--background-color); // ✅ Theme background
 }
 
+/* =========================== */
+/* ✅ Backdrop                 */
+/* =========================== */
 .modalBackdrop {
+  /* ===== Positioning ===== */
   position: absolute;
+
+  /* ===== Box Model ===== */
   width: 100%;
   height: 100%;
+
+  /* ===== Visual ===== */
   background: transparent;
 }
 
+/* =========================== */
+/* ✅ Modal Content            */
+/* =========================== */
 .modalContent {
+  /* ===== Positioning ===== */
   position: relative;
+
+  /* ===== Box Model ===== */
   width: 100vw;
   height: 100vh;
+  border-radius: 10px;
+  overflow: hidden;
+
+  /* ===== Layout ===== */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #00000087;
-  border-radius: 10px;
-  overflow: hidden;
 
+  /* ===== Visual ===== */
+  background-color: var(--overlay-background); // ✅ Themed overlay
+
+  /* ======================= */
+  /* ✅ Image Wrapper        */
+  /* ======================= */
   .imageWrapper {
+    /* ===== Positioning ===== */
+    position: relative;
+
+    /* ===== Box Model ===== */
     width: 100%;
-    height: 90vh; /* Takes most of the viewport height */
+    height: 90vh;
+
+    /* ===== Layout ===== */
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Center image horizontally */
+    justify-content: space-between;
 
+    /* ===== Images ===== */
     img {
       max-width: 100%;
       max-height: 100%;
-      object-fit: contain; /* Ensures the image fits within the container */
+      object-fit: contain;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
+
+    /* ===== Navigation Arrows ===== */
     .direction {
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
       z-index: 10;
+      transform: translateY(-50%);
 
       &.right {
         right: 1rem;
@@ -62,16 +101,23 @@
     }
   }
 
+  /* ======================= */
+  /* ✅ Close Button         */
+  /* ======================= */
   .closeButton {
+    /* ===== Positioning ===== */
     position: absolute;
     top: 3rem;
     right: 3rem;
-    background: none;
+    z-index: 10;
+
+    /* ===== Visual ===== */
     border: none;
-    color: #fff;
+    background: none;
+    color: var(--text-color); // ✅ Themed text color
     font-size: 2rem;
     cursor: pointer;
-    z-index: 10;
+    transition: opacity 0.3s ease;
 
     &:hover {
       opacity: 0.8;
@@ -79,45 +125,69 @@
   }
 }
 
+/* =========================== */
+/* ✅ Thumbnail Gallery        */
+/* =========================== */
 .thumbnailGallery {
+  /* ===== Layout ===== */
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-x: auto;
-  gap: 0.5rem;
-  padding: 1rem;
-  background-color: #000;
+
+  /* ===== Box Model ===== */
   width: 100%;
+  padding: 1rem;
+  gap: 0.5rem;
+  overflow-x: auto;
   overflow: hidden;
+
+  /* ===== Visual ===== */
+  background-color: var(--background-color); // ✅ Theme background
+
+  /* ======================= */
+  /* ✅ Thumbnail Wrapper     */
+  /* ======================= */
   .thumbnailWrapper {
-    width: 100px; /* Fixed width */
-    height: 80px; /* Fixed height */
+    /* ===== Box Model ===== */
+    width: 100px;
+    height: 80px;
     margin-right: 5px;
-    flex-shrink: 0;
     border: 2px solid transparent;
-    cursor: pointer;
     border-radius: 4px;
-    overflow: hidden; /* Ensures image doesn't overflow */
+    overflow: hidden;
+
+    /* ===== Layout ===== */
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    /* ===== Interaction ===== */
+    cursor: pointer;
     transition:
       transform 0.2s ease,
       border-color 0.2s ease;
 
-    .activeThumbnail {
-      border: 2px solid white !important; // Ensure visibility
+    &.activeThumbnail {
+      border: 2px solid var(--border-strong); // ✅ Use border-strong from theme
       transform: scale(1.1);
       transition: all 0.3s ease-in-out;
     }
 
+    /* ======================= */
+    /* ✅ Thumbnail Image      */
+    /* ======================= */
     .thumbnailImage {
+      /* ===== Box Model ===== */
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Ensures full coverage */
+
+      /* ===== Visual ===== */
+      object-fit: cover;
       transition:
         transform 0.3s ease,
         border-color 0.3s ease;
+
       &:hover {
         transform: scale(1.1);
       }
@@ -125,20 +195,23 @@
   }
 }
 
-@include m.respond-to("tablet") {
+/* =========================== */
+/* ✅ Responsive Adjustments   */
+/* =========================== */
+@media (max-width: 768px) {
   .thumbnailGallery {
-    margin-bottom: 25%;
+    margin-bottom: 25%; // ✅ Tablet
   }
 }
 
-@include m.respond-to("mobile") {
+@media (max-width: 500px) {
   .thumbnailGallery {
-    margin-bottom: 25%;
+    margin-bottom: 25%; // ✅ Mobile
   }
 }
 
-@include m.respond-to("small-mobile") {
+@media (max-width: 400px) {
   .thumbnailGallery {
-    margin-bottom: 25%;
+    margin-bottom: 25%; // ✅ Small mobile
   }
 }
