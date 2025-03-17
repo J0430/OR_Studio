@@ -35,8 +35,8 @@ const Header = () => {
               src={logos[3]}
               alt="OR Studio Logo"
               className={styles.logo}
-              width={isMobile ? 28 : 38}
-              height={isMobile ? 33 : 43}
+              width={isMobile ? 25 : 38}
+              height={isMobile ? 30 : 43}
               priority
               onClick={() => setIsNavOpen(false)} // ✅ Close nav on logo click
             />

@@ -1,37 +1,41 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
+/* =========================== */
+/* ✅ Dropdown Container Styling */
+/* =========================== */
 .dropdownContainer {
   display: inline-block;
   width: 100%;
   text-align: center;
 }
 
-/* Dropdown Button */
+/* =========================== */
+/* ✅ Dropdown Button Styling   */
+/* =========================== */
 .dropdownButton {
   background: rgba(0, 0, 0, 0.8);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 8px 12px;
+  padding: 8px 12px; // ✅ Increased horizontal padding for better spacing
   border-radius: 30px;
-  font-size: 1rem;
+  font-size: 1rem; // ✅ Responsive font size
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 12rem;
-  max-width: 100%;
-  flex: 0 1 auto;
+  width: 12rem; // ✅ Allows it to fit within its container
+  flex: 0 1 auto; // ✅ Prevents unnecessary stretching
+  font-weight: 500;
+  margin-bottom: 0.3rem;
 
   &:hover {
     background: rgba(0, 0, 0, 0.8);
   }
-
   .categoryText {
     flex-grow: 1;
     text-align: left;
   }
-
   .buttonContent {
     display: flex;
     align-items: center;
@@ -46,31 +50,19 @@
     .arrow {
       display: flex;
       flex-basis: fit-content;
-      transition: transform 0.3s ease;
     }
   }
 }
 
-/* Dropdown Content */
+/* =========================== */
+/* ✅ Dropdown Item Styling     */
+/* =========================== */
 .dropdownContent {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 15px;
-  padding: 0.5em;
-  min-width: 12rem;
-  max-width: 100%;
-  flex: 0 1 auto;
-  display: flex;
-  flex-direction: column;
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.2),
-    0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 10000;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: auto;
+  border-radius: m.rem(10);
+  padding: 0.3em;
 }
-
-/* Dropdown Items */
 .dropdownItem {
   padding: m.rem(4) m.rem(10);
   margin-bottom: m.rem(7);
@@ -88,8 +80,8 @@
 }
 
 .activeItem {
-  background-color: #343c48e6 !important;
-  font-weight: bold;
+  background-color: #343c48e6; // ✅ Ensure it stays active
+  font-weight: 500;
 }
 
 @media screen and (max-width: 768px) {

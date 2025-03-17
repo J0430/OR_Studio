@@ -5,90 +5,52 @@
 /* ✅ Main Control Wrapper     */
 /* =========================== */
 .worksControl {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: m.rem(20) 0;
-}
-
-/* =========================== */
-/* ✅ Title Box               */
-/* =========================== */
-.worksTitleBox {
-  width: fit-content;
-  position: relative;
-  top: m.rem(15);
-  padding: 0 1rem;
-}
-
-.worksTitle {
-  font-size: clamp(m.rem(20), 4vw, m.rem(32));
-  font-weight: 200;
-  color: var(--text-color); // ✅ Theme color
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-/* =========================== */
-/* ✅ Selector (Tabs) Box      */
-/* =========================== */
-.worksSelectorBox {
+  position: absolute; // ✅ Absolute to top of page
+  top: m.rem(20); // ✅ Distance from top (adjust as needed)
+  left: 50%; // ✅ Center horizontally
+  transform: translateX(-50%); // ✅ Proper centering
+  // ✅ Above everything else (if necessary)
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 2%;
-  padding: 0 m.rem(16);
-  padding-top: m.rem(16); // Space from divider line
-  border-top: m.rem(1) solid rgba(255, 255, 255, 0.3); // Default fallback
-  border-top: m.rem(1) solid rgba(var(--border-strong), 0.3); // ✅ Theme border
+  justify-content: center;
+  pointer-events: all;
+  width: auto; // ✅ Auto width, adaptable
+  overflow-y: auto;
+  z-index: 52200;
 }
 
-.worksSelector {
-  width: 100%;
+/* =========================== */
+/* ✅ Tabs Wrapper (Desktop)   */
+/* =========================== */
+.tabsWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 /* =========================== */
-/* ✅ Mobile Dropdown Style    */
+/* ✅ Dropdown Wrapper (Mobile) */
 /* =========================== */
-.worksDropdownMobile {
-  display: none; // ✅ Hidden by default
-  padding: 0 m.rem(16);
+.dropdownWrapper {
+  display: none; // ✅ Hide by default, show only on mobile
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+  width: auto;
 }
 
 /* =========================== */
 /* ✅ Responsive Adjustments   */
 /* =========================== */
-
-/* Mobile Styles */
 @media (max-width: 768px) {
-  .worksTitleBox {
-    display: none; // ✅ Hide title on mobile
-  }
-
-  .worksSelectorBox {
+  .tabsWrapper {
     display: none; // ✅ Hide tabs on mobile
   }
-  .worksControl {
+
+  .dropdownWrapper {
+    padding-bottom: 1rem;
+    height: fit-content;
     display: flex;
-    flex-direction: column;
-    position: absolute;
-    z-index: 1000;
-    left: 10.5rem;
-    top: 13.4%;
-    width: fit-content;
-    padding: 1.25rem 0;
-  }
-  .worksDropdownMobile {
-    top: 1.2rem;
-    left: 3.5rem;
-    width: 100%;
-    right: center;
-    display: flex;
-    position: relative;
-    text-align: justify;
+    z-index: 5000; // ✅ Show dropdown on mobile
   }
 }
