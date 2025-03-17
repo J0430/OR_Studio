@@ -10,8 +10,8 @@
   left: 0;
   width: 100%;
   background: transparent;
-  z-index: 0;
-  pointer-events: none; // ✅ Ghost layer to prevent blocking content
+  z-index: 10000; /* Ensure navbar is on top */
+  pointer-events: all; /* Ensure the navbar is interactive */
 }
 
 /* =========================== */
@@ -26,7 +26,22 @@
   justify-content: space-between;
   align-items: center;
   pointer-events: none;
-  z-index: -1; // ✅ Non-interactive container
+  z-index: 10;
+}
+
+/* =========================== */
+/* ✅ Invisible area between the logo and hamburger */
+/* =========================== */
+.navInvisibleArea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: calc(
+    100% - 40px
+  ); /* Make this match the space between the logo and hamburger */
+  height: 100%;
+  pointer-events: none; /* Allow clicking through this region */
 }
 
 /* =========================== */
@@ -38,7 +53,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
-  pointer-events: all; // ✅ Make children interactive
+  pointer-events: all; /* Make children interactive */
+  position: relative; /* Add relative positioning to control the child elements */
 }
 
 /* =========================== */
@@ -101,12 +117,12 @@
   /* ✅ When menu is open - become X */
   &[data-open="true"] .line:first-child {
     transform: rotate(45deg);
-    top: 50%; // Move to center
+    top: 50%; /* Move to center */
   }
 
   &[data-open="true"] .line:last-child {
     transform: rotate(-45deg);
-    bottom: 50%; // Move to center
+    bottom: 50%; /* Move to center */
   }
 }
 
@@ -125,7 +141,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  pointer-events: all; // ✅ Fully interactive when open
+  pointer-events: all; /* Fully interactive when open */
 }
 
 /* =========================== */
