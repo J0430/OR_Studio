@@ -9,8 +9,9 @@ const DynamicForm = ({ schema, title, logo }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, touchedFields },
+    formState: { errors, touchedFields, isSubmitting },
     reset,
+    trigger, // ✅ Trigger validation onBlur
   } = useForm({ resolver: yupResolver(schema), mode: "onChange" });
 
   const [serverError, setServerError] = useState("");
@@ -51,7 +52,7 @@ const DynamicForm = ({ schema, title, logo }) => {
         </div>
       )}
 
-      {/* First + Last Name Row */}
+      {/* ✅ First + Last Name Row */}
       <div className={styles.formRow}>
         {["firstName", "lastName"].map((field, index) => (
           <div className={styles.formGroup} key={index}>
@@ -59,10 +60,11 @@ const DynamicForm = ({ schema, title, logo }) => {
             <input
               type="text"
               {...register(field)}
+              onBlur={() => trigger(field)} // ✅ Trigger validation on blur
               className={`
                 ${styles.inputField}
-                ${errors[field] ? styles.error : ""}
                 ${touchedFields[field] && !errors[field] ? styles.valid : ""}
+                ${errors[field] ? styles.error : ""}
               `}
               placeholder={`Enter your ${field}`}
             />
@@ -70,7 +72,7 @@ const DynamicForm = ({ schema, title, logo }) => {
         ))}
       </div>
 
-      {/* Other Fields */}
+      {/* ✅ Other Fields */}
       {Object.keys(schema.fields)
         .filter((field) => !["firstName", "lastName"].includes(field))
         .map((field, index) => {
@@ -81,12 +83,11 @@ const DynamicForm = ({ schema, title, logo }) => {
               {isMessage ? (
                 <textarea
                   {...register(field)}
+                  onBlur={() => trigger(field)} // ✅ Trigger validation on blur
                   className={`
                     ${styles.inputField}
+                    ${touchedFields[field] && !errors[field] ? styles.valid : ""}
                     ${errors[field] ? styles.error : ""}
-                    ${
-                      touchedFields[field] && !errors[field] ? styles.valid : ""
-                    }
                   `}
                   placeholder="Enter your message"
                   rows={3}
@@ -95,12 +96,11 @@ const DynamicForm = ({ schema, title, logo }) => {
                 <input
                   type="text"
                   {...register(field)}
+                  onBlur={() => trigger(field)} // ✅ Trigger validation on blur
                   className={`
                     ${styles.inputField}
+                    ${touchedFields[field] && !errors[field] ? styles.valid : ""}
                     ${errors[field] ? styles.error : ""}
-                    ${
-                      touchedFields[field] && !errors[field] ? styles.valid : ""
-                    }
                   `}
                   placeholder={`Enter your ${field}`}
                 />
@@ -109,7 +109,7 @@ const DynamicForm = ({ schema, title, logo }) => {
           );
         })}
 
-      {/* Submit */}
+      {/* ✅ Submit Button */}
       <motion.button
         type="submit"
         className={styles.submitButton}
@@ -117,6 +117,7 @@ const DynamicForm = ({ schema, title, logo }) => {
         <span>{isSubmitting ? "Sending..." : "Send"}</span>
       </motion.button>
 
+      {/* ✅ Errors and Success */}
       {serverError && <p className={styles.errorMessage}>{serverError}</p>}
       {success && (
         <p className={styles.successMessage}>Message sent successfully!</p>
