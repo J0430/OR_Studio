@@ -22,7 +22,7 @@
     font-size: 1.5rem;
     font-weight: 500;
     color: white;
-    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -44,7 +44,7 @@
   /* ✅ Mobile Responsive Adjustments */
   @media screen and (max-width: 768px) {
     align-items: left; // ✅ Align content to the left on mobile
-    padding-top: 0.5rem
+    padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 
     h2 {
