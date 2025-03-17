@@ -1,24 +1,25 @@
+// ✅ WorksGrid.jsx
+
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import styles from "../WorksGrid/WorksGrid.module.scss"; // ✅ Updated path
+import styles from "../WorksGrid/WorksGrid.module.scss";
 
-// ✅ Individual Grid Item with Animation
-const WorksGridItem = ({ imagePath, index, onImageClick, showImages }) => {
+// ✅ Individual Grid Item (FIXED)
+const WorksGridItem = ({ work, index, onImageClick, showImages }) => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
     <motion.article
       ref={ref}
       className={styles.worksGridItem}
-      key={`${imagePath || "default"}-${index}`}
-      layoutId={imagePath}
-      onClick={() => onImageClick(imagePath)}
+      layoutId={work.frontImage}
+      onClick={() => onImageClick(work.frontImage)} // ✅ Fixed: Pass only image path
       tabIndex={0}
       role="button"
-      aria-label={`Open modal for Work ${index + 1}`} // ✅ Updated to Work
-      initial={{ opacity: 0, y: 100 }} // ✅ Start from bottom
+      aria-label={`Open modal for Work ${index + 1}`}
+      initial={{ opacity: 0, y: 100 }}
       animate={
         inView && showImages
           ? {
@@ -27,54 +28,47 @@ const WorksGridItem = ({ imagePath, index, onImageClick, showImages }) => {
               transition: {
                 duration: 0.4,
                 ease: "easeOut",
-                delay: index * 0.006, // ✅ Stagger effect
+                delay: index * 0.006,
               },
             }
           : {}
       }>
       {showImages ? (
         <Image
-          src={imagePath}
-          alt={`Work ${index + 1}`} // ✅ Updated to Work
+          src={work.frontImage}
+          alt={`Work ${index + 1}`}
           width={300}
           height={200}
-          loading="lazy"
-          className="loaded"
           quality={75}
         />
       ) : (
-        <div className={styles.worksPlaceholder} /> // ✅ Updated class
+        <div className={styles.worksPlaceholder} />
       )}
     </motion.article>
   );
 };
 
-// ✅ Main Grid Component
+// ✅ Main Grid Component (NO CHANGES NEEDED)
 const WorksGrid = ({ works, onImageClick, delay = 500 }) => {
   const [showImages, setShowImages] = useState(false);
 
-  // ✅ Delay loading until preloader is done
   useEffect(() => {
     const timeout = setTimeout(() => setShowImages(true), delay);
     return () => clearTimeout(timeout);
   }, [delay]);
 
-  if (!works || works.length === 0) {
-    return <div>No works available at this time.</div>; // ✅ Updated to works
-  }
+  if (!works.length) return <div>No works available at this time.</div>;
 
   return (
     <motion.section
       className={styles.worksGridWrapper}
-      aria-label="Works Grid" // ✅ Updated aria-label
+      aria-label="Works Grid"
       role="region">
       <div className={styles.worksGrid}>
-        {" "}
-        {/* ✅ Removed inline style, handled via SCSS */}
-        {works.map((imagePath, index) => (
+        {works.map((work, index) => (
           <WorksGridItem
-            key={`${imagePath || "default"}-${index}`}
-            imagePath={imagePath}
+            key={`${work.frontImage}-${index}`}
+            work={work}
             index={index}
             onImageClick={onImageClick}
             showImages={showImages}

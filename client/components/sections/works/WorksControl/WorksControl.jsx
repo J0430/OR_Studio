@@ -1,28 +1,36 @@
-import dynamic from "next/dynamic";
-import styles from "./WorksControl.module.scss"; // ✅ Assuming you store this SCSS
+import { useNav } from "@contexts/NavContext";
+import DropdownMenu from "@components/common/DropdownMenu/DropdownMenu";
+import CategoryTabs from "@components/common/CategoryTab/CategoryTabs";
+import styles from "../WorksControl/WorksControl.module.scss";
 
-// ✅ Dynamic imports
-const CategoryTabs = dynamic(
-  () => import("@components/common/CategoryTab/CategoryTabs")
-);
-const DropdownMenu = dynamic(
-  () => import("@components/common/DropdownMenu/DropdownMenu")
-);
+const WorksControl = ({
+  categories = [],
+  selectedCategory = "",
+  onCategorySelect = () => {},
+}) => {
+  const { isNavOpen } = useNav();
+  const filteredCategories = categories.filter(
+    (category) => category !== "Works"
+  );
 
-const WorksControl = ({ categories, selectedCategory, onCategorySelect }) => {
   return (
-    <section className={styles.worksControl} aria-label="Project Categories">
-      {/* ✅ Desktop Tabs (Optional: Can be hidden on mobile via CSS) */}
-      <div className={styles.tabsWrapper}>
-        <CategoryTabs
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategorySelect={onCategorySelect}
-        />
+    <section className={styles.worksControl} aria-label="Work Categories">
+      <div className={styles.worksTitleBox}>
+        <h1 className={styles.worksTitle}>Works</h1>
       </div>
 
-      {/* ✅ Always Visible Dropdown */}
-      <div className={styles.dropdownWrapper}>
+      <div className={styles.worksSelectorBox}>
+        <nav className={styles.worksSelector} aria-label="Category Navigation">
+          <CategoryTabs
+            categories={filteredCategories}
+            selectedCategory={selectedCategory}
+            onCategorySelect={onCategorySelect}
+          />
+        </nav>
+      </div>
+
+      {/* Mobile Dropdown appears only on mobile via CSS */}
+      <div className={styles.worksDropdownMobile}>
         <DropdownMenu
           categories={categories}
           selectedCategory={selectedCategory}

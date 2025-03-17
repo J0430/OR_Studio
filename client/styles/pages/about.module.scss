@@ -1,84 +1,107 @@
-.aboutPage {
+/* components/About.module.scss */
+
+.main {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
+}
+
+.row {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  font-family: Arial, sans-serif;
-  color: #333;
-  overflow-y: auto !important;
-}
-
-.headerImage,
-.teamImage {
-  position: relative;
-  width: 100%;
-  height: 400px;
-}
-
-.aboutSection {
-  max-width: 800px;
-  text-align: center;
-  padding: 2rem;
-  color: white;
-}
-
-.title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  letter-spacing: 2px;
-}
-
-.quote {
-  font-size: 1.5rem;
-  font-style: italic;
-  margin: 1rem 0;
-}
-
-.description {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.corePrinciples {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   gap: 2rem;
-  padding: 2rem;
 
-  background-color: black;
-  width: 100%;
-}
-
-.principle {
-  max-width: 250px;
-  text-align: center;
-}
-
-.principle h3 {
-  color: white;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.principle p {
-  color: white;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-@media (max-width: 768px) {
-  .corePrinciples {
+  @media (max-width: 768px) {
     flex-direction: column;
-    align-items: center;
+    text-align: center;
+  }
+}
+
+.textMain {
+  h1 {
+    position: relative;
+    display: inline;
+    height: 440px;
+    margin: 0px;
+    max-width: 100%;
+    overflow-x: clip;
+    overflow-y: clip;
+    padding: 0px;
+    visibility: visible;
+    width: 590px;
+    text-size-adjust: 100%;
+    font-family:
+      "proxima nova light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: bottom;
+    color: rgb(51, 51, 51);
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: none;
+    background-origin: padding-box;
+    background-position: 0% 0%;
+    background-repeat: repeat;
+    background-size: auto;
+    border: none;
+    border-bottom-color: rgb(51, 51, 51);
+    border-left-color: rgb(51, 51, 51);
+    border-right-color: rgb(51, 51, 51);
+    border-top-color: rgb(51, 51, 51);
+    outline: none;
+    outline-color: rgb(51, 51, 51);
+    text-rendering: optimizelegibility;
+    list-style: none;
+    overflow-clip-margin: content-box;
+    border-image: none;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-width: 1;
+
+    span {
+      color: #444;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+    }
   }
 
-  .headerImage,
-  .teamImage {
-    height: 250px;
+  .intro {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #555;
   }
 
-  .aboutSection {
-    padding: 1rem;
+  .description {
+    font-size: 1.1rem;
+    color: #777;
+    line-height: 1.6;
+  }
+}
+
+.imgMain {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 2rem;
   }
 }
