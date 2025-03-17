@@ -1,5 +1,5 @@
 @use "@styles/partials/variables" as v;
-
+@use "@styles/partials/mixins" as m;
 /* =========================== */
 /* ✅ Grid Wrapper             */
 /* =========================== */
@@ -8,15 +8,15 @@
   flex-grow: 1;
 
   /* ===== Box Model ===== */
-  height: 100%;
-  overflow-y: auto;
+  margin-top: 4rem;
+  overflow-y: scroll;
   overflow-x: hidden;
 
   /* ===== Visual / Motion ===== */
   -webkit-overflow-scrolling: touch;
 
   /* ===== Layering ===== */
-  z-index: 1;
+  z-index: 0;
 }
 
 /* =========================== */
@@ -25,6 +25,7 @@
 .worksGrid {
   /* ===== Layout ===== */
   display: grid;
+  padding-top: 2rem;
   grid-auto-rows: 1fr;
 
   /* ===== Box Model ===== */

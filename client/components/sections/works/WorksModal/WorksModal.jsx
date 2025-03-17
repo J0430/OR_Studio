@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import useClickOutside from "@hooks/useClickOuside";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import styles from "./WorksModal.module.scss"; // ✅ Updated import
 import Image from "next/image";
@@ -23,7 +22,6 @@ function WorksModal({ selectedImage, work, onClose }) {
     }
   }, [work, selectedImage]);
 
-  // ✅ Navigate next image
   const handleNext = useCallback(() => {
     setSwipeDirection(1);
     setCurrentImageIndex((prev) =>
@@ -31,7 +29,6 @@ function WorksModal({ selectedImage, work, onClose }) {
     );
   }, [work.images.length]);
 
-  // ✅ Navigate previous image
   const handlePrevious = useCallback(() => {
     setSwipeDirection(-1);
     setCurrentImageIndex((prev) =>
@@ -39,7 +36,6 @@ function WorksModal({ selectedImage, work, onClose }) {
     );
   }, [work.images.length]);
 
-  // ✅ Keyboard navigation
   const handleKeyDown = useCallback(
     (event) => {
       if (event.key === "ArrowRight") {
@@ -56,7 +52,6 @@ function WorksModal({ selectedImage, work, onClose }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
-  // ✅ Touch gestures
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -115,7 +110,7 @@ function WorksModal({ selectedImage, work, onClose }) {
               transition={{ duration: 0.3, ease: "easeInOut" }}>
               <Image
                 src={work.images[currentImageIndex]}
-                alt={`Work Image ${currentImageIndex + 1}`} // ✅ Updated alt tag
+                alt={`Work Image ${currentImageIndex + 1}`}
                 className={styles.modalImage}
                 width={900}
                 height={700}

@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useNav } from "@contexts/NavContext";
 import Image from "next/image";
 import styles from "./LandingPage.module.scss";
 
 const LandingPage = ({ images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef(null);
+  const { isNavOpen } = useNav();
 
   // Handle image index update for the carousel
   const updateImageIndex = useCallback(() => {
@@ -45,31 +47,32 @@ const LandingPage = ({ images }) => {
           </motion.div>
         )}
       </AnimatePresence>
-
+      {!isNavOpen && (
+        <motion.div className={styles.bannerTitleWrapper}>
+          <motion.div
+            className={styles.titleLineWrapper}
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+          />
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
+            className={styles.bannerTitle}>
+            DESIGN DIFFERENT
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 1, ease: "easeOut" }}
+            className={styles.bannerSubtitle}>
+            Architectural animation and visualization digital production by OR
+            Studio
+          </motion.p>
+        </motion.div>
+      )}{" "}
       {/* Banner Title and Subtitle with smooth animations */}
-      <motion.div className={styles.bannerTitleWrapper}>
-        <motion.div
-          className={styles.titleLineWrapper}
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-        />
-        <motion.h1
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
-          className={styles.bannerTitle}>
-          DESIGN DIFFERENT
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 1, ease: "easeOut" }}
-          className={styles.bannerSubtitle}>
-          Architectural animation and visualization digital production by OR
-          Studio
-        </motion.p>
-      </motion.div>
     </motion.section>
   );
 };

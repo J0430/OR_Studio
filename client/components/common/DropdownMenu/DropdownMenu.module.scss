@@ -1,40 +1,37 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-/* =========================== */
-/* ✅ Dropdown Container Styling */
-/* =========================== */
 .dropdownContainer {
   display: inline-block;
   width: 100%;
   text-align: center;
 }
 
-/* =========================== */
-/* ✅ Dropdown Button Styling   */
-/* =========================== */
+/* Dropdown Button */
 .dropdownButton {
   background: rgba(0, 0, 0, 0.8);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 8px 12px; // ✅ Increased horizontal padding for better spacing
+  padding: 8px 12px;
   border-radius: 30px;
-  font-size: 1rem; // ✅ Responsive font size
+  font-size: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 12rem; // ✅ Ensures it never goes smaller than 12rem
-  max-width: 100%; // ✅ Allows it to fit within its container
-  flex: 0 1 auto; // ✅ Prevents unnecessary stretching
+  min-width: 12rem;
+  max-width: 100%;
+  flex: 0 1 auto;
 
   &:hover {
     background: rgba(0, 0, 0, 0.8);
   }
+
   .categoryText {
     flex-grow: 1;
     text-align: left;
   }
+
   .buttonContent {
     display: flex;
     align-items: center;
@@ -49,13 +46,31 @@
     .arrow {
       display: flex;
       flex-basis: fit-content;
+      transition: transform 0.3s ease;
     }
   }
 }
 
-/* =========================== */
-/* ✅ Dropdown Item Styling     */
-/* =========================== */
+/* Dropdown Content */
+.dropdownContent {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  padding: 0.5em;
+  min-width: 12rem;
+  max-width: 100%;
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+}
+
+/* Dropdown Items */
 .dropdownItem {
   padding: m.rem(4) m.rem(10);
   margin-bottom: m.rem(7);
@@ -73,6 +88,24 @@
 }
 
 .activeItem {
-  background-color: #343c48e6 !important; // ✅ Ensure it stays active
+  background-color: #343c48e6 !important;
   font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  /* Adjust for mobile */
+  .dropdownButton {
+    min-width: 8rem;
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+
+  .dropdownContent {
+    min-width: 10rem;
+  }
+
+  .dropdownItem {
+    font-size: 14px;
+    padding: m.rem(4) m.rem(8);
+  }
 }
