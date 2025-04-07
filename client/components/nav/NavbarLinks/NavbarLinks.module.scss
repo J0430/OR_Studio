@@ -5,55 +5,59 @@
 /* ✅ Navbar Main Container    */
 /* =========================== */
 .navContainer {
-  /* ===== Positioning ===== */
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-
-  /* ===== Box Model ===== */
   width: 100%;
   height: 100vh;
-
-  /* ===== Layout ===== */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  padding: m.rem(32);
+  pointer-events: all;
+  animation: fadeSlideIn 0.7s ease forwards;
 
-  /* ===== Visual ===== */
-  background: rgba(0, 0, 0, 0.6); // ✅ Semi-dark overlay for desktop
+  @media screen and (max-width: 768px) {
+    padding: m.rem(24);
+    background: rgba(0, 0, 0, 0.9);
+    height: 100dvh;
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* =========================== */
 /* ✅ Close Button             */
 /* =========================== */
 .closeButton {
-  /* ===== Positioning ===== */
-  position: absolute;
+  position: fixed;
   top: m.rem(30);
   right: m.rem(30);
-
-  /* ===== Box Model ===== */
   border: none;
   background: none;
-
-  /* ===== Visual ===== */
   color: v.$white;
   font-size: m.rem(33);
   cursor: pointer;
-  pointer-events: all; // ✅ Ensure clickable
-
-  /* ===== Motion ===== */
+  pointer-events: all;
   transition: color 0.3s ease-in-out;
+  z-index: 2000;
 
   &:hover {
     color: v.$gray;
   }
 
-  /* =========================== */
-  /* ✅ Mobile Adjustments       */
-  /* =========================== */
   @media screen and (max-width: 768px) {
     top: m.rem(16);
     right: m.rem(16);
@@ -65,25 +69,17 @@
 /* ✅ Navbar List              */
 /* =========================== */
 .navList {
-  /* ===== Layout ===== */
   display: flex;
   flex-direction: column;
   place-items: center;
   gap: m.rem(24);
-
-  /* ===== Box Model ===== */
   padding: 0;
   margin: 0;
   list-style: none;
+  pointer-events: all;
 
-  /* ===== Interaction ===== */
-  pointer-events: all; // ✅ Make sure items are clickable
-
-  /* =========================== */
-  /* ✅ Mobile Adjustments       */
-  /* =========================== */
   @media screen and (max-width: 768px) {
-    gap: m.rem(20); // ✅ Smaller gap between links
+    gap: m.rem(20);
   }
 }
 
@@ -91,32 +87,24 @@
 /* ✅ Navbar List Items        */
 /* =========================== */
 .navItem {
-  /* ===== Typography ===== */
   font-size: m.rem(30);
   font-weight: v.$font-weight-regular;
   text-transform: uppercase;
-
-  /* ===== Visual ===== */
   color: v.$white;
   cursor: pointer;
-
-  /* ===== Motion ===== */
-  transition: transform 0.1s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 
   &:hover {
     color: v.$hover-bg;
     transform: scale(1.1);
   }
 
-  /* =========================== */
-  /* ✅ Mobile Adjustments       */
-  /* =========================== */
   @media screen and (max-width: 768px) {
-    font-size: m.rem(24); // ✅ Smaller font for mobile
+    font-size: m.rem(24);
     text-align: center;
 
     &:hover {
-      transform: scale(1.05); // ✅ Softer hover effect
+      transform: scale(1.05);
     }
   }
 }
@@ -125,35 +113,10 @@
 /* ✅ Active Link Highlight    */
 /* =========================== */
 .active {
-  /* ===== Typography ===== */
   font-weight: v.$font-weight-bold;
-
-  /* ===== Visual ===== */
   border-bottom: 0.06em solid rgba(255, 255, 255, 0.348);
 
-  /* =========================== */
-  /* ✅ Mobile Adjustments       */
-  /* =========================== */
   @media screen and (max-width: 768px) {
-    border-bottom: 0.05em solid rgba(255, 255, 255, 0.5); // ✅ Thinner line for mobile
-  }
-}
-
-/* =========================== */
-/* ✅ Mobile-Only Adjustments  */
-/* =========================== */
-@media screen and (max-width: 768px) {
-  .navContainer {
-    /* ===== Box Model ===== */
-    padding: m.rem(24); // ✅ Padding to avoid screen edges
-
-    /* ===== Visual ===== */
-    background: rgba(0, 0, 0, 0.9); // ✅ Darker overlay for mobile
-
-    /* ===== Layout ===== */
-    justify-content: center;
-
-    /* ===== Height Fix for Mobiles ===== */
-    height: 100dvh;
+    border-bottom: 0.05em solid rgba(255, 255, 255, 0.5);
   }
 }

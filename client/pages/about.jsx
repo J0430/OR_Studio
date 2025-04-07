@@ -23,8 +23,7 @@ export default function About() {
         <meta property="og:image" content="/images/header.jpg" />
         <meta property="og:type" content="website" />
       </Head>
-      // components/About.jsx import React from 'react'; import styles from
-      './About.module.scss';
+
       <section className={styles.main}>
         <div className={styles.row}>
           <div className={styles.textMain}>

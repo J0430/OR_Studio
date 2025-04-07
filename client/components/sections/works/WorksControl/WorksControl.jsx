@@ -5,16 +5,18 @@ import styles from "../WorksControl/WorksControl.module.scss";
 
 const WorksControl = ({
   categories = [],
-  selectedCategory = "",
-  onCategorySelect = () => {},
+  selectedCategory,
+  onCategorySelect,
 }) => {
   const { isNavOpen } = useNav();
-  const filteredCategories = categories.filter(
-    (category) => category !== "Works"
-  );
+  const filteredCategories = categories.filter((cat) => cat !== "Works");
 
   return (
-    <section className={styles.worksControl} aria-label="Work Categories">
+    <section
+      data-open={isNavOpen}
+      className={styles.worksControl}
+      aria-label="Work Categories"
+      aria-expanded={isNavOpen}>
       <div className={styles.worksTitleBox}>
         <h1 className={styles.worksTitle}>Works</h1>
       </div>
@@ -29,7 +31,6 @@ const WorksControl = ({
         </nav>
       </div>
 
-      {/* Mobile Dropdown appears only on mobile via CSS */}
       <div className={styles.worksDropdownMobile}>
         <DropdownMenu
           categories={categories}

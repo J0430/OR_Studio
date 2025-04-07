@@ -5,9 +5,18 @@
 /* ✅ Dropdown Container Styling */
 /* =========================== */
 .dropdownContainer {
-  display: inline-block;
-  width: 100%;
-  text-align: center;
+  position: relative;
+  z-index: 10001;
+  pointer-events: all;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 0.25rem 1rem;
+    border-radius: m.rem(10);
+  }
 }
 
 /* =========================== */
@@ -17,40 +26,33 @@
   background: rgba(0, 0, 0, 0.8);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 8px 12px; // ✅ Increased horizontal padding for better spacing
-  border-radius: 30px;
-  font-size: 1rem; // ✅ Responsive font size
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 12rem; // ✅ Allows it to fit within its container
-  flex: 0 1 auto; // ✅ Prevents unnecessary stretching
+  padding: 0.5rem 1rem;
+  border-radius: m.rem(30);
+  font-size: 1rem;
   font-weight: 500;
-  margin-bottom: 0.3rem;
+  cursor: pointer;
+  width: 12rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  &:hover {
-    background: rgba(0, 0, 0, 0.8);
-  }
-  .categoryText {
-    flex-grow: 1;
-    text-align: left;
-  }
   .buttonContent {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     .categoryText {
-      flex-grow: 1;
-      text-align: left;
       margin-left: 0.7rem;
     }
 
     .arrow {
       display: flex;
-      flex-basis: fit-content;
+      align-items: center;
     }
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.85);
   }
 }
 
@@ -58,46 +60,28 @@
 /* ✅ Dropdown Item Styling     */
 /* =========================== */
 .dropdownContent {
-  background-color: rgba(0, 0, 0, 0.8);
-  width: auto;
+  margin-top: 0.4rem;
+  background-color: rgba(0, 0, 0, 0.9);
   border-radius: m.rem(10);
   padding: 0.3em;
+  width: 100%;
 }
+
 .dropdownItem {
-  padding: m.rem(4) m.rem(10);
-  margin-bottom: m.rem(7);
-  font-size: 16px;
+  padding: m.rem(6) m.rem(12);
+  font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.9);
-  text-align: center;
+  text-align: left;
   cursor: pointer;
-  transition: all 0.1s ease-in-out;
   border-radius: 10px;
+  transition: all 0.15s ease-in-out;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.785);
-    color: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.2);
   }
 }
 
 .activeItem {
-  background-color: #343c48e6; // ✅ Ensure it stays active
-  font-weight: 500;
-}
-
-@media screen and (max-width: 768px) {
-  /* Adjust for mobile */
-  .dropdownButton {
-    min-width: 8rem;
-    font-size: 0.9rem;
-    padding: 6px 10px;
-  }
-
-  .dropdownContent {
-    min-width: 10rem;
-  }
-
-  .dropdownItem {
-    font-size: 14px;
-    padding: m.rem(4) m.rem(8);
-  }
+  background-color: rgba(255, 255, 255, 0.15);
+  font-weight: bold;
 }

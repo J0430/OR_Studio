@@ -9,63 +9,63 @@
   flex-direction: column;
   width: 100%;
   padding: m.rem(20) 0;
-}
 
-/* =========================== */
-/* ✅ Title Box               */
-/* =========================== */
-.worksTitleBox {
-  width: fit-content;
-  position: relative;
-  top: m.rem(15);
-  padding: 0 1rem;
-}
-
-.worksTitle {
-  font-size: clamp(m.rem(20), 4vw, m.rem(30));
-  font-weight: 200;
-  color: var(--text-color); // ✅ Theme color
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-/* =========================== */
-/* ✅ Selector (Tabs) Box      */
-/* =========================== */
-.worksSelectorBox {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 2%;
-  padding: 0 m.rem(16);
-  padding-top: m.rem(16); // Space from divider line
-  border-top: m.rem(1) solid rgba(255, 255, 255, 0.3); // Default fallback
-  border-top: m.rem(1) solid rgba(var(--border-strong), 0.3); // ✅ Theme border
-}
-
-.worksSelector {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .tabsWrapper {
-    position: relative;
-    display: flex;
-    gap: 2.5rem;
-    justify-content: center;
-    align-items: center;
-    padding: 0.625rem 0;
+  &[data-open="true"] {
+    z-index: 0;
   }
-}
 
-/* =========================== */
-/* ✅ Mobile Dropdown Style    */
-/* =========================== */
-.worksDropdownMobile {
-  display: none; // ✅ Hidden by default
-  padding: 0 m.rem(16);
+  /* ===== Visual ===== */
+
+  /* =========================== */
+  /* ✅ Title Box               */
+  /* =========================== */
+  .worksTitleBox {
+    width: fit-content;
+    position: relative;
+    top: m.rem(15);
+    padding: 0 1rem;
+
+    .worksTitle {
+      font-size: clamp(m.rem(20), 4vw, m.rem(30));
+      font-weight: 200;
+      color: var(--text-color); // ✅ Theme color
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+  }
+
+  /* =========================== */
+  /* ✅ Selector (Tabs) Box      */
+  /* =========================== */
+  .worksSelectorBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 2%;
+    padding: 0 m.rem(16);
+    padding-top: m.rem(16); // Space from divider line
+    border-top: m.rem(1) solid rgba(255, 255, 255, 0.3); // Default fallback
+    border-top: m.rem(1) solid rgba(var(--border-strong), 0.3); // ✅ Theme border
+    .worksSelector {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .tabsWrapper {
+        position: relative;
+        display: flex;
+        gap: 2.5rem;
+        justify-content: center;
+        align-items: center;
+        padding: 0.625rem 0;
+      }
+    }
+  }
+  .worksDropdownMobile {
+    display: none;
+  }
 }
 
 /* =========================== */
@@ -74,68 +74,38 @@
 
 /* Mobile Styles */
 @media (max-width: 768px) {
-  .worksTitleBox {
-    display: none; // ✅ Hide title on mobile
-  }
-
-  .worksSelectorBox {
-    display: none; // ✅ Hide tabs on mobile
-  }
   .worksControl {
     display: flex;
     flex-direction: column;
     position: absolute;
-    z-index: 1000;
     left: 10.5rem;
     top: 13.4%;
     width: fit-content;
     padding: 1.25rem 0;
-  }
-  /* =========================== */
-  /* ✅ Mobile Dropdown Style Centered on Top */
-  /* =========================== */
-  .worksDropdownMobile {
-    position: fixed; // Always visible and stays at top
-    top: 1rem; // Adjust this value as needed
-    left: 50%; // Center horizontally
-    transform: translateX(-50%); // Center trick
-    z-index: 10000; // Ensure it's above everything
 
-    display: flex;
-    justify-content: center;
-    width: fit-content; // Shrink to content
-    padding: 0 m.rem(16);
-    background: transparent; // Optional if you want background
-    pointer-events: all; // Make sure it's clickable
-  }
-
-  /* Hide on desktop */
-  @media (min-width: 769px) {
-    .worksDropdownMobile {
+    .worksTitleBox {
       display: none;
     }
-  } /* =========================== */
-  /* ✅ Mobile Dropdown Style Centered on Top */
-  /* =========================== */
-  .worksDropdownMobile {
-    position: fixed; // Always visible and stays at top
-    top: 1rem; // Adjust this value as needed
-    left: 50%; // Center horizontally
-    transform: translateX(-50%); // Center trick
-    z-index: 10000; // Ensure it's above everything
 
-    display: flex;
-    justify-content: center;
-    width: fit-content; // Shrink to content
-    padding: 0 m.rem(16);
-    background: transparent; // Optional if you want background
-    pointer-events: all; // Make sure it's clickable
-  }
-
-  /* Hide on desktop */
-  @media (min-width: 769px) {
-    .worksDropdownMobile {
+    .worksSelectorBox {
       display: none;
+    }
+    /* =========================== */
+    /* ✅ Mobile Dropdown Style Centered on Top */
+    /* =========================== */
+    .worksDropdownMobile {
+      position: fixed; // Always visible and stays at top
+      top: 1rem; // Adjust this value as needed
+      left: 50%; // Center horizontally
+      transform: translateX(-50%); // Center trick
+      z-index: 1; // Ensure it's above everything
+
+      display: flex;
+      justify-content: center;
+      width: fit-content; // Shrink to content
+      padding: 0 m.rem(16);
+      background: transparent; // Optional if you want background
+      pointer-events: all; // Make sure it's clickable
     }
   }
 }
