@@ -69,14 +69,14 @@
 /* ✅ Navbar List              */
 /* =========================== */
 .navList {
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-  gap: m.rem(24);
+  list-style: none;
   padding: 0;
   margin: 0;
-  list-style: none;
-  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: m.rem(24);
+  z-index: 10001;
 
   @media screen and (max-width: 768px) {
     gap: m.rem(20);
@@ -84,39 +84,36 @@
 }
 
 /* =========================== */
-/* ✅ Navbar List Items        */
+/* ✅ Navbar Item Styling      */
 /* =========================== */
 .navItem {
   font-size: m.rem(30);
-  font-weight: v.$font-weight-regular;
-  text-transform: uppercase;
+  font-weight: 400;
   color: v.$white;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  padding: 0.5rem 1rem;
+  text-align: center;
 
   &:hover {
+    transform: scale(1.05);
     color: v.$hover-bg;
-    transform: scale(1.1);
   }
 
   @media screen and (max-width: 768px) {
     font-size: m.rem(24);
-    text-align: center;
-
-    &:hover {
-      transform: scale(1.05);
-    }
   }
 }
 
 /* =========================== */
-/* ✅ Active Link Highlight    */
+/* ✅ Active Nav Item Style    */
 /* =========================== */
 .active {
-  font-weight: v.$font-weight-bold;
-  border-bottom: 0.06em solid rgba(255, 255, 255, 0.348);
+  font-weight: bold;
+  border-bottom: m.rem(2) solid rgba(255, 255, 255, 0.4);
 
   @media screen and (max-width: 768px) {
-    border-bottom: 0.05em solid rgba(255, 255, 255, 0.5);
+    border-bottom: m.rem(1) solid rgba(255, 255, 255, 0.4);
   }
 }

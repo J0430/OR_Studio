@@ -26,6 +26,19 @@
 }
 
 /* =========================== */
+/* ✅ Active Nav Item Style    */
+/* =========================== */
+.navItem.active {
+  font-weight: bold;
+  color: v.$white;
+  border-bottom: m.rem(2) solid rgba(255, 255, 255, 0.4);
+
+  @media screen and (max-width: 768px) {
+    border-bottom: m.rem(1) solid rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* =========================== */
 /* ✅ Logo                     */
 /* =========================== */
 .logo {
@@ -88,7 +101,32 @@
   justify-content: center;
   align-items: center;
   pointer-events: all;
-  padding-top: m.rem(60); // space to prevent overlap on mobile
+  padding-top: m.rem(60);
+  backdrop-filter: blur(8px);
+  animation: fadeSlideUp 0.6s ease forwards;
+  clip-path: inset(0 0 100% 0);
+  animation: revealMenu 0.6s ease forwards;
+
+  @keyframes revealMenu {
+    0% {
+      clip-path: inset(0 0 100% 0);
+    }
+    100% {
+      clip-path: inset(0 0 0% 0);
+    }
+  }
+
+  @keyframes fadeSlideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  // space to prevent overlap on mobile
 
   @media (max-width: 768px) {
     padding-top: m.rem(80);

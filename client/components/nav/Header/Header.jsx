@@ -1,4 +1,3 @@
-// ✅ Senior-Level Header.jsx with Accessibility and Clean Structure
 import { useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
