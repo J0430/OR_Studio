@@ -16,7 +16,7 @@ export const WorksPreloaderProvider = ({ children }) => {
 
   // ✅ Fallback to hide preloader after 2.8 seconds
   useEffect(() => {
-    const timeout = setTimeout(() => setIsPreloaderVisible(false), 2800);
+    const timeout = setTimeout(() => setIsPreloaderVisible(false), 2000);
     return () => clearTimeout(timeout);
   }, []);
 
