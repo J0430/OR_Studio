@@ -10,71 +10,54 @@
   left: 0;
   width: 100%;
   background: transparent;
-  z-index: 10000; /* Ensure navbar is on top */
-  pointer-events: all; /* Ensure the navbar is interactive */
-}
-
-/* =========================== */
-/* ✅ Ghost container (structure) */
-/* =========================== */
-.navGhostContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  pointer-events: none;
-  z-index: 10;
-}
-
-/* =========================== */
-/* ✅ Invisible area between the logo and hamburger */
-/* =========================== */
-.navInvisibleArea {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: calc(
-    100% - 40px
-  ); /* Make this match the space between the logo and hamburger */
-  height: 100%;
-  pointer-events: none; /* Allow clicking through this region */
-}
-
-/* =========================== */
-/* ✅ Interactive Content (logo & menu) */
-/* =========================== */
-.navContent {
-  width: 100%;
+  z-index: 1;
+  pointer-events: all;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
-  pointer-events: all; /* Make children interactive */
-  position: relative; /* Add relative positioning to control the child elements */
+
+  @media screen and (max-width: 768px) {
+    padding: 1rem;
+  }
+  &[data-open="true"] .navbar {
+    z-index: 0;
+  }
 }
 
 /* =========================== */
-/* ✅ Logo styling and interaction */
+/* ✅ Logo                     */
 /* =========================== */
 .logo {
   pointer-events: all;
   z-index: 1100;
   cursor: pointer;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 }
 
 /* =========================== */
-/* ✅ Menu Button styling */
+/* ✅ Hidden Logo (State Only) */
+/* =========================== */
+.logoHidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================== */
+/* ✅ Hamburger Menu Button    */
 /* =========================== */
 .menuButton {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
   border: none;
   background: none;
   color: v.$white;
   cursor: pointer;
-  z-index: 1100;
+  z-index: 1101;
   padding: 0;
   width: m.rem(40);
   height: m.rem(40);
@@ -82,52 +65,15 @@
   align-items: center;
   justify-content: center;
   pointer-events: all;
-}
 
-/* =========================== */
-/* ✅ Hamburger/X icon animation */
-/* =========================== */
-.menuIcon {
-  position: absolute;
-  width: m.rem(24);
-  height: m.rem(24);
-  z-index: 3000 !important;
-
-  .line {
-    position: absolute;
-    width: 100%;
-    height: m.rem(3);
-    background: v.$white;
-    transition:
-      transform 0.3s ease-in-out,
-      top 0.3s ease-in-out,
-      bottom 0.3s ease-in-out;
-
-    &:first-child {
-      top: 0;
-      transform-origin: center;
-    }
-
-    &:last-child {
-      bottom: 0;
-      transform-origin: center;
-    }
-  }
-
-  /* ✅ When menu is open - become X */
-  &[data-open="true"] .line:first-child {
-    transform: rotate(45deg);
-    top: 50%; /* Move to center */
-  }
-
-  &[data-open="true"] .line:last-child {
-    transform: rotate(-45deg);
-    bottom: 50%; /* Move to center */
+  @media screen and (max-width: 768px) {
+    top: 1rem;
+    right: 1rem;
   }
 }
 
 /* =========================== */
-/* ✅ Menu overlay when open */
+/* ✅ Fullscreen Menu Overlay  */
 /* =========================== */
 .menuOverlay {
   position: fixed;
@@ -141,14 +87,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  pointer-events: all; /* Fully interactive when open */
-}
+  pointer-events: all;
+  padding-top: m.rem(60); // space to prevent overlap on mobile
 
-/* =========================== */
-/* ✅ Mobile adjustments */
-/* =========================== */
-@media screen and (max-width: 768px) {
-  .navContent {
-    padding: 1rem;
+  @media (max-width: 768px) {
+    padding-top: m.rem(80);
   }
 }

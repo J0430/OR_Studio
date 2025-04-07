@@ -8,6 +8,7 @@ import styles from "../WorksGrid/WorksGrid.module.scss";
 
 // ✅ Individual Grid Item (FIXED)
 const WorksGridItem = ({ work, index, onImageClick, showImages }) => {
+  console.log(work.frontImage);
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
