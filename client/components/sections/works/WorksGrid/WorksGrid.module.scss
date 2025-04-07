@@ -27,7 +27,7 @@
   /* ===== Layout ===== */
   z-index: 0;
   display: grid;
-  padding-top: 2  rem;
+  padding-top: 2 rem;
 
   /* ===== Box Model ===== */
   gap: 0.2em;
@@ -52,6 +52,7 @@
   /* ✅ Responsive Adjustments   */
   /* =========================== */
   @media (max-width: 768px) {
+    margin-top: 5rem;
     grid-template-columns: repeat(2, 1fr);
     .worksGrid {
       gap: 0.15em;
