@@ -57,6 +57,11 @@
       transform-origin: center;
     }
   }
+
+  &:hover {
+    scale: 1.3;
+    transition: 0.5s ease-in-out; // Lighter gray when hovered
+  }
 }
 
 /* =========================== */
@@ -67,14 +72,9 @@
 /* ✅ Hover & Focus States     */
 /* =========================== */
 
-.hamburger:hover .line {
-  background: v.$gray; // Lighter gray when hovered
-}
-
 /* =========================== */
 /* ✅ Responsive Adjustments   */
 /* =========================== */
-
 @media (max-width: 768px) {
   .hamburger {
     width: m.rem(36); // Bigger on mobile to match the logo

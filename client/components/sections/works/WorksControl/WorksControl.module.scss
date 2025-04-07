@@ -20,17 +20,23 @@
   /* ✅ Title Box               */
   /* =========================== */
   .worksTitleBox {
-    width: fit-content;
-    position: relative;
-    top: m.rem(15);
+    position: absolute; // ✅ Make it independent of flow
+    top: 2.3rem;
+    left: 4.5rem;
+    z-index: 20; // ✅ Fixed horizontal position from left
     padding: 0 1rem;
 
     .worksTitle {
       font-size: clamp(m.rem(20), 4vw, m.rem(30));
-      font-weight: 200;
-      color: var(--text-color); // ✅ Theme color
+      font-weight: 400;
+      color: var(--text-color); // ✅ Theme-aware
       text-transform: uppercase;
       white-space: nowrap;
+    }
+
+    @media screen and (max-width: 768px) {
+      left: m.rem(16); // ✅ Adjust for smaller screens
+      top: m.rem(12);
     }
   }
 
