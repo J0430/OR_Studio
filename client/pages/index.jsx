@@ -97,9 +97,6 @@ export default function Home({ homeData }) {
             <SectionWrapper key={section.id} id={section.id}>
               <div className={styles.sectionContainer}>
                 {section.component}
-
-                {/* ✅ Scroll to next section button */}
-
                 <DirectionalButton
                   direction={index < sections.length - 1 ? "down" : "up"}
                   width={isMobile ? 2.3 : 3}
