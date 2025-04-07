@@ -14,28 +14,24 @@ const ProjectBanner = ({ images }) => {
   const timeoutRef = useRef(null);
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
-  const duration = 5000; // Transition time per image
+  const duration = 5000;
 
-  // Updates image index for infinite loop
   const updateImageIndex = useCallback(() => {
     if (!isPaused) {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     }
   }, [images.length, isPaused]);
 
-  // Stops autoplay when interacting
   const stopAutoPlay = () => {
     setIsPaused(true);
     clearInterval(intervalRef.current);
     clearTimeout(timeoutRef.current);
 
-    // Resume autoplay after 5s of inactivity
     timeoutRef.current = setTimeout(() => {
       setIsPaused(false);
     }, 5000);
   };
 
-  // Navigate to specific image when clicking on progress bar
   const handleProgressClick = (index) => {
     setCurrentImageIndex(index);
     stopAutoPlay();
@@ -44,8 +40,8 @@ const ProjectBanner = ({ images }) => {
   const handleKeyDown = useCallback(
     (event) => {
       if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
-        event.preventDefault(); // Prevent browser default behavior
-        event.stopPropagation(); // Stop event bubbling to parent sections
+        event.preventDefault();
+        event.stopPropagation();
 
         if (event.key === "ArrowRight") {
           setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -65,7 +61,6 @@ const ProjectBanner = ({ images }) => {
     if (images.length > 0 && !isPaused) {
       intervalRef.current = setInterval(updateImageIndex, duration);
     }
-
     return () => clearInterval(intervalRef.current);
   }, [images, updateImageIndex, isPaused, currentImageIndex]);
 
@@ -74,7 +69,6 @@ const ProjectBanner = ({ images }) => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
-  // SWIPE GESTURE DETECTION
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -99,7 +93,6 @@ const ProjectBanner = ({ images }) => {
       className={styles.carouselContainer}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}>
-      {/* Image Display with Smooth Blurred Transition */}
       <AnimatePresence mode="wait">
         {images.length > 0 && (
           <motion.div
@@ -107,7 +100,7 @@ const ProjectBanner = ({ images }) => {
             initial={{ opacity: 0.5, filter: "blur(200px) scale(1.1)" }}
             animate={{ opacity: 1, filter: "blur(100px) scale(1)" }}
             exit={{ opacity: 0.5, filter: "blur(200px) scale(1.1)" }}
-            transition={{ duration: 0.3, ease: "easeInOut" }} // Smooth fade and blur transition
+            transition={{ duration: 0.8, ease: "easeInOut" }}
             className={styles.imageWrapper}>
             <DirectionalButton
               direction="left"
@@ -136,7 +129,6 @@ const ProjectBanner = ({ images }) => {
         )}
       </AnimatePresence>
 
-      {/* Mapped Progress Bars (Only Active One Animates) */}
       <div className={styles.progressContainer}>
         {images.map((_, index) => (
           <ProgressBar
