@@ -105,7 +105,7 @@ export default function Home({ homeData }) {
                     width={isMobile ? 2.3 : 3}
                     height={isMobile ? 2.3 : 3}
                     onClick={() =>
-                      handleScroll(sections[index % sections.length]?.id)
+                      handleScroll(sections[(index + 1) % sections.length]?.id)
                     }
                   />
                 )}
