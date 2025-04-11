@@ -17,7 +17,6 @@ export const loadDynamicImports = (page, componentNames = []) => {
       const Component = dynamic(
         () => import(`@components/sections/${page}/${name}/${name}`),
         {
-          loading: () => <div>Loading {name}...</div>,
           ssr: false,
         }
       );
