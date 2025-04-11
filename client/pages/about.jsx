@@ -1,50 +1,106 @@
-  import Image from "next/image";
-  import Head from "next/head";
-  import styles from "@styles/pages/about.module.scss";
+import { useCallback, useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
+import { usePreloader } from "@contexts/MainPreloaderContext";
+import { useNav } from "@contexts/NavContext";
+import { fetchData } from "@utils/api";
+import { loadDynamicImports } from "@utils/loadDynamicImports";
+import Head from "next/head";
+import dynamic from "next/dynamic";
+import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
+import SectionWrapper from "@components/common/SectionWrapper/SectionWrapper";
+import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/MainPreloader";
+import styles from "@styles/pages/home.module.scss";
+import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
 
-  export default function About() {
-    return (
-      <>
-        <Head>
-          <title>OR Studio | About Us</title>
-          <meta
-            name="description"
-            content="Learn about Jami, a top digital production and design agency, pushing the limits of storytelling, design, and technology."
-          />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta
-            property="og:title"
-            content="About Us | Jami Digital Production"
-          />
-          <meta
-            property="og:description"
-            content="Discover how Jami crafts innovative stories and experiences through cutting-edge design and technology."
-          />
-          <meta property="og:image" content="/images/header.jpg" />
-          <meta property="og:type" content="website" />
-        </Head>
+const { LandingAbout } = loadDynamicImports("about", ["LandingAbout"]);
 
-        <section className={styles.main}>
-          <div className={styles.row}>
-            <div className={styles.textMain}>
-              <h1>
-                about<span>.</span>
-              </h1>
-              <p className={styles.intro}>
-                I'm a product designer based in sunny Sydney, Australia.
-              </p>
-              <p className={styles.description}>
-                Since 2005, I've enjoyed turning complex problems into simple,
-                beautiful and intuitive designs. When I'm not pushing pixels,
-                you'll find me cooking, gardening or working out in the park.
-              </p>
-            </div>
-            <div className={styles.imgMain}>
-              {/* You can change this src to your own image */}
-              <img src="public/assets/about/IMG_2356.JPG" alt="Profile picture" />
-            </div>
-          </div>
-        </section>
-      </>
-    );
+export const getStaticProps = async () => {
+  try {
+    const officeData = await fetchData("office");
+    return { props: { officeData } };
+  } catch (error) {
+    console.error("Error in getStaticProps:", error.message);
+    return {
+      props: { officeData: { projects: {}, frontImages: [], category: "" } },
+    };
   }
+};
+
+export default function About({ officeData }) {
+  console.log("LandingAbout component:", LandingAbout);
+  console.log(officeData, "officeData");
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const { isNavOpen } = useNav();
+  const { isPreloaderVisible } = usePreloader();
+  const [isPageReady, setIsPageReady] = useState(false);
+
+  useEffect(() => {
+    if (!isPreloaderVisible) {
+      const timeout = setTimeout(() => setIsPageReady(true));
+      return () => clearTimeout(timeout);
+    }
+  }, [isPreloaderVisible]);
+
+  const handleScroll = useCallback((targetId) => {
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
+
+  const beaconProject = officeData.projects?.o_project1;
+  console.log(beaconProject?.images);
+
+  const sections = [
+    {
+      component: <LandingAbout images={beaconProject?.images} />,
+      id: "landingAbout",
+    },
+    // { component: <AboutBanner />, id: "aboutBanner" },
+    // {
+    //   component: <WorkBanner images={EvenYehuda?.images} />,
+    //   id: "evenYehuda",
+    // },
+    // {
+    //   component: <WorkBanner images={Hevron8PenthouseRooftop?.images} />,
+    //   id: "hevron8",
+    // },
+    // {
+    //   component: <WorkBanner images={City69?.images} />,
+    //   id: "last-section",
+    // },
+  ];
+
+  return (
+    <>
+      <Head>
+        <title>OR Studio | About</title>
+      </Head>
+      <>
+        <div className={styles.homePage}>
+          {sections.map((section, index) => (
+            <SectionWrapper key={section.id} id={section.id}>
+              <div
+                data-section-id={section.id}
+                className={styles.sectionContainer}>
+                {section.component}
+                <ScrollSectionNavigation
+                  sections={sections.map((section) => section.id)}
+                />
+
+                <DirectionalButton
+                  direction={index < sections.length - 1 ? "down" : "up"}
+                  width={isMobile ? 2.3 : 3}
+                  height={isMobile ? 2.3 : 3}
+                  onClick={() =>
+                    handleScroll(sections[(index + 1) % sections.length]?.id)
+                  }
+                />
+              </div>
+            </SectionWrapper>
+          ))}
+        </div>
+      </>
+    </>
+  );
+}

@@ -1,71 +1,73 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-/* =========================== */
-/* ✅ Tabs Wrapper             */
-/* =========================== */
+/* =================================== */
+/* ✅ Tabs Container                   */
+/* =================================== */
 .tabsWrapper {
   position: relative;
   display: flex;
-  gap: m.rem(16);
   justify-content: center;
   align-items: center;
+  gap: m.rem(16);
   padding: m.rem(10) 0;
 }
 
-/* =========================== */
-/* ✅ Moving Highlight Pill    */
-/* =========================== */
+/* =================================== */
+/* ✅ Animated Highlight Bar           */
+/* =================================== */
 .highlight {
   position: absolute;
+  z-index: 0;
   height: m.rem(36);
   background: rgba(v.$white, 0.15);
   border-radius: m.rem(18);
-  z-index: 0;
   transition: all 0.3s ease;
   pointer-events: none;
 }
 
-/* =========================== */
-/* ✅ Individual Tab           */
-/* =========================== */
+/* =================================== */
+/* ✅ Tab Button                       */
+/* =================================== */
 .categoryTab {
   position: relative;
   z-index: 1;
   display: inline-flex;
-  align-items: center;
   justify-content: center;
-  padding: 0 m.rem(16);
+  align-items: center;
   height: m.rem(36);
-  min-width: m.rem(130); // ✅ Ensure consistency for smaller screens
-  max-width: m.rem(180); // ✅ Prevent tabs being too wide on big screens
-  border-radius: m.rem(18);
+  min-width: m.rem(150);
+  max-width: m.rem(180);
+  padding: 0 m.rem(20);
   border: none;
+  border-radius: m.rem(18);
   background: transparent;
-  cursor: pointer;
   color: v.$white;
-  font-size: clamp(m.rem(12), 2vw, m.rem(16));
+  font-size: clamp(m.rem(18), 2vw, m.rem(20));
   text-transform: capitalize;
   white-space: nowrap;
+  cursor: pointer;
   transition: color 0.3s ease;
 
   &:hover {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(v.$white, 0.75);
   }
 
   span {
     position: relative;
     z-index: 2;
   }
+
+  &.active {
+    background: transparent;
+    color: v.$white;
+    box-shadow: 0 0 m.rem(6) rgba(v.$white, 0.3);
+  }
 }
 
-/* =========================== */
-/* ✅ Optional Active Styles (if needed for visual feedback) */
-/* =========================== */
-
-/* =========================== */
-/* ✅ Responsive Adjustments   */
-/* =========================== */
+/* =================================== */
+/* ✅ Responsive Adjustments           */
+/* =================================== */
 @media (max-width: 768px) {
   .tabsWrapper {
     gap: m.rem(12);

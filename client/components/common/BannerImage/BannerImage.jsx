@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import styles from "../BannerImage/BannerImage.module.scss";
 
-const BannerImage = ({ image }) => {
+const BannerImage = ({ src }) => {
   return (
     <motion.div
       className={styles.imageWrapper}
@@ -11,7 +11,7 @@ const BannerImage = ({ image }) => {
       exit={{ opacity: 1 }}
       transition={{ duration: 0.2, ease: "easeOut" }}>
       <Image
-        src={image}
+        src={src}
         alt="Project Image"
         fill
         priority

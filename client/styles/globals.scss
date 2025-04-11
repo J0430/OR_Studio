@@ -1,3 +1,7 @@
+/* =========================== */
+/* ✅ GLOBALS CONFIGURATION FILE */
+/* =========================== */
+
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
@@ -66,6 +70,7 @@ body {
   background-attachment: fixed;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+
   @include m.scrollbar-style(
     rgba(255, 255, 255, 0.3),
     rgba(255, 255, 255, 0.6)
@@ -132,7 +137,7 @@ ol {
 }
 
 /* =========================== */
-/* ✅ UTILITIES               */
+/* ✅ UTILITIES                */
 /* =========================== */
 
 .u-hidden {

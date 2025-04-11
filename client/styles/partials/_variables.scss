@@ -1,5 +1,5 @@
 /* =========================== */
-/* TYPOGRAPHY                  */
+/* ✅ VARIABLES CONFIGURATION */
 /* =========================== */
 
 $base-font-size: 16px;
@@ -9,13 +9,21 @@ $font-weight-light: 300;
 $font-weight-regular: 400;
 $font-weight-bold: 600;
 
+/* =========================== */
+/* ✅ COLOR PALETTE            */
+/* =========================== */
+
+$black: #000;
+$gray: #aaa;
+$white: #fff;
+
 $overlay-bg: rgba(0, 0, 0, 0.8);
 $hover-bg: rgba(255, 255, 255, 0.9);
 $error-color: #ff4d4f;
 $success-color: #28a745;
 
 /* =========================== */
-/* SPACING SYSTEM              */
+/* ✅ SPACING SYSTEM           */
 /* =========================== */
 
 $spacing-xs: 0.25rem;
@@ -23,15 +31,3 @@ $spacing-sm: 0.5rem;
 $spacing-md: 1rem;
 $spacing-lg: 2rem;
 $spacing-xl: 4rem;
-
-$breakpoints: (
-  small-mobile: 380px,
-  mobile: 480px,
-  tablet: 920px,
-  laptop: 1300px,
-  desktop: 1500px,
-);
-
-$black: #000;
-$gray: #aaa;
-$white: #fff;
