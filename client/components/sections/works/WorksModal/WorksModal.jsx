@@ -146,8 +146,8 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
                   alt={`Thumbnail ${index + 1}`}
                   width={100}
                   height={75}
-                  layout="responsive"
-                  className={styles.thumbnailImage}
+                  // layout="responsive"
+                  // className={styles.thumbnailImage}
                 />
               </button>
             ))}

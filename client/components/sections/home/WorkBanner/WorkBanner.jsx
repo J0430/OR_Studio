@@ -4,9 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import BannerImage from "@components/common/BannerImage/BannerImage";
 import ProgressBar from "@components/common/ProgressBar/ProgressBar";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
-import styles from "../ProjectBanner/ProjectBanner.module.scss";
+import styles from "../WorkBanner/WorkBanner.module.scss";
 
-const ProjectBanner = ({ images }) => {
+const WorkBanner = ({ images }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -15,6 +15,7 @@ const ProjectBanner = ({ images }) => {
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
   const duration = 5000;
+  console.log(images);
 
   const updateImageIndex = useCallback(() => {
     if (!isPaused) {
@@ -100,7 +101,7 @@ const ProjectBanner = ({ images }) => {
             initial={{ opacity: 0.5, filter: "blur(200px) scale(1.1)" }}
             animate={{ opacity: 1, filter: "blur(100px) scale(1)" }}
             exit={{ opacity: 0.5, filter: "blur(200px) scale(1.1)" }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             className={styles.imageWrapper}>
             <DirectionalButton
               direction="left"
@@ -113,7 +114,7 @@ const ProjectBanner = ({ images }) => {
                 stopAutoPlay();
               }}
             />
-            <BannerImage image={images[currentImageIndex]} />
+            <BannerImage src={images[currentImageIndex]} />
             <DirectionalButton
               direction="right"
               width={isMobile ? 2.3 : 3}
@@ -130,11 +131,12 @@ const ProjectBanner = ({ images }) => {
       </AnimatePresence>
 
       <div className={styles.progressContainer}>
+        {" "}
         {images.map((_, index) => (
           <ProgressBar
             key={index}
             isActive={index === currentImageIndex}
-            duration={duration}
+            duration={5500}
             onClick={() => handleProgressClick(index)}
           />
         ))}
@@ -143,4 +145,4 @@ const ProjectBanner = ({ images }) => {
   );
 };
 
-export default ProjectBanner;
+export default WorkBanner;

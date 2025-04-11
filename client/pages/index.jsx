@@ -3,25 +3,21 @@ import { useMediaQuery } from "react-responsive";
 import { usePreloader } from "@contexts/MainPreloaderContext";
 import { useNav } from "@contexts/NavContext";
 import { fetchData } from "@utils/api";
+import { loadDynamicImports } from "@utils/loadDynamicImports";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import SectionWrapper from "@components/common/SectionWrapper/SectionWrapper";
 import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/MainPreloader";
 import styles from "@styles/pages/home.module.scss";
 
-// ✅ Dynamic imports for sections
-const LandingPage = dynamic(
-  () => import("@components/sections/home/LandingPage/LandingPage")
-);
-const AboutBanner = dynamic(
-  () => import("@components/sections/home/AboutBanner/AboutBanner")
-);
-const ProjectBanner = dynamic(
-  () => import("@components/sections/home/ProjectBanner/ProjectBanner")
-);
+const { LandingPage, AboutBanner, WorkBanner } = loadDynamicImports("home", [
+  "LandingPage",
+  "AboutBanner",
+  "WorkBanner",
+]);
 
-// ✅ Fetching data at build time
 export const getStaticProps = async () => {
   try {
     const homeData = await fetchData("home");
@@ -33,22 +29,19 @@ export const getStaticProps = async () => {
     };
   }
 };
-
 export default function Home({ homeData }) {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const { isNavOpen } = useNav();
   const { isPreloaderVisible } = usePreloader();
   const [isPageReady, setIsPageReady] = useState(false);
 
-  // ✅ Wait until preloader ends, then unlock page
   useEffect(() => {
     if (!isPreloaderVisible) {
-      const timeout = setTimeout(() => setIsPageReady(true), 600); // Smooth transition delay
+      const timeout = setTimeout(() => setIsPageReady(true), 100);
       return () => clearTimeout(timeout);
     }
   }, [isPreloaderVisible]);
 
-  // ✅ Smooth scroll to target ID
   const handleScroll = useCallback((targetId) => {
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
@@ -56,11 +49,10 @@ export default function Home({ homeData }) {
     }
   }, []);
 
-  // ✅ Extract data for banners
   const { LandingPictures, EvenYehuda, Hevron8PenthouseRooftop, City69 } =
     homeData.projects || {};
+  console.log(LandingPictures.images);
 
-  // ✅ Sections to render
   const sections = [
     {
       component: <LandingPage images={LandingPictures?.images} />,
@@ -68,15 +60,15 @@ export default function Home({ homeData }) {
     },
     { component: <AboutBanner />, id: "aboutBanner" },
     {
-      component: <ProjectBanner images={EvenYehuda?.images} />,
+      component: <WorkBanner images={EvenYehuda?.images} />,
       id: "evenYehuda",
     },
     {
-      component: <ProjectBanner images={Hevron8PenthouseRooftop?.images} />,
+      component: <WorkBanner images={Hevron8PenthouseRooftop?.images} />,
       id: "hevron8",
     },
     {
-      component: <ProjectBanner images={City69?.images} />,
+      component: <WorkBanner images={City69?.images} />,
       id: "last-section",
     },
   ];
@@ -87,28 +79,30 @@ export default function Home({ homeData }) {
         <title>OR Studio | Home</title>
       </Head>
 
-      {/* ✅ Preloader */}
       {isPreloaderVisible && <MainPreloader />}
 
-      {/* ✅ Page content */}
       {isPageReady && (
-        <div className={styles.homePage}>
-          {sections.map((section, index) => (
-            <SectionWrapper key={section.id} id={section.id}>
-              <div className={styles.sectionContainer}>
-                {section.component}
-                <DirectionalButton
-                  direction={index < sections.length - 1 ? "down" : "up"}
-                  width={isMobile ? 2.3 : 3}
-                  height={isMobile ? 2.3 : 3}
-                  onClick={() =>
-                    handleScroll(sections[(index + 1) % sections.length]?.id)
-                  }
-                />
-              </div>
-            </SectionWrapper>
-          ))}
-        </div>
+        <>
+          <div className={styles.homePage}>
+            {sections.map((section, index) => (
+              <SectionWrapper key={section.id} id={section.id}>
+                <div
+                  data-section-id={section.id}
+                  className={styles.sectionContainer}>
+                  {section.component}
+                  <DirectionalButton
+                    direction={index < sections.length - 1 ? "down" : "up"}
+                    width={isMobile ? 2.3 : 3}
+                    height={isMobile ? 2.3 : 3}
+                    onClick={() =>
+                      handleScroll(sections[(index + 1) % sections.length]?.id)
+                    }
+                  />
+                </div>
+              </SectionWrapper>
+            ))}
+          </div>
+        </>
       )}
     </>
   );

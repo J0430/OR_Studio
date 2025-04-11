@@ -10,7 +10,7 @@ const CategoryTabs = ({ categories, selectedCategory, onCategorySelect }) => {
   });
   const tabsRef = useRef([]);
 
-  // Adjust highlight position and width when selection changes
+  // Update highlight pill on selection
   useEffect(() => {
     const activeIndex = categories?.findIndex(
       (cat) => cat === selectedCategory
@@ -29,21 +29,21 @@ const CategoryTabs = ({ categories, selectedCategory, onCategorySelect }) => {
 
   return (
     <div className={styles.tabsWrapper}>
-      {/* ✅ Highlight pill */}
+      {/* ✅ Animated highlight pill */}
       {highlightProps.visible && (
         <motion.div
           className={styles.highlight}
           animate={{
             left: highlightProps.left,
             width: highlightProps.width,
-            opacity: highlightProps.visible ? 1 : 0,
+            opacity: 1,
           }}
           initial={{ opacity: 0 }}
           transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
         />
       )}
 
-      {/* ✅ Category tabs */}
+      {/* ✅ Render each category tab */}
       {categories?.map((category, index) => (
         <button
           key={category}
