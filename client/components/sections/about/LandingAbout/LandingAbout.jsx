@@ -121,16 +121,6 @@ export default function LandingAbout({ images = [] }) {
               priority
             />
           </div>
-
-          <div className={styles.overlayImage}>
-            <Image
-              src="/assets/works/categories/residential/r_project23/3.jpg"
-              alt="Interior Detail"
-              width={300}
-              height={300}
-              className={styles.smallImage}
-            />
-          </div>
         </motion.div>
       </motion.div>
     </section>
