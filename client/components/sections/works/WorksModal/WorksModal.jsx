@@ -110,8 +110,8 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
                 src={project.images[currentImageIndex]}
                 alt={`Project Image ${currentImageIndex + 1}`}
                 className={styles.modalImage}
-                width={900}
-                height={700}
+                width={1100}
+                height={900}
                 style={{ objectFit: "cover" }}
                 quality={85}
                 priority
