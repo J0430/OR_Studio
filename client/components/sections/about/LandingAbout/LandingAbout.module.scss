@@ -172,25 +172,40 @@
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
+    align-items: center;
 
     .imageBlock {
       width: 100%;
+      max-width: m.rem(320);
       position: relative;
 
       .imageWrapper {
+        width: 100%;
         height: auto;
       }
 
       .overlayImage {
         position: absolute;
-        bottom: m.rem(-60); // or tweak this up/down as needed
-        left: m.rem(15); // push a bit from left
+        bottom: m.rem(-70);
+        left: 25%;
+        transform: translateX(-50%);
         z-index: 3;
 
         .smallImage {
-          width: m.rem(140);
+          width: m.rem(120);
           height: auto;
-          box-shadow: 0 0 m.rem(12) rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 m.rem(10) rgba(0, 0, 0, 0.15);
+        }
+      }
+
+      .bottomLeftImage {
+        position: relative;
+        margin-top: m.rem(16);
+        align-self: center;
+
+        .extraSmallImage {
+          width: m.rem(100);
+          height: auto;
         }
       }
     }
