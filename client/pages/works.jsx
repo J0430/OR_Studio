@@ -6,28 +6,20 @@ import {
   WorksPreloaderProvider,
 } from "@contexts/WorksPreloaderContext";
 import { categories } from "@utils/globals";
+import { loadDynamicImports } from "@utils/loadDynamicImports";
 import { fisherYatesShuffle, interleaveArrays } from "@utils/utils";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import style from "@styles/pages/works.module.scss";
 
 // ✅ Dynamic Imports
-
-const WorksPreloader = dynamic(
-  () => import("@components/preloaders/WorksPreloader/WorksPreloader"),
-  { ssr: false }
-);
-const WorksControl = dynamic(
-  () => import("@components/sections/works/WorksControl/WorksControl")
-);
-const WorksGrid = dynamic(
-  () => import("@components/sections/works/WorksGrid/WorksGrid"),
-  { ssr: false }
-);
-const WorksModal = dynamic(
-  () => import("@components/sections/works/WorksModal/WorksModal"),
-  { ssr: false }
-);
+const { WorksPreloader, WorksControl, WorksGrid, WorksModal } =
+  loadDynamicImports("sections/works", [
+    "WorksPreloader",
+    "WorksControl",
+    "WorksGrid",
+    "WorksModal",
+  ]);
 
 // ✅ Fetch data
 export async function getStaticProps() {

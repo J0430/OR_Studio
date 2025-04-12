@@ -14,23 +14,15 @@ const parentVariants = {
   },
 };
 
-export const crazyArrow = {
-  initial: { x: 0 },
-  crazy: {
-    x: [0, 8, -4, 0],
-    transition: {
-      duration: 0.6,
-      ease: "easeInOut",
-    },
-  },
-};
-
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 1.2, ease: [0.33, 1, 0.68, 1] },
+    transition: {
+      duration: 1.2,
+      ease: [0.33, 1, 0.68, 1],
+    },
   },
 };
 
@@ -39,7 +31,10 @@ const fadeInRight = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 1.6, ease: [0.33, 1, 0.68, 1] },
+    transition: {
+      duration: 1.6,
+      ease: [0.33, 1, 0.68, 1],
+    },
   },
 };
 
@@ -48,7 +43,10 @@ const fadeScale = {
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 2, ease: [0.33, 1, 0.68, 1] },
+    transition: {
+      duration: 2,
+      ease: [0.33, 1, 0.68, 1],
+    },
   },
 };
 
@@ -58,13 +56,17 @@ const fadeFromBottomLeft = {
     opacity: 1,
     x: 0,
     y: 0,
-    transition: { duration: 1.4, ease: [0.33, 1, 0.68, 1] },
+    transition: {
+      duration: 1.4,
+      ease: [0.33, 1, 0.68, 1],
+    },
   },
 };
 
 export default function LandingAbout({ images = [] }) {
   return (
     <section className={styles.hero}>
+      {/* === Left Text Block === */}
       <motion.div
         className={styles.left}
         variants={parentVariants}
@@ -84,7 +86,7 @@ export default function LandingAbout({ images = [] }) {
         </motion.p>
 
         <motion.a className={styles.contact} variants={fadeUp}>
-          <Link href="/contact">Link Contact us</Link>
+          <Link href="/contact">Link Contact us</Link>{" "}
         </motion.a>
 
         <motion.div
@@ -100,6 +102,7 @@ export default function LandingAbout({ images = [] }) {
         </motion.div>
       </motion.div>
 
+      {/* === Right Image Block (Grouped) === */}
       <motion.div
         className={styles.right}
         variants={fadeInRight}
@@ -110,8 +113,8 @@ export default function LandingAbout({ images = [] }) {
             <Image
               src="/assets/works/categories/office/Project1/09.jpg"
               alt="Interior Large"
-              width={2000}
-              height={2000}
+              width={2500}
+              height={1500}
               className={styles.bgImage}
               priority
             />

@@ -79,6 +79,7 @@
   animation: fadeSlideUp 0.6s ease forwards;
   clip-path: inset(0 0 100% 0);
   animation: revealMenu 0.6s ease forwards;
+  padding-top: m.rem(80);
 
   @keyframes revealMenu {
     0% {

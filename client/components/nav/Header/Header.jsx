@@ -1,19 +1,20 @@
+// ✅ Senior-Level Header.jsx with Accessibility and Clean Structure
 import { useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNav } from "@contexts/NavContext";
 import { usePreloader } from "@contexts/MainPreloaderContext";
 import { logos } from "@utils/globals";
-import HamburgerMenu from "@components/common/HamburgerMenu/HamburgerMenu";
-import dynamic from "next/dynamic";
+import { loadDynamicImports } from "@utils/loadDynamicImports";
+
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.scss";
 
-const NavbarLinks = dynamic(() => import("../NavbarLinks/NavbarLinks"), {
-  loading: () => <div>Loading Menu...</div>,
-  ssr: false,
-});
+const { HamburgerToggleButton } = loadDynamicImports("common", [
+  "HamburgerToggleButton",
+]);
+const { NavbarLinks } = loadDynamicImports("nav", ["NavbarLinks"]);
 
 const Header = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -54,11 +55,11 @@ const Header = () => {
       </Link>
 
       {/* 🍔 Hamburger button */}
-      <HamburgerMenu
+      <HamburgerToggleButton
         isOpen={isNavOpen}
         onToggle={() => setIsNavOpen((prev) => !prev)}
-        aria-controls="main-navigation"
-        aria-expanded={isNavOpen}
+        gapBetweenLines={10}
+        lineWidth={32}
       />
 
       {/* 🧠 Animated Fullscreen Nav */}

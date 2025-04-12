@@ -1,0 +1,40 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+/* =========================== */
+/* ✅ Hamburger Toggle Button  */
+/* =========================== */
+.hamburgerButton {
+  position: relative;
+  width: m.rem(46);
+  height: m.rem(46);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 9999;
+  padding: 0;
+
+  &:hover {
+    scale: 1.1;
+    transition: scale 0.3s ease;
+  }
+
+  .line {
+    position: absolute;
+    height: m.rem(2);
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+
+    @media (max-width: 768px) {
+      height: m.rem(1.5);
+    }
+  }
+  &:hover,
+  &:focus-visible {
+    outline-offset: 3px;
+  }
+}
