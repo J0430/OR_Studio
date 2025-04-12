@@ -1,70 +1,96 @@
 @use "@styles/partials/variables" as v;
 
 /* =========================== */
-/* ✅ BANNER WRAPPER            */
+/* ✅ BANNER WRAPPER           */
 /* =========================== */
 .bannerWrapper {
-  /* Layout & Alignment */
+  position: relative;
   width: 100vw;
   height: 100dvh;
-  position: relative;
   overflow: hidden;
   background: black;
-  max-width: 100%; /* Optional: To limit the width on very large screens */
 
-  /* =========================== */
-  /* ✅ BANNER TITLE WRAPPER     */
-  /* =========================== */
-  .bannerTitleWrapper {
+  /* ✅ GRADIENT TOP */
+  &::before {
+    content: "";
     position: absolute;
-    bottom: 13%;
-    left: 3%;
-    width: 40%;
-    z-index: 1;
-    color: white;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.3) 60%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    animation: fadeInGradient 1.5s ease-in-out;
+  }
 
-    /* =========================== */
-    /* ✅ TITLE & SUBTITLE STYLES  */
-    /* =========================== */
-    .bannerTitle {
-      font-family: "Futura", "Helvetica Neue", sans-serif;
-      font-size: 2.3rem;
-      margin: 0;
-    }
-
-    .bannerSubtitle {
-      font-size: 1.5rem;
-      -webkit-font-smoothing: antialiased;
-      margin-top: 0.5rem;
-    }
+  /* ✅ GRADIENT BOTTOM */
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.5) 60%,
+      black 100%
+    );
+    animation: fadeInGradient 1.5s ease-in-out;
   }
 }
 
 /* =========================== */
-/* ✅ BANNER IMAGE GRADIENT    */
+/* ✅ IMAGE WRAPPER            */
 /* =========================== */
-.bannerWrapper::after {
-  content: "";
-  position: absolute;
-  bottom: 0rem;
-  left: 0;
+.bannerImageWrapper {
+  position: relative;
   width: 100%;
-  height: 35%;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.7) 60%,
-    black 100%
-  );
-  pointer-events: none;
-  animation: fadeInGradient 1.5s ease-in-out;
+  height: 100%;
+  z-index: 0;
+
+  .bannerImage {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 /* =========================== */
-/* ✅ RESPONSIVE BANNER LAYOUT  */
+/* ✅ TITLE & SUBTITLE WRAPPER */
 /* =========================== */
+.bannerTitleWrapper {
+  position: absolute;
+  bottom: 13%;
+  left: 3%;
+  width: 40%;
+  z-index: 3;
 
-/* Tablet */
+  .bannerTitle {
+    font-family: "Futura", "Helvetica Neue", sans-serif;
+    font-size: 2.3rem;
+    margin: 0;
+  }
+
+  .bannerSubtitle {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* =========================== */
+/* ✅ RESPONSIVE STYLES        */
+/* =========================== */
 @media screen and (max-width: 1024px) {
   .bannerTitleWrapper {
     bottom: 12% !important;
@@ -80,7 +106,6 @@
   }
 }
 
-/* Mobile */
 @media screen and (max-width: 768px) {
   .bannerTitleWrapper {
     bottom: 12% !important;
@@ -96,7 +121,6 @@
   }
 }
 
-/* Small Mobile */
 @media screen and (max-width: 480px) {
   .bannerTitleWrapper {
     bottom: 12% !important;

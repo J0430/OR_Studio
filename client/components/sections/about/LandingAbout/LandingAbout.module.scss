@@ -6,7 +6,7 @@
   grid-template-columns: 1fr 1fr;
   min-height: 100dvh;
   width: 100%;
-  padding-left: m.rem(80);
+  padding-left: clamp(1rem, 10vw, #{m.rem(250)});
   background-color: v.$black;
   font-family: v.$font-family-base;
   color: v.$white;
@@ -21,115 +21,92 @@
   }
 }
 
-/* ============================== */
-/* ✅ LEFT BLOCK – TEXT & LOGO */
-/* ============================== */
 .left {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: m.rem(40);
+  gap: m.rem(60);
   padding-right: m.rem(40);
 
-  h1 {
-    font-size: clamp(2.8rem, 6vw, 6rem);
-    line-height: 1.05;
-    font-weight: 500;
-  }
-
-  .scrollText {
+  .textBlockWrapper {
     display: flex;
-    align-items: flex-start;
-    gap: m.rem(12);
+    flex-direction: column;
+    gap: m.rem(60);
 
-    .line {
-      width: m.rem(1);
-      height: m.rem(60);
-      background: v.$white;
+    h1 {
+      font-family: v.$font-family-base;
+      font-size: clamp(2.8rem, 3vw, 6rem);
+      line-height: 1.05;
+      font-weight: 500;
     }
 
-    p {
-      font-size: m.rem(14);
-      line-height: 1.4;
-    }
-  }
-
-  .description {
-    font-size: m.rem(20);
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.75);
-    max-width: m.rem(420);
-  }
-
-  .contact {
-    display: inline-block;
-    font-size: m.rem(16);
-    font-weight: 500;
-    text-decoration: none;
-    color: v.$white;
-    position: relative;
-    width: fit-content;
-
-    &::after {
-      content: "→";
-      margin-left: m.rem(12);
-      transition: transform 0.3s ease;
+    .description {
+      font-size: m.rem(20);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.75);
+      max-width: m.rem(420);
     }
 
-    &:hover::after {
-      transform: translateX(4px);
+    .contact {
+      font-size: m.rem(16);
+      font-weight: 500;
+      color: v.$white;
+      text-decoration: none;
+      position: relative;
+
+      &::after {
+        content: "→";
+        margin-left: m.rem(12);
+        transition: transform 0.3s ease;
+      }
+
+      &:hover::after {
+        transform: translateX(4px);
+      }
     }
   }
 
   .bottomLeftImage {
-    position: absolute;
-    bottom: 9rem;
-    left: 5.5rem;
+    position: relative;
     z-index: 3;
+    align-self: flex-start;
+    margin-top: m.rem(10);
 
     .extraSmallImage {
-      width: m.rem(250);
-      height: auto;
-      object-fit: contain;
+      width: m.rem(200);
     }
   }
 
   @media screen and (max-width: 768px) {
     gap: m.rem(10);
-    padding-right: 0;
 
-    h1 {
-      font-size: m.rem(32);
-    }
+    .textBlockWrapper {
+      gap: m.rem(10);
 
-    .description {
-      font-size: m.rem(16);
-      line-height: 1.5;
-      margin-top: m.rem(10);
-      max-width: 100%;
-    }
+      h1 {
+        font-size: m.rem(32);
+      }
 
-    .contact {
-      font-size: m.rem(14);
-      margin-left: 0;
+      .description {
+        font-size: m.rem(16);
+      }
+
+      .contact {
+        font-size: m.rem(14);
+      }
     }
 
     .bottomLeftImage {
       position: absolute;
-      left: 15.9rem;
+      left: m.rem(254);
       bottom: 1rem;
-      margin-top: 1.25rem;
-      align-self: flex-start;
+
       .extraSmallImage {
         width: m.rem(120);
       }
     }
   }
 }
-
-/* ============================== */
-/* ✅ RIGHT BLOCK – IMAGES */
-/* ============================== */
 .right {
   display: flex;
   justify-content: flex-end;
@@ -142,11 +119,11 @@
     flex-direction: column;
     align-items: flex-start;
 
-    .imageWrapper {
+    .combinedWrapper {
+      position: relative;
       max-width: 80dvh;
       height: 85dvh;
       width: 100%;
-      position: relative;
 
       .bgImage {
         object-fit: cover;
@@ -154,19 +131,19 @@
         height: 100%;
         border-radius: 0;
       }
-    }
 
-    /* ✅ FLOATING OVERLAY PLACEMENT */
-    .overlayImage {
-      position: absolute;
-      top: m.rem(-100); // pull up above the wrapper
-      left: m.rem(-120); // offset to the left
-      z-index: 2;
+      .overlayImage {
+        position: absolute;
+        top: 10%;
+        left: -25%;
+        width: 70%;
+        z-index: 2;
 
-      .smallImage {
-        width: m.rem(350);
-        height: auto;
-        box-shadow: 0 0 m.rem(12) rgba(0, 0, 0, 0.2);
+        .smallImage {
+          width: 70%;
+          height: auto;
+          box-shadow: 0 0 m.rem(12) rgba(0, 0, 0, 0.2);
+        }
       }
     }
   }
@@ -177,18 +154,18 @@
     .imageBlock {
       width: 100%;
 
-      .imageWrapper {
+      .combinedWrapper {
         height: auto;
-      }
 
-      .overlayImage {
-        position: absolute;
-        top: m.rem(-30);
-        left: m.rem(20);
+        .overlayImage {
+          top: auto;
+          bottom: m.rem(-60);
+          left: 50%;
+          transform: translateX(-50%);
 
-        .smallImage {
-          width: m.rem(160);
-          height: auto;
+          .smallImage {
+            width: m.rem(180);
+          }
         }
       }
     }
