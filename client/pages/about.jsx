@@ -87,16 +87,14 @@ export default function About({ officeData }) {
                 <ScrollSectionNavigation
                   sections={sections.map((section) => section.id)}
                 />
-                {isPageReady && (
-                  <DirectionalButton
-                    direction={index < sections.length - 1 ? "down" : "up"}
-                    width={isMobile ? 2.3 : 3}
-                    height={isMobile ? 2.3 : 3}
-                    onClick={() =>
-                      handleScroll(sections[(index + 1) % sections.length]?.id)
-                    }
-                  />
-                )}
+                <DirectionalButton
+                  direction={index < sections.length - 1 ? "down" : "up"}
+                  width={isMobile ? 2.3 : 3}
+                  height={isMobile ? 2.3 : 3}
+                  onClick={() =>
+                    handleScroll(sections[(index + 1) % sections.length]?.id)
+                  }
+                />
               </div>
             </SectionWrapper>
           ))}

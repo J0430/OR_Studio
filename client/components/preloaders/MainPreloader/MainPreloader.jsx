@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { preloaderLogos } from "@utils/globals";
 import { usePreloader } from "@contexts/MainPreloaderContext";
-import TypingEffect from "@components/common/TypingEffect/TypingEffect";
 import Image from "next/image";
 import styles from "./MainPreloader.module.scss";
 
