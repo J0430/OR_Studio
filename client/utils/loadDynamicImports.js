@@ -1,27 +1,22 @@
 import dynamic from "next/dynamic";
 
 /**
- * Dynamically imports multiple components from a given page/section folder.
+ * Dynamically loads components from /components/* using a clean fallback.
  *
- * @param {string} page - Folder name under "sections" (e.g., "home", "about")
- * @param {string[]} componentNames - List of component names (e.g., ["LandingPage", "AboutBanner"])
- * @returns {Record<string, React.ComponentType>} Object mapping component names to dynamic imports
+ * @param {string} basePath - Relative path from /components (e.g. "common", "sections/home")
+ * @param {string[]} componentNames - List of component names (folder & file must match)
+ * @returns {Record<string, React.ComponentType>}
  */
-export const loadDynamicImports = (page, componentNames = []) => {
-  if (!page || !Array.isArray(componentNames)) {
-    throw new Error("Invalid arguments passed to loadDynamicImports.");
-  }
-
+export const loadDynamicImports = (basePath, componentNames = []) => {
   return Object.fromEntries(
     componentNames.map((name) => {
       const Component = dynamic(
-        () => import(`@components/sections/${page}/${name}/${name}`),
+        () => import(`../components/${basePath}/${name}/${name}`),
         {
-          loading: () => <div>Loading {name}...</div>,
           ssr: false,
+          loading: () => null, // ✅ safest possible
         }
       );
-
       return [name, Component];
     })
   );

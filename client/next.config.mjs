@@ -1,9 +1,11 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
 
   webpack: (config) => {
-    config.cache = false; // Disable caching
+    config.module.rules.push({
+      test: /\.md$/,
+      use: "ignore-loader", // <- Ignores all .md files during import
+    });
     return config;
   },
 };

@@ -12,11 +12,10 @@ import SectionWrapper from "@components/common/SectionWrapper/SectionWrapper";
 import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/MainPreloader";
 import styles from "@styles/pages/home.module.scss";
 
-const { LandingPage, AboutBanner, WorkBanner } = loadDynamicImports("home", [
-  "LandingPage",
-  "AboutBanner",
-  "WorkBanner",
-]);
+const { LandingPage, AboutBanner, WorkBanner } = loadDynamicImports(
+  "sections/home",
+  ["LandingPage", "AboutBanner", "WorkBanner"]
+);
 
 export const getStaticProps = async () => {
   try {

@@ -12,7 +12,7 @@ import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/Ma
 import styles from "@styles/pages/home.module.scss";
 import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
 
-const { LandingAbout } = loadDynamicImports("about", ["LandingAbout"]);
+const { LandingAbout } = loadDynamicImports("sections/about", ["LandingAbout"]);
 
 export const getStaticProps = async () => {
   try {
