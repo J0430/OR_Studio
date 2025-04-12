@@ -108,7 +108,7 @@ export default function LandingAbout({ images = [] }) {
         variants={fadeInRight}
         initial="hidden"
         animate="visible">
-        <motion.div className={styles.imageBlock} variants={fadeScale}>
+        <div className={styles.imageBlock}>
           <div className={styles.imageWrapper}>
             <Image
               src="/assets/works/categories/office/Project1/09.jpg"
@@ -119,7 +119,18 @@ export default function LandingAbout({ images = [] }) {
               priority
             />
           </div>
-        </motion.div>
+
+          {/* ✅ Overlay OUTSIDE wrapper, but still inside imageBlock */}
+          <motion.div className={styles.overlayImage} variants={fadeScale}>
+            <Image
+              src="/assets/works/categories/residential/r_project23/3.jpg"
+              alt="Interior Detail"
+              width={220}
+              height={180}
+              className={styles.smallImage}
+            />
+          </motion.div>
+        </div>
       </motion.div>
     </section>
   );
