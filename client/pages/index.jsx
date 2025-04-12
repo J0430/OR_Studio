@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import SectionWrapper from "@components/common/SectionWrapper/SectionWrapper";
-import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/MainPreloader";
+import MainPreloader from "@components/preloaders/MainPreloader/MainPreloader";
 import styles from "@styles/pages/home.module.scss";
 
 const { LandingPage, AboutBanner, WorkBanner } = loadDynamicImports(
@@ -89,15 +89,15 @@ export default function Home({ homeData }) {
                   data-section-id={section.id}
                   className={styles.sectionContainer}>
                   {section.component}
-                  <DirectionalButton
-                    direction={index < sections.length - 1 ? "down" : "up"}
-                    width={isMobile ? 2.3 : 3}
-                    height={isMobile ? 2.3 : 3}
-                    onClick={() =>
-                      handleScroll(sections[(index + 1) % sections.length]?.id)
-                    }
-                  />
                 </div>
+                <DirectionalButton
+                  direction={index < sections.length - 1 ? "down" : "up"}
+                  width={isMobile ? 2.3 : 3}
+                  height={isMobile ? 2.3 : 3}
+                  onClick={() =>
+                    handleScroll(sections[(index + 1) % sections.length]?.id)
+                  }
+                />
               </SectionWrapper>
             ))}
           </div>

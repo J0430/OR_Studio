@@ -22,9 +22,15 @@
     align-items: center;
     text-align: center;
     gap: m.rem(32);
+
+    .textContainer {
+      p {
+        font-size: m.rem(30);
+        color: #9bafb3;
+      }
+    }
   }
 }
-
 /* =========================== */
 /* ✅ Preloader Logo Styles    */
 /* =========================== */

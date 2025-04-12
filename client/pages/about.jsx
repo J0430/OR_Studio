@@ -8,7 +8,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import SectionWrapper from "@components/common/SectionWrapper/SectionWrapper";
-import MainPreloader from "@components/preloaders/MainPreloader/mainpreloader/MainPreloader";
+import MainPreloader from "@components/preloaders/MainPreloader/MainPreloader";
 import styles from "@styles/pages/home.module.scss";
 import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
 
