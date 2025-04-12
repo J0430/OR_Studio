@@ -72,64 +72,54 @@ export default function LandingAbout({ images = [] }) {
         variants={parentVariants}
         initial="hidden"
         animate="visible">
-        <motion.h1 variants={fadeUp}>
-          Designing <br />
-          spaces that <br />
-          reflect your <br />
-          story
-        </motion.h1>
+        <div className={styles.textBlockWrapper}>
+          <motion.h1 variants={fadeUp}>
+            Designing <br />
+            spaces that <br />
+            reflect your <br />
+            story
+          </motion.h1>
 
-        <motion.p className={styles.description} variants={fadeUp}>
-          Architectural animation and visualization go beyond static renderings
-          — they create immersive narratives that bring unbuilt environments to
-          life.
-        </motion.p>
+          <motion.p className={styles.description} variants={fadeUp}>
+            Architectural animation and visualization go beyond static
+            renderings — they create immersive narratives that bring unbuilt
+            environments to life.
+          </motion.p>
 
-        <motion.a className={styles.contact} variants={fadeUp}>
-          <Link href="/contact">Link Contact us</Link>{" "}
-        </motion.a>
-
-        <motion.div
-          className={styles.bottomLeftImage}
-          variants={fadeFromBottomLeft}>
-          <Image
-            src="/assets/logos/Or_Studio_w.png"
-            alt="Or Studio Logo"
-            width={250}
-            height={100}
-            className={styles.extraSmallImage}
-          />
-        </motion.div>
+          <motion.a className={styles.contact} variants={fadeUp}>
+            <Link href="/contact">Link Contact us</Link>
+          </motion.a>
+          <motion.div
+            className={styles.bottomLeftImageWrapper}
+            variants={fadeFromBottomLeft}>
+            <Image
+              src="/assets/logos/Or_Studio_w.png"
+              alt="Or Studio Logo"
+              width={130}
+              height={50}
+              className={styles.extraSmallImage}
+            />
+          </motion.div>
+        </div>
       </motion.div>
 
-      {/* === Right Image Block (Grouped) === */}
+      {/* === Right Image Block (Grouped as One Unit) === */}
       <motion.div
         className={styles.right}
         variants={fadeInRight}
         initial="hidden"
         animate="visible">
         <div className={styles.imageBlock}>
-          <div className={styles.imageWrapper}>
+          <div className={styles.combinedWrapper}>
             <Image
               src="/assets/works/categories/office/Project1/09.jpg"
-              alt="Interior Large"
+              alt="Main background"
               width={2500}
               height={1500}
               className={styles.bgImage}
               priority
             />
           </div>
-
-          {/* ✅ Overlay OUTSIDE wrapper, but still inside imageBlock */}
-          <motion.div className={styles.overlayImage} variants={fadeScale}>
-            <Image
-              src="/assets/works/categories/residential/r_project23/3.jpg"
-              alt="Interior Detail"
-              width={220}
-              height={180}
-              className={styles.smallImage}
-            />
-          </motion.div>
         </div>
       </motion.div>
     </section>

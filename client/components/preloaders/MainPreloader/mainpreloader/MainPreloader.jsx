@@ -69,13 +69,6 @@ const MainPreloader = () => {
                 onLoad={onImageLoad}
               />
             </motion.div>
-
-            {/* Typing effect */}
-            <TypingEffect
-              text="Architecture Visualization"
-              typingSpeed={100}
-              delay={2000}
-            />
           </motion.div>
         </motion.div>
       )}

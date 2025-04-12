@@ -4,8 +4,7 @@ import { useNav } from "@contexts/NavContext";
 import Image from "next/image";
 import styles from "./LandingPage.module.scss";
 
-const LandingPage = ({ images = [] }) => {
-  console.log(images);
+const LandingPage = ({ images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef(null);
   const { isNavOpen } = useNav();
