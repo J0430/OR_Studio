@@ -116,17 +116,18 @@
       padding: 0;
 
       h1 {
-        font-size: m.rem(23);
+        font-size: m.rem(28);
         line-height: 1.1;
       }
 
       .description {
-        font-size: m.rem(13);
+        font-size: m.rem(15);
         line-height: 1.6;
       }
 
       .contact {
-        font-size: m.rem(12);
+        font-size: m.rem(15);
+        margin-bottom: m.rem(5);
         font-weight: 500;
         display: inline-block;
         text-decoration: none;
@@ -140,7 +141,7 @@
 
       .bottomLeftImage {
         position: absolute;
-        left: 18.1rem;
+        left: 17.1rem;
         bottom: 1rem;
 
         .extraSmallImage {
@@ -157,13 +158,13 @@
       .imageWrapper {
         position: relative;
         width: 100%;
-        height: 43dvh;
+        height: 48dvh;
 
         overflow: hidden;
 
         .bgImage {
           position: absolute !important;
-          top: -45px;
+          top: -45px !important;
           width: 100%;
           height: auto;
           object-fit: cover;
