@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../LandingAbout/LandingAbout.module.scss";
@@ -52,6 +53,7 @@ const fadeFromBottomLeft = {
 };
 
 export default function LandingAbout() {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   return (
     <section className={styles.hero}>
       {/* LEFT BLOCK */}
@@ -101,8 +103,9 @@ export default function LandingAbout() {
             <Image
               src="/assets/works/categories/office/Project1/09.jpg"
               alt="Main background"
-              width={1400}
-              height={1000}
+              fill
+              // width={isMobile ? 800 : 1400}
+              // height={isMobile ? 40 : 1000}
               className={styles.bgImage}
               priority
             />

@@ -59,7 +59,7 @@ const Header = () => {
         isOpen={isNavOpen}
         onToggle={() => setIsNavOpen((prev) => !prev)}
         gapBetweenLines={10}
-        lineWidth={32}
+        lineWidth={isMobile ? 25 : 30}
       />
 
       {/* 🧠 Animated Fullscreen Nav */}

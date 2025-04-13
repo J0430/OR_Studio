@@ -13,12 +13,12 @@
   align-content: flex-end;
   overflow: hidden;
 
-  @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    padding-top: 4rem;
-  }
+  //   @media (max-width: 768px) {
+  //     display: flex;
+  //     flex-direction: column;
+  //     padding: 2rem;
+  //     padding-top: 4rem;
+  //   }
 }
 .aboutWrapper {
   display: grid;
@@ -34,7 +34,7 @@
     justify-content: space-evenly;
 
     h1 {
-      font-size: clamp(2.5rem, 2.5vw, 5.5rem);
+      font-size: m.rem(30px);
       line-height: 1.05;
       font-weight: 300;
     }
@@ -73,30 +73,6 @@
         width: clamp(6rem, 6.5vw, 8rem); // smaller minimum and smaller scaling
       }
     }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: m.rem(32);
-      }
-
-      .description {
-        font-size: m.rem(16);
-      }
-
-      .contact {
-        font-size: m.rem(14);
-      }
-
-      .bottomLeftImage {
-        position: absolute;
-        left: 15.9rem;
-        bottom: 1rem;
-
-        .extraSmallImage {
-          width: m.rem(120);
-        }
-      }
-    }
   }
 
   /* ============================== */
@@ -121,35 +97,41 @@
 @media screen and (max-width: 768px) {
   .hero {
     padding: 4rem 1.2rem 2rem;
+    position: relative;
+    display: flex;
+    // min-height: 80dvh;
+    // max-height: 80svh;
+    // height: 80svh;
   }
   .aboutWrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100dvh;
-    max-height: 100svh;
-    height: 100svh;
+    justify-self: start;
+    // min-height: 80dvh;
+    // max-height: 80svh;
+    // height: 80svh;
 
     .left {
-      gap: m.rem(20);
+      gap: m.rem(4);
       padding: 0;
 
       h1 {
-        font-size: m.rem(32);
+        font-size: m.rem(23);
         line-height: 1.1;
       }
 
       .description {
-        font-size: m.rem(15);
+        font-size: m.rem(13);
         line-height: 1.6;
       }
 
       .contact {
-        font-size: m.rem(14);
+        font-size: m.rem(12);
         font-weight: 500;
         display: inline-block;
         text-decoration: none;
         color: v.$white;
-        margin-top: m.rem(4);
+        margin-top: m.rem(1);
 
         &:hover::after {
           transform: translateX(4px);
@@ -168,10 +150,24 @@
     }
 
     .right {
-      margin-top: m.rem(20);
+      place-items: start;
+      height: -webkit-fill-available;
+      overflow: hidden;
 
       .imageWrapper {
-        height: auto;
+        position: relative;
+        width: 100%;
+        height: 43dvh;
+
+        overflow: hidden;
+
+        .bgImage {
+          position: absolute !important;
+          top: -45px;
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+        }
       }
     }
   }

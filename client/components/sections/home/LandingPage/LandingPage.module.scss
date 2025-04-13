@@ -22,10 +22,11 @@
     pointer-events: none;
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.7) 0%,
-      rgba(0, 0, 0, 0.3) 60%,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.3) 30%,
       rgba(0, 0, 0, 0) 100%
     );
+
     animation: fadeInGradient 1.5s ease-in-out;
   }
 
