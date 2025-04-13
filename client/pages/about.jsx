@@ -27,8 +27,6 @@ export const getStaticProps = async () => {
 };
 
 export default function About({ officeData }) {
-  console.log("LandingAbout component:", LandingAbout);
-  console.log(officeData, "officeData");
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const { isNavOpen } = useNav();
   const { isPreloaderVisible } = usePreloader();
@@ -70,6 +68,7 @@ export default function About({ officeData }) {
     //   id: "last-section",
     // },
   ];
+  if (sections.length === 1) return sections[0].component;
 
   return (
     <>
@@ -84,6 +83,7 @@ export default function About({ officeData }) {
                 data-section-id={section.id}
                 className={styles.sectionContainer}>
                 {section.component}
+
                 <ScrollSectionNavigation
                   sections={sections.map((section) => section.id)}
                 />
