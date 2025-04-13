@@ -17,7 +17,8 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-const links = ["Home", "Works", "Contact", "About"];
+// const links = ["Home", "Works", "Contact", "About"];
+const links = ["Home", "Works", "Contact"];
 
 const NavbarLinks = () => {
   const pathname = usePathname();
