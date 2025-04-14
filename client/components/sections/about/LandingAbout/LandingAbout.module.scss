@@ -9,19 +9,14 @@
   color: v.$white;
   align-content: flex-end;
   overflow: hidden;
-
-  //   @media (max-width: 768px) {
-  //     display: flex;
-  //     flex-direction: column;
-  //     padding: 2rem;
-  //     padding-top: 4rem;
-  //   }
 }
 .aboutWrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 80dvh;
-
+  min-height: 100dvh;
+  max-height: 100svh;
+  height: 100svh;
+  width: 100vw;
   /* ============================== */
   /* ✅ LEFT BLOCK */
   /* ============================== */
