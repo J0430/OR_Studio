@@ -18,7 +18,7 @@ const { NavbarLinks } = loadDynamicImports("nav", ["NavbarLinks"]);
 
 const Header = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const { isNavOpen, setIsNavOpen } = useNav();
+  const { isNavOpen, setIsNavOpen, pathname } = useNav();
   const { isPreloaderVisible = false } = usePreloader();
   const navRef = useRef(null);
 
@@ -37,6 +37,7 @@ const Header = () => {
   return (
     <motion.header
       className={styles.navbar}
+      data-about={pa}
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.1 }}>
