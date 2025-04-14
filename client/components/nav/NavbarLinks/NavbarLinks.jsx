@@ -22,6 +22,7 @@ const links = ["Home", "Works", "Contact", "About"];
 const NavbarLinks = () => {
   const pathname = usePathname();
   const { setIsNavOpen } = useNav();
+  console.log(pathname);
 
   return (
     <motion.ul

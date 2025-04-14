@@ -58,6 +58,9 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   min-height: 100dvh;
+  max-height: 100svh;
+  height: 100svh;
+  width: 100vw;
   overflow-x: hidden;
   margin: 0;
   padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0)
