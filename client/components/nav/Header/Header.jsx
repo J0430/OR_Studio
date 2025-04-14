@@ -18,10 +18,9 @@ const { NavbarLinks } = loadDynamicImports("nav", ["NavbarLinks"]);
 
 const Header = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const { isNavOpen, setIsNavOpen, pathname } = useNav();
+  const { isNavOpen, setIsNavOpen } = useNav();
   const { isPreloaderVisible = false } = usePreloader();
   const navRef = useRef(null);
-  console.log("pathname", pathname);
 
   // 🔁 ESC key to close nav
   useEffect(() => {
@@ -38,7 +37,6 @@ const Header = () => {
   return (
     <motion.header
       className={styles.navbar}
-      data-about={pathname === "/works"}
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.1 }}>
