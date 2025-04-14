@@ -16,7 +16,8 @@ export const NavProvider = ({ children }) => {
   const toggleNav = () => setIsNavOpen((prev) => !prev);
 
   return (
-    <NavContext.Provider value={{ isNavOpen, setIsNavOpen, toggleNav }}>
+    <NavContext.Provider
+      value={{ isNavOpen, setIsNavOpen, toggleNav, pathname }}>
       {children}
     </NavContext.Provider>
   );

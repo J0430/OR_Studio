@@ -2,10 +2,7 @@
 @use "@styles/partials/mixins" as m;
 
 .hero {
-  min-height: 100dvh;
-  max-height: 100svh;
-  height: 100svh;
-  width: 100vw;
+  display: flex;
   padding-left: clamp(1rem, 5vw, #{m.rem(150)});
   background-color: v.$black;
   font-family: v.$font-family-base;
@@ -31,10 +28,11 @@
   .left {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: clamp(2.8rem, 2.8vw, 6rem);
 
     h1 {
-      font-size: m.rem(30px);
+      font-size: clamp(2.8rem, 2vw, 6rem);
       line-height: 1.05;
       font-weight: 300;
     }
@@ -167,8 +165,6 @@
         overflow: hidden;
 
         .bgImage {
-          position: absolute !important;
-
           height: auto;
           object-fit: cover;
         }
