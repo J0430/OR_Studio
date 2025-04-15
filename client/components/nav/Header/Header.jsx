@@ -1,4 +1,3 @@
-// ✅ Senior-Level Header.jsx with Accessibility and Clean Structure
 import { useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
@@ -22,7 +21,6 @@ const Header = () => {
   const { isPreloaderVisible = false } = usePreloader();
   const navRef = useRef(null);
 
-  // 🔁 ESC key to close nav
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape" && isNavOpen) setIsNavOpen(false);
@@ -31,18 +29,15 @@ const Header = () => {
     return () => document.removeEventListener("keydown", handleEsc);
   }, [isNavOpen, setIsNavOpen]);
 
-  // ❌ Don't render while preloader is active
   if (isPreloaderVisible) return null;
 
   return (
     <motion.header
       className={styles.navbar}
-      // data-about={pa}
+      data-page={pathname === "/works" ? "works" : undefined}
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.1 }}>
-      {/* 🔍 Logo hidden when menu is open */}
-
       <Link href="/" passHref>
         <Image
           src={logos[3]}
@@ -55,7 +50,6 @@ const Header = () => {
         />
       </Link>
 
-      {/* 🍔 Hamburger button */}
       <HamburgerToggleButton
         isOpen={isNavOpen}
         onToggle={() => setIsNavOpen((prev) => !prev)}
@@ -63,7 +57,6 @@ const Header = () => {
         lineWidth={isMobile ? 25 : 30}
       />
 
-      {/* 🧠 Animated Fullscreen Nav */}
       <AnimatePresence>
         {isNavOpen && (
           <motion.nav

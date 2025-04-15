@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNav } from "@contexts/NavContext";
 import DropdownMenu from "@components/common/DropdownMenu/DropdownMenu";
 import CategoryTabs from "@components/common/CategoryTab/CategoryTabs";
@@ -8,13 +9,23 @@ const WorksControl = ({
   selectedCategory,
   onCategorySelect,
 }) => {
+  const [scrolled, setScrolled] = useState(false);
   const { isNavOpen } = useNav();
   const filteredCategories = categories.filter((cat) => cat !== "Works");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      setScrolled(scrollY > 100); // change 100px threshold if needed
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <section
       data-open={isNavOpen}
-      className={styles.worksControl}
+      className={`${styles.worksControl} ${scrolled ? styles.blurred : ""}`}
       aria-label="Work Categories"
       aria-expanded={isNavOpen}>
       <div className={styles.worksTitleBox}>
