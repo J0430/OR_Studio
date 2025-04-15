@@ -64,13 +64,12 @@
   /* ✅ Image Wrapper        */
   /* ======================= */
   .imageWrapper {
-    position: relative;
     width: 100%;
     height: 90vh;
 
     display: flex;
     align-items: center;
-    justify-content: center; // default: centered for single image
+    justify-content: space-between; // default: centered for single image
 
     &.hasMultiple {
       justify-content: space-between; // apply only if arrows exist
@@ -147,11 +146,12 @@
   /* ======================= */
   .thumbnailWrapper {
     /* ===== Box Model ===== */
+
     width: 100px;
     height: 80px;
-    margin-right: 5px;
-    border: 2px solid transparent;
-    border-radius: 4px;
+    margin-right: 2rem;
+    border: 0 solid transparent;
+    border-radius: 2px;
     overflow: hidden;
 
     /* ===== Layout ===== */
@@ -167,7 +167,7 @@
       border-color 0.2s ease;
 
     &.activeThumbnail {
-      border: 2px solid var(--border-strong); // ✅ Use border-strong from theme
+      border: solid 0.03em white;
       transform: scale(1.1);
       transition: all 0.3s ease-in-out;
     }
