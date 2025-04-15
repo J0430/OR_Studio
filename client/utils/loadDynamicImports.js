@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
  * @returns {Record<string, React.ComponentType>}
  */
 export const loadDynamicImports = (basePath, componentNames = []) => {
+  console.log(basePath);
   return Object.fromEntries(
     componentNames.map((name) => {
       const Component = dynamic(

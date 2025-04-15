@@ -15,7 +15,6 @@ const WorkBanner = ({ images }) => {
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
   const duration = 5000;
-  console.log(images);
 
   const updateImageIndex = useCallback(() => {
     if (!isPaused) {

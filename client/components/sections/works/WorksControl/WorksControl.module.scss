@@ -20,23 +20,17 @@
   /* ✅ Title Box               */
   /* =========================== */
   .worksTitleBox {
-    position: absolute; // ✅ Make it independent of flow
-    top: 2.3rem;
-    left: 4.5rem;
-    z-index: 20; // ✅ Fixed horizontal position from left
+    width: fit-content;
+    position: relative;
+    top: m.rem(15);
     padding: 0 1rem;
 
     .worksTitle {
       font-size: clamp(m.rem(20), 4vw, m.rem(30));
-      font-weight: 400;
-      color: var(--text-color); // ✅ Theme-aware
+      font-weight: 200;
+      color: var(--text-color); // ✅ Theme color
       text-transform: uppercase;
       white-space: nowrap;
-    }
-
-    @media screen and (max-width: 768px) {
-      left: m.rem(16); // ✅ Adjust for smaller screens
-      top: m.rem(12);
     }
   }
 
@@ -87,6 +81,7 @@
     left: 10.5rem;
     top: 13.4%;
     width: fit-content;
+    padding: 1.25rem 0;
 
     .worksTitleBox {
       display: none;

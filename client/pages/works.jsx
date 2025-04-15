@@ -8,20 +8,26 @@ import {
 import { categories } from "@utils/globals";
 import { loadDynamicImports } from "@utils/loadDynamicImports";
 import { fisherYatesShuffle, interleaveArrays } from "@utils/utils";
-import dynamic from "next/dynamic";
+
 import Head from "next/head";
 import style from "@styles/pages/works.module.scss";
+import dynamic from "next/dynamic";
+
+// const WorksPreloader = dynamic(
+//   () => import("@components/preloaders/WorksPreloader")
+// );
 
 // ✅ Dynamic Imports
-const { WorksPreloader, WorksControl, WorksGrid, WorksModal } =
-  loadDynamicImports("sections/works", [
-    "WorksPreloader",
-    "WorksControl",
-    "WorksGrid",
-    "WorksModal",
-  ]);
+const WorksPreloader = dynamic(
+  () => import("@components/preloaders/WorksPreloader/WorksPreloader"),
+  { ssr: false, loading: () => null }
+);
 
-// ✅ Fetch data
+const { WorksControl, WorksGrid, WorksModal } = loadDynamicImports(
+  "sections/works",
+  ["WorksControl", "WorksGrid", "WorksModal"]
+);
+//
 export async function getStaticProps() {
   try {
     const categoriesData = await Promise.all(

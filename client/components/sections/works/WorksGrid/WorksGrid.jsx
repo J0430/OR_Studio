@@ -1,5 +1,3 @@
-// ✅ WorksGrid.jsx
-
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
@@ -8,7 +6,6 @@ import styles from "../WorksGrid/WorksGrid.module.scss";
 
 // ✅ Individual Grid Item (FIXED)
 const WorksGridItem = ({ work, index, onImageClick, showImages }) => {
-  console.log(work.frontImage);
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
