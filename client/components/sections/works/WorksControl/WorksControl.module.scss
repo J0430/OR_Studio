@@ -9,7 +9,7 @@
   flex-direction: column;
   width: 100%;
   padding: m.rem(20) 0;
-
+  background-color: var(--background-color);
   &[data-open="true"] {
     z-index: 0;
   }
@@ -22,13 +22,14 @@
   .worksTitleBox {
     width: fit-content;
     position: relative;
-    top: m.rem(10);
+    top: m.rem(15);
     padding: 0 1rem;
 
     .worksTitle {
-      font-size: clamp(m.rem(20), 5rem, m.rem(40));
-      font-weight: 300 !important;
+      font-size: clamp(m.rem(20), 4vw, m.rem(30));
+      font-weight: 400;
       color: var(--text-color); // ✅ Theme color
+
       white-space: nowrap;
     }
   }
@@ -76,11 +77,9 @@
   .worksControl {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    left: 10.5rem;
-    top: 13.4%;
     width: fit-content;
-    padding: 1.25rem 0;
+    padding: 2.5rem;
+    background-color: var(--background-color);
 
     .worksTitleBox {
       display: none;
