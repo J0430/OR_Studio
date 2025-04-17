@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ToggleProvider } from "@contexts/ToggleContext";
 import Image from "next/image";
 import useClickOutside from "@hooks/useClickOuside";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
+import ScrollingBlurReveal from "@components/common/ScrollReveal/ScrollReveal"; // Import the components
 import styles from "./WorksModal.module.scss";
 
 const WorksModal = ({ selectedImage, project, onClose }) => {
@@ -139,15 +141,15 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
               <button
                 key={img || index}
                 onClick={() => setCurrentImageIndex(index)}
-                className={`${styles.thumbnailWrapper} ${index === currentImageIndex ? styles.activeThumbnail : ""}`}
+                className={styles.thumbnailWrapper}
                 aria-label={`Go to image ${index + 1}`}>
                 <Image
                   src={img}
                   alt={`Thumbnail ${index + 1}`}
                   width={100}
                   height={75}
-                  // layout="responsive"
-                  // className={styles.thumbnailImage}
+                  layout="responsive"
+                  className={`{${styles.thumbnailImage} ${index === currentImageIndex ? styles.activeThumbnail : ""}`}
                 />
               </button>
             ))}

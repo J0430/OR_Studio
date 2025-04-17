@@ -1,0 +1,21 @@
+/* ScrollableBlur.module.scss */
+
+/* The wrapper around the scrollable content */
+.scrollableBlurWrapper {
+  max-height: 100vh; /* Full viewport height for the scrollable container */
+  overflow-y: auto; /* Enable vertical scrolling */
+  position: relative;
+  transition: filter 0.3s ease-in-out; /* Smooth transition for blur effect */
+}
+
+/* Content inside the scrollable area */
+.scrollableContent {
+  padding: 20px; /* Padding for content */
+}
+
+/* The blurred effect is applied when the scroll threshold is exceeded */
+.blurred {
+  filter: blur(
+    5px
+  ); /* Apply blur when the scroll position exceeds the threshold */
+}

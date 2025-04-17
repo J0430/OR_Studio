@@ -9,6 +9,7 @@ export default function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>OR Studio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content="Architectural Visualization Website"

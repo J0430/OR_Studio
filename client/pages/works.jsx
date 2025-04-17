@@ -1,122 +1,71 @@
-import React, { useState, useMemo, useCallback } from "react";
-import { fetchData } from "@utils/api";
-import { AnimatePresence } from "framer-motion";
+// pages/works.js
 import {
-  useWorksPreloader,
   WorksPreloaderProvider,
+  useWorksPreloader,
 } from "@contexts/WorksPreloaderContext";
-import { categories } from "@utils/globals";
+import { AnimatePresence } from "framer-motion";
+import { useState, useMemo, useCallback } from "react";
 import { loadDynamicImports } from "@utils/loadDynamicImports";
-import { fisherYatesShuffle, interleaveArrays } from "@utils/utils";
-
 import Head from "next/head";
 import style from "@styles/pages/works.module.scss";
-import dynamic from "next/dynamic";
 
-// const WorksPreloader = dynamic(
-//   () => import("@components/preloaders/WorksPreloader")
-// );
-
-// ✅ Dynamic Imports
-const WorksPreloader = dynamic(
-  () => import("@components/preloaders/WorksPreloader/WorksPreloader"),
-  { ssr: false, loading: () => null }
-);
-
+// Dynamic Imports for components
+const { WorksPreloader } = loadDynamicImports("preloaders", ["WorksPreloader"]);
 const { WorksControl, WorksGrid, WorksModal } = loadDynamicImports(
   "sections/works",
   ["WorksControl", "WorksGrid", "WorksModal"]
 );
-//
-export async function getStaticProps() {
-  try {
-    const categoriesData = await Promise.all(
-      ["residential", "commercial", "urbanPlanning", "office"].map(fetchData)
-    );
 
-    return {
-      props: {
-        residential: categoriesData[0] || { projects: {} },
-        commercial: categoriesData[1] || { projects: {} },
-        urbanPlanning: categoriesData[2] || { projects: {} },
-        office: categoriesData[3] || { projects: {} },
-      },
-    };
-  } catch (error) {
-    console.error("❌ Error in getStaticProps:", error.message);
-    return {
-      props: {
-        residential: { projects: {} },
-        commercial: { projects: {} },
-        urbanPlanning: { projects: {} },
-        office: { projects: {} },
-      },
-    };
-  }
-}
+function WorksContent() {
+  const { isPreloaderVisible, preloadedImages, projectsData } =
+    useWorksPreloader();
 
-// ✅ Main WorksContent Component
-function WorksContent({ residential, commercial, urbanPlanning, office }) {
-  const { isPreloaderVisible } = useWorksPreloader();
-
-  // ✅ State
   const [state, setState] = useState({
-    categorySelected: categories[1] || "Residential",
+    categorySelected: "Residential", // Default category
     selectedImage: null,
     selectedProject: null,
   });
 
-  // ✅ Category Mapping
+  // Category Data Mapping
   const categoryDataMap = useMemo(
     () => ({
-      Residential: Object.values(residential?.projects || {}),
-      "Urban Planning": Object.values(urbanPlanning?.projects || {}),
-      Commercial: Object.values(commercial?.projects || {}),
-      Office: Object.values(office?.projects || {}),
-      Works: interleaveArrays([
-        Object.values(residential?.projects || {}),
-        Object.values(urbanPlanning?.projects || {}),
-        Object.values(commercial?.projects || {}),
-        Object.values(office?.projects || {}),
-      ]).flat(),
+      Residential: Object.values(projectsData.residential?.projects || {}),
+      "Urban Planning": Object.values(
+        projectsData.urbanPlanning?.projects || {}
+      ),
+      Commercial: Object.values(projectsData.commercial?.projects || {}),
+      Office: Object.values(projectsData.office?.projects || {}),
     }),
-    [residential, urbanPlanning, commercial, office]
+    [projectsData]
   );
 
-  // ✅ Shuffled Projects
-  const works = useMemo(
-    () => fisherYatesShuffle(categoryDataMap[state.categorySelected] || []),
-    [state.categorySelected, categoryDataMap]
-  );
+  const works = useMemo(() => {
+    return categoryDataMap[state.categorySelected] || [];
+  }, [state.categorySelected, categoryDataMap]);
 
-  // ✅ Handle Category Click
+  // Handle Category Click
   const handleCategoryClick = useCallback((categoryName) => {
-    console.log("✅ Category selected:", categoryName);
     setState((prevState) => ({
       ...prevState,
       categorySelected: categoryName,
-      selectedImage: null, // Reset modal when category changes
+      selectedImage: null,
       selectedProject: null,
     }));
   }, []);
 
-  // ✅ Handle Image Click (Main Debug)
+  // Handle Image Click
   const handleImageClick = useCallback(
     (imageSrc) => {
       const currentProjectsArray =
         categoryDataMap[state.categorySelected] || [];
-
-      // Log all frontImages and images array before searching
-      currentProjectsArray.forEach((project) => {});
-
-      let matchedProject = currentProjectsArray.find((project) => {
-        return project.frontImage === imageSrc;
-      });
+      let matchedProject = currentProjectsArray.find(
+        (project) => project.frontImage === imageSrc
+      );
 
       if (!matchedProject) {
-        matchedProject = currentProjectsArray.find((project) => {
-          return project.images?.includes(imageSrc);
-        });
+        matchedProject = currentProjectsArray.find((project) =>
+          project.images?.includes(imageSrc)
+        );
       }
 
       if (matchedProject) {
@@ -125,14 +74,11 @@ function WorksContent({ residential, commercial, urbanPlanning, office }) {
           selectedImage: imageSrc,
           selectedProject: matchedProject,
         }));
-      } else {
-        console.warn("❌ No matching project for image:", imageSrc);
       }
     },
     [categoryDataMap, state.categorySelected]
   );
 
-  // ✅ Close Modal
   const handleCloseModal = useCallback(() => {
     setState((prevState) => ({
       ...prevState,
@@ -145,13 +91,14 @@ function WorksContent({ residential, commercial, urbanPlanning, office }) {
     <>
       <Head>
         <title>OR Studio | Works</title>
+        <meta name="mobile-web-app-capable" content="yes" />
       </Head>
 
       {isPreloaderVisible && <WorksPreloader />}
 
       <main className={style.worksPage}>
         <WorksControl
-          categories={categories}
+          categories={Object.keys(categoryDataMap)}
           selectedCategory={state.categorySelected}
           onCategorySelect={handleCategoryClick}
         />
@@ -159,7 +106,7 @@ function WorksContent({ residential, commercial, urbanPlanning, office }) {
         <WorksGrid
           works={works}
           category={state.categorySelected}
-          onImageClick={handleImageClick} // ✅ Critical for opening modal
+          onImageClick={handleImageClick}
         />
 
         <AnimatePresence>
@@ -176,11 +123,10 @@ function WorksContent({ residential, commercial, urbanPlanning, office }) {
   );
 }
 
-// ✅ Final Export Wrapped in Provider
 export default function WorksPage(props) {
   return (
     <WorksPreloaderProvider>
-      <WorksContent {...props} />
+      <WorksContent />
     </WorksPreloaderProvider>
   );
 }

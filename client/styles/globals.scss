@@ -10,12 +10,12 @@
 /* =========================== */
 
 :root {
-  --background-color: #000000;
-  --overlay-background: rgba(0, 0, 0, 0.8);
-  --text-color: #ffffff;
+  --background-color: #1515159e; /* Interpolation for SCSS variables inside CSS custom properties */
+  --text-color: rgba(255, 255, 255, 0.8);
   --border-strong: #ffffff;
   --text-color-preloader: #a5b7bb;
-  --overlay-background: rgba(0, 0, 0, 0.35);
+  --overlay-background: rgba(0, 0, 0, 0.1);
+  --overlay-bg-image: blur(5px);
 }
 
 [data-theme="light"] {
@@ -46,6 +46,7 @@ textarea,
 }
 
 html {
+  background-color: var(--background-color);
   font-size: v.$base-font-size;
   line-height: v.$line-height;
   scroll-behavior: smooth;

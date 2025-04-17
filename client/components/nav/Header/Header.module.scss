@@ -30,7 +30,7 @@
 /* =========================== */
 .navItem.active {
   font-weight: bold;
-  color: v.$white;
+  color: var(--text-color);
   border-bottom: m.rem(2) solid rgba(255, 255, 255, 0.4);
 
   @media screen and (max-width: 768px) {

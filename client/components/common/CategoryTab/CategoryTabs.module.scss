@@ -20,7 +20,8 @@
   position: absolute;
   z-index: 0;
   height: m.rem(36);
-  background: rgba(v.$white, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(v.$white, 0.85);
   border-radius: m.rem(18);
   transition: all 0.3s ease;
   pointer-events: none;
@@ -42,15 +43,17 @@
   border: none;
   border-radius: m.rem(18);
   background: transparent;
-  color: v.$white;
-  font-size: clamp(m.rem(18), 2vw, m.rem(20));
+  color: var(--text-color);
+  font-size: clamp(m.rem(18), 2vw, m.rem(17));
   text-transform: capitalize;
   white-space: nowrap;
   cursor: pointer;
   transition: color 0.3s ease;
 
   &:hover {
-    color: rgba(v.$white, 0.75);
+    color: v.$white;
+    border: rgba(255, 255, 255, 0.15) solid m.rem(0.4rem);
+    transition: color border 0.3s ease;
   }
 
   span {
@@ -60,8 +63,10 @@
 
   &.active {
     background: transparent;
-    color: v.$white;
-    box-shadow: 0 0 m.rem(6) rgba(v.$white, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 m.rem(2) rgba(v.$white, 0.8);
+    transition: color 0.3s ease;
+    color: rgba(0, 0, 0, 0.7);
   }
 }
 
