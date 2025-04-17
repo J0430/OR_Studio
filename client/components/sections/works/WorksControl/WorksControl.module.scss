@@ -22,12 +22,12 @@
   .worksTitleBox {
     width: fit-content;
     position: relative;
-    top: m.rem(15);
+    top: m.rem(10);
     padding: 0 1rem;
 
     .worksTitle {
-      font-size: clamp(m.rem(20), 4vw, m.rem(30));
-      font-weight: 200;
+      font-size: clamp(m.rem(20), 5rem, m.rem(40));
+      font-weight: 300 !important;
       color: var(--text-color); // ✅ Theme color
       white-space: nowrap;
     }

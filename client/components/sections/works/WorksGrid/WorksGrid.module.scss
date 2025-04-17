@@ -6,6 +6,7 @@
 .worksGridWrapper {
   /* ===== Layout ===== */
   flex-grow: 1;
+  z-index: 1;
 
   /* ===== Box Model ===== */
 
@@ -15,10 +16,20 @@
   /* ===== Visual / Motion ===== */
   -webkit-overflow-scrolling: touch;
 
+  width: 100%;
   /* ===== Layering ===== */
   z-index: 0;
+  @media (max-width: 768px) {
+    // margin-top: 5rem;
+    // mask: linear-gradient(
+    //   to top,
+    //   rgb(255, 255, 255) 100%,
+    //   rgba(255, 255, 255, 0.424) 0%,
+    //   transpar
+    // );
+    // background-image: blur(1px);
+  }
 }
-
 /* =========================== */
 /* ✅ Grid Container           */
 /* =========================== */
@@ -51,7 +62,15 @@
   /* ✅ Responsive Adjustments   */
   /* =========================== */
   @media (max-width: 768px) {
-    margin-top: 5rem;
+    background: linear-gradient(
+      to bottom,
+      0deg,
+      rgba(55, 55, 55, 0) 52%,
+      rgba(55, 55, 55, 0.9) 57%
+    );
+    background-size: cover;
+    background-repeat: no-repeat;
+
     grid-template-columns: repeat(2, 1fr);
     .worksGrid {
       gap: 0.15em;
@@ -112,7 +131,6 @@
     opacity: 1;
 
     &:hover {
-      transform: scale(1.05);
       opacity: 0.9;
     }
   }

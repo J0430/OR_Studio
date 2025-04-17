@@ -4,10 +4,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1"
-        />
         <meta charSet="UTF-8" />
         <meta name="theme-color" content="#000000" />
         <meta name="format-detection" content="telephone=no" />
@@ -19,7 +15,7 @@ export default function Document() {
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;700;900&display=swap"
           rel="stylesheet"
         />
         <link rel="icon" href="/favicon.ico" />

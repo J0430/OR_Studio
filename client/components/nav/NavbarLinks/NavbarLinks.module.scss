@@ -64,7 +64,7 @@
 .navItem {
   font-size: m.rem(30);
   font-weight: 400;
-  color: v.$white;
+  color: var(--tex-color);
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease-in-out;

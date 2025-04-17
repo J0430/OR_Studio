@@ -36,7 +36,7 @@
   .content {
     display: flex;
     flex-direction: column;
-    color: rgba(255, 255, 255, 0.944);
+    color: var(--text-color);
     width: 45%;
     height: auto;
     align-self: center;

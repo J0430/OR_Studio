@@ -4,11 +4,11 @@
 .hero {
   display: flex;
   padding-left: clamp(1rem, 5vw, #{m.rem(150)});
-  background-color: v.$black;
   font-family: v.$font-family-base;
-  color: v.$white;
+  color: var(--text-color);
   align-content: flex-end;
   overflow: hidden;
+  background-color: var(--background-color);
 }
 .aboutWrapper {
   display: grid;

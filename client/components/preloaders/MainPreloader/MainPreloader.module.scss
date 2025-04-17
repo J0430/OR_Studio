@@ -10,7 +10,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: v.$black;
+  background-color: var(--background-color);
   @include m.center-flex;
   z-index: 9999;
   opacity: 1;
