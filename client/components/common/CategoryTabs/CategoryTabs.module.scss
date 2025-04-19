@@ -21,11 +21,10 @@
   z-index: 0;
   height: m.rem(36);
   color: rgba(0, 0, 0, 0.7);
-  background: rgba(v.$white, 0.85);
   border-radius: m.rem(18);
-  transition: all 0.3s ease;
+  transition: all -0.1ms ease;
   pointer-events: none;
-  background: rgba(v.$white, 0.8);
+  background: rgba(v.$white, 0.9);
 }
 
 /* =================================== */
@@ -45,6 +44,7 @@
   border-radius: m.rem(18);
   background: transparent;
   color: rgba(v.$white, 0.8);
+  z-index: 0;
   font-size: clamp(m.rem(18), 2vw, m.rem(17));
   text-transform: capitalize;
   white-space: nowrap;
@@ -65,6 +65,7 @@
   &.active {
     background: transparent;
     color: rgba(0, 0, 0, 0.7);
+    z-index: 0;
     box-shadow: 0 0 m.rem(2) rgba(v.$white, 0.8);
   }
 }
