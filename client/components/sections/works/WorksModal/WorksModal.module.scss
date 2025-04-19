@@ -2,7 +2,7 @@
 @use "@styles/partials/mixins" as m;
 
 /* =========================== */
-/* Modal Container          */
+/* ✅ Modal Container          */
 /* =========================== */
 .modalContainer {
   /* ===== Positioning ===== */
@@ -21,11 +21,11 @@
   align-items: center;
 
   /* ===== Visual ===== */
-  background-color: var(--background-color); // Theme background
+  background-color: var(--background-color); // ✅ Theme background
 }
 
 /* =========================== */
-/* Backdrop                 */
+/* ✅ Backdrop                 */
 /* =========================== */
 .modalBackdrop {
   /* ===== Positioning ===== */
@@ -36,11 +36,11 @@
   height: 100%;
 
   /* ===== Visual ===== */
-  background-color: var(--background-color);
+  background: transparent;
 }
 
 /* =========================== */
-/* Modal Content            */
+/* ✅ Modal Content            */
 /* =========================== */
 .modalContent {
   /* ===== Positioning ===== */
@@ -59,12 +59,15 @@
   align-items: center;
 
   /* ===== Visual ===== */
+  background-color: var(--overlay-background); // ✅ Themed overlay
+
   /* ======================= */
-  /* Image Wrapper        */
+  /* ✅ Image Wrapper        */
   /* ======================= */
   .imageWrapper {
     width: 100%;
     height: 90vh;
+
     display: flex;
     align-items: center;
     justify-content: space-between; // default: centered for single image
@@ -77,7 +80,7 @@
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
 
     .direction {
@@ -97,20 +100,20 @@
   }
 
   /* ======================= */
-  /* Close Button         */
+  /* ✅ Close Button         */
   /* ======================= */
   .closeButton {
     /* ===== Positioning ===== */
     position: absolute;
-    top: 3rem;
-    right: 3rem;
+    top: 1.5rem;
+    right: 1.5rem;
     z-index: 10;
 
     /* ===== Visual ===== */
     border: none;
     background: none;
-    color: var(--text-color); // Themed text color
-    font-size: 2rem;
+    color: var(--text-color); // ✅ Themed text color
+    font-size: 1.8rem;
     cursor: pointer;
     transition: opacity 0.3s ease;
 
@@ -119,6 +122,81 @@
     }
   }
 }
+
+/* =========================== */
+/* ✅ Thumbnail Gallery        */
+/* =========================== */
+// .thumbnailGallery {
+//   /* ===== Layout ===== */
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+
+//   /* ===== Box Model ===== */
+//   width: 100%;
+//   padding: 1rem;
+//   gap: 0.5rem;
+//   overflow-x: auto;
+//   overflow: hidden;
+
+//   /* ===== Visual ===== */
+//   background-color: var(--background-color); // ✅ Theme background
+
+//   /* ======================= */
+//   /* ✅ Thumbnail Wrapper     */
+//   /* ======================= */
+//   .thumbnailWrapper {
+//     /* ===== Box Model ===== */
+
+//     width: 100px;
+//     height: 80px;
+//     margin-right: 2rem;
+//     border: 0 solid transparent;
+//     border-radius: 2px;
+//     overflow: hidden;
+
+//     /* ===== Layout ===== */
+//     flex-shrink: 0;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+
+//     /* ===== Interaction ===== */
+//     cursor: pointer;
+//     transition:
+//       transform 0.2s ease,
+//       border-color 0.2s ease;
+
+//     &.activeThumbnail {
+//       border: solid 0.03em white;
+//       transform: scale(1.1);
+//       transition: all 0.3s ease-in-out;
+//     }
+
+//     /* ======================= */
+//     /* ✅ Thumbnail Image      */
+//     /* ======================= */
+//     .thumbnailImage {
+//       /* ===== Box Model ===== */
+//       width: 100%;
+//       height: 100%;
+
+//       /* ===== Visual ===== */
+//       object-fit: cover;
+//       transition:
+//         transform 0.3s ease,
+//         border-color 0.3s ease;
+
+//       &:hover {
+//         transform: scale(1.1);
+//       }
+//     }
+//   }
+// }
+
+/* =========================== */
+/* ✅ Responsive Adjustments   */
+/* =========================== */
 
 /* =========================== */
 /* Thumbnail Gallery        */
@@ -137,11 +215,9 @@
   /* ===== Visual ===== */ /* =========================== */
   /* Responsive Adjustments   */ /* =========================== */
   @media (max-width: 768px) {
-    .thumbnailGallery {
-      margin-bottom: 40%; // Tablet
-    }
+    margin-bottom: 40%;
+    gap: 2rem; // ✅ Tablet
   }
-
   /* ======================= */
   /* Thumbnail Wrapper     */
   /* ======================= */
@@ -168,19 +244,16 @@
     }
 
     .activeThumbnail {
-      border: solid var(--text-color) 0.0003em;
+      border: solid white 0.19em;
       transition: all 0.3s ease-in-out;
     }
     &:hover {
       transform: scale(1.05);
       transition: transform 0.3s ease;
     }
-  }
-
-  @media (max-width: 768px) {
-    .thumbnailWrapper {
-      height: 7rem;
-      width: 7rem; // Tablet
+    @media (max-width: 768px) {
+      height: 10rem;
+      width: 10rem;
     }
   }
 }

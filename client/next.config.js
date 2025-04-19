@@ -1,18 +1,13 @@
 const path = require("path");
-const withTM = require("next-transpile-modules")([
-  "@ant-design/icons",
-  "@ant-design/icons-svg",
-]);
 
 const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig = {
   experimental: {
     esmExternals: true,
+    reactRefresh: false,
   },
-  output: "export",
   reactStrictMode: true,
-
   images: {
     domains: ["monumental-kleicha-0d19a2.netlify.app"],
     unoptimized: true,
@@ -25,7 +20,7 @@ const nextConfig = {
   },
 
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: process.env.NODE_ENV === "production",
   },
 
   typescript: {
@@ -53,5 +48,3 @@ const nextConfig = {
     return config;
   },
 };
-
-module.exports = withTM(nextConfig);

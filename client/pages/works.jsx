@@ -4,10 +4,14 @@ import {
   useWorksPreloader,
 } from "@contexts/WorksPreloaderContext";
 import { AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
+
 import { useState, useMemo, useCallback } from "react";
 import { loadDynamicImports } from "@utils/loadDynamicImports";
 import Head from "next/head";
 import style from "@styles/pages/works.module.scss";
+import { useNav } from "@contexts/NavContext";
+import { usePreloader } from "@contexts/MainPreloaderContext";
 
 // Dynamic Imports for components
 const { WorksPreloader } = loadDynamicImports("preloaders", ["WorksPreloader"]);
@@ -19,9 +23,9 @@ const { WorksControl, WorksGrid, WorksModal } = loadDynamicImports(
 function WorksContent() {
   const { isPreloaderVisible, preloadedImages, projectsData } =
     useWorksPreloader();
-
+  const { isDevice } = usePreloader;
   const [state, setState] = useState({
-    categorySelected: "Residential", // Default category
+    categorySelected: isDevice ? "Works" : "Residential", // Default category
     selectedImage: null,
     selectedProject: null,
   });

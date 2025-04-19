@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 
 export const PreloaderContext = createContext();
 
 export const PreloaderProvider = ({ children }) => {
   const [isPreloaderVisible, setIsPreloaderVisible] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(0);
+  const isDevice = useMediaQuery({ maxWidth: 768 });
 
   const totalImages = 5; // Adjust as needed.
 
@@ -47,6 +49,7 @@ export const PreloaderProvider = ({ children }) => {
   return (
     <PreloaderContext.Provider
       value={{
+        isDevice,
         isPreloaderVisible,
         onImageLoad,
       }}>
@@ -61,6 +64,7 @@ export const usePreloader = () => {
   if (!context) {
     console.warn("usePreloader must be used within a PreloaderProvider");
     return {
+      isDevice,
       isPreloaderVisible: false,
       onImageLoad: () => {},
     };

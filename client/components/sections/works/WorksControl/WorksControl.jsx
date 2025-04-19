@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNav } from "@contexts/NavContext";
-import DropdownMenu from "@components/common/DropdownMenu/DropdownMenu";
-import CategoryTabs from "@components/common/CategoryTab/CategoryTabs";
+import { loadDynamicImports } from "@utils/loadDynamicImports";
 import styles from "../WorksControl/WorksControl.module.scss";
+
+// Dynamically import components
+const { DropdownMenu, CategoryTabs } = loadDynamicImports("common", [
+  "DropdownMenu",
+  "CategoryTabs",
+]);
 
 const WorksControl = ({
   categories = [],
