@@ -85,6 +85,9 @@ export default function Home({ homeData }) {
           <div className={styles.homePage}>
             {sections.map((section, index) => (
               <SectionWrapper key={section.id} id={section.id}>
+                <ScrollSectionNavigation
+                  sections={sections.map((section) => section.id)}
+                />
                 <div
                   data-section-id={section.id}
                   className={styles.sectionContainer}>

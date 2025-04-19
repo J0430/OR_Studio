@@ -8,16 +8,21 @@ import dynamic from "next/dynamic";
  * @returns {Record<string, React.ComponentType>}
  */
 export const loadDynamicImports = (basePath, componentNames = []) => {
-  console.log(basePath);
+  console.log(componentNames);
   return Object.fromEntries(
     componentNames.map((name) => {
+      console.log(name);
       const Component = dynamic(
-        () => import(`../components/${basePath}/${name}/${name}`),
+        () => import(`../components/${basePath}/${name}/${name}`), // Ensure your component name and path match
         {
-          ssr: false,
-          loading: () => null, // ✅ safest possible
+          ssr: false, // Disabling server-side rendering
+          loading: () => <div>Loading...</div>, // Provide a fallback while loading
+          // Optionally add error handling logic
+          onError: (error) =>
+            console.error(`Failed to load component ${name}:`, error),
         }
       );
+
       return [name, Component];
     })
   );

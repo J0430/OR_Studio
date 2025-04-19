@@ -68,7 +68,7 @@ export default function About({ officeData }) {
     //   id: "last-section",
     // },
   ];
-  if (sections.length === 1) return sections[0].component;
+  // if (sections.length === 1) return sections[0].component;
 
   return (
     <>

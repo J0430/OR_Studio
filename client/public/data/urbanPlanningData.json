@@ -3,7 +3,6 @@
   "projects": {
     "up_project1": {
       "title": "Sustainable Urban Living",
-      "frontImage": "/assets/works/categories/urban-planning/up_project1/up_p1_i1.jpg",
       "images": [
         "/assets/works/categories/urban-planning/up_project1/up_p1_i1.jpg",
         "/assets/works/categories/urban-planning/up_project1/up_p1_i2.jpg",
@@ -13,7 +12,6 @@
     },
     "up_project2": {
       "title": "Community-Centric Urban Plan",
-      "frontImage": "/assets/works/categories/urban-planning/up_project2/up_p2_i2.jpg",
       "images": [
         "/assets/works/categories/urban-planning/up_project2/up_p2_i1.jpg",
         "/assets/works/categories/urban-planning/up_project2/up_p2_i2.jpg",
@@ -24,7 +22,6 @@
     },
     "up_project3": {
       "title": "Eco-Friendly Residential Cluster",
-      "frontImage": "/assets/works/categories/urban-planning/up_project3/up_p3_i2.jpg",
       "images": [
         "/assets/works/categories/urban-planning/up_project3/up_p3_i1.jpg",
         "/assets/works/categories/urban-planning/up_project3/up_p3_i2.jpg",
@@ -34,7 +31,6 @@
     },
     "up_project4": {
       "title": "Urban Forest Integration",
-      "frontImage": "/assets/works/categories/urban-planning/up_project4/up_p4_i1.jpg",
       "images": [
         "/assets/works/categories/urban-planning/up_project4/up_p4_i1.jpg",
         "/assets/works/categories/urban-planning/up_project4/up_p4_i2.jpg"
@@ -43,7 +39,6 @@
     },
     "up_project5": {
       "title": "Vertical Garden Residences",
-      "frontImage": "/assets/works/categories/urban-planning/up_project5/up_p5_i1.jpg",
       "images": [
         "/assets/works/categories/urban-planning/up_project5/up_p5_i1.jpg",
         "/assets/works/categories/urban-planning/up_project5/up_p5_i2.jpg"
@@ -52,7 +47,6 @@
     },
     "up_project6": {
       "title": "Eco-Innovative Business Hub",
-      "frontImage": "/assets/works/categories/urban-planning/up_project6/up_p6_i1.jpg",
       "images": [
         "/assets/works/categories/urban-planning/up_project6/up_p6_i1.jpg",
         "/assets/works/categories/urban-planning/up_project6/up_p6_i2.jpg"

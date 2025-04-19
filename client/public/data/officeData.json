@@ -3,7 +3,6 @@
   "projects": {
     "o_project1": {
       "title": "Beacon Towers",
-      "frontImage": "/assets/works/categories/office/Project1/09.jpg",
       "images": [
         "/assets/works/categories/office/Project1/09.jpg",
         "/assets/works/categories/office/Project1/051.jpg",
@@ -14,7 +13,6 @@
     },
     "o_project2": {
       "title": "Urban Living Complex",
-      "frontImage": "/assets/works/categories/office/project2/2.jpg",
       "images": [
         "/assets/works/categories/office/project2/2.jpg",
         "/assets/works/categories/office/project2/3.jpg",
@@ -24,7 +22,6 @@
     },
     "o_project3": {
       "title": "Skyline Tower",
-      "frontImage": "/assets/works/categories/office/project3/3.jpg",
       "images": [
         "/assets/works/categories/office/project3/3.jpg",
         "/assets/works/categories/office/project3/21.jpg"

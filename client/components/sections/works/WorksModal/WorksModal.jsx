@@ -6,6 +6,7 @@ import useClickOutside from "@hooks/useClickOuside";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import ScrollingBlurReveal from "@components/common/ScrollReveal/ScrollReveal"; // Import the components
 import styles from "./WorksModal.module.scss";
+import { usePreloader } from "@contexts/MainPreloaderContext";
 
 const WorksModal = ({ selectedImage, project, onClose }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -13,7 +14,7 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
   const modalRef = useRef(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
-
+  const { isDevice } = usePreloader();
   const hasMultipleImages = project.images.length > 1;
 
   useClickOutside(modalRef, onClose);
@@ -66,7 +67,6 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
       handlePrevious();
     }
   };
-
   return (
     <motion.div
       className={styles.modalContainer}
@@ -94,8 +94,8 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
           {hasMultipleImages && (
             <DirectionalButton
               direction="left"
-              width={3}
-              height={3}
+              width={isDevice ? 1.5 : 3}
+              height={isDevice ? 1.5 : 3}
               onClick={handlePrevious}
               className={styles.leftButton}
             />
@@ -104,9 +104,9 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentImageIndex}
-              initial={{ opacity: 0, x: swipeDirection * 100 }}
+              initial={{ opacity: 0, x: -swipeDirection * 100 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -swipeDirection * 100 }}
+              exit={{ opacity: 0, x: swipeDirection * 100 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}>
               <Image
                 src={project.images[currentImageIndex]}
@@ -124,8 +124,8 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
           {hasMultipleImages && (
             <DirectionalButton
               direction="right"
-              width={3}
-              height={3}
+              width={isDevice ? 1.5 : 3}
+              height={isDevice ? 1.5 : 3}
               onClick={handleNext}
               className={styles.rightButton}
             />

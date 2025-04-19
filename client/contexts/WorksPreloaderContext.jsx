@@ -1,8 +1,6 @@
 // contexts/WorksPreloaderContext.js
 import { createContext, useContext, useState, useEffect } from "react";
-import { fetchData } from "@utils/api"; // Assuming fetchData is already defined
-
-// Context to manage the preloader state
+import { fetchData } from "@utils/api";
 const WorksPreloaderContext = createContext();
 
 export const WorksPreloaderProvider = ({ children }) => {
@@ -15,11 +13,12 @@ export const WorksPreloaderProvider = ({ children }) => {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const categories = await Promise.all(
-          ["residential", "commercial", "urbanPlanning", "office"].map(
-            fetchData
-          )
-        );
+        const categories = await Promise.all([
+          fetchData("residential"),
+          fetchData("commercial"), // ← NEW STRUCTURE
+          fetchData("urbanPlanning"),
+          fetchData("office"), // ← NEW STRUCTURE
+        ]);
 
         const imageUrls = [
           ...Object.values(categories[0]?.projects || {}).flatMap((project) => [

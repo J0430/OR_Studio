@@ -38,6 +38,7 @@ export const ToggleProvider = ({ children }) => {
   return (
     <ToggleContext.Provider
       value={{
+        pathname,
         isOpen,
         toggleVisibility,
         closeComponent,
@@ -56,6 +57,7 @@ export const useToggle = () => {
       isOpen: { modal: false, sidebar: false, nav: false },
       toggleVisibility: () => {},
       closeComponent: () => {},
+      usePathname: () => {},
     };
   }
   return context;
