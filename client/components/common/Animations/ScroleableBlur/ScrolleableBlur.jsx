@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useSpring, animated } from "@react-spring/web"; // Import react-spring for smooth animations
-import styles from "../ScrolleableBlur/ScrolleableBlur.module.scss";
+import styles from "../ScroleableBlur/ScrolleableBlur.module.scss";
 
 // ScrollBlur component accepts data-gap as a prop
 const ScrollBlur = ({ dataGap = 200 }) => {
