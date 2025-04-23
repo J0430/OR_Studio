@@ -30,7 +30,6 @@ export async function fetchData(fileName) {
         formattedFileName
       );
       const fileContent = fs.readFileSync(filePath, "utf-8");
-      console.log(fileContent);
       dataJson = JSON.parse(fileContent);
     } else {
       // Client-side: Use fetch to get the file
