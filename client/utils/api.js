@@ -6,6 +6,7 @@
  * @returns {Promise<Object>} - An object containing projects, frontImages, and category.
  */
 export async function fetchData(fileName) {
+  console.log(fileName);
   try {
     // Validate fileName
     if (!fileName || typeof fileName !== "string") {
@@ -17,7 +18,6 @@ export async function fetchData(fileName) {
 
     let dataJson;
 
-    // Check if running on the server
     if (typeof window === "undefined") {
       // Server-side: Use fs to read local files
       const fs = (await import("fs")).default;
@@ -30,6 +30,7 @@ export async function fetchData(fileName) {
         formattedFileName
       );
       const fileContent = fs.readFileSync(filePath, "utf-8");
+      console.log(fileContent);
       dataJson = JSON.parse(fileContent);
     } else {
       // Client-side: Use fetch to get the file
@@ -49,7 +50,7 @@ export async function fetchData(fileName) {
     return {
       projects: dataJson?.projects || {},
       frontImages: Object.values(dataJson.projects || {})
-        .map((project) => project?.images[0])
+        .map((project) => project?.[0])
         .filter((img) => img && img.trim() !== ""),
       category: dataJson.category || "Default Category",
     };

@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { usePreloader } from "@contexts/MainPreloaderContext";
-import { useNav } from "@contexts/NavContext";
+import { usePreloader } from "@contexts/Context";
+
 import { fetchData } from "@utils/api";
 import { loadDynamicImports } from "@utils/loadDynamicImports";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import SectionWrapper from "@components/common/SectionWrapper/SectionWrapper";
-import MainPreloader from "@components/preloaders/MainPreloader/MainPreloader";
 import styles from "@styles/pages/home.module.scss";
 import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
 
@@ -26,18 +25,10 @@ export const getStaticProps = async () => {
   }
 };
 
-export default function About2({ officeData }) {
+export default function About({ officeData }) {
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const { isNavOpen } = useNav();
-  const { isPreloaderVisible } = usePreloader();
-  const [isPageReady, setIsPageReady] = useState(false);
 
-  useEffect(() => {
-    if (!isPreloaderVisible) {
-      const timeout = setTimeout(() => setIsPageReady(true));
-      return () => clearTimeout(timeout);
-    }
-  }, [isPreloaderVisible]);
+  const [isPageReady, setIsPageReady] = useState(false);
 
   const handleScroll = useCallback((targetId) => {
     const targetElement = document.getElementById(targetId);
@@ -47,7 +38,6 @@ export default function About2({ officeData }) {
   }, []);
 
   const beaconProject = officeData.projects?.o_project1;
-  console.log(beaconProject?.images);
 
   const sections = [
     {

@@ -8,7 +8,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: m.rem(20) 0;
 
   &[data-open="true"] {
     z-index: 0;
@@ -22,12 +21,11 @@
   .worksTitleBox {
     width: fit-content;
     position: relative;
-    top: m.rem(15);
-    padding: 0 1rem;
+    bottom: -(m.rem(50));
 
     .worksTitle {
       font-size: clamp(m.rem(20), 4vw, m.rem(30));
-      font-weight: 350;
+      font-weight: 400;
       color: var(--text-color); // ✅ Theme color
 
       white-space: nowrap;
@@ -38,11 +36,13 @@
   /* ✅ Selector (Tabs) Box      */
   /* =========================== */
   .worksSelectorBox {
+    // width: fit-content;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: 2%;
+    z-index: 900000;
+    margin-top: 0.5%;
     padding: 0 m.rem(16);
     padding-top: m.rem(16); // Space from divider line
     border-top: m.rem(1) solid rgba(255, 255, 255, 0.3); // Default fallback
@@ -54,6 +54,7 @@
       align-items: center;
 
       .tabsWrapper {
+        z-index: 900000;
         position: relative;
         display: flex;
         gap: 2.5rem;
@@ -81,6 +82,7 @@
     background-color: var(--background-color);
     padding: 0;
     margin: 0;
+    z-index: 999999;
 
     .worksTitleBox {
       display: none;
@@ -97,7 +99,7 @@
       top: 1rem; // Adjust this value as needed
       left: 50%; // Center horizontally
       transform: translateX(-50%); // Center trick
-      z-index: 1; // Ensure it's above everything
+      z-index: 900000 !important; // Ensure it's above everything
 
       display: flex;
       justify-content: center;

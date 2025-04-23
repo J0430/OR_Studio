@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNav } from "@contexts/NavContext";
 import { loadDynamicImports } from "@utils/loadDynamicImports";
+import DropdownMenu from "@components/common/DropdownMenu/DropdownMenu";
+import CategoryTabs from "@components/common/CategoryTabs/CategoryTabs";
 import styles from "../WorksControl/WorksControl.module.scss";
 
 // Dynamically import components
-const { DropdownMenu, CategoryTabs } = loadDynamicImports("common", [
-  "DropdownMenu",
-  "CategoryTabs",
-]);
+// const { DropdownMenu, CategoryTabs } = loadDynamicImports("common", [
+//   "DropdownMenu",
+//   "CategoryTabs",
+// ]);
 
 const WorksControl = ({
   categories = [],
@@ -15,7 +17,6 @@ const WorksControl = ({
   onCategorySelect,
 }) => {
   const [scrolled, setScrolled] = useState(false);
-  const { isNavOpen } = useNav();
   const filteredCategories = categories.filter((cat) => cat !== "Works");
 
   useEffect(() => {
@@ -29,10 +30,8 @@ const WorksControl = ({
 
   return (
     <section
-      data-open={isNavOpen}
       className={`${styles.worksControl} ${scrolled ? styles.blurred : ""}`}
-      aria-label="Work Categories"
-      aria-expanded={isNavOpen}>
+      aria-label="Work Categories">
       <div className={styles.worksTitleBox}>
         <h1 className={styles.worksTitle}>Works</h1>
       </div>

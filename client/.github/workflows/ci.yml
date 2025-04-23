@@ -31,22 +31,26 @@ jobs:
       - name: Set environment variables
         run: echo "NEXT_PUBLIC_BASE_URL=https://monumental-kleicha-0d19a2.netlify.app" >> .env.local
 
-      # Step 5: Clean previous builds
+      # Step 5: Run tests (add this step to ensure tests run in CI)
+      - name: Run tests
+        run: npm run test:ci
+
+      # Step 6: Clean previous builds
       - name: Clean previous builds
         run: rm -rf out/ .next/
 
-      # Step 6: Build the project (Static Export)
+      # Step 7: Build the project (Static Export)
       - name: Build project
         run: npm run build
 
-      # Step 7: Copy Netlify config files (_redirects and _headers)
+      # Step 8: Copy Netlify config files (_redirects and _headers)
       - name: Copy Netlify Config Files
         run: |
           mkdir -p out
           cp public/_redirects out/ || echo "No _redirects file to copy."
           cp public/_headers out/ || echo "No _headers file to copy."
 
-      # Step 8: Deploy to Netlify
+      # Step 9: Deploy to Netlify
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2
         env:

@@ -200,200 +200,192 @@
 //     }
 //   }
 // }
-@use "@styles/partials/variables" as v;
-@use "@styles/partials/mixins" as m;
-/* =========================== */
-/* ✅ Grid Wrapper             */
-/* =========================== */
-.worksGridWrapper {
-  /* ===== Layout ===== */
-  flex-grow: 1;
-  z-index: 0;
+// .worksGridWrapper {
+//   /* ===== Layout ===== */
+//   flex-grow: 1;
 
-  /* ===== Box Model ===== */
+//   /* ===== Box Model ===== */
 
-  overflow-y: scroll;
-  overflow-x: hidden;
+//   overflow-y: scroll;
+//   overflow-x: hidden;
 
-  /* ===== Visual / Motion ===== */
-  -webkit-overflow-scrolling: touch;
+//   /* ===== Visual / Motion ===== */
+//   -webkit-overflow-scrolling: touch;
 
-  width: 100%;
-  /* ===== Layering ===== */
-
-  @media (max-width: 768px) {
-    padding-top: 4.5rem;
-    &::before {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.1) 4%,
-        rgba(0, 0, 0, 0.4) 70%,
-        rgba(0, 0, 0, 0.5)
-      );
-      -webkit-backdrop-filter: blur(0.0015em);
-      backdrop-filter: blur(0.0015em);
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-start;
-      padding: 1rem;
-      pointer-events: none;
-      z-index: 0;
-      top: 70%;
-      grid-template-columns: repeat(2, 1fr);
-      .worksGrid {
-        gap: 0.15em;
-      } // ✅ Mobile: 2 columns
-    }
-
-    // margin-top: 5rem;
-    // mask: linear-gradient(
-    //   to top,
-    //   rgb(255, 255, 255) 100%,
-    //   rgba(255, 255, 255, 0.424) 0%,
-    //   transpar
-    // );
-    // background-image: blur(1px);
-  }
-}
-/* =========================== */
-/* ✅ Grid Container           */
-/* =========================== */
-.worksGrid {
-  /* ===== Layout ===== */
-  z-index: 0;
-  display: grid;
-  padding-top: 2 rem;
-
-  /* ===== Box Model ===== */
-  gap: 0.2em;
-  height: auto;
-  overflow: visible;
-
-  /* ===== Scrollbar Styling ===== */
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: var(--background-color);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--border-color);
-    border-radius: 4px;
-  }
-
-  /* =========================== */
-  /* ✅ Responsive Adjustments   */
-  /* =========================== */
-}
-
-// @media (min-width: 769px) {
-//   grid-template-columns: repeat(3, 1fr); // ✅ Desktop: 3 columns
+//   /* ===== Layering ===== */
+//   z-index: 0;
 // }
 
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.1) 4%,
-    rgba(0, 0, 0, 0.4) 70%,
-    rgba(0, 0, 0, 0.5)
-  );
-  -webkit-backdrop-filter: blur(0.0015em);
-  backdrop-filter: blur(0.0015em);
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 1rem;
-  pointer-events: none;
-  z-index: 2;
-  top: 70%;
-}
-/* =========================== */
-/* ✅ Thumbnail Strip          */
-/* =========================== */
+// /* =========================== */
+// /* ✅ Grid Container           */
+// /* =========================== */
+// .worksGrid {
+//   /* ===== Layout ===== */
+//   z-index: 0;
+//   display: grid;
+//   padding-top: 2 rem;
 
-/* =========================== */
-/* ✅ Grid Items               */
-/* =========================== */
-.worksGridItem {
-  /* ===== Positioning ===== */
+//   /* ===== Box Model ===== */
+//   gap: 0.2em;
+//   height: auto;
+//   overflow: visible;
+
+//   /* ===== Scrollbar Styling ===== */
+//   &::-webkit-scrollbar {
+//     width: 8px;
+//   }
+
+//   &::-webkit-scrollbar-track {
+//     background: var(--background-color);
+//   }
+
+//   &::-webkit-scrollbar-thumb {
+//     background-color: var(--border-color);
+//     border-radius: 4px;
+//   }
+
+//   /* =========================== */
+//   /* ✅ Responsive Adjustments   */
+//   /* =========================== */
+//   @media (max-width: 768px) {
+//     margin-top: 5rem;
+//     grid-template-columns: repeat(2, 1fr);
+//     .worksGrid {
+//       gap: 0.15em;
+//     } // ✅ Mobile: 2 columns
+//   }
+
+//   @media (min-width: 769px) {
+//     grid-template-columns: repeat(3, 1fr); // ✅ Desktop: 3 columns
+//   }
+// }
+.scrollShadow {
   position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh; // 🚩 Explicit height for scrolling
+  width: 100%;
 
-  /* ===== Box Model ===== */
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
+  .worksGrid {
+    overflow: hidden;
 
-  /* ===== Layout ===== */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: grid;
+    gap: 0.2em;
+    overflow: visible;
+    /* =========================== */
+    /* ✅ Grid Items               */
+    /* =========================== */
+    .worksGridItem {
+      /* ===== Positioning ===== */
+      position: relative;
 
-  /* ===== Visual ===== */
-  background-color: var(--background-color);
-  will-change: transform;
-  backface-visibility: blur(10px);
+      cursor: pointer;
+      /* ===== Box Model ===== */
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
 
-  /* =========================== */
-  /* ✅ Special Grid Variants   */
-  /* =========================== */
-  &:nth-child(1) {
-    grid-column: span 2;
-    aspect-ratio: 2 / 1; // ✅ First item wider
+      /* ===== Layout ===== */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      /* ===== Visual ===== */
+      background-color: var(--background-color);
+      will-change: transform;
+
+      /* =========================== */
+      /* ✅ Special Grid Variants   */
+      /* =========================== */
+      &:nth-child(1) {
+        grid-column: span 2;
+        aspect-ratio: 2 / 1; // ✅ First item wider
+      }
+
+      &:nth-child(7n) {
+        grid-row: span 2;
+        aspect-ratio: 1 / 2; // ✅ Tall item every 7th
+      }
+
+      /* =========================== */
+      /* ✅ Image inside Item       */
+      /* =========================== */
+      img {
+        /* ===== Box Model ===== */
+        width: 100%;
+        height: 100%;
+
+        /* ===== Visual ===== */
+        transition:
+          opacity 0.6s ease,
+          transform 0.3s ease;
+        opacity: 1;
+
+        &:hover {
+          transform: scale(1.05);
+          opacity: 0.9;
+        }
+      }
+
+      /* =========================== */
+      /* ✅ Placeholder (Loader)     */
+      /* =========================== */
+      .worksPlaceholder {
+        /* ===== Box Model ===== */
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+
+        /* ===== Visual ===== */
+        background-color: var(--overlay-background);
+        animation: pulse 1.5s infinite ease-in-out;
+      }
+
+      /* ===== Motion ===== */
+      @keyframes pulse {
+        0% {
+          opacity: 0.7;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.7;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      padding-top: 5rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.15em;
+    }
+
+    @media (min-width: 769px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
-  &:nth-child(7n) {
-    grid-row: span 2;
-    aspect-ratio: 1 / 2; // ✅ Tall item every 7th
+  .topShadow,
+  .bottomShadow {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2rem;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
-  /* =========================== */
-  /* ✅ Image inside Item       */
-  /* =========================== */
-  img {
-    /* ===== Box Model ===== */
-    width: 100%;
-    height: 100%;
-
-    /* ===== Visual ===== */
-    transition:
-      opacity 0.6s ease,
-      transform 0.3s ease;
+  .topShadowVisible {
     opacity: 1;
-
-    &:hover {
-      opacity: 0.9;
-    }
+    top: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
   }
 
-  /* =========================== */
-  /* ✅ Placeholder (Loader)     */
-  /* =========================== */
-  .worksPlaceholder {
-    /* ===== Box Model ===== */
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 16 / 9;
-
-    /* ===== Visual ===== */
-    background-color: var(--overlay-background);
-    animation: pulse 1.5s infinite ease-in-out;
-  }
-
-  /* ===== Motion ===== */
-  @keyframes pulse {
-    0% {
-      opacity: 0.7;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0.7;
-    }
+  .bottomShadowVisible {
+    opacity: 1;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
   }
 }

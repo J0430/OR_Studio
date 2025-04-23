@@ -7,6 +7,9 @@
   /* ===== Layout ===== */
   display: flex;
   flex-direction: column;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 
   /* ===== Box Model ===== */
   height: 100dvh;
@@ -28,19 +31,24 @@
     padding: 0;
   }
 }
+.worksPage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.preloaderOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(1rem);
+  z-index: 20;
+}
 
 /* =========================== */
 /* ✅ Control Panel for Works  */
 /* =========================== */
-.worksControl {
-  /* ===== Box Model ===== */
-  width: 100%;
-  padding: 1rem;
-  margin-bottom: 1rem;
-
-  /* ===== Visual ===== */
-
-  border-bottom: 1px solid var(--border-strong); // ✅ Theme border for consistency
-
-  /* ===== Layering ===== */
-}
