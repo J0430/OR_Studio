@@ -11,8 +11,21 @@
   align-items: center;
   gap: m.rem(16);
   padding: m.rem(10) 0;
+  // justify-content: center;
+  // margin: 0.4rem;
+  //   border-radius: 30px;
+  //   top: 109px;
+  //   align-items: center;
+  //   gap: 1rem;
+  //   padding: .625rem 0;
+  //   box-shadow: 0px 1px 10px 0.03em;
+  //   border: 0.02rem solid rgb(0 0 0,0);
+  //   box-shadow: 1px 5px px 1px;
+  //   backdrop-filter: blur(0.06em);
+  //   z-index: 10;
+  //border: 1px solid rgb(0 0 0 / 1%);
+  //   background-color: #00000059;
 }
-
 /* =================================== */
 /* ✅ Animated Highlight Bar           */
 /* =================================== */
@@ -24,10 +37,8 @@
   border-radius: m.rem(18);
   transition: all -0.1ms ease;
   pointer-events: none;
-  background: rgba(v.$white, 0.9);
-}
-
-/* =================================== */
+  background: rgba(v.$white, 0.86);
+} /* =================================== */
 /* ✅ Tab Button                       */
 /* =================================== */
 .categoryTab {
@@ -52,21 +63,30 @@
   transition: color 0.3s ease;
 
   &:hover {
+    background: rgba(0, 0, 0, 0);
+    color: #fff;
+    box-shadow: 0 0 0.375rem hsla(0, 0%, 100%, 0.3);
     color: v.$white;
     border: rgba(255, 255, 255, 0.15) solid m.rem(0.4rem);
     transition: color border 0.3s ease;
+  }
+  &.active {
+    height: m.rem(36);
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 500;
+    border-radius: m.rem(18);
+    transition: all -0.1ms ease;
+    pointer-events: none;
+    background: rgba(v.$white, 0.86);
+    z-index: 1000 !important;
+
+    transition: all 0.5s ease;
   }
 
   span {
     position: relative;
     z-index: 2;
-  }
-
-  &.active {
-    background: transparent;
-    color: rgba(0, 0, 0, 0.7);
-    z-index: 0;
-    box-shadow: 0 0 m.rem(2) rgba(v.$white, 0.8);
+    // color: rgba(0, 0, 0, 0.7) }
   }
 }
 

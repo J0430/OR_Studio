@@ -6,7 +6,7 @@ import ProgressBar from "@components/common/ProgressBar/ProgressBar";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import styles from "../WorkBanner/WorkBanner.module.scss";
 
-const WorkBanner = ({ images }) => {
+const WorkBanner = ({ images = [] }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);

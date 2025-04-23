@@ -55,5 +55,4 @@ const AboutBanner = () => {
     </>
   );
 };
-
 export default AboutBanner;

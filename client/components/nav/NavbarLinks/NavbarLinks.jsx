@@ -1,9 +1,10 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useNav } from "@contexts/NavContext";
-import styles from "./NavbarLinks.module.scss";
+import styles from "../NavbarLinks/NavbarLinks.module.scss";
 
+// Define the container variants for entrance and exit animations
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -19,16 +20,17 @@ const itemVariants = {
 
 const links = ["Home", "Works", "Contact", "About"];
 
-const NavbarLinks = () => {
+const NavbarLinks = ({ setIsNavOpen, isNavOpen }) => {
   const pathname = usePathname();
-  const { setIsNavOpen } = useNav();
 
   return (
     <motion.ul
       className={styles.navList}
       variants={containerVariants}
       initial="hidden"
-      animate="visible">
+      animate="visible"
+      exit="hidden" // Add exit for smooth fade-out effect
+    >
       {links.map((link, index) => {
         const href = link === "Home" ? "/" : `/${link.toLowerCase()}`;
         const isActive = pathname === href;
@@ -44,7 +46,7 @@ const NavbarLinks = () => {
               href={href}
               scroll={false}
               className={styles.navLink}
-              onClick={() => setIsNavOpen(false)}
+              onClick={() => setIsNavOpen(!isNavOpen)}
               aria-current={isActive ? "page" : undefined}>
               {link}
             </Link>
@@ -54,5 +56,4 @@ const NavbarLinks = () => {
     </motion.ul>
   );
 };
-
 export default NavbarLinks;

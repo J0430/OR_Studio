@@ -1,11 +1,12 @@
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { preloaderLogos } from "@utils/globals";
-import { usePreloader } from "@contexts/MainPreloaderContext";
+import { usePageContext } from "@contexts/PageContext/PageContext";
 import Image from "next/image";
-import styles from "./MainPreloader.module.scss";
+import styles from "./HomePreloader.module.scss";
 
-const MainPreloader = () => {
-  const { isPreloaderVisible, onImageLoad } = usePreloader();
+const HomePreloader = () => {
+  const { isPreloaderVisible, onImageLoad } = usePageContext();
 
   return (
     <AnimatePresence mode="wait">
@@ -13,13 +14,9 @@ const MainPreloader = () => {
         <motion.div
           className={styles.preloaderWrapper}
           initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          exit={{
-            opacity: 0,
-            scale: 1.1,
-            transition: { duration: 1.3, ease: "easeInOut" },
-          }} // ✅ Smoother transition
-          transition={{ duration: 1.3, ease: "easeOut" }}>
+          animate={{ opacity: 0 }}
+          transition={{ duration: 2.5, ease: [0.9, 0, 1, 1] }}
+          exit={{ opacity: 0 }}>
           <motion.div className={styles.preloaderContainer}>
             {/* Logo 1 */}
             <motion.div
@@ -86,4 +83,4 @@ const MainPreloader = () => {
   );
 };
 
-export default MainPreloader;
+export default HomePreloader;

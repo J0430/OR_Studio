@@ -1,37 +1,34 @@
 import { useCallback, useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
-import { usePreloader } from "@contexts/MainPreloaderContext";
-import { useNav } from "@contexts/NavContext";
-import { fetchData } from "@utils/api";
+import {
+  usePageContext,
+  PageContextProvider,
+} from "@contexts/PageContext/PageContext";
+import HomePreloader from "@components/preloaders/HomePreloader/HomePreloader";
 import { loadDynamicImports } from "@utils/loadDynamicImports";
+import { useMediaQuery } from "react-responsive";
+import { fetchData } from "@utils/api";
 import Head from "next/head";
-import dynamic from "next/dynamic";
-import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
-import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
-import SectionWrapper from "@components/common/SectionWrapper/SectionWrapper";
-import MainPreloader from "@components/preloaders/MainPreloader/MainPreloader";
 import styles from "@styles/pages/home.module.scss";
 
-const { LandingPage, AboutBanner, WorkBanner } = loadDynamicImports(
+const { DirectionalButton, ScrollSectionNavigation, SectionWrapper } =
+  loadDynamicImports("common", [
+    "DirectionalButton",
+    "ScrollSectionNavigation",
+    "SectionWrapper",
+  ]);
+
+// const { HomePreloader } = loadDynamicImports("preloaders", ["HomePreloader"]);
+
+const { LandingPageSection, AboutBanner, WorkBanner } = loadDynamicImports(
   "sections/home",
-  ["LandingPage", "AboutBanner", "WorkBanner"]
+  ["LandingPageSection", "AboutBanner", "WorkBanner"]
 );
 
-export const getStaticProps = async () => {
-  try {
-    const homeData = await fetchData("home");
-    return { props: { homeData } };
-  } catch (error) {
-    console.error("Error in getStaticProps:", error.message);
-    return {
-      props: { homeData: { projects: {}, frontImages: [], category: "" } },
-    };
-  }
-};
-export default function Home({ homeData }) {
+function HomeContent() {
+  const { preloader, isPreloaderVisible, projectsData } = usePageContext();
+  const homeData = projectsData.home;
+
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const { isNavOpen } = useNav();
-  const { isPreloaderVisible } = usePreloader();
   const [isPageReady, setIsPageReady] = useState(false);
 
   useEffect(() => {
@@ -48,64 +45,82 @@ export default function Home({ homeData }) {
     }
   }, []);
 
-  const { LandingPictures, EvenYehuda, Hevron8PenthouseRooftop, City69 } =
-    homeData.projects || {};
-  console.log(LandingPictures.images);
+  const {
+    LandingPictures = {},
+    EvenYehuda = {},
+    Hevron8PenthouseRooftop = {},
+    City69 = {},
+  } = homeData?.projects || {};
 
   const sections = [
     {
-      component: <LandingPage images={LandingPictures?.images} />,
+      component: <LandingPageSection images={LandingPictures?.images || []} />,
       id: "landingPage",
     },
     { component: <AboutBanner />, id: "aboutBanner" },
     {
-      component: <WorkBanner images={EvenYehuda?.images} />,
+      component: <WorkBanner images={EvenYehuda?.images || []} />,
       id: "evenYehuda",
     },
     {
-      component: <WorkBanner images={Hevron8PenthouseRooftop?.images} />,
+      component: <WorkBanner images={Hevron8PenthouseRooftop?.images || []} />,
       id: "hevron8",
     },
     {
-      component: <WorkBanner images={City69?.images} />,
+      component: <WorkBanner images={City69?.images || []} />,
       id: "last-section",
     },
   ];
+
+  if (sections.length === 1) return sections[0]?.component;
 
   return (
     <>
       <Head>
         <title>OR Studio | Home</title>
       </Head>
-
-      {isPreloaderVisible && <MainPreloader />}
-
-      {isPageReady && (
-        <>
-          <div className={styles.homePage}>
-            {sections.map((section, index) => (
-              <SectionWrapper key={section.id} id={section.id}>
-                <ScrollSectionNavigation
-                  sections={sections.map((section) => section.id)}
-                />
-                <div
-                  data-section-id={section.id}
-                  className={styles.sectionContainer}>
-                  {section.component}
-                </div>
-                <DirectionalButton
-                  direction={index < sections.length - 1 ? "down" : "up"}
-                  width={isMobile ? 2.3 : 3}
-                  height={isMobile ? 2.3 : 3}
-                  onClick={() =>
-                    handleScroll(sections[(index + 1) % sections.length]?.id)
-                  }
-                />
-              </SectionWrapper>
-            ))}
-          </div>
-        </>
-      )}
+      <div className={styles.homePage}>
+        {sections.map((section, index) => (
+          <SectionWrapper key={section.id} id={section.id}>
+            <div
+              data-section-id={section.id}
+              className={styles.sectionContainer}>
+              {section.component}
+            </div>
+            <DirectionalButton
+              direction={index < sections.length - 1 ? "down" : "up"}
+              width={isMobile ? 2.3 : 3}
+              height={isMobile ? 2.3 : 3}
+              onClick={() =>
+                handleScroll(sections[(index + 1) % sections.length]?.id)
+              }
+            />
+          </SectionWrapper>
+        ))}
+      </div>
     </>
+  );
+}
+
+export const getStaticProps = async () => {
+  try {
+    const homeData = await fetchData("home");
+    return { props: { homeData } };
+  } catch (error) {
+    console.error("Error in getStaticProps:", error.message);
+    return {
+      props: { homeData: { projects: {}, frontImages: [], category: "" } },
+    };
+  }
+};
+
+export default function HomePage({ homeData }) {
+  return (
+    <PageContextProvider
+      timeoutDuration={2500}
+      endpoints={["home"]}
+      preloader={<HomePreloader />}>
+      <HomeContent />
+    </PageContextProvider>
   );
 }

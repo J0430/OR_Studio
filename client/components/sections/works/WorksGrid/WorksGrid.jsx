@@ -1,38 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+import ScrollShadow from "@components/common/ScrollShadow/ScrollShadow";
 import Image from "next/image";
 import styles from "../WorksGrid/WorksGrid.module.scss";
-import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
-import { images } from "next.config";
 
-const WorksGridItem = ({
-  key,
-  work,
-  works,
-  src,
-  index,
-  onImageClick,
-  showImages,
-}) => {
-  console.log(work);
+const WorksGridItem = (
+  { work, index, onImageClick, showImages }
+  // : {
+  // work: any;
+  // index: number;
+  // onImageClick: (image: string) => void;
+  // showImages: boolean;
+  // }
+) => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [activeImage, setActiveImage] = useState(work.images?.[0]);
-
-  const hoverVariants = {
-    rest: { scale: 1 },
-    hover: { scale: 1.02 },
-  };
 
   return (
     <motion.article
       ref={ref}
       className={styles.worksGridItem}
-      layoutId={`image-${activeImage}`}
-      onClick={() => onImageClick(activeImage)}
-      tabIndex={0}
-      role="button"
-      aria-label={`Open modal for ${work.title}`}
+      layoutId={`work-item-${work.images[0]}`}
+      onClick={() => onImageClick(work.images[0])}
       initial={{ opacity: 0, y: 100 }}
       animate={
         inView && showImages
@@ -46,25 +35,17 @@ const WorksGridItem = ({
               },
             }
           : {}
-      }
-      whileHover="hover">
-      {showImages && activeImage ? (
-        <motion.div
-          whileHover={hoverVariants}
-          className={styles.hoverWrapper}
-          // variants={hoverVariants}
-          initial="rest"
-          animate="rest">
-          {/* // whileHover="hover"> */}
-          {/* <ScrollSectionNavigation sections={works} id={index} /> */}
+      }>
+      {showImages ? (
+        <div className={styles.hoverWrapper}>
           <Image
-            src={work.images?.[0]}
+            src={work.images[0]}
             alt={`Project: ${work.title}`}
             fill
             style={{ objectFit: "cover" }}
             className={styles.worksImage}
           />
-        </motion.div>
+        </div>
       ) : (
         <div className={styles.worksPlaceholder} />
       )}
@@ -108,7 +89,6 @@ const WorksGridItem = ({
   /* </motion.div> */
 }
 
-// ✅ Main Grid
 const WorksGrid = ({ works, onImageClick, delay = 500 }) => {
   const [showImages, setShowImages] = useState(false);
 
@@ -120,26 +100,21 @@ const WorksGrid = ({ works, onImageClick, delay = 500 }) => {
   if (!works.length) return <div>No works available at this time.</div>;
 
   return (
-    <motion.section
-      className={styles.worksGridWrapper}
-      aria-label="Works Grid"
-      role="region">
+    <ScrollShadow
+      className={styles.scrollShadow}
+      style={{ maxHeight: "80vh", overflowY: "auto" }}>
       <div className={styles.worksGrid}>
         {works.map((work, index) => (
-          <>
-            <WorksGridItem
-              key={`${work.title}-${index}`}
-              work={work}
-              works={works}
-              src={work.images[0]}
-              index={index}
-              onImageClick={onImageClick}
-              showImages={showImages}
-            />
-          </>
+          <WorksGridItem
+            key={`${work.title}-${index}`}
+            work={work}
+            index={index}
+            onImageClick={onImageClick}
+            showImages={showImages}
+          />
         ))}
       </div>
-    </motion.section>
+    </ScrollShadow>
   );
 };
 

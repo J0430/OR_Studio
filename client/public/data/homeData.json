@@ -3,7 +3,7 @@
   "projects": {
     "LandingPictures": {
       "title": "Landing Pictures",
-      "frontImage": "/assets/home/HomePictures/Front 3.jpg",
+
       "description": "",
       "images": [
         "/assets/home/HomePictures/Front 3.jpg",
@@ -14,7 +14,7 @@
     },
     "EvenYehuda": {
       "title": "Even Yehuda",
-      "frontImage": "/assets/home/EvenYehuda/4.png",
+
       "description": "",
       "images": [
         "/assets/home/EvenYehuda/4.png",
@@ -25,7 +25,7 @@
     },
     "Hevron8PenthouseRooftop": {
       "title": "Hevron 8 Penthouse Rooftop",
-      "frontImage": "/assets/home/Hevron8PenthouseRooftop/Hevron_003-View2_PS.jpg",
+
       "description": "",
       "images": [
         "/assets/home/Hevron8PenthouseRooftop/Hevron_003-View2_PS.jpg",
@@ -36,7 +36,6 @@
     },
     "City69": {
       "title": "City69",
-      "frontImage": "/assets/home/City69/13.png",
       "description": "",
       "images": [
         "/assets/home/City69/13.png",

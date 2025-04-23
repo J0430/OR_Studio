@@ -1,11 +1,25 @@
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import styles from "./WorksPreloader.module.scss";
-import { usePageContext } from "@contexts/PageContext/PageContext";
+import { useTheme } from "next-themes";
+import { AnimatedLogoProps } from "./AnimatedLogo.types";
+import styles from "./AnimatedLogo.module.scss";
 
-const WorksPreloader = () => {
-  const { isPreloaderVisible } = usePageContext();
-  const totalDuration = 2;
-  const strokeDuration = 1;
+export const AnimatedLogo: React.FC<AnimatedLogoProps> = ({
+  size = 125,
+  strokeColor = "white",
+  fillColor = "white",
+  animateFill = true,
+  strokeWidth = 1,
+  className = "",
+  theme,
+}) => {
+  const { theme: currentTheme } = useTheme();
+  const appliedTheme = theme || currentTheme;
+
+  const [animationKey, setAnimationKey] = useState(0);
+
+  const dynamicStrokeColor = appliedTheme === "dark" ? "white" : strokeColor;
+  const dynamicFillColor = appliedTheme === "light" ? fillColor : fillColor;
 
   const outerPath =
     "M 47.07 22.29 C 53.32 21.64 59.71 22.12 66.00 22.01 C 71.61 22.10 77.40 21.62 82.96 22.35 C 96.57 24.41 107.56 37.30 108.01 50.98 C 108.33 58.67 106.88 67.62 101.60 73.57 C 98.27 77.52 94.14 79.78 89.75 82.32 C 94.45 91.64 98.56 101.27 103.61 110.39 C 105.43 113.94 108.69 118.69 107.88 122.81 C 106.77 125.85 103.93 125.29 101.33 126.01 C 96.60 119.18 93.48 111.67 89.65 104.34 C 86.97 99.23 85.21 93.91 81.95 89.09 C 81.37 94.31 81.82 100.12 80.25 105.08 C 77.08 116.24 66.61 125.21 55.02 126.34 C 49.71 126.95 44.47 126.69 39.51 124.54 C 31.66 121.24 25.55 114.46 22.40 106.63 C 20.14 100.98 20.48 94.97 20.48 89.00 C 20.62 76.34 20.33 63.65 20.59 50.99 C 20.95 36.78 33.01 23.91 47.07 22.29 Z";
@@ -17,56 +31,46 @@ const WorksPreloader = () => {
     "M 56.97 84.48 C 61.70 83.99 67.07 83.96 71.78 84.56 C 72.82 90.24 72.48 96.62 71.18 102.25 C 69.12 109.62 63.47 113.83 56.77 116.78 C 56.27 109.18 56.61 101.61 56.45 94.00 C 56.45 90.87 56.30 87.55 56.97 84.48 Z",
   ];
 
+  const handleClick = () => setAnimationKey((prev) => prev + 1);
+
   return (
-    <motion.div
-      className={styles.preloaderContainer}
-      initial={{ opacity: 1 }}
-      animate={{ opacity: 0 }}
-      transition={{
-        duration: 1,
-        ease: "easeInOut",
-        delay: totalDuration + 1,
-      }}
-      exit={{ opacity: 0 }}>
-      <motion.svg
-        className={styles.logo}
-        viewBox="0 0 125 150"
-        width="125.0pt"
-        height="150.0pt">
-        {/* Mask for cutout */}
-        <mask id="logo-mask">
-          <path d={outerPath} fill="white" />
-          {innerPaths.map((d, i) => (
-            <path key={i} d={d} fill="black" />
-          ))}
-        </mask>
-
-        {/* Fill + mask */}
-        <motion.path
-          d={outerPath}
-          fill="#a2b5bb"
-          mask="url(#logo-mask)"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: strokeDuration }}
-        />
-
-        {/* Stroke animation */}
-        {[outerPath, ...innerPaths].map((d, i) => (
-          <motion.path
-            key={i}
-            d={d}
-            stroke="#a3b6bd"
-            strokeWidth={2}
-            fill="none"
-            initial={{ strokeDasharray: 500, strokeDashoffset: 500 }}
-            animate={{ strokeDashoffset: 0 }}
-            transition={{ duration: strokeDuration, ease: "easeInOut" }}
-          />
+    <motion.svg
+      key={animationKey}
+      className={styles.animatedLogo}
+      width={size}
+      height={size}
+      viewBox="0 0 125 150"
+      onClick={handleClick}>
+      <mask id="logo-mask">
+        <path d={outerPath} fill="white" />
+        {innerPaths.map((d, i) => (
+          <path key={i} d={d} fill="black" />
         ))}
-      </motion.svg>
-    </motion.div>
+      </mask>
+
+      <motion.path
+        d={outerPath}
+        fill={animateFill ? dynamicFillColor : "transparent"}
+        mask="url(#logo-mask)"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1 }}
+      />
+
+      {[outerPath, ...innerPaths].map((d, i) => (
+        <motion.path
+          key={i}
+          d={d}
+          stroke={dynamicStrokeColor}
+          strokeWidth={strokeWidth}
+          fill="none"
+          initial={{ strokeDasharray: 500, strokeDashoffset: 500 }}
+          animate={{ strokeDashoffset: 0 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+        />
+      ))}
+    </motion.svg>
   );
 };
 
-export default WorksPreloader;
+export default AnimatedLogo;

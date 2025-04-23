@@ -33,15 +33,16 @@
   /* =========================== */
   /* ✅ Preloader Logo           */
   /* =========================== */
-  .logo {
-    /* ===== Box Model ===== */
-    width: m.rem(100);
-    height: auto;
+  .animatedLogo {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 0;
 
-    /* ===== Visual ===== */
-    object-fit: contain;
-
-    /* ===== Layering ===== */
-    z-index: 10;
+    svg {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
   }
 }

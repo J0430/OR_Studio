@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true, // Enables esModuleInterop for proper imports
+    "allowSyntheticDefaultImports": true, // Allows synthetic default imports
+    "moduleResolution": "node", // Use Node's module resolution strategy
+    "target": "es5", // Target JS version
+    "lib": ["dom", "esnext"], // Specify the library files
+    "types": ["react", "react-dom"], // Specify the types to include
+    "allowJs": true, // Allow JS files in the project
+    "jsx": "preserve", // Enable JSX support
+    "baseUrl": ".", // Set base directory for resolving paths
+    "paths": {
+      "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
+      "@utils/*": ["utils/*"],
+      "@api/*": ["public/api/*"],
+      "@styles/*": ["styles/*"],
+      "@contexts/*": ["contexts/*"],
+      "@public/*": ["public/*"],
+      "@data/*": ["public/data/*"],
+      "@pages/*": ["pages/*"]
+    },
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.jsx",
+    "**/*.js",
+    "pages/**/*",
+    "components/**/*",
+    "hooks/**/*",
+    "utils/**/*"
+  ],
+  "exclude": ["node_modules"]
+}

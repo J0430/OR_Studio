@@ -1,8 +1,10 @@
-import { PreloaderProvider } from "@contexts/MainPreloaderContext";
-import { NavProvider } from "@contexts/NavContext";
-import Header from "@components/nav/Header/Header";
+import { loadDynamicImports } from "@utils/loadDynamicImports";
+import { ThemeProvider } from "next-themes";
+import { AppProps } from "next/app";
 import Head from "next/head";
 import "@styles/globals.scss";
+
+const { Header } = loadDynamicImports("nav", ["Header"]);
 
 export default function MyApp({ Component, pageProps }) {
   return (
@@ -16,13 +18,10 @@ export default function MyApp({ Component, pageProps }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <PreloaderProvider>
-        <NavProvider>
-          <Header />
-          <Component {...pageProps} />
-        </NavProvider>
-      </PreloaderProvider>
+      <ThemeProvider>
+        <Header />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }

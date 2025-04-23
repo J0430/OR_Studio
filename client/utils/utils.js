@@ -7,10 +7,8 @@ export const fisherYatesShuffle = (array) => {
   }
   return shuffledArray;
 };
-
-// Interleave Arrays: Merge multiple arrays by interleaving their elements
 export const interleaveArrays = (arrays) => {
-  const maxLength = Math.max(...arrays.map((arr) => arr?.length)); // Find the longest array length
+  const maxLength = Math.max(...arrays.map((arr) => arr?.length));
   const result = [];
 
   for (let i = 0; i < maxLength; i++) {

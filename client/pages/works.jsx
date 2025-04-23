@@ -1,36 +1,29 @@
-// pages/works.js
-import {
-  WorksPreloaderProvider,
-  useWorksPreloader,
-} from "@contexts/WorksPreloaderContext";
-import { AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
-
 import { useState, useMemo, useCallback } from "react";
+import {
+  usePageContext,
+  PageContextProvider,
+} from "@contexts/PageContext/PageContext";
 import { loadDynamicImports } from "@utils/loadDynamicImports";
-import Head from "next/head";
+import { AnimatePresence } from "framer-motion";
 import style from "@styles/pages/works.module.scss";
-import { useNav } from "@contexts/NavContext";
-import { usePreloader } from "@contexts/MainPreloaderContext";
+import Head from "next/head";
 
 // Dynamic Imports for components
 const { WorksPreloader } = loadDynamicImports("preloaders", ["WorksPreloader"]);
+console.log(WorksPreloader);
 const { WorksControl, WorksGrid, WorksModal } = loadDynamicImports(
   "sections/works",
   ["WorksControl", "WorksGrid", "WorksModal"]
 );
-
 function WorksContent() {
-  const { isPreloaderVisible, preloadedImages, projectsData } =
-    useWorksPreloader();
-  const { isDevice } = usePreloader;
+  const { preloader, isPreloaderVisible, projectsData } = usePageContext();
+
   const [state, setState] = useState({
-    categorySelected: isDevice ? "Works" : "Residential", // Default category
+    categorySelected: "Residential",
     selectedImage: null,
     selectedProject: null,
   });
 
-  // Category Data Mapping
   const categoryDataMap = useMemo(
     () => ({
       Residential: Object.values(projectsData.residential?.projects || {}),
@@ -47,21 +40,20 @@ function WorksContent() {
     return categoryDataMap[state.categorySelected] || [];
   }, [state.categorySelected, categoryDataMap]);
 
-  // Handle Category Click
   const handleCategoryClick = useCallback((categoryName) => {
-    setState((prevState) => ({
-      ...prevState,
+    setState((prev) => ({
+      ...prev,
       categorySelected: categoryName,
       selectedImage: null,
       selectedProject: null,
     }));
   }, []);
 
-  // Handle Image Click
   const handleImageClick = useCallback(
     (imageSrc) => {
       const currentProjectsArray =
         categoryDataMap[state.categorySelected] || [];
+
       let matchedProject = currentProjectsArray.find(
         (project) => project.frontImage === imageSrc
       );
@@ -73,8 +65,8 @@ function WorksContent() {
       }
 
       if (matchedProject) {
-        setState((prevState) => ({
-          ...prevState,
+        setState((prev) => ({
+          ...prev,
           selectedImage: imageSrc,
           selectedProject: matchedProject,
         }));
@@ -84,8 +76,8 @@ function WorksContent() {
   );
 
   const handleCloseModal = useCallback(() => {
-    setState((prevState) => ({
-      ...prevState,
+    setState((prev) => ({
+      ...prev,
       selectedImage: null,
       selectedProject: null,
     }));
@@ -98,39 +90,46 @@ function WorksContent() {
         <meta name="mobile-web-app-capable" content="yes" />
       </Head>
 
-      {isPreloaderVisible && <WorksPreloader />}
-
       <main className={style.worksPage}>
-        <WorksControl
-          categories={Object.keys(categoryDataMap)}
-          selectedCategory={state.categorySelected}
-          onCategorySelect={handleCategoryClick}
-        />
+        <WorksPreloader />
+        <>
+          <WorksControl
+            categories={Object.keys(categoryDataMap)}
+            selectedCategory={state.categorySelected}
+            onCategorySelect={handleCategoryClick}
+          />
 
-        <WorksGrid
-          works={works}
-          category={state.categorySelected}
-          onImageClick={handleImageClick}
-        />
+          <WorksGrid
+            works={works}
+            category={state.categorySelected}
+            onImageClick={handleImageClick}
+          />
 
-        <AnimatePresence>
-          {state.selectedImage && state.selectedProject && (
-            <WorksModal
-              selectedImage={state.selectedImage}
-              project={state.selectedProject}
-              onClose={handleCloseModal}
-            />
-          )}
-        </AnimatePresence>
+          <AnimatePresence>
+            {state.selectedImage && state.selectedProject && (
+              <WorksModal
+                selectedImage={state.selectedImage}
+                project={state.selectedProject}
+                onClose={handleCloseModal}
+              />
+            )}
+          </AnimatePresence>
+        </>
       </main>
     </>
   );
 }
 
-export default function WorksPage(props) {
+export default function WorksPage({
+  residential,
+  commercial,
+  urbanPlanning,
+  office,
+}) {
   return (
-    <WorksPreloaderProvider>
+    <PageContextProvider
+      endpoints={["residential", "commercial", "urbanPlanning", "office"]}>
       <WorksContent />
-    </WorksPreloaderProvider>
+    </PageContextProvider>
   );
 }
