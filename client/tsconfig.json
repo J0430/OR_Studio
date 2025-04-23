@@ -6,6 +6,7 @@
     "target": "es5", // Target JS version
     "lib": ["dom", "esnext"], // Specify the library files
     "types": ["react", "react-dom"], // Specify the types to include
+    "typeRoots": ["./node_modules/@types", "./types"],
     "allowJs": true, // Allow JS files in the project
     "jsx": "preserve", // Enable JSX support
     "baseUrl": ".", // Set base directory for resolving paths
@@ -18,7 +19,8 @@
       "@contexts/*": ["contexts/*"],
       "@public/*": ["public/*"],
       "@data/*": ["public/data/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "typeRoots": ["./node_modules/@types", "./types"]
     },
     "skipLibCheck": true,
     "strict": false,
