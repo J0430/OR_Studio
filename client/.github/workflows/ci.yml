@@ -13,50 +13,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
+        working-directory: client
 
-      # Step 4: Set environment variables
       - name: Set environment variables
         run: echo "NEXT_PUBLIC_BASE_URL=https://monumental-kleicha-0d19a2.netlify.app" >> .env.local
+        working-directory: client
 
-      # Step 5: Run tests (add this step to ensure tests run in CI)
       - name: Run tests
         run: npm run test:ci
+        working-directory: client
 
-      # Step 6: Clean previous builds
       - name: Clean previous builds
         run: rm -rf out/ .next/
+        working-directory: client
 
-      # Step 7: Build the project (Static Export)
       - name: Build project
         run: npm run build
+        working-directory: client
 
-      # Step 8: Copy Netlify config files (_redirects and _headers)
       - name: Copy Netlify Config Files
         run: |
           mkdir -p out
-          cp public/_redirects out/ || echo "No _redirects file to copy."
-          cp public/_headers out/ || echo "No _headers file to copy."
+          cp public/_redirects out/ || true
+          cp public/_headers out/ || true
+        working-directory: client
 
-      # Step 9: Deploy to Netlify
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
-          publish-dir: ./out
+          publish-dir: ./client/out
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
