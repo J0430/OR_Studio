@@ -3,16 +3,15 @@
   "projects": {
     "c_project1": {
       "title": "",
-      "frontImage": "/assets/works/categories/commercial/c_project1/c_p1_i1.jpg",
-      "images": ["/assets/works/categories/commercial/c_project1/c_p1_i1.jpg"],
+      "frontImage": "/assets/works/categories/Commercial/c_project1/c_p2_i1.webp",
+      "images": ["/assets/works/categories/Commercial/c_project1/c_p2_i1.webp"],
       "description": ""
     },
-
     "c_project2": {
       "title": "",
       "description": "",
-      "frontImage": "/assets/works/categories/commercial/c_project2/c_p2_i1.jpg",
-      "images": ["/assets/works/categories/commercial/c_project2/c_p2_i1.jpg"]
+      "frontImage": "/assets/works/categories/Commercial/c_project2/c_p2_i2.webp",
+      "images": ["/assets/works/categories/Commercial/c_project2/c_p2_i2.webp"]
     }
   }
 }

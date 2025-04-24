@@ -9,29 +9,13 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../Header/Header.module.scss";
-import HamburgerToggleButton from "@components/common/HamburgerToggleButton/HamburgerToggleButton";
-import NavbarLinks from "@components/nav/NavbarLinks/NavbarLinks";
-import dynamic from "next/dynamic";
-import AnimatedLogo from "@components/common/AnimatedLogo/AnimatedLogo";
-// for default exports
 
-// const { HamburgerToggleButton } = loadDynamicImports("common", [
-//   "HamburgerToggleButton",
-// ]);
-// const { NavbarLinks } = loadDynamicImports("nav", ["NavbarLinks"]);
-// const AnimatedLogo = dynamic(
-//   () => import("@components/common/AnimatedLogo/AnimatedLogo")
-// );
-// const NavbarLinks = dynamic(() =>
-//   import("@components/nav/NavbarLinks/NavbarLinks").then(
-//     (mod) => mod.NavbarLinks
-//   )
-// );
-// const HamburgerToggleButton = dynamic(() =>
-//   import("@components/common/HamburgerToggleButton/HamburgerToggleButton").then(
-//     (mod) => mod.default || mod.HamburgerToggleButton
-//   )
-// );
+const { HamburgerToggleButton, AnimatedLogo } = loadDynamicImports("common", [
+  "HamburgerToggleButton",
+  "AnimatedLogo",
+]);
+const { NavbarLinks } = loadDynamicImports("nav", ["NavbarLinks"]);
+
 console.log(
   "HamburgerToggleButton",
   HamburgerToggleButton,
