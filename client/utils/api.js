@@ -49,7 +49,7 @@ export async function fetchData(fileName) {
     return {
       projects: dataJson?.projects || {},
       frontImages: Object.values(dataJson.projects || {})
-        .map((project) => project?.[0])
+        .map((project) => project?.images?.[0] || project?.frontImage)
         .filter((img) => img && img.trim() !== ""),
       category: dataJson.category || "Default Category",
     };

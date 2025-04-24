@@ -7,6 +7,36 @@ import {
 
 const PageContext = createContext<PageContextState | undefined>(undefined);
 
+export async function getStaticData(endpoints: string[]) {
+  try {
+    const responses = await Promise.all(
+      endpoints.map((endpoint) => fetchData(endpoint))
+    );
+
+    const props = endpoints.reduce(
+      (acc, key, index) => {
+        acc[key] = responses[index];
+        return acc;
+      },
+      {} as Record<string, any>
+    );
+
+    return { props };
+  } catch (error) {
+    console.error("Error in getStaticData:", error.message);
+
+    const fallbackProps = endpoints.reduce(
+      (acc, key) => {
+        acc[key] = { projects: {}, frontImages: [], category: "" };
+        return acc;
+      },
+      {} as Record<string, any>
+    );
+
+    return { props: fallbackProps };
+  }
+}
+
 export const PageContextProvider = ({
   children,
   endpoints = [],
@@ -94,6 +124,7 @@ export const PageContextProvider = ({
   return (
     <PageContext.Provider
       value={{
+        endpoints,
         preloader,
         isPreloaderVisible,
         preloadedImages,

@@ -1,6 +1,7 @@
 import { ReactNode, ReactElement } from "react";
 
 export interface PageContextState {
+  endpoints: string[];
   preloader: ReactElement;
   isPreloaderVisible: boolean;
   preloadedImages: string[];
