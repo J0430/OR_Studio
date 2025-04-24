@@ -50,4 +50,8 @@ const nextConfig = {
   },
 };
 
+<<<<<<< HEAD
 module.exports = nextConfig;
+=======
+module.exports = nextConfig;
+>>>>>>> ceb2f6a (fix: final successful build configuration)
