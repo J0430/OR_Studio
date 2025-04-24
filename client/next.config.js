@@ -50,17 +50,4 @@ const nextConfig = {
   },
 };
 
-<<<<<<< HEAD
 module.exports = nextConfig;
-=======
-<<<<<<< HEAD
-module.exports = nextConfig;
->>>>>>> ceb2f6a (fix: final successful build configuration)
-=======
-<<<<<<< HEAD
-module.exports = nextConfig;
-=======
-module.exports = nextConfig;
->>>>>>> ceb2f6a (fix: final successful build configuration)
->>>>>>> dec727d (fix: resolved merge conflicts)
->>>>>>> e1266a9 (fix: resolved merge conflicts)
