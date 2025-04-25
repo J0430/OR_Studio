@@ -1,0 +1,92 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+/* =========================== */
+/* ✅ Main Preloader Wrapper   */
+/* =========================== */
+.preloaderWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--background-color);
+  @include m.center-flex;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+
+  .preloaderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: m.rem(32);
+
+    .textContainer {
+      p {
+        font-size: m.rem(30);
+        color: #9bafb3;
+      }
+    }
+  }
+}
+/* =========================== */
+/* ✅ Preloader Logo Styles    */
+/* =========================== */
+.preloaderLogo {
+  width: max-content;
+  margin-bottom: m.rem(24);
+}
+
+/* =========================== */
+/* ✅ Hidden class for visibility toggling */
+/* =========================== */
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================== */
+/* ✅ Responsive Adjustments   */
+/* =========================== */
+
+/* Tablet */
+@media screen and (max-width: 1024px) {
+  .preloaderWrapper {
+    .preloaderContainer {
+      gap: m.rem(20);
+    }
+
+    .preloaderLogo {
+      margin-bottom: m.rem(16);
+    }
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .preloaderWrapper {
+    margin-bottom: 10rem;
+    .preloaderContainer {
+      gap: m.rem(16);
+    }
+
+    .preloaderLogo {
+      margin-bottom: m.rem(12);
+    }
+  }
+}
+
+/* Small Mobile */
+@media screen and (max-width: 480px) {
+  .preloaderWrapper {
+    .preloaderContainer {
+      gap: m.rem(12);
+    }
+
+    .preloaderLogo {
+      margin-bottom: m.rem(8);
+    }
+  }
+}

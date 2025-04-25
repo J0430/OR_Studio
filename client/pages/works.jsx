@@ -7,6 +7,10 @@ import { loadDynamicImports } from "@utils/loadDynamicImports";
 import { AnimatePresence } from "framer-motion";
 import style from "@styles/pages/works.module.scss";
 import Head from "next/head";
+import {
+  WorksPreloaderProvider,
+  useWorksPreloader,
+} from "@contexts/WorksPreloaderContext";
 
 // Dynamic Imports for components
 const { WorksPreloader } = loadDynamicImports("preloaders", ["WorksPreloader"]);
@@ -15,8 +19,9 @@ const { WorksControl, WorksGrid, WorksModal } = loadDynamicImports(
   "sections/works",
   ["WorksControl", "WorksGrid", "WorksModal"]
 );
+
 function WorksContent() {
-  const { preloader, isPreloaderVisible, projectsData } = usePageContext();
+  const { preloader, isPreloaderVisible, projectsData } = useWorksPreloader();
 
   const [state, setState] = useState({
     categorySelected: "Residential",
@@ -127,9 +132,8 @@ export default function WorksPage({
   office,
 }) {
   return (
-    <PageContextProvider
-      endpoints={["residential", "commercial", "urbanPlanning", "office"]}>
+    <WorksPreloaderProvider>
       <WorksContent />
-    </PageContextProvider>
+    </WorksPreloaderProvider>
   );
 }
