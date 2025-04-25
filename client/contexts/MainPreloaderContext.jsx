@@ -1,33 +1,22 @@
-import React, {
-  createContext,
-  useState,
-  useEffect,
-  useContext,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import { usePathname } from "next/navigation";
 
 const HomeContext = createContext();
 
 export const HomeProvider = ({ children, data }) => {
-  const pathname = usePathname();
-
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isPreloaderVisible, setIsPreloaderVisible] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const [totalImages, setTotalImages] = useState(0);
 
-  // Stable toggle function to avoid re-renders
-  const toggleNav = useCallback(() => setIsNavOpen((prev) => !prev), []);
+  const pathname = usePathname();
 
-  // Preload images when `data` changes
   useEffect(() => {
     const imageUrls = data?.projects
       ? Object.values(data.projects).flatMap((proj) => proj.images || [])
       : [];
 
-    if (!imageUrls.length) {
+    if (imageUrls.length === 0) {
       setIsPreloaderVisible(false);
       return;
     }
@@ -38,52 +27,38 @@ export const HomeProvider = ({ children, data }) => {
     imageUrls.forEach((src) => {
       const img = new Image();
       img.src = src;
-      img.onload = img.onerror = () => setImagesLoaded((prev) => prev + 1);
+      img.onload = () => setImagesLoaded((prev) => prev + 1);
+      img.onerror = () => console.error("Error loading image:", src);
     });
   }, [data]);
 
-  // Handle preloader visibility
   useEffect(() => {
-    let timeoutId;
-
     if (imagesLoaded >= totalImages && totalImages > 0) {
-      timeoutId = setTimeout(() => setIsPreloaderVisible(false), 1500);
+      setTimeout(() => setIsPreloaderVisible(false), 2000);
     }
-
-    return () => clearTimeout(timeoutId);
   }, [imagesLoaded, totalImages]);
 
-  // Close nav on route change
   useEffect(() => {
     setIsNavOpen(false);
   }, [pathname]);
 
-  // Memoize context value to reduce unnecessary re-renders
-  const contextValue = useMemo(
-    () => ({
-      isNavOpen,
-      setIsNavOpen,
-      toggleNav,
-      isPreloaderVisible,
-      setIsPreloaderVisible,
-      imagesLoaded,
-      totalImages,
-      pathname,
-      data,
-    }),
-    [
-      isNavOpen,
-      toggleNav,
-      isPreloaderVisible,
-      imagesLoaded,
-      totalImages,
-      pathname,
-      data,
-    ]
-  );
+  const toggleNav = () => setIsNavOpen((prev) => !prev);
 
   return (
-    <HomeContext.Provider value={contextValue}>{children}</HomeContext.Provider>
+    <HomeContext.Provider
+      value={{
+        isNavOpen,
+        setIsNavOpen,
+        toggleNav,
+        isPreloaderVisible,
+        setIsPreloaderVisible,
+        imagesLoaded,
+        totalImages,
+        pathname,
+        data, // ✅ Expose data here
+      }}>
+      {children}
+    </HomeContext.Provider>
   );
 };
 
