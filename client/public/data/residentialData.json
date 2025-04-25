@@ -3,276 +3,276 @@
   "projects": {
     "r_project1": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project1/r_p1_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project1/r_p1_front.webp",
       "description": "",
 
       "images": [
-        "/assets/works/categories/Residential/r_project1/4.jpg",
-        "/assets/works/categories/Residential/r_project1/5.jpg",
-        "/assets/works/categories/Residential/r_project1/6.jpg"
+        "/assets/works/categories/Residential/r_project1/4.webp",
+        "/assets/works/categories/Residential/r_project1/5.webp",
+        "/assets/works/categories/Residential/r_project1/6.webp"
       ]
     },
     "r_project2": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project2/r_p2_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project2/r_p2_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project2/2.jpg",
-        "/assets/works/categories/Residential/r_project2/3.jpg",
-        "/assets/works/categories/Residential/r_project2/6.jpg",
-        "/assets/works/categories/Residential/r_project2/7.jpg",
-        "/assets/works/categories/Residential/r_project2/8.jpg",
-        "/assets/works/categories/Residential/r_project2/13.jpg"
+        "/assets/works/categories/Residential/r_project2/2.webp",
+        "/assets/works/categories/Residential/r_project2/3.webp",
+        "/assets/works/categories/Residential/r_project2/6.webp",
+        "/assets/works/categories/Residential/r_project2/7.webp",
+        "/assets/works/categories/Residential/r_project2/8.webp",
+        "/assets/works/categories/Residential/r_project2/13.webp"
       ]
     },
     "r_project3": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project3/r_p3_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project3/r_p3_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project3/\u05d7\u05d6\u05d9\u05ea.jpg",
-        "/assets/works/categories/Residential/r_project3/\u05e4\u05d9\u05e0\u05d4.jpg"
+        "/assets/works/categories/Residential/r_project3/\u05d7\u05d6\u05d9\u05ea.webp",
+        "/assets/works/categories/Residential/r_project3/\u05e4\u05d9\u05e0\u05d4.webp"
       ]
     },
     "r_project4": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project4/r_p4_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project4/r_p4_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project4/1 (1).jpg",
-        "/assets/works/categories/Residential/r_project4/4 (3).jpg"
+        "/assets/works/categories/Residential/r_project4/1 (1).webp",
+        "/assets/works/categories/Residential/r_project4/4 (3).webp"
       ]
     },
     "r_project5": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project5/r_p5_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project5/r_p5_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project5/3 (1).jpg",
-        "/assets/works/categories/Residential/r_project5/4 \u05dc\u05d9\u05dc\u05d4.jpg",
-        "/assets/works/categories/Residential/r_project5/7.jpg",
-        "/assets/works/categories/Residential/r_project5/\u05d9\u05d5\u05dd.jpg"
+        "/assets/works/categories/Residential/r_project5/3 (1).webp",
+        "/assets/works/categories/Residential/r_project5/4 \u05dc\u05d9\u05dc\u05d4.webp",
+        "/assets/works/categories/Residential/r_project5/7.webp",
+        "/assets/works/categories/Residential/r_project5/\u05d9\u05d5\u05dd.webp"
       ]
     },
     "r_project6": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project6/r_p6_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project6/r_p6_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project6/3.jpg",
-        "/assets/works/categories/Residential/r_project6/5.jpg"
+        "/assets/works/categories/Residential/r_project6/3.webp",
+        "/assets/works/categories/Residential/r_project6/5.webp"
       ]
     },
     "r_project7": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project7/r_p7_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project7/r_p7_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project7/image1.jpg",
-        "/assets/works/categories/Residential/r_project7/\u05d9\u05d5\u05dd.jpg",
-        "/assets/works/categories/Residential/r_project7/\u05de\u05d5\u05e8\u05d3\u05d9 \u05d4\u05d2\u05d8\u05d0\u05d5\u05ea.jpg",
-        "/assets/works/categories/Residential/r_project7/\u05e2\u05e8\u05d1.jpg"
+        "/assets/works/categories/Residential/r_project7/image1.webp",
+        "/assets/works/categories/Residential/r_project7/\u05d9\u05d5\u05dd.webp",
+        "/assets/works/categories/Residential/r_project7/\u05de\u05d5\u05e8\u05d3\u05d9 \u05d4\u05d2\u05d8\u05d0\u05d5\u05ea.webp",
+        "/assets/works/categories/Residential/r_project7/\u05e2\u05e8\u05d1.webp"
       ]
     },
     "r_project8": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project8/r_p8_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project8/r_p8_front.webp",
       "description": "",
 
       "images": [
-        "/assets/works/categories/Residential/r_project8/2.jpg",
-        "/assets/works/categories/Residential/r_project8/3.jpg"
+        "/assets/works/categories/Residential/r_project8/2.webp",
+        "/assets/works/categories/Residential/r_project8/3.webp"
       ]
     },
     "r_project9": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project9/r_p9_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project9/r_p9_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project9/4 (2).jpg",
-        "/assets/works/categories/Residential/r_project9/ARN.jpg"
+        "/assets/works/categories/Residential/r_project9/4 (2).webp",
+        "/assets/works/categories/Residential/r_project9/ARN.webp"
       ]
     },
     "r_project10": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project10/r_p10_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project10/r_p10_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project10/3.jpg",
-        "/assets/works/categories/Residential/r_project10/7.jpg"
+        "/assets/works/categories/Residential/r_project10/3.webp",
+        "/assets/works/categories/Residential/r_project10/7.webp"
       ]
     },
     "r_project11": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project11/r_p11_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project11/r_p11_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project11/1.jpg",
-        "/assets/works/categories/Residential/r_project11/2.jpg",
-        "/assets/works/categories/Residential/r_project11/3.jpg"
+        "/assets/works/categories/Residential/r_project11/1.webp",
+        "/assets/works/categories/Residential/r_project11/2.webp",
+        "/assets/works/categories/Residential/r_project11/3.webp"
       ]
     },
     "r_project12": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project12/r_p12_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project12/r_p12_front.webp",
       "description": "",
-      "images": ["/assets/works/categories/Residential/r_project12/4.jpg"]
+      "images": ["/assets/works/categories/Residential/r_project12/4.webp"]
     },
     "r_project13": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project13/r_p13_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project13/r_p13_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project13/11.jpg",
-        "/assets/works/categories/Residential/r_project13/12.jpg"
+        "/assets/works/categories/Residential/r_project13/11.webp",
+        "/assets/works/categories/Residential/r_project13/12.webp"
       ]
     },
     "r_project14": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project14/r_p14_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project14/r_p14_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project14/1.jpg",
-        "/assets/works/categories/Residential/r_project14/2.jpg"
+        "/assets/works/categories/Residential/r_project14/1.webp",
+        "/assets/works/categories/Residential/r_project14/2.webp"
       ]
     },
     "r_project15": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project15/r_p15_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project15/r_p15_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project15/5.jpg",
-        "/assets/works/categories/Residential/r_project15/6.jpg",
-        "/assets/works/categories/Residential/r_project15/9.jpg"
+        "/assets/works/categories/Residential/r_project15/5.webp",
+        "/assets/works/categories/Residential/r_project15/6.webp",
+        "/assets/works/categories/Residential/r_project15/9.webp"
       ]
     },
     "r_project16": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project16/r_p16_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project16/r_p16_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project16/4.jpg",
-        "/assets/works/categories/Residential/r_project16/5.jpg",
-        "/assets/works/categories/Residential/r_project16/6.jpg",
-        "/assets/works/categories/Residential/r_project16/8.jpg",
-        "/assets/works/categories/Residential/r_project16/78.jpg"
+        "/assets/works/categories/Residential/r_project16/4.webp",
+        "/assets/works/categories/Residential/r_project16/5.webp",
+        "/assets/works/categories/Residential/r_project16/6.webp",
+        "/assets/works/categories/Residential/r_project16/8.webp",
+        "/assets/works/categories/Residential/r_project16/78.webp"
       ]
     },
     "r_project17": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project17/r_p17_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project17/r_p17_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project17/3.jpg",
-        "/assets/works/categories/Residential/r_project17/4.jpg"
+        "/assets/works/categories/Residential/r_project17/3.webp",
+        "/assets/works/categories/Residential/r_project17/4.webp"
       ]
     },
     "r_project18": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project18/r_p18_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project18/r_p18_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project18/4.jpg",
-        "/assets/works/categories/Residential/r_project18/6.jpg",
-        "/assets/works/categories/Residential/r_project18/7.jpg"
+        "/assets/works/categories/Residential/r_project18/4.webp",
+        "/assets/works/categories/Residential/r_project18/6.webp",
+        "/assets/works/categories/Residential/r_project18/7.webp"
       ]
     },
     "r_project19": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project19/r_p19_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project19/r_p19_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project19/יום.jpg",
-        "/assets/works/categories/Residential/r_project19/ערב.jpg"
+        "/assets/works/categories/Residential/r_project19/יום.webp",
+        "/assets/works/categories/Residential/r_project19/ערב.webp"
       ]
     },
     "r_project20": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project20/r_p20_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project20/r_p20_front.webp",
       "description": "",
-      "images": ["/assets/works/categories/Residential/r_project20/5.jpg"]
+      "images": ["/assets/works/categories/Residential/r_project20/5.webp"]
     },
     "r_project21": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project21/r_p21_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project21/r_p21_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project21/6.jpg",
-        "/assets/works/categories/Residential/r_project21/7.jpg"
+        "/assets/works/categories/Residential/r_project21/6.webp",
+        "/assets/works/categories/Residential/r_project21/7.webp"
       ]
     },
     "r_project22": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project22/r_p22_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project22/r_p22_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project22/8.jpg",
-        "/assets/works/categories/Residential/r_project22/10.jpg"
+        "/assets/works/categories/Residential/r_project22/8.webp",
+        "/assets/works/categories/Residential/r_project22/10.webp"
       ]
     },
     "r_project23": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project23/r_p23_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project23/r_p23_front.webp",
       "description": "",
-      "images": ["/assets/works/categories/Residential/r_project23/3.jpg"]
+      "images": ["/assets/works/categories/Residential/r_project23/3.webp"]
     },
     "r_project24": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project24/r_p24_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project24/r_p24_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project24/3.jpg",
-        "/assets/works/categories/Residential/r_project24/7.jpg",
-        "/assets/works/categories/Residential/r_project24/82.jpg"
+        "/assets/works/categories/Residential/r_project24/3.webp",
+        "/assets/works/categories/Residential/r_project24/7.webp",
+        "/assets/works/categories/Residential/r_project24/82.webp"
       ]
     },
     "r_project25": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project25/r_p25_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project25/r_p25_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project25/2.jpg",
-        "/assets/works/categories/Residential/r_project25/4.jpg"
+        "/assets/works/categories/Residential/r_project25/2.webp",
+        "/assets/works/categories/Residential/r_project25/4.webp"
       ]
     },
     "r_project26": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project26/r_p26_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project26/r_p26_front.webp",
       "description": "",
-      "images": ["/assets/works/categories/Residential/r_project26/3.jpg"]
+      "images": ["/assets/works/categories/Residential/r_project26/3.webp"]
     },
     "r_project27": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project27/r_p27_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project27/r_p27_front.webp",
       "description": "",
-      "images": ["/assets/works/categories/Residential/r_project27/2.jpg"]
+      "images": ["/assets/works/categories/Residential/r_project27/2.webp"]
     },
     "r_project28": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project28/r_p28_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project28/r_p28_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project28/1.jpg",
-        "/assets/works/categories/Residential/r_project28/7.jpg"
+        "/assets/works/categories/Residential/r_project28/1.webp",
+        "/assets/works/categories/Residential/r_project28/7.webp"
       ]
     },
     "r_project29": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project29/r_p29_front.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project29/r_p29_front.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project29/1.jpg",
-        "/assets/works/categories/Residential/r_project29/2.jpg",
-        "/assets/works/categories/Residential/r_project29/4.jpg"
+        "/assets/works/categories/Residential/r_project29/1.webp",
+        "/assets/works/categories/Residential/r_project29/2.webp",
+        "/assets/works/categories/Residential/r_project29/4.webp"
       ]
     },
     "r_project30": {
       "title": "",
-      "frontImage": "/assets/works/categories/Residential/r_project30/r_p30.jpg",
+      "frontImage": "/assets/works/categories/Residential/r_project30/r_p30.webp",
       "description": "",
       "images": [
-        "/assets/works/categories/Residential/r_project30/6.jpg",
-        "/assets/works/categories/Residential/r_project30/8.jpg"
+        "/assets/works/categories/Residential/r_project30/6.webp",
+        "/assets/works/categories/Residential/r_project30/8.webp"
       ]
     }
   }

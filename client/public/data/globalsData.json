@@ -1,9 +1,9 @@
 {
   "logos": [
-    "/assets/logos/Or_Studio_w.png",
-    "/assets/logos/OR Studio.png",
-    "/assets/logos/OR.png",
-    "/assets/logos/OR_white.png",
+    "/assets/logos/Or_Studio_w.webp",
+    "/assets/logos/OR Studio.webp",
+    "/assets/logos/OR.webp",
+    "/assets/logos/OR_white.webp",
     "/assets/logos/OR.svg"
   ],
   "categories": [
@@ -14,5 +14,5 @@
     "Office",
     "Animation"
   ],
-  "preloaderLogos": ["/assets/logos/OR Studio.png", "/assets/logos/OR.png"]
+  "preloaderLogos": ["/assets/logos/OR Studio.webp", "/assets/logos/OR.webp"]
 }
