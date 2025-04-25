@@ -16,41 +16,10 @@ export const usePreloader = () => {
   return context;
 };
 
-export const PreloaderProvider = ({ children, data }) => {
+export const PreloaderProvider = ({ children }) => {
   const [isPreloaderVisible, setIsPreloaderVisible] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const [totalImages, setTotalImages] = useState(0);
-  const [projectsData] = useState(data || {});
-
-  useEffect(() => {
-    const imageUrls = data?.projects
-      ? Object.values(data.projects).flatMap((proj) => proj.images || [])
-      : [];
-
-    if (imageUrls.length === 0) {
-      setIsPreloaderVisible(false);
-      return;
-    }
-
-    setTotalImages(imageUrls.length);
-    setImagesLoaded(0);
-
-    imageUrls.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = img.onerror = () => setImagesLoaded((prev) => prev + 1);
-    });
-  }, [data]);
-
-  useEffect(() => {
-    let timer;
-
-    if (imagesLoaded >= totalImages && totalImages > 0) {
-      timer = setTimeout(() => setIsPreloaderVisible(false), 3000);
-    }
-
-    return () => clearTimeout(timer);
-  }, [imagesLoaded, totalImages]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -72,16 +41,15 @@ export const PreloaderProvider = ({ children, data }) => {
     }
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => setIsPreloaderVisible(false), 2500);
+  }, []);
+
   const contextValue = useMemo(
     () => ({
       isPreloaderVisible,
-      projectsData,
-      imagesLoaded,
-      totalImages,
-      onImageLoad: () =>
-        setImagesLoaded((prev) => Math.min(prev + 1, totalImages)),
     }),
-    [isPreloaderVisible, projectsData, imagesLoaded, totalImages]
+    [isPreloaderVisible]
   );
 
   return (

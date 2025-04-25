@@ -26,20 +26,19 @@ const dynamicComponents = loadDynamicImports("sections/home", [
   ...new Set(sectionsConfig.map((s) => s.component)),
 ]);
 
-function HomeContent() {
-  const { isPreloaderVisible, projectsData } = usePreloader();
+function HomeContent({ data }) {
   const isMobile = useMediaQuery({ maxWidth: 768 });
-
+  const { isPreloaderVisible } = usePreloader;
   const sections = useMemo(
     () =>
       sectionsConfig.map(({ component, projectKey }, index) => ({
         id: `section-${index}`,
         component: dynamicComponents[component],
         props: projectKey
-          ? { images: projectsData?.projects[projectKey]?.images || [] }
+          ? { images: data?.projects[projectKey]?.images || [] }
           : {},
       })),
-    [projectsData]
+    [data]
   );
 
   const handleScroll = useCallback((targetId) => {
@@ -58,7 +57,8 @@ function HomeContent() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
+          exit={{ opacity: 1 }} // set final opacity to 0.4
+          transition={{ duration: 3, ease: "easeInOut" }}
           className={styles.homePage}>
           {sections.map(({ component: SectionComponent, props, id }, index) => (
             <SectionWrapper key={id} id={id}>
@@ -95,8 +95,8 @@ export const getStaticProps = async () => {
 
 export default function HomePage({ homeData }) {
   return (
-    <PreloaderProvider data={homeData}>
-      <HomeContent />
+    <PreloaderProvider>
+      <HomeContent data={homeData} />
     </PreloaderProvider>
   );
 }
