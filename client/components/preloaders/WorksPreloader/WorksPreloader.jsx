@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import styles from "./WorksPreloader.module.scss";
-import { usePageContext } from "@contexts/PageContext/PageContext";
+
+import { useWorksPreloader } from "@contexts/WorksPreloaderContext";
 
 const WorksPreloader = () => {
-  const { isPreloaderVisible } = usePageContext();
+  const { isPreloaderVisible } = useWorksPreloader();
   const totalDuration = 2;
   const strokeDuration = 1;
 

@@ -1,15 +1,26 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
-import { usePathname } from "next/navigation";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+} from "react";
 
-const HomeContext = createContext();
+export const PreloaderContext = createContext();
 
-export const HomeProvider = ({ children, data }) => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+export const usePreloader = () => {
+  const context = useContext(PreloaderContext);
+  if (!context) {
+    throw new Error("usePreloader must be used within a PreloaderProvider");
+  }
+  return context;
+};
+
+export const PreloaderProvider = ({ children, data }) => {
   const [isPreloaderVisible, setIsPreloaderVisible] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const [totalImages, setTotalImages] = useState(0);
-
-  const pathname = usePathname();
+  const [projectsData] = useState(data || {});
 
   useEffect(() => {
     const imageUrls = data?.projects
@@ -27,45 +38,55 @@ export const HomeProvider = ({ children, data }) => {
     imageUrls.forEach((src) => {
       const img = new Image();
       img.src = src;
-      img.onload = () => setImagesLoaded((prev) => prev + 1);
-      img.onerror = () => console.error("Error loading image:", src);
+      img.onload = img.onerror = () => setImagesLoaded((prev) => prev + 1);
     });
   }, [data]);
 
   useEffect(() => {
+    let timer;
+
     if (imagesLoaded >= totalImages && totalImages > 0) {
-      setTimeout(() => setIsPreloaderVisible(false), 2000);
+      timer = setTimeout(() => setIsPreloaderVisible(false), 3000);
     }
+
+    return () => clearTimeout(timer);
   }, [imagesLoaded, totalImages]);
 
   useEffect(() => {
-    setIsNavOpen(false);
-  }, [pathname]);
+    if (typeof window !== "undefined") {
+      const navigationEntry =
+        performance.getEntriesByType("navigation")[0] || {};
+      const navigationType = navigationEntry.type || "navigate";
+      const hasVisited = sessionStorage.getItem("hasVisited");
 
-  const toggleNav = () => setIsNavOpen((prev) => !prev);
+      if (
+        navigationType === "reload" ||
+        navigationType === "navigate" ||
+        !hasVisited
+      ) {
+        sessionStorage.setItem("hasVisited", "true");
+        setIsPreloaderVisible(true);
+      } else {
+        setIsPreloaderVisible(false);
+      }
+    }
+  }, []);
+
+  const contextValue = useMemo(
+    () => ({
+      isPreloaderVisible,
+      projectsData,
+      imagesLoaded,
+      totalImages,
+      onImageLoad: () =>
+        setImagesLoaded((prev) => Math.min(prev + 1, totalImages)),
+    }),
+    [isPreloaderVisible, projectsData, imagesLoaded, totalImages]
+  );
 
   return (
-    <HomeContext.Provider
-      value={{
-        isNavOpen,
-        setIsNavOpen,
-        toggleNav,
-        isPreloaderVisible,
-        setIsPreloaderVisible,
-        imagesLoaded,
-        totalImages,
-        pathname,
-        data, // ✅ Expose data here
-      }}>
+    <PreloaderContext.Provider value={contextValue}>
       {children}
-    </HomeContext.Provider>
+    </PreloaderContext.Provider>
   );
-};
-
-export const useHomeContext = () => {
-  const context = useContext(HomeContext);
-  if (!context) {
-    throw new Error("useHomeContext must be used within a HomeProvider");
-  }
-  return context;
 };
