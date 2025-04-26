@@ -1,4 +1,3 @@
-// contexts/WorksPreloaderContext.js
 import { createContext, useContext, useState, useEffect } from "react";
 import { fetchData } from "@utils/api";
 const WorksPreloaderContext = createContext();
