@@ -1,32 +1,23 @@
 import dynamic from "next/dynamic";
-import React from "react";
 
 /**
- * Dynamically loads components with explicit default export handling.
+ * Dynamically loads components from /components/* using a clean fallback.
  *
- * @param {string} basePath - Base path from components (e.g., "nav", "common")
- * @param {string[]} componentNames - Names of components to load dynamically
- * @param {boolean} [disableSSR=true] - Disable server-side rendering (default true)
- * @returns {object} - Object mapping names to dynamic components
+ * @param {string} basePath - Relative path from /components (e.g. "common", "sections/home")
+ * @param {string[]} componentNames - List of component names (folder & file must match)
+ * @returns {Record<string, React.ComponentType>}
  */
-export const loadDynamicImports = (
-  basePath,
-  componentNames,
-  disableSSR = true
-) => {
+export const loadDynamicImports = (basePath, componentNames = []) => {
+  console.log(basePath);
   return Object.fromEntries(
     componentNames.map((name) => {
       const Component = dynamic(
-        () =>
-          import(`../components/${basePath}/${name}/${name}`).then(
-            (mod) => mod.default || mod[name]
-          ),
+        () => import(`../components/${basePath}/${name}/${name}`),
         {
-          ssr: !disableSSR,
+          ssr: false,
+          loading: () => null, // ✅ safest possible
         }
       );
-      const MemoizedComponent = React.memo(Component);
-
       return [name, Component];
     })
   );
