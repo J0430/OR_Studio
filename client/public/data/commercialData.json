@@ -1,17 +1,45 @@
 {
-  "category": "Commercial",
-  "projects": {
-    "c_project1": {
-      "title": "",
-      "frontImage": "/assets/works/categories/Commercial/c_project1/c_p2_i1.webp",
-      "images": ["/assets/works/categories/Commercial/c_project1/c_p2_i1.webp"],
-      "description": ""
-    },
-    "c_project2": {
-      "title": "",
-      "description": "",
-      "frontImage": "/assets/works/categories/Commercial/c_project2/c_p2_i2.webp",
-      "images": ["/assets/works/categories/Commercial/c_project2/c_p2_i2.webp"]
+    "category": "Commercial",
+    "projects": {
+        "c_project1": {
+            "title": "",
+            "frontImage": {
+                "src": "/assets/works/categories/Commercial/c_project1/commercial_c_project1_front.webp",
+                "orientation": "landscape",
+                "width": 1920,
+                "height": 1080
+            },
+            "description": "",
+            "images": [
+                {
+                    "src": "/assets/works/categories/Commercial/c_project1/c_p2_i1.webp",
+                    "orientation": "",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "storyline": "",
+            "views": 67
+        },
+        "c_project2": {
+            "title": "",
+            "frontImage": {
+                "src": "/assets/works/categories/Commercial/c_project2/commercial_c_project2_front.webp",
+                "orientation": "landscape",
+                "width": 1920,
+                "height": 1080
+            },
+            "description": "",
+            "images": [
+                {
+                    "src": "/assets/works/categories/Commercial/c_project2/c_p2_i2.webp",
+                    "orientation": "",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "storyline": "",
+            "views": 141
+        }
     }
-  }
 }

@@ -1,11 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { preloaderLogos } from "@utils/globals";
-import { usePreloader } from "@contexts/HomeContext";
 import Image from "next/image";
 import styles from "./MainPreloader.module.scss";
+import { usePageContext } from "@contexts/PageContext";
 
 const MainPreloader = () => {
-  const { isPreloaderVisible, onImageLoad } = usePreloader();
+  const { isPreloaderVisible, onImageLoad } = usePageContext();
 
   return (
     <AnimatePresence mode="wait">

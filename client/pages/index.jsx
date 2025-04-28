@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useState, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
-import { usePreloader, PreloaderProvider } from "@contexts/HomeContext";
 import { loadDynamicImports } from "@utils/loadDynamicImports";
-import { useMediaQuery } from "react-responsive";
-import { fetchData } from "@utils/api";
+import { usePageContext, PageContextProvider } from "@contexts/PageContext";
+import { homeData } from "@public/data";
 import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
 
@@ -26,19 +25,19 @@ const dynamicComponents = loadDynamicImports("sections/home", [
   ...new Set(sectionsConfig.map((s) => s.component)),
 ]);
 
-function HomeContent({ data }) {
-  const isMobile = useMediaQuery({ maxWidth: 768 });
-  const { isPreloaderVisible } = usePreloader;
+function HomeContent() {
+  const { isDevice, isPreloaderVisible } = usePageContext();
+
   const sections = useMemo(
     () =>
       sectionsConfig.map(({ component, projectKey }, index) => ({
         id: `section-${index}`,
         component: dynamicComponents[component],
         props: projectKey
-          ? { images: data?.projects[projectKey]?.images || [] }
+          ? { images: homeData.projects[projectKey]?.images || [] }
           : {},
       })),
-    [data]
+    []
   );
 
   const handleScroll = useCallback((targetId) => {
@@ -57,7 +56,6 @@ function HomeContent({ data }) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 1 }} // set final opacity to 0.4
           transition={{ duration: 3, ease: "easeInOut" }}
           className={styles.homePage}>
           {sections.map(({ component: SectionComponent, props, id }, index) => (
@@ -67,8 +65,8 @@ function HomeContent({ data }) {
               </div>
               <DirectionalButton
                 direction={index < sections.length - 1 ? "down" : "up"}
-                width={isMobile ? 2.3 : 3}
-                height={isMobile ? 2.3 : 3}
+                width={isDevice ? 2.3 : 3}
+                height={isDevice ? 2.3 : 3}
                 onClick={() =>
                   handleScroll(sections[(index + 1) % sections.length].id)
                 }
@@ -80,23 +78,10 @@ function HomeContent({ data }) {
     </>
   );
 }
-
-export const getStaticProps = async () => {
-  try {
-    const homeData = await fetchData("home");
-    return { props: { homeData } };
-  } catch (error) {
-    console.error("Error in getStaticProps:", error.message);
-    return {
-      props: { homeData: { projects: {}, frontImages: [], category: "" } },
-    };
-  }
-};
-
 export default function HomePage({ homeData }) {
   return (
-    <PreloaderProvider>
+    <PageContextProvider>
       <HomeContent data={homeData} />
-    </PreloaderProvider>
+    </PageContextProvider>
   );
 }

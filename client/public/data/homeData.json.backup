@@ -59,14 +59,7 @@
           "width": 1920,
           "height": 1080
         }
-      ],
-      "frontImage": {
-        "src": "/assets/works/categories/home/evenyehuda/home_evenyehuda_front.webp",
-        "orientation": "landscape",
-        "width": 1920,
-        "height": 1080
-      },
-      "storyline": ""
+      ]
     },
     "Hevron8PenthouseRooftop": {
       "title": "Hevron 8 Penthouse Rooftop",
@@ -96,14 +89,7 @@
           "width": 1920,
           "height": 1080
         }
-      ],
-      "frontImage": {
-        "src": "/assets/works/categories/home/hevron8penthouserooftop/home_hevron8penthouserooftop_front.webp",
-        "orientation": "landscape",
-        "width": 1920,
-        "height": 1080
-      },
-      "storyline": ""
+      ]
     },
     "City69": {
       "title": "City69",
@@ -133,14 +119,7 @@
           "width": 1920,
           "height": 1080
         }
-      ],
-      "frontImage": {
-        "src": "/assets/works/categories/home/city69/home_city69_front.webp",
-        "orientation": "landscape",
-        "width": 1920,
-        "height": 1080
-      },
-      "storyline": ""
+      ]
     }
   }
 }

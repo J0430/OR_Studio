@@ -1,27 +1,30 @@
 import { useState, useMemo, useCallback } from "react";
-import {
-  usePageContext,
-  PageContextProvider,
-} from "@contexts/PageContext/PageContext";
-import { loadDynamicImports } from "@utils/loadDynamicImports";
-import { AnimatePresence } from "framer-motion";
-import style from "@styles/pages/works.module.scss";
+import { AnimatePresence, motion } from "framer-motion";
 import Head from "next/head";
+import Image from "next/image";
+import { usePageContext, PageContextProvider } from "@contexts/PageContext";
+import { loadDynamicImports } from "@utils/loadDynamicImports";
 import {
-  WorksPreloaderProvider,
-  useWorksPreloader,
-} from "@contexts/WorksPreloaderContext";
+  residentialData,
+  commercialData,
+  urbanPlanningData,
+  officeData,
+} from "@public/data";
 
-// Dynamic Imports for components
-const { WorksPreloader } = loadDynamicImports("preloaders", ["WorksPreloader"]);
-console.log(WorksPreloader);
-const { WorksControl, WorksGrid, WorksModal } = loadDynamicImports(
-  "sections/works",
-  ["WorksControl", "WorksGrid", "WorksModal"]
-);
+import styles from "@styles/pages/works.module.scss";
 
-function WorksContent() {
-  const { preloader, isPreloaderVisible, projectsData } = useWorksPreloader();
+const WorksContent = () => {
+  const { isPreloaderVisible, isDevice } = usePageContext();
+
+  const { WorksControl, WorksModal, WorksPreloader } = useMemo(
+    () =>
+      loadDynamicImports("sections/works", [
+        "WorksControl",
+        "WorksModal",
+        "WorksPreloader",
+      ]),
+    []
+  );
 
   const [state, setState] = useState({
     categorySelected: "Residential",
@@ -31,62 +34,82 @@ function WorksContent() {
 
   const categoryDataMap = useMemo(
     () => ({
-      Residential: Object.values(projectsData.residential?.projects || {}),
-      "Urban Planning": Object.values(
-        projectsData.urbanPlanning?.projects || {}
-      ),
-      Commercial: Object.values(projectsData.commercial?.projects || {}),
-      Office: Object.values(projectsData.office?.projects || {}),
+      Residential: Object.values(residentialData.projects || {}),
+      "Urban Planning": Object.values(urbanPlanningData.projects || {}),
+      Commercial: Object.values(commercialData.projects || {}),
+      Office: Object.values(officeData.projects || {}),
     }),
-    [projectsData]
+    []
   );
 
-  const works = useMemo(() => {
-    return categoryDataMap[state.categorySelected] || [];
-  }, [state.categorySelected, categoryDataMap]);
+  const works = useMemo(
+    () => categoryDataMap[state.categorySelected] || [],
+    [state.categorySelected, categoryDataMap]
+  );
 
   const handleCategoryClick = useCallback((categoryName) => {
-    setState((prev) => ({
-      ...prev,
+    setState({
       categorySelected: categoryName,
       selectedImage: null,
       selectedProject: null,
-    }));
+    });
   }, []);
 
   const handleImageClick = useCallback(
-    (imageSrc) => {
-      const currentProjectsArray =
-        categoryDataMap[state.categorySelected] || [];
-
-      let matchedProject = currentProjectsArray.find(
-        (project) => project.frontImage === imageSrc
-      );
-
-      if (!matchedProject) {
-        matchedProject = currentProjectsArray.find((project) =>
-          project.images?.includes(imageSrc)
-        );
-      }
-
-      if (matchedProject) {
-        setState((prev) => ({
-          ...prev,
-          selectedImage: imageSrc,
-          selectedProject: matchedProject,
-        }));
-      }
+    (project) => {
+      setState({
+        ...state,
+        selectedImage: project.images[0].src,
+        selectedProject: project,
+      });
     },
-    [categoryDataMap, state.categorySelected]
+    [state]
   );
 
   const handleCloseModal = useCallback(() => {
-    setState((prev) => ({
-      ...prev,
+    setState({
+      ...state,
       selectedImage: null,
       selectedProject: null,
-    }));
-  }, []);
+    });
+  }, [state]);
+
+  const WorksGridItem = ({ work, index }) => {
+    return (
+      <motion.article
+        className={styles.worksGridItem}
+        layoutId={`work-item-${work.images[0].src}`}
+        onClick={() => handleImageClick(work)}
+        initial={{ opacity: 0, y: 100 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          transition: {
+            duration: 0.4,
+            ease: "easeOut",
+            delay: index * 0.05,
+          },
+        }}>
+        <div className={styles.hoverWrapper}>
+          <Image
+            src={work.images[0].src}
+            alt={`Project: ${work.title}`}
+            fill
+            styles={{ objectFit: "cover" }}
+            className={styles.worksImage}
+          />
+        </div>
+      </motion.article>
+    );
+  };
+
+  const WorksGrid = () => (
+    <div className={styles.worksGrid}>
+      {works.map((work, index) => (
+        <WorksGridItem key={work.title + index} work={work} index={index} />
+      ))}
+    </div>
+  );
 
   return (
     <>
@@ -95,45 +118,44 @@ function WorksContent() {
         <meta name="mobile-web-app-capable" content="yes" />
       </Head>
 
-      <main className={style.worksPage}>
+      <main className={styles.worksPage}>
         <WorksPreloader />
-        <>
-          <WorksControl
-            categories={Object.keys(categoryDataMap)}
-            selectedCategory={state.categorySelected}
-            onCategorySelect={handleCategoryClick}
-          />
 
-          <WorksGrid
-            works={works}
-            category={state.categorySelected}
-            onImageClick={handleImageClick}
-          />
+        {!isPreloaderVisible && (
+          <>
+            <WorksControl
+              categories={Object.keys(categoryDataMap)}
+              selectedCategory={state.categorySelected}
+              onCategorySelect={handleCategoryClick}
+            />
 
-          <AnimatePresence>
-            {state.selectedImage && state.selectedProject && (
-              <WorksModal
-                selectedImage={state.selectedImage}
-                project={state.selectedProject}
-                onClose={handleCloseModal}
-              />
-            )}
-          </AnimatePresence>
-        </>
+            <WorksGrid />
+
+            <AnimatePresence>
+              {state.selectedImage && state.selectedProject && (
+                <WorksModal
+                  selectedImage={state.selectedImage}
+                  project={state.selectedProject}
+                  onClose={handleCloseModal}
+                />
+              )}
+            </AnimatePresence>
+          </>
+        )}
       </main>
     </>
   );
-}
+};
 
-export default function WorksPage({
-  residential,
-  commercial,
-  urbanPlanning,
-  office,
-}) {
+export default function WorksPage() {
+  const { WorksPreloader } = useMemo(
+    () => loadDynamicImports("preloaders", ["WorksPreloader"]),
+    []
+  );
+
   return (
-    <WorksPreloaderProvider>
+    <PageContextProvider preloader={<WorksPreloader />}>
       <WorksContent />
-    </WorksPreloaderProvider>
+    </PageContextProvider>
   );
 }

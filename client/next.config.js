@@ -16,9 +16,6 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(process.cwd(), "styles")],
   },
-  eslint: {
-    ignoreDuringBuilds: process.env.NODE_ENV === "production",
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
