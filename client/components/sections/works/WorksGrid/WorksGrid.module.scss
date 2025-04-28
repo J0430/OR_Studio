@@ -1,391 +1,238 @@
-// @use "@styles/partials/variables" as v;
-// @use "@styles/partials/mixins" as m;
-// /* =========================== */
-// /* ✅ Grid Wrapper             */
-// /* =========================== */
-// .worksGridWrapper {
-//   /* ===== Layout ===== */
-//   flex-grow: 1;
-//   z-index: 1;
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
 
-//   /* ===== Box Model ===== */
+/* =========================== */
+/* ✅ Grid Container           */
+/* =========================== */
+.worksGrid {
+  display: grid;
+  gap: 0.2em;
+  padding-top: 2rem;
+  overflow: visible;
 
-//   overflow-y: scroll;
-//   overflow-x: hidden;
-
-//   /* ===== Visual / Motion ===== */
-//   -webkit-overflow-scrolling: touch;
-
-//   width: 100%;
-//   /* ===== Layering ===== */
-//   z-index: 0;
-//   @media (max-width: 768px) {
-//     // margin-top: 5rem;
-//     // mask: linear-gradient(
-//     //   to top,
-//     //   rgb(255, 255, 255) 100%,
-//     //   rgba(255, 255, 255, 0.424) 0%,
-//     //   transpar
-//     // );
-//     // background-image: blur(1px);
-//   }
-// }
-// .hoverWrapper {
-//   position: relative;
-//   width: 100%;
-//   height: 100%;
-// }
-
-// .worksImage {
-//   object-fit: cover;
-//   display: block;
-//   transition: transform 0.5s ease;
-
-//   .hoverWrapper:hover & {
-//     transform: scale(1.06);
-//   }
-// }
-
-// .overlay {
-//   position: absolute;
-//   inset: 0;
-//   background: linear-gradient(
-//     to bottom,
-//     rgba(0, 0, 0, 0.1) 4%,
-//     rgba(0, 0, 0, 0.4) 70%,
-//     rgba(0, 0, 0, 0.5)
-//   );
-//   -webkit-backdrop-filter: blur(0.0015em);
-//   backdrop-filter: blur(0.0015em);
-//   display: flex;
-//   align-items: flex-end;
-//   justify-content: flex-start;
-//   padding: 1rem;
-//   pointer-events: none;
-//   z-index: 2;
-//   top: 70%;
-// }
-// /* =========================== */
-// /* ✅ Thumbnail Strip          */
-// /* =========================== */
-
-// /* =========================== */
-// /* ✅ Grid Container           */
-// /* =========================== */
-// .worksGrid {
-//   /* ===== Layout ===== */
-//   z-index: 0;
-//   display: grid;
-//   padding-top: 2 rem;
-
-//   /* ===== Box Model ===== */
-//   gap: 0.2em;
-//   height: auto;
-//   overflow: visible;
-
-//   /* ===== Scrollbar Styling ===== */
-//   &::-webkit-scrollbar {
-//     width: 8px;
-//   }
-
-//   &::-webkit-scrollbar-track {
-//     background: var(--background-color);
-//   }
-
-//   &::-webkit-scrollbar-thumb {
-//     background-color: var(--border-color);
-//     border-radius: 4px;
-//   }
-
-//   /* =========================== */
-//   /* ✅ Responsive Adjustments   */
-//   /* =========================== */
-//   @media (max-width: 768px) {
-//     background: linear-gradient(
-//       to bottom,
-//       0deg,
-//       rgba(55, 55, 55, 0) 52%,
-//       rgba(55, 55, 55, 0.9) 57%
-//     );
-//     background-size: cover;
-//     background-repeat: no-repeat;
-
-//     grid-template-columns: repeat(2, 1fr);
-//     .worksGrid {
-//       gap: 0.15em;
-//     } // ✅ Mobile: 2 columns
-//   }
-
-//   @media (min-width: 769px) {
-//     grid-template-columns: repeat(3, 1fr); // ✅ Desktop: 3 columns
-//   }
-// }
-
-// /* =========================== */
-// /* ✅ Grid Items               */
-// /* =========================== */
-// .worksGridItem {
-//   /* ===== Positioning ===== */
-//   position: relative;
-
-//   /* ===== Box Model ===== */
-//   overflow: hidden;
-//   aspect-ratio: 1 / 1;
-
-//   /* ===== Layout ===== */
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-
-//   /* ===== Visual ===== */
-
-//   backface-visibility: hidden;
-
-//   /* =========================== */
-//   /* ✅ Special Grid Variants   */
-//   /* =========================== */
-//   &:nth-child(1) {
-//     grid-column: span 2;
-//     aspect-ratio: 2 / 1; // ✅ First item wider
-//   }
-
-//   &:nth-child(7n) {
-//     grid-row: span 2;
-//     aspect-ratio: 1 / 2; // ✅ Tall item every 7th
-//   }
-
-//   /* =========================== */
-//   /* ✅ Image inside Item       */
-//   /* =========================== */
-//   img {
-//     /* ===== Box Model ===== */
-//     width: 100%;
-//     height: 100%;
-
-//     /* ===== Visual ===== */
-//     transition:
-//       opacity 0.6s ease,
-//       transform 0.3s ease;
-//     opacity: 1;
-
-//     &:hover {
-//       opacity: 0.9;
-//     }
-//   }
-
-//   /* =========================== */
-//   /* ✅ Placeholder (Loader)     */
-//   /* =========================== */
-//   .worksPlaceholder {
-//     /* ===== Box Model ===== */
-//     width: 100%;
-//     height: 100%;
-//     aspect-ratio: 16 / 9;
-
-//     /* ===== Visual ===== */
-//     background-color: var(--overlay-background);
-//     animation: pulse 1.5s infinite ease-in-out;
-//   }
-
-//   /* ===== Motion ===== */
-//   @keyframes pulse {
-//     0% {
-//       opacity: 0.7;
-//     }
-//     50% {
-//       opacity: 1;
-//     }
-//     100% {
-//       opacity: 0.7;
-//     }
-//   }
-// }
-// .worksGridWrapper {
-//   /* ===== Layout ===== */
-//   flex-grow: 1;
-
-//   /* ===== Box Model ===== */
-
-//   overflow-y: scroll;
-//   overflow-x: hidden;
-
-//   /* ===== Visual / Motion ===== */
-//   -webkit-overflow-scrolling: touch;
-
-//   /* ===== Layering ===== */
-//   z-index: 0;
-// }
-
-// /* =========================== */
-// /* ✅ Grid Container           */
-// /* =========================== */
-// .worksGrid {
-//   /* ===== Layout ===== */
-//   z-index: 0;
-//   display: grid;
-//   padding-top: 2 rem;
-
-//   /* ===== Box Model ===== */
-//   gap: 0.2em;
-//   height: auto;
-//   overflow: visible;
-
-//   /* ===== Scrollbar Styling ===== */
-//   &::-webkit-scrollbar {
-//     width: 8px;
-//   }
-
-//   &::-webkit-scrollbar-track {
-//     background: var(--background-color);
-//   }
-
-//   &::-webkit-scrollbar-thumb {
-//     background-color: var(--border-color);
-//     border-radius: 4px;
-//   }
-
-//   /* =========================== */
-//   /* ✅ Responsive Adjustments   */
-//   /* =========================== */
-//   @media (max-width: 768px) {
-//     margin-top: 5rem;
-//     grid-template-columns: repeat(2, 1fr);
-//     .worksGrid {
-//       gap: 0.15em;
-//     } // ✅ Mobile: 2 columns
-//   }
-
-//   @media (min-width: 769px) {
-//     grid-template-columns: repeat(3, 1fr); // ✅ Desktop: 3 columns
-//   }
-// }
-.scrollShadow {
-  position: relative;
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-height: 100vh; // 🚩 Explicit height for scrolling
-  width: 100%;
-
-  .worksGrid {
-    overflow: hidden;
-
-    display: grid;
-    gap: 0.2em;
-    overflow: visible;
-    /* =========================== */
-    /* ✅ Grid Items               */
-    /* =========================== */
-    .worksGridItem {
-      /* ===== Positioning ===== */
-      position: relative;
-
-      cursor: pointer;
-      /* ===== Box Model ===== */
-      overflow: hidden;
-      aspect-ratio: 1 / 1;
-
-      /* ===== Layout ===== */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      /* ===== Visual ===== */
-      background-color: var(--background-color);
-      will-change: transform;
-
-      /* =========================== */
-      /* ✅ Special Grid Variants   */
-      /* =========================== */
-      &:nth-child(1) {
-        grid-column: span 2;
-        aspect-ratio: 2 / 1; // ✅ First item wider
-      }
-
-      &:nth-child(7n) {
-        grid-row: span 2;
-        aspect-ratio: 1 / 2; // ✅ Tall item every 7th
-      }
-
-      /* =========================== */
-      /* ✅ Image inside Item       */
-      /* =========================== */
-      img {
-        /* ===== Box Model ===== */
-        width: 100%;
-        height: 100%;
-
-        /* ===== Visual ===== */
-        transition:
-          opacity 0.6s ease,
-          transform 0.3s ease;
-        opacity: 1;
-
-        &:hover {
-          transform: scale(1.05);
-          opacity: 0.9;
-        }
-      }
-
-      /* =========================== */
-      /* ✅ Placeholder (Loader)     */
-      /* =========================== */
-      .worksPlaceholder {
-        /* ===== Box Model ===== */
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-
-        /* ===== Visual ===== */
-        background-color: var(--overlay-background);
-        animation: pulse 1.5s infinite ease-in-out;
-      }
-
-      /* ===== Motion ===== */
-      @keyframes pulse {
-        0% {
-          opacity: 0.7;
-        }
-        50% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0.7;
-        }
-      }
-    }
-
-    @media (max-width: 768px) {
-      padding-top: 5rem;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.15em;
-    }
-
-    @media (min-width: 769px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  @media (max-width: 768px) {
+    margin-top: 5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.15em;
   }
 
-  .topShadow,
-  .bottomShadow {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 2rem;
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .topShadowVisible {
-    opacity: 1;
-    top: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
-  }
-
-  .bottomShadowVisible {
-    opacity: 1;
-    bottom: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+  @media (min-width: 769px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* =========================== */
+/* ✅ Grid Items               */
+/* =========================== */
+.worksGrids {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+
+  &:nth-child(1) {
+    grid-column: span 2;
+    aspect-ratio: 2 / 1;
+  }
+
+  &:nth-child(7n) {
+    grid-row: span 2;
+    aspect-ratio: 1 / 2;
+  }
+}
+
+/* =========================== */
+/* ✅ Hover Effect             */
+/* =========================== */
+.hoverWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  &:hover .worksImage {
+    transform: scale(1.06);
+  }
+}
+
+.worksImage {
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+/* =========================== */
+/* ✅ Placeholder (Loader)     */
+/* =========================== */
+.worksPlaceholder {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: var(--overlay-background);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* =========================== */
+/* ✅ Overlay                  */
+/* =========================== */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 4%,
+    rgba(0, 0, 0, 0.4) 70%,
+    rgba(0, 0, 0, 0.5)
+  );
+  backdrop-filter: blur(0.0015em);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 1rem;
+  pointer-events: none;
+  z-index: 2;
+  top: 70%;
+}
+
+// .scrollShadow {
+//   position: relative;
+//   overflow-y: auto;
+//   overflow-x: hidden;
+//   max-height: 100vh; // 🚩 Explicit height for scrolling
+//   width: 100%;
+
+//   .worksGrid {
+//     overflow: hidden;
+
+//     display: grid;
+//     gap: 0.2em;
+//     overflow: visible;
+//     /* =========================== */
+//     /* ✅ Grid Items               */
+//     /* =========================== */
+//     .worksGridItem {
+//       /* ===== Positioning ===== */
+//       position: relative;
+
+//       cursor: pointer;
+//       /* ===== Box Model ===== */
+//       overflow: hidden;
+//       aspect-ratio: 1 / 1;
+
+//       /* ===== Layout ===== */
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+
+//       /* ===== Visual ===== */
+//       background-color: var(--background-color);
+//       will-change: transform;
+
+//       /* =========================== */
+//       /* ✅ Special Grid Variants   */
+//       /* =========================== */
+//       &:nth-child(1) {
+//         grid-column: span 2;
+//         aspect-ratio: 2 / 1; // ✅ First item wider
+//       }
+
+//       &:nth-child(7n) {
+//         grid-row: span 2;
+//         aspect-ratio: 1 / 2; // ✅ Tall item every 7th
+//       }
+
+//       /* =========================== */
+//       /* ✅ Image inside Item       */
+//       /* =========================== */
+//       img {
+//         /* ===== Box Model ===== */
+//         width: 100%;
+//         height: 100%;
+
+//         /* ===== Visual ===== */
+//         transition:
+//           opacity 0.6s ease,
+//           transform 0.3s ease;
+//         opacity: 1;
+
+//         &:hover {
+//           transform: scale(1.05);
+//           opacity: 0.9;
+//         }
+//       }
+
+//       /* =========================== */
+//       /* ✅ Placeholder (Loader)     */
+//       /* =========================== */
+//       .worksPlaceholder {
+//         /* ===== Box Model ===== */
+//         width: 100%;
+//         height: 100%;
+//         overflow: hidden;
+
+//         /* ===== Visual ===== */
+//         background-color: var(--overlay-background);
+//         animation: pulse 1.5s infinite ease-in-out;
+//       }
+
+//       /* ===== Motion ===== */
+//       @keyframes pulse {
+//         0% {
+//           opacity: 0.7;
+//         }
+//         50% {
+//           opacity: 1;
+//         }
+//         100% {
+//           opacity: 0.7;
+//         }
+//       }
+//     }
+
+//     @media (max-width: 768px) {
+//       padding-top: 5rem;
+//       grid-template-columns: repeat(2, 1fr);
+//       gap: 0.15em;
+//     }
+
+//     @media (min-width: 769px) {
+//       grid-template-columns: repeat(3, 1fr);
+//     }
+//   }
+
+//   .topShadow,
+//   .bottomShadow {
+//     position: absolute;
+//     left: 0;
+//     right: 0;
+//     height: 2rem;
+//     pointer-events: none;
+//     z-index: 2;
+//     opacity: 0;
+//     transition: opacity 0.3s ease;
+//   }
+
+//   .topShadowVisible {
+//     opacity: 1;
+//     top: 0;
+//     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
+//   }
+
+//   .bottomShadowVisible {
+//     opacity: 1;
+//     bottom: 0;
+//     background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+//   }
+// }
