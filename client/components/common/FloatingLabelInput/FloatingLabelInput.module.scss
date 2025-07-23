@@ -1,0 +1,76 @@
+/* components/forms/FloatingLabelInput.module.scss */
+.floatingLabelInput {
+  position: relative;
+  display: block;
+  margin-bottom: 1rem;
+
+  /* The text input or textarea styles */
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #fff; /* assuming a dark background form (adjust as needed) */
+    background-color: rgba(255, 255, 255, 0.1); /* translucent background */
+    border: 1px solid #666;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: #0a84ff; /* highlight border on focus (adjust to theme) */
+    }
+    &::placeholder {
+      color: transparent; /* Hide the placeholder text, we use label instead */
+    }
+    /* Disabled state styling */
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  /* The floating label */
+  label {
+    position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+    font-size: 1rem;
+    color: #aaa;
+    pointer-events: none;
+    transition:
+      top 0.2s ease,
+      font-size 0.2s ease,
+      color 0.2s ease;
+  }
+
+  /* When input is focused or has text, float the label up */
+  input:focus + label,
+  input:not(:placeholder-shown) + label,
+  textarea:focus + label,
+  textarea:not(:placeholder-shown) + label {
+    top: -0.5rem;
+    font-size: 0.85rem;
+    color: #0a84ff; /* emphasize label (e.g., using primary theme color) */
+    background: var(
+      --form-bg,
+      #000
+    ); /* optional: give label a background to cover input */
+    padding: 0 0.25em;
+  }
+
+  /* Error state styling */
+  &.error input,
+  &.error textarea {
+    border-color: #e00;
+  }
+  &.error label {
+    color: #e00;
+  }
+  .errorText {
+    color: #e00;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+}

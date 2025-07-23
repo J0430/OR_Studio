@@ -1,13 +1,13 @@
-export interface Work {
-  title: string;
-  images: { src: string }[];
+// components/sections/works/WorksGrid/WorksGrid.types.ts
+
+export interface WorkImage {
+  src: string;
 }
 
-export interface WorksGridItemProps {
-  work: Work;
-  index: number;
-  onImageClick: (work: Work) => void;
-  showImages: boolean;
+export interface Work {
+  title: string;
+  images: WorkImage[];
+  description?: string;
 }
 
 export interface WorksGridProps {

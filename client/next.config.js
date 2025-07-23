@@ -1,50 +1,38 @@
-const path = require("path");
-
-const isProd = process.env.NODE_ENV === "production";
-
-const nextConfig = {
-  output: "export",
-  experimental: {
-    esmExternals: true,
-  },
-  reactStrictMode: true,
-  images: {
-    domains: ["monumental-kleicha-0d19a2.netlify.app"],
-    unoptimized: true,
-  },
-  assetPrefix: isProd ? process.env.NEXT_PUBLIC_ASSET_PREFIX || "" : "",
-  sassOptions: {
-    includePaths: [path.join(process.cwd(), "styles")],
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  webpack: (config) => {
-    config.module.rules.push(
-      {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        use: [
-          "@svgr/webpack",
-          {
-            loader: "file-loader",
-            options: {
-              name: "[path][name].[ext]",
-            },
+webpack: (config) => {
+  config.module.rules.push(
+    {
+      test: /\.(png|jpe?g|gif|svg|md)$/i,
+      use: [
+        "@svgr/webpack",
+        {
+          loader: "file-loader",
+          options: {
+            name: "[path][name].[ext]",
           },
-        ],
-      },
-      {
-        test: /\.md$/,
-        use: "ignore-loader",
-      }
-    );
+        },
+      ],
+    },
+    {
+      test: /\.md$/,
+      use: "ignore-loader",
+    }
+  );
 
-    config.resolve.fallback = {
-      path: require.resolve("path-browserify"),
-    };
+  config.resolve.fallback = {
+    path: require.resolve("path-browserify"),
+  };
 
-    return config;
-  },
+  // ✅ Add these aliases so Webpack understands @components, @utils, etc.
+  config.resolve.alias = {
+    ...(config.resolve.alias || {}),
+    "@components": path.resolve(__dirname, "components"),
+    "@utils": path.resolve(__dirname, "utils"),
+    "@styles": path.resolve(__dirname, "styles"),
+    "@hooks": path.resolve(__dirname, "hooks"),
+    "@contexts": path.resolve(__dirname, "contexts"),
+    "@public": path.resolve(__dirname, "public"),
+    "@data": path.resolve(__dirname, "public/data"),
+  };
+
+  return config;
 };
-
-module.exports = nextConfig;

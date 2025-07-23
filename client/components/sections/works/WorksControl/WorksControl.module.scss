@@ -41,7 +41,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    z-index: 900000;
+    z-index: 1;
     margin-top: 0.5%;
     padding: 0 m.rem(16);
     padding-top: m.rem(16); // Space from divider line
@@ -82,7 +82,7 @@
     background-color: var(--background-color);
     padding: 0;
     margin: 0;
-    z-index: 999999;
+    z-index: 1;
 
     .worksTitleBox {
       display: none;

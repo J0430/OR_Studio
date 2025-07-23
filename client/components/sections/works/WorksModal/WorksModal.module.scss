@@ -11,7 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--overlay-background); // 0.6 opacity
+  background-color: var(--overlay-background);
   backdrop-filter: blur(10px);
 }
 
@@ -24,7 +24,6 @@
 .modalContent {
   position: relative;
   width: 100%;
-
   height: 100%;
   max-height: 100dvh;
   overflow: hidden;
@@ -33,28 +32,6 @@
   justify-content: center;
   align-items: center;
   background-color: transparent;
-
-  .imageWrapper {
-    width: 100%;
-    flex-grow: 0.7;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-
-    img {
-      max-width: 100%;
-      max-height: 100dvh;
-      object-fit: contain;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-    }
-
-    .direction {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
 
   .closeButton {
     position: absolute;
@@ -74,25 +51,72 @@
   }
 }
 
+/* Image Display */
+.imageWrapper {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .direction {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.imageTransitionWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
+
+  &.zoomed {
+    cursor: zoom-out;
+
+    img {
+      transform: scale(1.8);
+      transition: transform 0.4s ease;
+    }
+  }
+
+  img {
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    transition: transform 0.3s ease;
+  }
+}
+
+/* Thumbnail Bar */
+.thumbnailContainer {
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
 .thumbnailGallery {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   padding: 1rem 0;
   overflow-x: auto;
 
   .thumbnailWrapper {
     border: none;
-    height: 8rem;
-    width: 12rem;
+    height: 6rem;
+    width: 6rem;
     background-color: transparent;
     cursor: pointer;
     transition: transform 0.3s ease;
-
-    &:hover {
-      transform: scale(1.05);
-    }
 
     .thumbnailImage {
       width: 100%;
@@ -101,17 +125,12 @@
     }
 
     &.activeThumbnail {
-      border: 2px solid rgba(0, 0, 0, 0.303);
+      border: 3px solid rgb(237, 237, 237);
     }
-  }
-}
-@media (min-width: 769px) {
-  .thumbnailGallery {
-    gap: 2rem;
-  }
 
-  .thumbnailWrapper {
-    height: 5rem;
-    width: 5rem;
+    @media (max-width: 768px) {
+      height: 4rem;
+      width: 4rem;
+    }
   }
 }

@@ -1,141 +1,110 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { fetchData } from "@utils/api";
-import {
+// contexts/PageContext.tsx
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+  ReactNode,
+} from "react";
+import { useRouter } from "next/router";
+import { useMediaQuery } from "react-responsive";
+import type {
   PageContextState,
   PageContextProviderProps,
 } from "./PageContext.types";
 
 const PageContext = createContext<PageContextState | undefined>(undefined);
 
-export async function getStaticData(endpoints: string[]) {
-  try {
-    const responses = await Promise.all(
-      endpoints.map((endpoint) => fetchData(endpoint))
-    );
-
-    const props = endpoints.reduce(
-      (acc, key, index) => {
-        acc[key] = responses[index];
-        return acc;
-      },
-      {} as Record<string, any>
-    );
-
-    return { props };
-  } catch (error) {
-    console.error("Error in getStaticData:", error.message);
-
-    const fallbackProps = endpoints.reduce(
-      (acc, key) => {
-        acc[key] = { projects: {}, frontImages: [], category: "" };
-        return acc;
-      },
-      {} as Record<string, any>
-    );
-
-    return { props: fallbackProps };
-  }
-}
-
 export const PageContextProvider = ({
   children,
-  endpoints = [],
-  timeoutDuration = 0,
-  preloader,
-  preloadImages = true,
+  preloader = null,
+  timeoutDuration = 1500,
 }: PageContextProviderProps) => {
-  const [isPreloaderVisible, setIsPreloaderVisible] = useState(true);
-  const [imagesLoaded, setImagesLoaded] = useState(0);
-  const [preloadedImages, setPreloadedImages] = useState<string[]>([]);
-  const [projectsData, setProjectsData] = useState<Record<string, any>>({});
+  const router = useRouter();
+  const isDevice = useMediaQuery({ maxWidth: 768 });
+  const isWorksPath = router.pathname === "/works";
+  const isHomePath = router.pathname === "/";
+
+  const [isPreloaderVisible, setIsPreloaderVisible] = useState(false);
 
   useEffect(() => {
-    const fetchAll = async () => {
-      try {
-        const results = await Promise.all(endpoints.map(fetchData));
-        const dataMap = Object.fromEntries(
-          endpoints.map((key, i) => [key, results[i]])
-        );
-        setProjectsData(dataMap);
+    if (!preloader || typeof window === "undefined") return;
 
-        if (preloadImages) {
-          const imageUrls = Object.values(dataMap)
-            .flatMap((entry) =>
-              Object.values(entry?.projects || {}).flatMap((project: any) => [
-                project.frontImage,
-                ...(project.images || []),
-              ])
-            )
-            .filter(Boolean);
+    const navEntries = performance.getEntriesByType(
+      "navigation"
+    ) as PerformanceNavigationTiming[];
+    const navType = navEntries[0]?.type;
 
-          setPreloadedImages(imageUrls);
-
-          imageUrls.forEach((src) => {
-            const img = new Image();
-            img.src = src;
-            img.onload = () => setImagesLoaded((n) => n + 1);
-            img.onerror = () => console.error("❌ Failed to load image:", src);
-          });
-        }
-      } catch (err) {
-        console.error("❌ Error fetching data in PageContext:", err);
-      }
-    };
-
-    if (endpoints.length > 0) fetchAll();
-  }, [endpoints, preloadImages]);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const navigationEntry = performance.getEntriesByType("navigation")[0] as
-        | PerformanceNavigationTiming
-        | undefined;
-      const navigationType = navigationEntry?.type || "navigate";
-
-      const hasVisited = sessionStorage.getItem("hasVisited") || "false";
-
-      if (
-        navigationType === "reload" ||
-        navigationType === "navigate" ||
-        hasVisited === "false"
-      ) {
-        sessionStorage.setItem("hasVisited", "true");
-        setIsPreloaderVisible(true);
-      } else {
+    // Always show on /works
+    if (isWorksPath) {
+      setIsPreloaderVisible(true);
+      const timer = setTimeout(() => {
         setIsPreloaderVisible(false);
-      }
-    }
-  }, []);
-  useEffect(() => {
-    if (preloadedImages.length > 0 && imagesLoaded >= preloadedImages.length) {
-      const timer = setTimeout(
-        () => setIsPreloaderVisible(false),
-        timeoutDuration
-      );
+      }, timeoutDuration);
       return () => clearTimeout(timer);
     }
 
-    const fallback = setTimeout(
-      () => setIsPreloaderVisible(false),
-      timeoutDuration
-    );
-    return () => clearTimeout(fallback);
-  }, [imagesLoaded, preloadedImages.length, timeoutDuration]);
+    // Only show once on / (first load or reload, not via shallow push)
+    const hasShown = sessionStorage.getItem("preloaderShown");
+    const hasUsedShallow = window.history.state?.shallow;
+    const shouldShow =
+      isHomePath &&
+      (navType === "navigate" || navType === "reload") &&
+      !hasShown &&
+      !hasUsedShallow;
+
+    if (shouldShow) {
+      sessionStorage.setItem("preloaderShown", "true");
+      setIsPreloaderVisible(true);
+      const timer = setTimeout(() => {
+        setIsPreloaderVisible(false);
+      }, timeoutDuration);
+      return () => clearTimeout(timer);
+    }
+  }, [preloader, router.pathname, timeoutDuration, isWorksPath, isHomePath]);
+
+  const contextValue = useMemo(
+    () => ({
+      preloader,
+      isPreloaderVisible,
+      isDevice,
+    }),
+    [preloader, isPreloaderVisible, isDevice]
+  );
 
   return (
-    <PageContext.Provider
-      value={{
-        endpoints,
-        preloader,
-        isPreloaderVisible,
-        preloadedImages,
-        imagesLoaded,
-        projectsData,
-        setImagesLoaded,
-        setPreloadedImages,
-        setProjectsData,
-      }}>
-      {isPreloaderVisible && preloader}
-      {!isPreloaderVisible && children}
+    <PageContext.Provider value={contextValue}>
+      <div
+        style={{
+          position: "relative",
+          zIndex: 0,
+        }}>
+        {/* Show preloader over content */}
+        {preloader && (
+          <div
+            style={{
+              opacity: isPreloaderVisible ? 1 : 0,
+              pointerEvents: isPreloaderVisible ? "auto" : "none",
+              transition: "opacity 0.8s ease-in-out",
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              zIndex: 1000000,
+            }}>
+            {preloader}
+          </div>
+        )}
+        <div
+          style={{
+            filter: isPreloaderVisible ? "blur(10px)" : "none",
+            transition: "filter 0.6s ease-in-out",
+          }}>
+          {children}
+        </div>
+      </div>
     </PageContext.Provider>
   );
 };

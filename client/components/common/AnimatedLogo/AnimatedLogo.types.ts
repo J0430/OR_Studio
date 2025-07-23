@@ -6,5 +6,5 @@ export interface AnimatedLogoProps {
   strokeWidth?: number;
   className?: string;
   theme?: string;
-  autoFadeOut?: boolean;
+  priority?: boolean;
 }

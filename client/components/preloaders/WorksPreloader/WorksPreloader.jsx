@@ -1,10 +1,9 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import styles from "./WorksPreloader.module.scss";
-
-import { useWorksPreloader } from "@contexts/WorksPreloaderContext";
+import { usePageContext } from "@contexts/PageContext/PageContext";
 
 const WorksPreloader = () => {
-  const { isPreloaderVisible } = useWorksPreloader();
+  const { isPreloaderVisible } = usePageContext();
   const totalDuration = 2;
   const strokeDuration = 1;
 
@@ -19,54 +18,56 @@ const WorksPreloader = () => {
   ];
 
   return (
-    <motion.div
-      className={styles.preloaderContainer}
-      initial={{ opacity: 1 }}
-      animate={{ opacity: 0 }}
-      transition={{
-        duration: 1,
-        ease: "easeInOut",
-        delay: totalDuration + 1,
-      }}
-      exit={{ opacity: 0 }}>
-      <motion.svg
-        className={styles.logo}
-        viewBox="0 0 125 150"
-        width="125.0pt"
-        height="150.0pt">
-        {/* Mask for cutout */}
-        <mask id="logo-mask">
-          <path d={outerPath} fill="white" />
-          {innerPaths.map((d, i) => (
-            <path key={i} d={d} fill="black" />
-          ))}
-        </mask>
+    <AnimatePresence mode="wait">
+      <motion.div
+        className={styles.preloaderContainer}
+        initial={{ opacity: 1 }}
+        animate={{ opacity: 0 }}
+        transition={{
+          duration: 1,
+          ease: "easeInOut",
+          delay: totalDuration + 1,
+        }}
+        exit={{ opacity: 0 }}>
+        <motion.svg
+          className={styles.logo}
+          viewBox="0 0 125 150"
+          width="125.0pt"
+          height="150.0pt">
+          {/* Mask for cutout */}
+          <mask id="logo-mask">
+            <path d={outerPath} fill="white" />
+            {innerPaths.map((d, i) => (
+              <path key={i} d={d} fill="black" />
+            ))}
+          </mask>
 
-        {/* Fill + mask */}
-        <motion.path
-          d={outerPath}
-          fill="#a2b5bb"
-          mask="url(#logo-mask)"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: strokeDuration }}
-        />
-
-        {/* Stroke animation */}
-        {[outerPath, ...innerPaths].map((d, i) => (
+          {/* Fill + mask */}
           <motion.path
-            key={i}
-            d={d}
-            stroke="#a3b6bd"
-            strokeWidth={2}
-            fill="none"
-            initial={{ strokeDasharray: 500, strokeDashoffset: 500 }}
-            animate={{ strokeDashoffset: 0 }}
-            transition={{ duration: strokeDuration, ease: "easeInOut" }}
+            d={outerPath}
+            fill="#a2b5bb"
+            mask="url(#logo-mask)"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: strokeDuration }}
           />
-        ))}
-      </motion.svg>
-    </motion.div>
+
+          {/* Stroke animation */}
+          {[outerPath, ...innerPaths].map((d, i) => (
+            <motion.path
+              key={i}
+              d={d}
+              stroke="#a3b6bd"
+              strokeWidth={2}
+              fill="none"
+              initial={{ strokeDasharray: 500, strokeDashoffset: 500 }}
+              animate={{ strokeDashoffset: 0 }}
+              transition={{ duration: strokeDuration, ease: "easeInOut" }}
+            />
+          ))}
+        </motion.svg>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

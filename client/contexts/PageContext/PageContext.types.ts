@@ -1,21 +1,13 @@
 import { ReactNode, ReactElement } from "react";
 
 export interface PageContextState {
-  endpoints: string[];
-  preloader: ReactElement;
+  preloader: React.ReactNode;
   isPreloaderVisible: boolean;
-  preloadedImages: string[];
-  imagesLoaded: number;
-  projectsData: Record<string, any>;
-  setImagesLoaded: (n: number) => void;
-  setPreloadedImages: (images: string[]) => void;
-  setProjectsData: (data: Record<string, any>) => void;
+  isDevice: boolean;
 }
 
 export interface PageContextProviderProps {
   children: ReactNode;
-  endpoints?: string[];
+  preloader?: ReactNode;
   timeoutDuration?: number;
-  preloader?: ReactElement;
-  preloadImages?: boolean;
 }

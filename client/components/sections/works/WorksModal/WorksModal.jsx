@@ -9,7 +9,8 @@ import styles from "./WorksModal.module.scss";
 const WorksModal = ({ selectedImage, project, onClose }) => {
   const isDevice = useMediaQuery({ maxWidth: 768 });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [swipeDirection, setSwipeDirection] = useState(1); // 1 = forward, -1 = backward
+  const [swipeDirection, setSwipeDirection] = useState(1);
+  const [zoomed, setZoomed] = useState(false);
   const modalRef = useRef(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
@@ -26,11 +27,13 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
 
   const handleNext = useCallback(() => {
     setSwipeDirection(1);
+    setZoomed(false);
     setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
   }, [project.images.length]);
 
   const handlePrevious = useCallback(() => {
     setSwipeDirection(-1);
+    setZoomed(false);
     setCurrentImageIndex((prev) =>
       prev === 0 ? project.images.length - 1 : prev - 1
     );
@@ -40,8 +43,9 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
     (e) => {
       if (e.key === "ArrowRight") handleNext();
       if (e.key === "ArrowLeft") handlePrevious();
+      if (e.key === "Escape") onClose();
     },
-    [handleNext, handlePrevious]
+    [handleNext, handlePrevious, onClose]
   );
 
   useEffect(() => {
@@ -58,13 +62,28 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
     const deltaX = touchStartX.current - touchEndX.current;
 
     if (deltaX > 50) {
-      setSwipeDirection(1);
       handleNext();
     } else if (deltaX < -50) {
-      setSwipeDirection(-1);
       handlePrevious();
     }
   };
+
+  const handleBackdropClick = (e) => {
+    const target = e.target;
+
+    const isImage = target.tagName === "IMG";
+    const isArrow = target.closest(`.${styles.direction}`);
+    const isThumbnail = target.closest(`.${styles.thumbnailWrapper}`);
+
+    if (!isImage && !isArrow && !isThumbnail) {
+      onClose();
+    }
+  };
+
+  const toggleZoom = () => {
+    setZoomed((prev) => !prev);
+  };
+
   return (
     <AnimatePresence>
       <motion.div
@@ -90,6 +109,7 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
+          onClick={handleBackdropClick}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}>
           <button
@@ -113,17 +133,21 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentImageIndex}
+                className={`${styles.imageTransitionWrapper} ${
+                  zoomed ? styles.zoomed : ""
+                }`}
                 initial={{ opacity: 0, x: -swipeDirection * 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: swipeDirection * 50 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}>
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                onClick={toggleZoom}>
                 <Image
                   src={project.images[currentImageIndex]}
                   alt={`Project Image ${currentImageIndex + 1}`}
-                  className={styles.modalImage}
                   width={1200}
-                  height={1100}
-                  style={{ objectFit: "cover" }}
+                  height={800}
+                  className={styles.modalImage}
+                  style={{ objectFit: "contain", maxHeight: "100%" }}
                   quality={85}
                   priority
                 />
@@ -142,23 +166,28 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
           </div>
 
           {hasMultipleImages && (
-            <div className={styles.thumbnailGallery}>
-              {project.images.map((img, index) => (
-                <button
-                  key={img || index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`${styles.thumbnailWrapper} ${
-                    index === currentImageIndex ? styles.activeThumbnail : ""
-                  }`}>
-                  <Image
-                    src={img}
-                    alt={`Thumbnail ${index + 1}`}
-                    width={150}
-                    height={125}
-                    className={styles.thumbnailImage}
-                  />
-                </button>
-              ))}
+            <div className={styles.thumbnailContainer}>
+              <div className={styles.thumbnailGallery}>
+                {project.images.map((img, index) => (
+                  <button
+                    key={img || index}
+                    onClick={() => {
+                      setCurrentImageIndex(index);
+                      setZoomed(false);
+                    }}
+                    className={`${styles.thumbnailWrapper} ${
+                      index === currentImageIndex ? styles.activeThumbnail : ""
+                    }`}>
+                    <Image
+                      src={img}
+                      alt={`Thumbnail ${index + 1}`}
+                      width={150}
+                      height={125}
+                      className={styles.thumbnailImage}
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
           )}
         </motion.div>
