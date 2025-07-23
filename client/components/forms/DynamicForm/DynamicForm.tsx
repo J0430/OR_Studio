@@ -1,20 +1,20 @@
-//DynamicForm.tsx
-
 import React, { useState } from "react";
+import type { Path } from "react-hook-form";
 import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldDefinition } from "@common/FloatingLabelInput/FloatingLabelInput.type";
 import { FloatingLabelInput } from "@common/FloatingLabelInput/FloatingLabelInput";
 import styles from "./DynamicForm.module.scss";
+import { BaseFormData } from "./DynamicForm.types";
 
-interface DynamicFormProps<FormData extends Record<string, any>> {
-  schema: yup.ObjectSchema<FormData>; // Yup schema defining form structure and validation
-  fields: FieldDefinition[]; // Fields configuration for rendering inputs
-  onSubmit: (data: FormData) => Promise<void> | void; // callback to handle form data submission
-  title?: string; // Optional form title to display at top
-  logoSrc?: string; // Optional logo image URL to display at top of form
-  successMessage?: string; // Optional custom success message
+interface DynamicFormProps<FormData extends BaseFormData> {
+  schema: yup.ObjectSchema<FormData>;
+  fields: FieldDefinition[];
+  onSubmit: (data: FormData) => Promise<void> | void;
+  title?: string;
+  logoSrc?: string;
+  successMessage?: string;
 }
 
 export const DynamicForm = <FormData extends Record<string, any>>({
@@ -25,7 +25,6 @@ export const DynamicForm = <FormData extends Record<string, any>>({
   logoSrc,
   successMessage,
 }: DynamicFormProps<FormData>) => {
-  // Initialize the form with react-hook-form, connecting the Yup schema.
   const {
     register,
     handleSubmit,
@@ -33,46 +32,39 @@ export const DynamicForm = <FormData extends Record<string, any>>({
     setError,
     reset,
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
-    mode: "onSubmit", // validate on submit; use 'onChange' or 'onBlur' for live validation
+    // ✅ TypeScript-compatible fix
+    resolver: yupResolver(schema) as any,
+    mode: "onSubmit",
   });
 
-  // Local UI state
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // Form submit handler (wraps the user-provided onSubmit to handle loading and errors)
   const handleFormSubmit: SubmitHandler<FormData> = async (formData) => {
-    setServerError(null); // clear any previous server error
+    setServerError(null);
     setIsSubmitting(true);
     try {
-      await onSubmit(formData); // attempt to submit form data
-      setIsSuccess(true); // if successful, mark success state
-      reset(); // optionally reset form fields
+      await onSubmit(formData);
+      setIsSuccess(true);
+      reset();
     } catch (err: any) {
-      // If server returns validation errors for specific fields, use setError to show them
-      if (err && err.fieldErrors) {
-        // err.fieldErrors is assumed to be an object like { fieldName: "Error message", ... }
+      if (err?.fieldErrors) {
         for (const [fieldName, message] of Object.entries(err.fieldErrors)) {
-          setError(fieldName as keyof FormData, {
+          setError(fieldName as Path<FormData>, {
             type: "server",
             message: String(message),
           });
         }
       }
-      // Handle a general server error (not field-specific)
-      if (err && err.message) {
-        setServerError(err.message);
-      } else {
-        setServerError("An unexpected error occurred. Please try again.");
-      }
+      setServerError(
+        err?.message || "An unexpected error occurred. Please try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // If the form was successfully submitted, show a success message (and optionally hide the form)
   if (isSuccess) {
     return (
       <div className={styles.successMessage} aria-live="polite">
@@ -85,18 +77,15 @@ export const DynamicForm = <FormData extends Record<string, any>>({
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
       className={styles.dynamicForm}>
-      {/* Optional logo and title */}
       {logoSrc && <img src={logoSrc} alt="Form logo" className={styles.logo} />}
       {title && <h2 className={styles.title}>{title}</h2>}
 
-      {/* Global (server) error message, if any */}
       {serverError && (
         <p className={styles.errorText} role="alert">
           {serverError}
         </p>
       )}
 
-      {/* Render each field using FloatingLabelInput */}
       {fields.map((field) => (
         <FloatingLabelInput
           key={field.name}
@@ -111,7 +100,6 @@ export const DynamicForm = <FormData extends Record<string, any>>({
         />
       ))}
 
-      {/* Submit button */}
       <button
         type="submit"
         className={styles.submitButton}
