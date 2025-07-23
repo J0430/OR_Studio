@@ -1,3 +1,4 @@
+// pages/index.tsx (HomePage)
 import { useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { loadDynamicImports } from "@utils/loadDynamicImports";
@@ -10,8 +11,6 @@ const { DirectionalButton, SectionWrapper } = loadDynamicImports("common", [
   "DirectionalButton",
   "SectionWrapper",
 ]);
-
-const { MainPreloader } = loadDynamicImports("preloaders", ["MainPreloader"]);
 
 const sectionsConfig = [
   { component: "LandingPageSection", projectKey: "LandingPictures" },
@@ -50,13 +49,11 @@ function HomeContent() {
         <title>OR Studio | Home</title>
       </Head>
 
-      <MainPreloader />
-
       {!isPreloaderVisible && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 3, ease: "easeInOut" }}
+          transition={{ duration: 2, ease: "easeInOut" }}
           className={styles.homePage}>
           {sections.map(({ component: SectionComponent, props, id }, index) => (
             <SectionWrapper key={id} id={id}>
@@ -78,10 +75,14 @@ function HomeContent() {
     </>
   );
 }
-export default function HomePage({ homeData }) {
+
+export default function HomePage() {
+  const { WorksPreloader } = loadDynamicImports("preloaders", [
+    "WorksPreloader",
+  ]);
   return (
-    <PageContextProvider>
-      <HomeContent data={homeData} />
+    <PageContextProvider preloader={<WorksPreloader />}>
+      <HomeContent />
     </PageContextProvider>
   );
 }

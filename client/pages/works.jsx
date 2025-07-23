@@ -1,9 +1,12 @@
 import { useState, useMemo, useCallback } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import Head from "next/head";
-import Image from "next/image";
+import { AnimatePresence } from "framer-motion";
+
 import { usePageContext, PageContextProvider } from "@contexts/PageContext";
+import dynamic from "next/dynamic";
+
 import { loadDynamicImports } from "@utils/loadDynamicImports";
+
 import {
   residentialData,
   commercialData,
@@ -13,21 +16,20 @@ import {
 
 import styles from "@styles/pages/works.module.scss";
 
+// ✅ Lazy-load content components only (not WorksPreloader)
+const { WorksGrid, WorksControl } = loadDynamicImports("sections/works", [
+  "WorksGrid",
+  "WorksControl",
+]);
+const WorksModal = dynamic(
+  () => import("@components/sections/works/WorksModal/WorksModal"),
+  { ssr: false }
+);
 const WorksContent = () => {
-  const { isPreloaderVisible, isDevice } = usePageContext();
-
-  const { WorksControl, WorksModal, WorksPreloader } = useMemo(
-    () =>
-      loadDynamicImports("sections/works", [
-        "WorksControl",
-        "WorksModal",
-        "WorksPreloader",
-      ]),
-    []
-  );
+  const { isPreloaderVisible } = usePageContext();
 
   const [state, setState] = useState({
-    categorySelected: "Residential",
+    categorySelected: "All",
     selectedImage: null,
     selectedProject: null,
   });
@@ -42,10 +44,17 @@ const WorksContent = () => {
     []
   );
 
-  const works = useMemo(
-    () => categoryDataMap[state.categorySelected] || [],
-    [state.categorySelected, categoryDataMap]
-  );
+  const works = useMemo(() => {
+    if (state.categorySelected === "All") {
+      return [
+        ...Object.values(residentialData.projects || {}),
+        ...Object.values(commercialData.projects || {}),
+        ...Object.values(urbanPlanningData.projects || {}),
+        ...Object.values(officeData.projects || {}),
+      ];
+    }
+    return categoryDataMap[state.categorySelected] || [];
+  }, [state.categorySelected, categoryDataMap]);
 
   const handleCategoryClick = useCallback((categoryName) => {
     setState({
@@ -55,61 +64,21 @@ const WorksContent = () => {
     });
   }, []);
 
-  const handleImageClick = useCallback(
-    (project) => {
-      setState({
-        ...state,
-        selectedImage: project.images[0].src,
-        selectedProject: project,
-      });
-    },
-    [state]
-  );
+  const handleImageClick = useCallback((project) => {
+    setState((prev) => ({
+      ...prev,
+      selectedImage: project.images[0].src,
+      selectedProject: project,
+    }));
+  }, []);
 
   const handleCloseModal = useCallback(() => {
-    setState({
-      ...state,
+    setState((prev) => ({
+      ...prev,
       selectedImage: null,
       selectedProject: null,
-    });
-  }, [state]);
-
-  const WorksGridItem = ({ work, index }) => {
-    return (
-      <motion.article
-        className={styles.worksGridItem}
-        layoutId={`work-item-${work.images[0].src}`}
-        onClick={() => handleImageClick(work)}
-        initial={{ opacity: 0, y: 100 }}
-        animate={{
-          opacity: 1,
-          y: 0,
-          transition: {
-            duration: 0.4,
-            ease: "easeOut",
-            delay: index * 0.05,
-          },
-        }}>
-        <div className={styles.hoverWrapper}>
-          <Image
-            src={work.images[0].src}
-            alt={`Project: ${work.title}`}
-            fill
-            styles={{ objectFit: "cover" }}
-            className={styles.worksImage}
-          />
-        </div>
-      </motion.article>
-    );
-  };
-
-  const WorksGrid = () => (
-    <div className={styles.worksGrid}>
-      {works.map((work, index) => (
-        <WorksGridItem key={work.title + index} work={work} index={index} />
-      ))}
-    </div>
-  );
+    }));
+  }, []);
 
   return (
     <>
@@ -119,8 +88,6 @@ const WorksContent = () => {
       </Head>
 
       <main className={styles.worksPage}>
-        <WorksPreloader />
-
         {!isPreloaderVisible && (
           <>
             <WorksControl
@@ -128,9 +95,7 @@ const WorksContent = () => {
               selectedCategory={state.categorySelected}
               onCategorySelect={handleCategoryClick}
             />
-
-            <WorksGrid />
-
+            <WorksGrid works={works} onImageClick={handleImageClick} />
             <AnimatePresence>
               {state.selectedImage && state.selectedProject && (
                 <WorksModal
@@ -148,13 +113,14 @@ const WorksContent = () => {
 };
 
 export default function WorksPage() {
-  const { WorksPreloader } = useMemo(
-    () => loadDynamicImports("preloaders", ["WorksPreloader"]),
-    []
-  );
-
+  const { WorksPreloader } = loadDynamicImports("preloaders", [
+    "WorksPreloader",
+  ]);
   return (
-    <PageContextProvider preloader={<WorksPreloader />}>
+    <PageContextProvider
+      preloader={<WorksPreloader />}
+      timeoutDuration={1800} //
+    >
       <WorksContent />
     </PageContextProvider>
   );

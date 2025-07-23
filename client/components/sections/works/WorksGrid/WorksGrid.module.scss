@@ -1,52 +1,62 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-/* =========================== */
-/* ✅ Grid Container           */
-/* =========================== */
+/* ============================= */
+/* ✅ Grid Wrapper               */
+/* ============================= */
+.worksGridWrapper {
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 0;
+}
+
+/* ============================= */
+/* ✅ Grid Container             */
+/* ============================= */
 .worksGrid {
   display: grid;
-  gap: 0.2em;
+  gap: 0.25rem;
   padding-top: 2rem;
-  overflow: visible;
+  grid-template-columns: repeat(6, 1fr); // 6 columns allow flexible spans
 
   @media (max-width: 768px) {
-    margin-top: 5rem;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.15em;
+    padding-top: 0;
   }
 
   @media (min-width: 769px) {
-    grid-template-columns: repeat(3, 1fr);
+    padding-top: 0;
+  }
+
+  > article {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:nth-child(5n + 1),
+    &:nth-child(5n + 2) {
+      // Every row of two images (items 1 & 2, then 6 & 7, etc.)
+      grid-column: span 3;
+      aspect-ratio: 16 / 9;
+    }
+
+    &:nth-child(5n + 3),
+    &:nth-child(5n + 4),
+    &:nth-child(5n + 5) {
+      // Every row of three images (items 3,4,5, then 8,9,10, etc.)
+      grid-column: span 2;
+      aspect-ratio: 4 / 3;
+    }
   }
 }
 
-/* =========================== */
-/* ✅ Grid Items               */
-/* =========================== */
-.worksGrids {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backface-visibility: hidden;
-
-  &:nth-child(1) {
-    grid-column: span 2;
-    aspect-ratio: 2 / 1;
-  }
-
-  &:nth-child(7n) {
-    grid-row: span 2;
-    aspect-ratio: 1 / 2;
-  }
-}
-
-/* =========================== */
-/* ✅ Hover Effect             */
-/* =========================== */
+/* ============================= */
+/* ✅ Hover Effect               */
+/* ============================= */
 .hoverWrapper {
   position: relative;
   width: 100%;
@@ -63,13 +73,12 @@
   transition: transform 0.5s ease;
 }
 
-/* =========================== */
-/* ✅ Placeholder (Loader)     */
-/* =========================== */
+/* ============================= */
+/* ✅ Placeholder (Loader)       */
+/* ============================= */
 .worksPlaceholder {
   width: 100%;
   height: 100%;
-  aspect-ratio: 16 / 9;
   background-color: var(--overlay-background);
   animation: pulse 1.5s infinite ease-in-out;
 }
@@ -88,22 +97,25 @@
 /* ✅ Overlay                  */
 /* =========================== */
 .overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.1) 4%,
-    rgba(0, 0, 0, 0.4) 70%,
-    rgba(0, 0, 0, 0.5)
-  );
-  backdrop-filter: blur(0.0015em);
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 1rem;
   pointer-events: none;
-  z-index: 2;
-  top: 70%;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  min-height: 6em;
+  width: 100%;
+  padding: 0.5em 0.75em;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), transparent);
+  opacity: 0;
+  transform: translateY(1em);
+  transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 // .scrollShadow {

@@ -84,7 +84,7 @@ export default function LandingAbout() {
             className={styles.bottomLeftImage}
             variants={fadeFromBottomLeft}>
             <Image
-              src="/assets/logos/Or_Studio_w.png"
+              src="/assets/logos/Or_Studio_w.webp"
               alt="Or Studio Logo"
               width={220}
               height={100}
@@ -101,7 +101,7 @@ export default function LandingAbout() {
           animate="visible">
           <div className={styles.imageWrapper}>
             <Image
-              src="/assets/works/categories/office/Project1/09.jpg"
+              src="/assets/works/categories/office/Project1/09.webp"
               alt="Main background"
               width={isMobile ? 800 : 1400}
               height={isMobile ? 400 : 1000}

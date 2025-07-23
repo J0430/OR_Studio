@@ -1,0 +1,45 @@
+/* components/Header/Header.module.scss */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #fff; /* Example background, can be customized */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  /* You can add spacing or max-width for the logo if needed */
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  /* Ensure the toggle icon scales nicely */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav {
+  /* The nav is initially hidden on mobile (handled via AnimatePresence or CSS) */
+  overflow: hidden; /* hide content when collapsed (for smooth height animation) */
+  background-color: #fff;
+}
+
+@media (min-width: 768px) {
+  .toggleButton {
+    display: none; /* Hide toggle button on desktop view */
+  }
+  .nav {
+    /* On larger screens, show the nav normally (e.g., horizontal menu) */
+    display: block !important;
+    height: auto !important;
+    opacity: 1 !important;
+    position: static;
+  }
+}

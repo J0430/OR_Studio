@@ -3,27 +3,31 @@
     "projects": {
         "o_project1": {
             "title": "Beacon Towers",
-            "frontImage": {
-                "src": "/assets/works/categories/Office/Project1/09.webp",
-                "orientation": "landscape"
-            },
             "description": "The Beacon Towers is a cutting-edge architectural masterpiece that merges functionality with aesthetics. Featuring a seamless blend of modern glass facades and innovative structural design, the towers redefine urban office spaces. The project embodies sustainable architecture with energy-efficient features, offering a panoramic skyline view while integrating harmoniously into the bustling cityscape. With state-of-the-art facilities and a unique artistic facade, Beacon Towers stands as a beacon of innovation and progress in urban design.",
             "images": [
                 {
                     "src": "/assets/works/categories/Office/Project1/09.webp",
-                    "orientation": ""
+                    "orientation": "portrait",
+                    "width": 1996,
+                    "height": 2281
                 },
                 {
                     "src": "/assets/works/categories/Office/Project1/051.webp",
-                    "orientation": ""
+                    "orientation": "landscape",
+                    "width": 2404,
+                    "height": 1927
                 },
                 {
                     "src": "/assets/works/categories/Office/Project1/mushi (1).webp",
-                    "orientation": ""
+                    "orientation": "portrait",
+                    "width": 2250,
+                    "height": 2725
                 },
                 {
                     "src": "/assets/works/categories/Office/Project1/mushi (2).webp",
-                    "orientation": ""
+                    "orientation": "portrait",
+                    "width": 2250,
+                    "height": 2725
                 }
             ],
             "storyline": "",
@@ -31,23 +35,25 @@
         },
         "o_project2": {
             "title": "Urban Living Complex",
-            "frontImage": {
-                "src": "/assets/works/categories/Office/project2/2.webp",
-                "orientation": "landscape"
-            },
             "description": "The Urban Living Complex introduces a dynamic residential and retail hub at the heart of the city. The project combines elegant apartments with green spaces and retail outlets, emphasizing community living. With a contemporary design and innovative urban planning, it reflects a perfect balance of comfort and modernity.",
             "images": [
                 {
                     "src": "/assets/works/categories/Office/project2/2.webp",
-                    "orientation": ""
+                    "orientation": "landscape",
+                    "width": 2500,
+                    "height": 1666
                 },
                 {
                     "src": "/assets/works/categories/Office/project2/3.webp",
-                    "orientation": ""
+                    "orientation": "landscape",
+                    "width": 2500,
+                    "height": 2102
                 },
                 {
                     "src": "/assets/works/categories/Office/project2/6.webp",
-                    "orientation": ""
+                    "orientation": "landscape",
+                    "width": 2500,
+                    "height": 1406
                 }
             ],
             "storyline": "",
@@ -55,19 +61,19 @@
         },
         "o_project3": {
             "title": "Skyline Tower",
-            "frontImage": {
-                "src": "/assets/works/categories/Office/project3/3.webp",
-                "orientation": "landscape"
-            },
             "description": "Skyline Tower is an iconic high-rise structure that defines luxury office space in the metropolitan skyline. With a minimalist design, open terraces, and energy-efficient materials, this project showcases the future of urban architecture.",
             "images": [
                 {
                     "src": "/assets/works/categories/Office/project3/3.webp",
-                    "orientation": ""
+                    "orientation": "landscape",
+                    "width": 2500,
+                    "height": 2141
                 },
                 {
                     "src": "/assets/works/categories/Office/project3/21.webp",
-                    "orientation": ""
+                    "orientation": "landscape",
+                    "width": 2500,
+                    "height": 2049
                 }
             ],
             "storyline": "",

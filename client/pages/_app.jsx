@@ -1,12 +1,15 @@
-import { loadDynamicImports } from "@utils/loadDynamicImports";
+// pages/_app.tsx
+
 import { ThemeProvider } from "next-themes";
-import { AppProps } from "next/app";
 import Head from "next/head";
 import "@styles/globals.scss";
+import { dynamicImportComponents } from "@utils/dynamicImportComponents";
 
-const { Header } = loadDynamicImports("nav", ["Header"]);
+const { Header } = dynamicImportComponents("nav", ["Header"]);
 
-export default function MyApp({ Component, pageProps }) {
+// const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({ Component, pageProps }) => {
+  console.log(Header);
   return (
     <>
       <Head>
@@ -24,4 +27,6 @@ export default function MyApp({ Component, pageProps }) {
       </ThemeProvider>
     </>
   );
-}
+};
+
+export default MyApp;

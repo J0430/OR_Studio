@@ -12,6 +12,7 @@
     "baseUrl": ".", // Set base directory for resolving paths
     "paths": {
       "@components/*": ["components/*"],
+      "@common/*": ["components/common/*"],
       "@hooks/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
       "@api/*": ["public/api/*"],
@@ -39,7 +40,8 @@
     "pages/**/*",
     "components/**/*",
     "hooks/**/*",
-    "utils/**/*"
+    "utils/**/*",
+    "../../../../Downloads/OR_Studio-main/client/components/sections/about/LandingAbout"
   ],
   "exclude": ["node_modules"]
 }
