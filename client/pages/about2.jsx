@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { usePreloader } from "@contexts/Context";
 
 import { fetchData } from "@utils/api";
 import { loadDynamicImports } from "@utils/loadDynamicImports";
