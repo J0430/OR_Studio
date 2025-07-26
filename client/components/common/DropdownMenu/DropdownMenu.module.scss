@@ -1,7 +1,8 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
+
 /* =========================== */
-/* ✅ Dropdown Container Styling */
+/* ✅ Dropdown Container       */
 /* =========================== */
 .dropdownContainer {
   position: relative;
@@ -10,41 +11,46 @@
 
   @media (max-width: 768px) {
     position: fixed;
+    top: 1rem;
     left: 50%;
     transform: translateX(-50%);
-
     padding: 0.25rem 1rem;
     border-radius: m.rem(10);
   }
 }
 
 /* =========================== */
-/* ✅ Dropdown Button Styling   */
+/* ✅ Dropdown Button          */
 /* =========================== */
 .dropdownButton {
-  color: rgba(0, 0, 0, 0.7);
   border-radius: m.rem(18);
-  transition: all -0.1ms ease;
-  box-shadow: 0px 5px 20px 1px;
-  pointer-events: none;
-  background: rgba(v.$white, 0.9);
-  color: rgba(0, 0, 0, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 0.5rem 1rem;
+  background: rgba(v.$white, 0.9);
+  box-shadow: 0px 5px 20px 1px rgba(0, 0, 0, 0.05);
 
   font-size: 1rem;
   font-weight: 500;
-  cursor: pointer;
+  padding: 0.5rem 1rem;
   width: 12rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 
+  color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: rgba(233, 230, 230, 0.85);
+  }
+
   .buttonContent {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+
     .categoryText {
       margin-left: 0.7rem;
     }
@@ -54,41 +60,37 @@
       align-items: center;
     }
   }
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.85);
-  }
 }
 
 /* =========================== */
-/* ✅ Dropdown Item Styling     */
+/* ✅ Dropdown List (ul)       */
 /* =========================== */
 .dropdownContent {
   margin-top: 0.4rem;
-  color: rgba(0, 0, 0, 0.7);
-  border-radius: m.rem(18);
-  transition: all -0.1ms ease;
-  pointer-events: none;
-  background: rgba(v.$white, 0.9);
-  padding: 0.3em;
   width: 100%;
+  padding: 0.3em;
+  background: rgba(v.$white, 0.9);
+  border-radius: m.rem(18);
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.08);
 }
 
+/* =========================== */
+/* ✅ Dropdown Item (li)       */
+/* =========================== */
 .dropdownItem {
   padding: m.rem(6) m.rem(12);
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.9);
-  text-align: left;
-  cursor: pointer;
+  color: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  transition: background 0.15s ease-in-out;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.05);
   }
 }
 
 .activeItem {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(0, 0, 0, 0.1);
   font-weight: bold;
 }

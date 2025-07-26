@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
 import { dynamicImportComponents } from "@utils/dynamicImportComponents";
-import { logos } from "@utils/globals";
-
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../Header/Header.module.scss";
 
+import { usePageContext } from "@contexts/PageContext"; // ✅ Import context
+
 import type { FC, KeyboardEvent } from "react";
 
+// Dynamic imports
 const { HamburgerToggleButton, AnimatedLogo } = dynamicImportComponents(
   "common",
   ["HamburgerToggleButton", "AnimatedLogo"]
@@ -18,9 +19,15 @@ const { HamburgerToggleButton, AnimatedLogo } = dynamicImportComponents(
 const { NavbarLinks } = dynamicImportComponents("nav", ["NavbarLinks"]);
 
 const Header: FC = () => {
+  const { isPreloaderVisible } = usePageContext();
+  if (isPreloaderVisible) return null;
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
   const pathname = usePathname();
+  console.log("Rendering Header. Preloader visible?", isPreloaderVisible);
+
+  // ✅ Don't render at all if preloader is visible
+  if (isPreloaderVisible) return null;
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent<Document>) => {
@@ -39,7 +46,10 @@ const Header: FC = () => {
   return (
     <motion.header
       className={styles.navbar}
-      data-page={pathname === "/works" ? "works" : undefined}>
+      data-page={pathname === "/works" ? "works" : undefined}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 0.3 }}>
       <motion.div className={styles.logo}>
         <Link href="/" passHref>
           <AnimatedLogo

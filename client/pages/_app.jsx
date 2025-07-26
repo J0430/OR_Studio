@@ -1,15 +1,13 @@
 // pages/_app.tsx
-
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
 import "@styles/globals.scss";
 import { dynamicImportComponents } from "@utils/dynamicImportComponents";
+import { PageContextProvider } from "@contexts/PageContext";
 
 const { Header } = dynamicImportComponents("nav", ["Header"]);
 
-// const MyApp = ({ Component, pageProps }: AppProps) => {
-const MyApp = ({ Component, pageProps }) => {
-  console.log(Header);
+function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
@@ -21,12 +19,15 @@ const MyApp = ({ Component, pageProps }) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <ThemeProvider>
-        <Header />
-        <Component {...pageProps} />
+        <PageContextProvider>
+          <Header />
+          <Component {...pageProps} />
+        </PageContextProvider>
       </ThemeProvider>
     </>
   );
-};
+}
 
 export default MyApp;
