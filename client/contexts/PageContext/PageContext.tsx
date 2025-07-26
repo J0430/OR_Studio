@@ -19,7 +19,7 @@ const PageContext = createContext<PageContextState | undefined>(undefined);
 export const PageContextProvider = ({
   children,
   preloader = null,
-  timeoutDuration = 1500,
+  timeoutDuration = 3000,
 }: PageContextProviderProps) => {
   const router = useRouter();
   const isDevice = useMediaQuery({ maxWidth: 768 });
@@ -36,33 +36,47 @@ export const PageContextProvider = ({
     ) as PerformanceNavigationTiming[];
     const navType = navEntries[0]?.type;
 
-    // Always show on /works
+    let timer: NodeJS.Timeout;
+
+    // Always show preloader on /works
     if (isWorksPath) {
       setIsPreloaderVisible(true);
-      const timer = setTimeout(() => {
+      timer = setTimeout(() => {
         setIsPreloaderVisible(false);
       }, timeoutDuration);
-      return () => clearTimeout(timer);
+    } else {
+      // Only show once on / (first load or reload)
+      const hasShown = sessionStorage.getItem("preloaderShown");
+      const hasUsedShallow = window.history.state?.shallow;
+      const shouldShow =
+        isHomePath &&
+        (navType === "navigate" || navType === "reload") &&
+        !hasShown &&
+        !hasUsedShallow;
+
+      if (shouldShow) {
+        sessionStorage.setItem("preloaderShown", "true");
+        setIsPreloaderVisible(true);
+        timer = setTimeout(() => {
+          setIsPreloaderVisible(false);
+        }, timeoutDuration);
+      }
     }
 
-    // Only show once on / (first load or reload, not via shallow push)
-    const hasShown = sessionStorage.getItem("preloaderShown");
-    const hasUsedShallow = window.history.state?.shallow;
-    const shouldShow =
-      isHomePath &&
-      (navType === "navigate" || navType === "reload") &&
-      !hasShown &&
-      !hasUsedShallow;
-
-    if (shouldShow) {
-      sessionStorage.setItem("preloaderShown", "true");
-      setIsPreloaderVisible(true);
-      const timer = setTimeout(() => {
-        setIsPreloaderVisible(false);
-      }, timeoutDuration);
-      return () => clearTimeout(timer);
-    }
+    return () => {
+      clearTimeout(timer);
+    };
   }, [preloader, router.pathname, timeoutDuration, isWorksPath, isHomePath]);
+
+  // Prevent body scroll while preloader is visible
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (isPreloaderVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isPreloaderVisible]);
 
   const contextValue = useMemo(
     () => ({
@@ -75,35 +89,31 @@ export const PageContextProvider = ({
 
   return (
     <PageContext.Provider value={contextValue}>
-      <div
-        style={{
-          position: "relative",
-          zIndex: 0,
-        }}>
-        {/* Show preloader over content */}
-        {preloader && (
-          <div
-            style={{
-              opacity: isPreloaderVisible ? 1 : 0,
-              pointerEvents: isPreloaderVisible ? "auto" : "none",
-              transition: "opacity 0.8s ease-in-out",
-              position: "fixed",
-              top: 0,
-              left: 0,
-              width: "100vw",
-              height: "100vh",
-              zIndex: 1000000,
-            }}>
-            {preloader}
-          </div>
-        )}
+      {/* Preloader Overlay */}
+      {preloader && (
         <div
           style={{
-            filter: isPreloaderVisible ? "blur(10px)" : "none",
-            transition: "filter 0.6s ease-in-out",
+            opacity: isPreloaderVisible ? 1 : 0,
+            pointerEvents: isPreloaderVisible ? "auto" : "none",
+            transition: "opacity 0.8s ease-in-out",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            zIndex: 1000000,
           }}>
-          {children}
+          {preloader}
         </div>
+      )}
+
+      {/* App Content (blurred when preloader visible) */}
+      <div
+        style={{
+          filter: isPreloaderVisible ? "blur(10px)" : "none",
+          transition: "filter 0.6s ease-in-out",
+        }}>
+        {children}
       </div>
     </PageContext.Provider>
   );

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNav } from "@contexts/NavContext";
 import { loadDynamicImports } from "@utils/loadDynamicImports";
 import styles from "../WorksControl/WorksControl.module.scss";
 
