@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNav } from "@contexts/NavContext";
-import { usePreloader } from "@contexts/MainPreloaderContext";
+import { usePreloaderContext } from "@contexts/PreloaderContext";
 import { logos } from "utils/globals";
 import { dynamicImportComponents } from "utils/dynamicImportComponents";
 import Image from "next/image";
