@@ -58,6 +58,16 @@
   opacity: 0;
   pointer-events: none;
 }
+.hamburgerWrapper {
+  z-index: 99999;
+  pointer-events: auto;
+} // Allows interaction
+
+//   @media (max-width: 768px) {
+//     top: m.rem(16);
+//     right: m.rem(16);
+//   }
+// }
 
 /* =========================== */
 /* Fullscreen Menu Overlay     */
@@ -68,22 +78,23 @@
   left: 0;
   width: 100%;
   height: 100dvh;
-  z-index: 1000001;
+  z-index: 10000;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   pointer-events: all;
   overflow: visible;
-  isolation: isolate; // 💡 key to prevent blur bleeding onto children
+  isolation: isolate;
+  backdrop-filter: blur(60px);
+  background-color: var(
+    --overlay-background
+  ); // rgba(0, 0, 0, 0.6)// 💡 key to prevent blur bleeding onto children
 
   &::before {
     content: "";
     position: absolute;
     inset: 0;
-    backdrop-filter: blur(30px);
-    background-color: var(--overlay-background); // rgba(0, 0, 0, 0.6)
-    z-index: 0;
   }
 
   /* Children like navList stay unblurred */

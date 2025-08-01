@@ -24,27 +24,13 @@ const AboutBanner = () => {
         <div className={styles.textContainer}>
           <p className={styles.description} aria-label="About OR Studio text">
             {words.map((word, index) => (
-              <motion.span
-                key={index}
-                className={styles.word}
-                initial={{ opacity: 0.5, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{
-                  delay: index * 0.09,
-                  duration: 0.3,
-                }}>
+              <motion.span key={index} className={styles.word}>
                 {word}&nbsp;
               </motion.span>
             ))}
           </p>
           <motion.div
             className={styles.linkWrapper}
-            initial={{ opacity: 1 }}
-            animate={isInView ? { opacity: 0.8 } : {}}
-            transition={{
-              delay: words.length * 0.09 + 0.3,
-              duration: 0.4,
-            }}
             whileHover={{ scale: 1.08 }}>
             <Link href="/about" className={styles.link}>
               More about us

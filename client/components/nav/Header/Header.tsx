@@ -60,14 +60,16 @@ const Header: FC = () => {
         </Link>
       </motion.div>
 
-      <HamburgerToggleButton
-        isOpen={isNavOpen}
-        onToggle={toggleNav}
-        gapBetweenLines={10}
-        lineWidth={30}
-        aria-expanded={isNavOpen}
-        aria-controls="main-navigation"
-      />
+      <div className={styles.hamburgerWrapper}>
+        <HamburgerToggleButton
+          isOpen={isNavOpen}
+          onToggle={toggleNav}
+          gapBetweenLines={10}
+          lineWidth={30}
+          aria-expanded={isNavOpen}
+          aria-controls="main-navigation"
+        />
+      </div>
 
       <AnimatePresence>
         {isNavOpen && (
@@ -77,7 +79,7 @@ const Header: FC = () => {
             initial={{ opacity: 0, y: "100%" }}
             animate={{ opacity: 1, y: "0%" }}
             exit={{ opacity: 0, y: "100%" }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}>
+            transition={{ duration: 1, ease: "easeInOut" }}>
             <NavbarLinks setIsNavOpen={setIsNavOpen} isNavOpen={isNavOpen} />
           </motion.nav>
         )}

@@ -1,4 +1,3 @@
-// ✅ WorksGrid.tsx (updated to support empty/default works)
 import React from "react";
 import MediaCard from "@components/common/MediaCard";
 import styles from "./WorksGrid.module.scss";
