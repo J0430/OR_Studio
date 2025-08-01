@@ -1,20 +1,16 @@
-// DropdownMenu.tsx
+// DropdownMenu.tsx:
+
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { RiArrowDownSLine } from "react-icons/ri";
+import type { DropdownMenuProps } from "./DropdownMenu.types"; // ✅ imported from correct file
 import styles from "./DropdownMenu.module.scss";
 
-interface DropdownMenuProps {
-  categories: string[];
-  selectedCategory: string;
-  onCategorySelect: (category: string) => void;
-}
-
-const DropdownMenu = ({
+const DropdownMenu: React.FC<DropdownMenuProps> = ({
   categories,
   selectedCategory,
   onCategorySelect,
-}: DropdownMenuProps) => {
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 

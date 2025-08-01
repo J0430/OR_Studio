@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "./WorksPreloader.module.scss";
-import { usePageContext } from "@contexts/PageContext/PageContext";
+import { usePreloaderContext } from "@contexts/PreloaderContext/PreloaderContext";
 
 const WorksPreloader = () => {
-  const { isPreloaderVisible } = usePageContext();
+  const { isPreloaderVisible } = usePreloaderContext();
   const totalDuration = 2;
   const strokeDuration = 1;
 

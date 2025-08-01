@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
-import { dynamicImportComponents } from "@utils/dynamicImportComponents";
+import { dynamicImportComponents } from "utils/dynamicImportComponents";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../Header/Header.module.scss";
+import styles from "./Header.module.scss";
 
-import { usePageContext } from "@contexts/PageContext"; // ✅ Import context
+import { usePreloaderContext } from "@contexts/PreloaderContext"; // ✅ Import context
 
 import type { FC, KeyboardEvent } from "react";
 
@@ -19,12 +19,12 @@ const { HamburgerToggleButton, AnimatedLogo } = dynamicImportComponents(
 const { NavbarLinks } = dynamicImportComponents("nav", ["NavbarLinks"]);
 
 const Header: FC = () => {
-  const { isPreloaderVisible } = usePageContext();
+  const { isPreloaderVisible } = usePreloaderContext();
   if (isPreloaderVisible) return null;
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
   const pathname = usePathname();
-  console.log("Rendering Header. Preloader visible?", isPreloaderVisible);
+  console.log("Rendering Header. Preloader visible?", "Loca");
 
   // ✅ Don't render at all if preloader is visible
   if (isPreloaderVisible) return null;

@@ -1,11 +1,16 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import Head from "next/head";
 import { AnimatePresence } from "framer-motion";
+import { categories } from "utils/globals";
 
-import { usePageContext, PageContextProvider } from "@contexts/PageContext";
+import {
+  usePreloaderContext,
+  PreloaderContextProvider,
+} from "@contexts/PreloaderContext";
+
 import dynamic from "next/dynamic";
-
-import { loadDynamicImports } from "@utils/loadDynamicImports";
+import { loadDynamicImports } from "utils/loadDynamicImports";
+import { useMediaQuery } from "react-responsive";
 
 import {
   residentialData,
@@ -16,23 +21,21 @@ import {
 
 import styles from "@styles/pages/works.module.scss";
 
-// ✅ Lazy-load content components only (not WorksPreloader)
-const { WorksGrid, WorksControl } = loadDynamicImports("sections/works", [
-  "WorksGrid",
-  "WorksControl",
-]);
+// Lazy load modal only
 const WorksModal = dynamic(
   () => import("@components/sections/works/WorksModal/WorksModal"),
   { ssr: false }
 );
-const WorksContent = () => {
-  const { isPreloaderVisible } = usePageContext();
 
-  const [state, setState] = useState({
-    categorySelected: "All",
-    selectedImage: null,
-    selectedProject: null,
-  });
+// Lazy load grid & controls
+const { WorksGrid, WorksControl } = loadDynamicImports("sections/works", [
+  "WorksGrid",
+  "WorksControl",
+]);
+
+const WorksContent = () => {
+  const { isPreloaderVisible } = usePreloaderContext();
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const categoryDataMap = useMemo(
     () => ({
@@ -40,21 +43,37 @@ const WorksContent = () => {
       "Urban Planning": Object.values(urbanPlanningData.projects || {}),
       Commercial: Object.values(commercialData.projects || {}),
       Office: Object.values(officeData.projects || {}),
+      Animation: [], // Add later
     }),
     []
   );
 
-  const works = useMemo(() => {
-    if (state.categorySelected === "All") {
-      return [
-        ...Object.values(residentialData.projects || {}),
-        ...Object.values(commercialData.projects || {}),
-        ...Object.values(urbanPlanningData.projects || {}),
-        ...Object.values(officeData.projects || {}),
-      ];
+  // All projects for mobile view
+  const allProjects = useMemo(() => {
+    return Object.values(categoryDataMap).flat();
+  }, [categoryDataMap]);
+
+  const [state, setState] = useState({
+    categorySelected: isMobile ? null : categories?.[1],
+    selectedImage: null,
+    selectedProject: null,
+  });
+
+  // Update state on first mount if window size changes (hydration-safe)
+  useEffect(() => {
+    if (isMobile && state.categorySelected !== null) {
+      setState((prev) => ({ ...prev, categorySelected: null }));
     }
-    return categoryDataMap[state.categorySelected] || [];
-  }, [state.categorySelected, categoryDataMap]);
+    if (!isMobile && state.categorySelected === null) {
+      setState((prev) => ({ ...prev, categorySelected: categories?.[0] }));
+    }
+  }, [isMobile]);
+
+  const works = useMemo(() => {
+    return state.categorySelected
+      ? categoryDataMap[state.categorySelected]
+      : allProjects;
+  }, [state.categorySelected, categoryDataMap, allProjects]);
 
   const handleCategoryClick = useCallback((categoryName) => {
     setState({
@@ -112,16 +131,16 @@ const WorksContent = () => {
   );
 };
 
+// Wrap in PageContext
 export default function WorksPage() {
   const { WorksPreloader } = loadDynamicImports("preloaders", [
     "WorksPreloader",
   ]);
   return (
-    <PageContextProvider
+    <PreloaderContextProvider
       preloader={<WorksPreloader />}
-      timeoutDuration={1800} //
-    >
+      timeoutDuration={1800}>
       <WorksContent />
-    </PageContextProvider>
+    </PreloaderContextProvider>
   );
 }

@@ -1,3 +1,5 @@
+//NavbarLinks.module.scss:
+
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
@@ -65,17 +67,30 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100dvh; /* Using "dvh" for more reliable height relative to viewport */
-  z-index: 10001;
+  height: 100dvh;
+  z-index: 1000001;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   pointer-events: all;
-  backdrop-filter: blur(30px);
-  background-color: var(--overlay-background);
   overflow: visible;
-  /* No more animation or keyframes needed here */
+  isolation: isolate; // 💡 key to prevent blur bleeding onto children
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(30px);
+    background-color: var(--overlay-background); // rgba(0, 0, 0, 0.6)
+    z-index: 0;
+  }
+
+  /* Children like navList stay unblurred */
+  > * {
+    position: relative;
+    z-index: 2;
+  }
 }
 
 /* Prevent menu overlap when it opens */

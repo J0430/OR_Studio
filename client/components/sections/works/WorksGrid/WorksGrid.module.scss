@@ -9,6 +9,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 0;
+  background-color: var(--background-color);
 }
 
 /* ============================= */
@@ -16,9 +17,9 @@
 /* ============================= */
 .worksGrid {
   display: grid;
-  gap: 0.25rem;
-  padding-top: 2rem;
-  grid-template-columns: repeat(6, 1fr); // 6 columns allow flexible spans
+  gap: m.rem(2);
+  padding-top: m.rem(32);
+  grid-template-columns: repeat(6, 1fr);
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -36,10 +37,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    transform: translateY(m.rem(20));
+    animation: fadeUp 0.8s ease-out forwards;
 
     &:nth-child(5n + 1),
     &:nth-child(5n + 2) {
-      // Every row of two images (items 1 & 2, then 6 & 7, etc.)
       grid-column: span 3;
       aspect-ratio: 16 / 9;
     }
@@ -47,10 +50,52 @@
     &:nth-child(5n + 3),
     &:nth-child(5n + 4),
     &:nth-child(5n + 5) {
-      // Every row of three images (items 3,4,5, then 8,9,10, etc.)
       grid-column: span 2;
       aspect-ratio: 4 / 3;
     }
+
+    // ✅ Stagger animation delays via nth-child
+    &:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.15s;
+    }
+    &:nth-child(4) {
+      animation-delay: 0.2s;
+    }
+    &:nth-child(5) {
+      animation-delay: 0.25s;
+    }
+    &:nth-child(6) {
+      animation-delay: 0.3s;
+    }
+    &:nth-child(7) {
+      animation-delay: 0.35s;
+    }
+    &:nth-child(8) {
+      animation-delay: 0.4s;
+    }
+    &:nth-child(9) {
+      animation-delay: 0.45s;
+    }
+    &:nth-child(10) {
+      animation-delay: 0.5s;
+    }
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(m.rem(20));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -105,146 +150,15 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  min-height: 6em;
+  min-height: m.rem(96);
   width: 100%;
-  padding: 0.5em 0.75em;
-  font-size: 0.875rem;
+  padding: m.rem(8) m.rem(12);
+  font-size: m.rem(14);
   line-height: 1.5;
   letter-spacing: 0.02em;
-  color: #fff;
+  color: v.$white;
   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), transparent);
   opacity: 0;
-  transform: translateY(1em);
+  transform: translateY(m.rem(16));
   transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
-
-// .scrollShadow {
-//   position: relative;
-//   overflow-y: auto;
-//   overflow-x: hidden;
-//   max-height: 100vh; // 🚩 Explicit height for scrolling
-//   width: 100%;
-
-//   .worksGrid {
-//     overflow: hidden;
-
-//     display: grid;
-//     gap: 0.2em;
-//     overflow: visible;
-//     /* =========================== */
-//     /* ✅ Grid Items               */
-//     /* =========================== */
-//     .worksGridItem {
-//       /* ===== Positioning ===== */
-//       position: relative;
-
-//       cursor: pointer;
-//       /* ===== Box Model ===== */
-//       overflow: hidden;
-//       aspect-ratio: 1 / 1;
-
-//       /* ===== Layout ===== */
-//       display: flex;
-//       align-items: center;
-//       justify-content: center;
-
-//       /* ===== Visual ===== */
-//       background-color: var(--background-color);
-//       will-change: transform;
-
-//       /* =========================== */
-//       /* ✅ Special Grid Variants   */
-//       /* =========================== */
-//       &:nth-child(1) {
-//         grid-column: span 2;
-//         aspect-ratio: 2 / 1; // ✅ First item wider
-//       }
-
-//       &:nth-child(7n) {
-//         grid-row: span 2;
-//         aspect-ratio: 1 / 2; // ✅ Tall item every 7th
-//       }
-
-//       /* =========================== */
-//       /* ✅ Image inside Item       */
-//       /* =========================== */
-//       img {
-//         /* ===== Box Model ===== */
-//         width: 100%;
-//         height: 100%;
-
-//         /* ===== Visual ===== */
-//         transition:
-//           opacity 0.6s ease,
-//           transform 0.3s ease;
-//         opacity: 1;
-
-//         &:hover {
-//           transform: scale(1.05);
-//           opacity: 0.9;
-//         }
-//       }
-
-//       /* =========================== */
-//       /* ✅ Placeholder (Loader)     */
-//       /* =========================== */
-//       .worksPlaceholder {
-//         /* ===== Box Model ===== */
-//         width: 100%;
-//         height: 100%;
-//         overflow: hidden;
-
-//         /* ===== Visual ===== */
-//         background-color: var(--overlay-background);
-//         animation: pulse 1.5s infinite ease-in-out;
-//       }
-
-//       /* ===== Motion ===== */
-//       @keyframes pulse {
-//         0% {
-//           opacity: 0.7;
-//         }
-//         50% {
-//           opacity: 1;
-//         }
-//         100% {
-//           opacity: 0.7;
-//         }
-//       }
-//     }
-
-//     @media (max-width: 768px) {
-//       padding-top: 5rem;
-//       grid-template-columns: repeat(2, 1fr);
-//       gap: 0.15em;
-//     }
-
-//     @media (min-width: 769px) {
-//       grid-template-columns: repeat(3, 1fr);
-//     }
-//   }
-
-//   .topShadow,
-//   .bottomShadow {
-//     position: absolute;
-//     left: 0;
-//     right: 0;
-//     height: 2rem;
-//     pointer-events: none;
-//     z-index: 2;
-//     opacity: 0;
-//     transition: opacity 0.3s ease;
-//   }
-
-//   .topShadowVisible {
-//     opacity: 1;
-//     top: 0;
-//     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
-//   }
-
-//   .bottomShadowVisible {
-//     opacity: 1;
-//     bottom: 0;
-//     background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
-//   }
-// }
