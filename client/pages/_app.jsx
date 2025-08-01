@@ -2,10 +2,11 @@
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
 import "@styles/globals.scss";
-import { dynamicImportComponents } from "@utils/dynamicImportComponents";
-import { PageContextProvider } from "@contexts/PageContext";
+import Header from "@components/nav/Header/Header";
+import { dynamicImportComponents } from "utils/dynamicImportComponents";
+import { PreloaderContextProvider } from "@contexts/PreloaderContext";
 
-const { Header } = dynamicImportComponents("nav", ["Header"]);
+// const { Header } = dynamicImportComponents("nav", ["Header"]);
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -21,10 +22,10 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <ThemeProvider>
-        <PageContextProvider>
+        <PreloaderContextProvider>
           <Header />
           <Component {...pageProps} />
-        </PageContextProvider>
+        </PreloaderContextProvider>
       </ThemeProvider>
     </>
   );

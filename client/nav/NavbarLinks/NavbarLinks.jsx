@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useNav } from "@contexts/NavContext";
 import styles from "./NavbarLinks.module.scss";
 
 const containerVariants = {

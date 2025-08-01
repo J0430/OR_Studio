@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
-import { fetchData } from "@utils/api";
-import { loadDynamicImports } from "@utils/loadDynamicImports";
+import { officeData } from "@public/data";
+import { loadDynamicImports } from "utils/loadDynamicImports";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
@@ -12,19 +12,7 @@ import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/S
 
 const { LandingAbout } = loadDynamicImports("sections/about", ["LandingAbout"]);
 
-export const getStaticProps = async () => {
-  try {
-    const officeData = await fetchData("office");
-    return { props: { officeData } };
-  } catch (error) {
-    console.error("Error in getStaticProps:", error.message);
-    return {
-      props: { officeData: { projects: {}, frontImages: [], category: "" } },
-    };
-  }
-};
-
-export default function About({ officeData }) {
+export default function About() {
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const [isPageReady, setIsPageReady] = useState(false);

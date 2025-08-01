@@ -1,3 +1,5 @@
+//NavbarLinks.module.scss:
+
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
@@ -9,7 +11,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1100; // Ensure navbar stays on top
+  z-index: 1100;
   pointer-events: all;
   display: flex;
   justify-content: space-between;
@@ -47,9 +49,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
   gap: m.rem(24);
-  z-index: 10001;
+  z-index: 10; // stays above blurred layer
+  position: relative;
 
   @media screen and (max-width: 768px) {
     gap: m.rem(20);
@@ -68,6 +70,7 @@
   transition: all 0.2s ease-in-out;
   padding: 0.5rem 1rem;
   text-align: center;
+  animation: fadeInUp 0.3s ease forwards;
 
   &:hover {
     transform: scale(1.05);
@@ -76,6 +79,20 @@
 
   @media screen and (max-width: 768px) {
     font-size: m.rem(24);
+  }
+}
+.navItem {
+  animation: fadeInUp 0.3s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

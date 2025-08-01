@@ -4,7 +4,7 @@ import Head from "next/head";
 import styles from "@styles/pages/contact.module.scss";
 import DynamicForm from "@components/common/DynamicForm/DynamicForm";
 import ContactHeader from "@components/sections/contact/ContactHeader/ContactHeader";
-import { logos } from "@utils/globals";
+import { logos } from "utils/globals";
 import * as yup from "yup";
 
 // ✅ Schema with correct field names

@@ -1,8 +1,12 @@
 // pages/index.tsx (HomePage)
 import { useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
-import { loadDynamicImports } from "@utils/loadDynamicImports";
-import { usePageContext, PageContextProvider } from "@contexts/PageContext";
+import { loadDynamicImports } from "utils/loadDynamicImports";
+import {
+  usePreloaderContext,
+  PreloaderContextProvider,
+} from "@contexts/PreloaderContext";
+
 import { homeData } from "@public/data";
 import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
@@ -25,7 +29,7 @@ const dynamicComponents = loadDynamicImports("sections/home", [
 ]);
 
 function HomeContent() {
-  const { isDevice, isPreloaderVisible } = usePageContext();
+  const { isDevice, isPreloaderVisible } = usePreloaderContext();
 
   const sections = useMemo(
     () =>
@@ -81,8 +85,8 @@ export default function HomePage() {
     "WorksPreloader",
   ]);
   return (
-    <PageContextProvider preloader={<WorksPreloader />}>
+    <PreloaderContextProvider preloader={<WorksPreloader />}>
       <HomeContent />
-    </PageContextProvider>
+    </PreloaderContextProvider>
   );
 }

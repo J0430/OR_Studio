@@ -3,16 +3,16 @@ import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNav } from "@contexts/NavContext";
 import { usePreloader } from "@contexts/MainPreloaderContext";
-import { logos } from "@utils/globals";
-import { loadDynamicImports } from "@utils/loadDynamicImports";
+import { logos } from "utils/globals";
+import { dynamicImportComponents } from "utils/dynamicImportComponents";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.scss";
 
-const { HamburgerToggleButton } = loadDynamicImports("common", [
+const { HamburgerToggleButton } = dynamicImportComponents("common", [
   "HamburgerToggleButton",
 ]);
-const { NavbarLinks } = loadDynamicImports("nav", ["NavbarLinks"]);
+const { NavbarLinks } = dynamicImportComponents("nav", ["NavbarLinks"]);
 
 const Header = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
