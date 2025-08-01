@@ -41,7 +41,6 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    z-index: 1;
     margin-top: 0.5%;
     padding: 0 m.rem(16);
     padding-top: m.rem(16); // Space from divider line
@@ -96,7 +95,7 @@
     /* =========================== */
     .worksDropdownMobile {
       position: fixed; // Always visible and stays at top
-      top: 1rem; // Adjust this value as needed
+      top: 0.5rem; // Adjust this value as needed
       left: 50%; // Center horizontally
       transform: translateX(-50%); // Center trick
       z-index: 900000 !important; // Ensure it's above everything
