@@ -7,15 +7,15 @@
 /* Navbar (Main Container)  */
 /* =========================== */
 .navbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1;
   pointer-events: all;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
   padding: 1rem;
   overflow: visible;
 

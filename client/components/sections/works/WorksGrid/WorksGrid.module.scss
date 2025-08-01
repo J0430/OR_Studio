@@ -17,7 +17,7 @@
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
-    gap: m.rem(1.5);
+    gap: m.rem(2);
     padding-top: 0;
   }
 
@@ -50,12 +50,12 @@
 
       &:nth-child(6n + 1) {
         grid-column: span 2;
-        aspect-ratio: 16 / 9;
+        aspect-ratio: 1.45;
       }
 
       &:nth-child(6n + 2) {
         grid-column: 1;
-        aspect-ratio: 1.288;
+        aspect-ratio: 1.29;
       }
 
       &:nth-child(6n + 3) {
@@ -73,7 +73,7 @@
       &:nth-child(6n + 5),
       &:nth-child(6n + 6) {
         grid-column: span 1;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 1.45;
       }
     }
 

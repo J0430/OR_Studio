@@ -48,14 +48,13 @@ const WorksControl: React.FC<WorksControlProps> = ({
             onCategorySelect={onCategorySelect}
           />
         </nav>
-      </div>
-
-      <div className={styles.worksDropdownMobile}>
-        <DropdownMenu
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategorySelect={onCategorySelect}
-        />
+        <div className={styles.worksDropdownMobile}>
+          <DropdownMenu
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onCategorySelect={onCategorySelect}
+          />
+        </div>
       </div>
     </section>
   );
