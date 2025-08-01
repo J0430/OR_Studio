@@ -80,22 +80,19 @@
 @media (max-width: 768px) {
   .aboutWrapper {
     padding: m.rem(1) m.rem(1.2); /* Adjust padding for mobile */
-  }
 
-  .textContainer {
-    max-width: 90%; /* Increase width for mobile */
-  }
-
-  .description {
-    font-size: m.rem(18); /* Adjust font size for mobile */
-  }
-
-  .linkWrapper {
-    margin-top: m.rem(20);
-  }
-
-  .link {
-    font-size: m.rem(16); /* Adjust link font size for mobile */
+    .textContainer {
+      max-width: 90%; /* Increase width for mobile */
+      .description {
+        font-size: m.rem(16); /* Adjust font size for mobile */
+      }
+      .linkWrapper {
+        margin-top: m.rem(20);
+        .link {
+          font-size: m.rem(16); /* Adjust link font size for mobile */
+        }
+      }
+    }
   }
 }
 
