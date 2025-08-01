@@ -17,7 +17,7 @@ const { NavbarLinks } = dynamicImportComponents("nav", ["NavbarLinks"]);
 const Header = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const { isNavOpen, setIsNavOpen, pathname } = useNav();
-  const { isPreloaderVisible = false } = usePreloader();
+  const { isPreloaderVisible = false } = usePreloaderContext();
   const navRef = useRef(null);
 
   useEffect(() => {
