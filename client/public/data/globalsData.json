@@ -11,8 +11,7 @@
     "Residential",
     "Commercial",
     "Urban Planning",
-    "Office",
-    "Animation"
+    "Office"
   ],
   "preloaderLogos": ["/assets/logos/OR Studio.webp", "/assets/logos/OR.webp"]
 }

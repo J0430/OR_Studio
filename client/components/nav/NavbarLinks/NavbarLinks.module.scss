@@ -54,6 +54,7 @@
   position: relative;
 
   @media screen and (max-width: 768px) {
+    margin-top: m.rem(25);
     gap: m.rem(20);
   }
 }
@@ -78,7 +79,7 @@
   }
 
   @media screen and (max-width: 768px) {
-    font-size: m.rem(24);
+    font-size: m.rem(22);
   }
 }
 .navItem {

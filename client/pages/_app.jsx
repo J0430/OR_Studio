@@ -21,12 +21,12 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ThemeProvider>
-        <PreloaderContextProvider>
-          <Header />
-          <Component {...pageProps} />
-        </PreloaderContextProvider>
-      </ThemeProvider>
+      {/* <ThemeProvider> */}
+      <PreloaderContextProvider>
+        <Header />
+        <Component {...pageProps} />
+      </PreloaderContextProvider>
+      {/* </ThemeProvider> */}
     </>
   );
 }
