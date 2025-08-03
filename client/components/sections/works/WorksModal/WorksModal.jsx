@@ -5,9 +5,10 @@ import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import useClickOutside from "@hooks/useClickOuside";
-import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
+
 import styles from "./WorksModal.module.scss";
 
+const { IconButton } = loadDynamicImports("common", ["IconButton"]);
 const WorksModal = ({ selectedImage, project, onClose }) => {
   const isDevice = useMediaQuery({ maxWidth: 768 });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -118,7 +119,7 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
               layoutId={selectedImage}>
               {hasMultipleImages && (
                 <div className={`${styles.direction} ${styles.left}`}>
-                  <DirectionalButton
+                  <IconButton
                     direction="left"
                     width={isDevice ? 1.5 : 3}
                     height={isDevice ? 1.5 : 3}
@@ -129,7 +130,6 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
 
               <motion.div
                 key={project.images[currentImageIndex] || currentImageIndex}
-                layoutId={selectedImage}
                 className={`${styles.imageTransitionWrapper} ${
                   zoomed ? styles.zoomed : ""
                 }`}
@@ -152,7 +152,7 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
 
               {hasMultipleImages && (
                 <div className={`${styles.direction} ${styles.right}`}>
-                  <DirectionalButton
+                  <IconButton
                     direction="right"
                     width={isDevice ? 1.5 : 3}
                     height={isDevice ? 1.5 : 3}
