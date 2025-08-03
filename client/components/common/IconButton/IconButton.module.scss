@@ -1,0 +1,143 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+.iconButtonWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+
+  .iconButton {
+    position: absolute;
+    width: var(--button-width, 3.5rem);
+    height: var(--button-height, 3.5rem);
+    border: m.rem(1.7) solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background-color 0.3s ease,
+      width 0.3s ease,
+      height 0.3s ease;
+    width: var(--button-width, 3.5rem);
+    background-color: rgba(0, 0, 0, 0.3);
+    height: var(--button-height, 3.5rem);
+
+    &:hover {
+      width: calc(var(--button-width, 3.5rem) * 1.1);
+      height: calc(var(--button-height, 3.5rem) * 1.1);
+      //   transform: scale(1.1);
+    }
+  }
+
+  .arrowIcon {
+    width: m.rem(12);
+    height: m.rem(12);
+    border-bottom: m.rem(1.2) solid white;
+    border-right: m.rem(1.2) solid white;
+    display: block;
+    pointer-events: none;
+    transform-origin: center center;
+    transition: none !important; // Prevent animation on hover
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  .zoomSymbol {
+    font-size: m.rem(18);
+    font-weight: 400;
+    color: white;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  &.up .iconButton {
+    left: 50%;
+    bottom: 1.5rem;
+    transform: translateX(-50%);
+
+    .arrowIcon {
+      transform: rotate(-135deg);
+      margin-top: 0.35rem;
+    }
+  }
+
+  &.down .iconButton {
+    left: 50%;
+    bottom: 1.5rem;
+    transform: translateX(-50%);
+
+    .arrowIcon {
+      transform: rotate(45deg);
+      margin-bottom: 0.27rem;
+    }
+  }
+
+  &.left .iconButton {
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+
+    .arrowIcon {
+      transform: rotate(135deg);
+      margin-left: 0.3rem;
+    }
+  }
+
+  &.right .iconButton {
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+
+    .arrowIcon {
+      transform: rotate(-45deg);
+      margin-right: 0.3rem;
+    }
+  }
+
+  &.zoomIn .iconButton,
+  &.zoomOut .iconButton {
+    bottom: 1.5rem;
+    right: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .iconButton {
+      width: m.rem(36);
+      height: m.rem(36);
+      border-width: m.rem(1.2);
+    }
+
+    .arrowIcon {
+      width: m.rem(10);
+      height: m.rem(10);
+    }
+
+    .zoomSymbol {
+      font-size: m.rem(16);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .iconButton {
+      width: m.rem(30);
+      height: m.rem(30);
+      border-width: m.rem(1);
+    }
+
+    .arrowIcon {
+      width: m.rem(8);
+      height: m.rem(8);
+    }
+
+    .zoomSymbol {
+      font-size: m.rem(14);
+    }
+  }
+}
