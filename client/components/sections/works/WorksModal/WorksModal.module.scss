@@ -1,3 +1,5 @@
+//WorksModal.module.scss:
+
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
@@ -5,7 +7,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 1;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -19,6 +21,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  z-index: 2;
 }
 
 .modalContent {
@@ -32,6 +35,7 @@
   justify-content: center;
   align-items: center;
   background-color: transparent;
+  z-index: 2;
 
   .closeButton {
     position: absolute;
@@ -40,7 +44,7 @@
     border: none;
     background: none;
     color: var(--text-color);
-    z-index: 999999;
+    z-index: 3;
     font-size: 2rem;
     cursor: pointer;
     transition: opacity 0.3s ease;
@@ -51,7 +55,6 @@
   }
 }
 
-/* Image Display */
 .imageWrapper {
   width: 100%;
   height: 70vh;
@@ -62,8 +65,19 @@
 
   .direction {
     position: absolute;
+
     top: 50%;
     transform: translateY(-50%);
+
+    &.left {
+      left: 2rem;
+      z-index: 10;
+    }
+
+    &.right {
+      right: 2rem;
+      z-index: 10;
+    }
   }
 }
 
@@ -73,13 +87,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: zoom-in;
+  cursor: default;
 
   &.zoomed {
-    cursor: zoom-out;
-
     img {
       transform: scale(1.8);
+      cursor: zoom-out;
       transition: transform 0.4s ease;
     }
   }
@@ -90,16 +103,17 @@
     object-fit: contain;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     transition: transform 0.3s ease;
+    cursor: zoom-out;
   }
 }
 
-/* Thumbnail Bar */
 .thumbnailContainer {
   height: 8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  z-index: 2;
 }
 
 .thumbnailGallery {
@@ -109,6 +123,9 @@
   gap: 1rem;
   padding: 1rem 0;
   overflow-x: auto;
+  @media (max-width: 768px) {
+    margin-bottom: 40%; // ✅ Tablet
+  }
 
   .thumbnailWrapper {
     border: none;
@@ -117,7 +134,7 @@
     background-color: transparent;
     cursor: pointer;
     transition: transform 0.3s ease;
-
+    z-index: 10;
     .thumbnailImage {
       width: 100%;
       height: 100%;

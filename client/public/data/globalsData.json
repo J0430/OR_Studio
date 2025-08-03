@@ -1,10 +1,10 @@
 {
   "logos": [
-    "/assets/logos/Or_Studio_w.webp",
-    "/assets/logos/OR Studio.webp",
-    "/assets/logos/OR.webp",
-    "/assets/logos/OR_white.webp",
-    "/assets/logos/OR.svg"
+    "/assets/logos/or-studio.webp",
+    "/assets/logos/or-studio.svg",
+    "/assets/logos/or-studio-white.webp",
+    "/assets/logos/or-white.webp",
+    "/assets/logos/or_studio_w.webp"
   ],
   "categories": [
     "Works",
@@ -13,5 +13,8 @@
     "Urban Planning",
     "Office"
   ],
-  "preloaderLogos": ["/assets/logos/OR Studio.webp", "/assets/logos/OR.webp"]
+  "preloaderLogos": [
+    "/assets/logos/or-studio.webp",
+    "/assets/logos/or-white.webp"
+  ]
 }

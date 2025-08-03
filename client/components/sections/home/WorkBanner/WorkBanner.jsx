@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useMediaQuery } from "react-responsive";
 import { AnimatePresence, motion } from "framer-motion";
+import { loadDynamicImports } from "utils/loadDynamicImports";
 import BannerImage from "@components/common/BannerImage/BannerImage";
 import ProgressBar from "@components/common/ProgressBar/ProgressBar";
-import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
+// import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import styles from "../WorkBanner/WorkBanner.module.scss";
 
+const { IconButton } = loadDynamicImports("common", ["IconButton"]);
 const WorkBanner = ({ images = [] }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -102,7 +104,8 @@ const WorkBanner = ({ images = [] }) => {
             exit={{ opacity: 0.5, filter: "blur(200px) scale(1.1)" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className={styles.imageWrapper}>
-            <DirectionalButton
+            {/* <DirectionalButton */}
+            <IconButton
               direction="left"
               width={isMobile ? 2.3 : 3}
               height={isMobile ? 2.3 : 3}
@@ -114,7 +117,8 @@ const WorkBanner = ({ images = [] }) => {
               }}
             />
             <BannerImage src={images[currentImageIndex]} />
-            <DirectionalButton
+            {/* <DirectionalButton */}
+            <IconButton
               direction="right"
               width={isMobile ? 2.3 : 3}
               height={isMobile ? 2.3 : 3}

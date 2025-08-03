@@ -79,18 +79,6 @@ export default function LandingAbout() {
           <motion.a className={styles.contact} variants={fadeUp}>
             <Link href="/contact">Contact us</Link>
           </motion.a>
-
-          <motion.div
-            className={styles.bottomLeftImage}
-            variants={fadeFromBottomLeft}>
-            <Image
-              src="/assets/logos/Or_Studio_w.webp"
-              alt="Or Studio Logo"
-              width={220}
-              height={100}
-              className={styles.extraSmallImage}
-            />
-          </motion.div>
         </motion.div>
 
         {/* RIGHT BLOCK */}
@@ -101,7 +89,7 @@ export default function LandingAbout() {
           animate="visible">
           <div className={styles.imageWrapper}>
             <Image
-              src="/assets/works/categories/office/Project1/09.webp"
+              src="/assets/works/categories/Office/Project1/mushi(2).webp" // ✅ Uppercase "O"
               alt="Main background"
               width={isMobile ? 800 : 1400}
               height={isMobile ? 400 : 1000}

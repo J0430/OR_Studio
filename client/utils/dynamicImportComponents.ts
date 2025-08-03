@@ -14,7 +14,6 @@ export const dynamicImportComponents = (
 ): Record<string, ComponentType<any>> => {
   return Object.fromEntries(
     componentNames.map((name) => {
-      console.log(name);
       const Component = dynamic(
         () => import(`../components/${basePath}/${name}/${name}`),
         {

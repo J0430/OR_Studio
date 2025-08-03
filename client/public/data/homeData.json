@@ -59,14 +59,7 @@
           "width": 1920,
           "height": 1080
         }
-      ],
-      "frontImage": {
-        "src": "/assets/works/categories/home/evenyehuda/home_evenyehuda_front.webp",
-        "orientation": "landscape",
-        "width": 1920,
-        "height": 1080
-      },
-      "storyline": ""
+      ]
     },
     "Hevron8PenthouseRooftop": {
       "title": "Hevron 8 Penthouse Rooftop",
@@ -96,14 +89,7 @@
           "width": 1920,
           "height": 1080
         }
-      ],
-      "frontImage": {
-        "src": "/assets/works/categories/home/hevron8penthouserooftop/home_hevron8penthouserooftop_front.webp",
-        "orientation": "landscape",
-        "width": 1920,
-        "height": 1080
-      },
-      "storyline": ""
+      ]
     },
     "City69": {
       "title": "City69",
@@ -133,14 +119,51 @@
           "width": 1920,
           "height": 1080
         }
+      ]
+    },
+    "Hevron": {
+      "title": "Elevate House",
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project2/13.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1406
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/8.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1407
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/2.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1407
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/3.webp",
+          "orientation": "landscape",
+          "width": 2442,
+          "height": 1414
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/6.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1406
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/7.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1406
+        }
       ],
-      "frontImage": {
-        "src": "/assets/works/categories/home/city69/home_city69_front.webp",
-        "orientation": "landscape",
-        "width": 1920,
-        "height": 1080
-      },
-      "storyline": ""
+      "storyline": "",
+      "views": 121
     }
   }
 }

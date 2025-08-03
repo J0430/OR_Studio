@@ -1,16 +1,18 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useState, useMemo, useCallback } from "react";
 import Head from "next/head";
 import { AnimatePresence } from "framer-motion";
 import { categories } from "utils/globals";
-
 import {
-  usePreloaderContext,
-  PreloaderContextProvider,
-} from "@contexts/PreloaderContext";
-
+  useWorksPreloader,
+  WorksPreloaderProvider,
+} from "@contexts/WorksPreloaderContext";
 import dynamic from "next/dynamic";
+import {
+  fisherYatesShuffle,
+  interleaveArrays,
+  shuffleProjectImages,
+} from "utils/utils";
 import { loadDynamicImports } from "utils/loadDynamicImports";
-import { useMediaQuery } from "react-responsive";
 
 import {
   residentialData,
@@ -21,79 +23,71 @@ import {
 
 import styles from "@styles/pages/works.module.scss";
 
-// Lazy load modal only
+// ✅ Dynamic Import (No SSR) for Modal
 const WorksModal = dynamic(
   () => import("@components/sections/works/WorksModal/WorksModal"),
   { ssr: false }
 );
 
-// Lazy load grid & controls
-const { WorksGrid, WorksControl } = loadDynamicImports("sections/works", [
-  "WorksGrid",
+// ✅ Lazy-load rest
+const { WorksControl, WorksGrid } = loadDynamicImports("sections/works", [
   "WorksControl",
+  "WorksGrid",
 ]);
 
+const { WorksPreloader } = loadDynamicImports("preloaders", ["WorksPreloader"]);
+
+// ✅ Main Content
 const WorksContent = () => {
-  const { isPreloaderVisible } = usePreloaderContext();
-  const isMobile = useMediaQuery({ maxWidth: 768 });
-
-  const categoryDataMap = useMemo(
-    () => ({
-      Residential: Object.values(residentialData.projects || {}),
-      "Urban Planning": Object.values(urbanPlanningData.projects || {}),
-      Commercial: Object.values(commercialData.projects || {}),
-      Office: Object.values(officeData.projects || {}),
-      Animation: [], // Add later
-    }),
-    []
-  );
-
-  // All projects for mobile view
-  const allProjects = useMemo(() => {
-    return Object.values(categoryDataMap).flat();
-  }, [categoryDataMap]);
+  const { isPreloaderVisible } = useWorksPreloader();
 
   const [state, setState] = useState({
-    categorySelected: isMobile ? null : categories?.[1],
+    categorySelected: categories[1] || "Residential",
     selectedImage: null,
     selectedProject: null,
   });
 
-  // Update state on first mount if window size changes (hydration-safe)
-  useEffect(() => {
-    if (isMobile && state.categorySelected !== null) {
-      setState((prev) => ({ ...prev, categorySelected: null }));
-    }
-    if (!isMobile && state.categorySelected === null) {
-      setState((prev) => ({ ...prev, categorySelected: categories?.[0] }));
-    }
-  }, [isMobile]);
+  const categoryDataMap = useMemo(
+    () => ({
+      Residential: shuffleProjectImages(
+        Object.values(residentialData?.projects || {})
+      ),
+      "Urban Planning": shuffleProjectImages(
+        Object.values(urbanPlanningData?.projects || {})
+      ),
+      Commercial: shuffleProjectImages(
+        Object.values(commercialData?.projects || {})
+      ),
+      Office: shuffleProjectImages(Object.values(officeData?.projects || {})),
+    }),
+    []
+  );
 
-  const works = useMemo(() => {
-    return state.categorySelected
-      ? categoryDataMap[state.categorySelected]
-      : allProjects;
-  }, [state.categorySelected, categoryDataMap, allProjects]);
+  const works = useMemo(
+    () => fisherYatesShuffle(categoryDataMap[state.categorySelected] || []),
+    [state.categorySelected, categoryDataMap]
+  );
 
   const handleCategoryClick = useCallback((categoryName) => {
-    setState({
+    setState((prevState) => ({
+      ...prevState,
       categorySelected: categoryName,
       selectedImage: null,
       selectedProject: null,
-    });
+    }));
   }, []);
 
-  const handleImageClick = useCallback((project) => {
-    setState((prev) => ({
-      ...prev,
-      selectedImage: project.images[0].src,
-      selectedProject: project,
+  const handleImageClick = useCallback((work) => {
+    setState((prevState) => ({
+      ...prevState,
+      selectedImage: work.images[0].src,
+      selectedProject: work,
     }));
   }, []);
 
   const handleCloseModal = useCallback(() => {
-    setState((prev) => ({
-      ...prev,
+    setState((prevState) => ({
+      ...prevState,
       selectedImage: null,
       selectedProject: null,
     }));
@@ -101,46 +95,46 @@ const WorksContent = () => {
 
   return (
     <>
-      <Head>
-        <title>OR Studio | Works</title>
-        <meta name="mobile-web-app-capable" content="yes" />
-      </Head>
-
+      {isPreloaderVisible && <WorksPreloader />}
       <main className={styles.worksPage}>
-        {!isPreloaderVisible && (
-          <>
-            <WorksControl
-              categories={Object.keys(categoryDataMap)}
-              selectedCategory={state.categorySelected}
-              onCategorySelect={handleCategoryClick}
+        <WorksControl
+          categories={Object.keys(categoryDataMap)}
+          selectedCategory={state.categorySelected}
+          onCategorySelect={handleCategoryClick}
+        />
+
+        <WorksGrid works={works} onImageClick={handleImageClick} />
+
+        <AnimatePresence>
+          {state.selectedImage && state.selectedProject && (
+            <WorksModal
+              selectedImage={state.selectedImage}
+              project={state.selectedProject}
+              onClose={handleCloseModal}
             />
-            <WorksGrid works={works} onImageClick={handleImageClick} />
-            <AnimatePresence>
-              {state.selectedImage && state.selectedProject && (
-                <WorksModal
-                  selectedImage={state.selectedImage}
-                  project={state.selectedProject}
-                  onClose={handleCloseModal}
-                />
-              )}
-            </AnimatePresence>
-          </>
-        )}
+          )}
+        </AnimatePresence>
       </main>
     </>
   );
 };
 
-// Wrap in PageContext
+// ✅ Wrapped Export
 export default function WorksPage() {
-  const { WorksPreloader } = loadDynamicImports("preloaders", [
-    "WorksPreloader",
-  ]);
   return (
-    <PreloaderContextProvider
-      preloader={<WorksPreloader />}
-      timeoutDuration={1800}>
-      <WorksContent />
-    </PreloaderContextProvider>
+    <>
+      <Head>
+        <title>OR Studio | Works</title>
+        <meta
+          name="description"
+          content="Discover OR Studio's Residential, Urban Planning, Commercial and Office Architecture Projects."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
+      <WorksPreloaderProvider>
+        <WorksContent />
+      </WorksPreloaderProvider>
+    </>
   );
 }

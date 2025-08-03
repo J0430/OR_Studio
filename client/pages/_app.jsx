@@ -1,14 +1,17 @@
 // pages/_app.tsx
 import { ThemeProvider } from "next-themes";
+import { NavProvider } from "@contexts/NavContext";
 import Head from "next/head";
 import "@styles/globals.scss";
-import Header from "@components/nav/Header/Header";
+
 import { dynamicImportComponents } from "utils/dynamicImportComponents";
 import { PreloaderContextProvider } from "@contexts/PreloaderContext";
 
-// const { Header } = dynamicImportComponents("nav", ["Header"]);
+const { Header } = dynamicImportComponents("nav", ["Header"]);
 
 function MyApp({ Component, pageProps }) {
+  console.log("PreloaderContextProvider:", PreloaderContextProvider);
+
   return (
     <>
       <Head>
@@ -20,13 +23,12 @@ function MyApp({ Component, pageProps }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      {/* <ThemeProvider> */}
-      <PreloaderContextProvider>
-        <Header />
-        <Component {...pageProps} />
-      </PreloaderContextProvider>
-      {/* </ThemeProvider> */}
+      <NavProvider>
+        <PreloaderContextProvider>
+          <Header />
+          <Component {...pageProps} />
+        </PreloaderContextProvider>
+      </NavProvider>
     </>
   );
 }

@@ -1,3 +1,5 @@
+//WorksModal.jsx
+
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,10 +13,12 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState(1);
   const [zoomed, setZoomed] = useState(false);
+
   const modalRef = useRef(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
-  const hasMultipleImages = project.images.length > 1;
+
+  const hasMultipleImages = project.images?.length > 1;
 
   useClickOutside(modalRef, onClose);
 
@@ -29,15 +33,15 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
     setSwipeDirection(1);
     setZoomed(false);
     setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
-  }, [project.images.length]);
+  }, [project?.images?.length]);
 
   const handlePrevious = useCallback(() => {
     setSwipeDirection(-1);
     setZoomed(false);
     setCurrentImageIndex((prev) =>
-      prev === 0 ? project.images.length - 1 : prev - 1
+      prev === 0 ? project?.images.length - 1 : prev - 1
     );
-  }, [project.images.length]);
+  }, [project?.images.length]);
 
   const handleKeyDown = useCallback(
     (e) => {
@@ -61,16 +65,12 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
     touchEndX.current = e.changedTouches[0].clientX;
     const deltaX = touchStartX.current - touchEndX.current;
 
-    if (deltaX > 50) {
-      handleNext();
-    } else if (deltaX < -50) {
-      handlePrevious();
-    }
+    if (deltaX > 50) handleNext();
+    else if (deltaX < -50) handlePrevious();
   };
 
   const handleBackdropClick = (e) => {
     const target = e.target;
-
     const isImage = target.tagName === "IMG";
     const isArrow = target.closest(`.${styles.direction}`);
     const isThumbnail = target.closest(`.${styles.thumbnailWrapper}`);
@@ -91,25 +91,19 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}>
+        transition={{ duration: 0.8 }}>
         <motion.div
           className={styles.modalBackdrop}
-          onClick={onClose}
-          initial={{ backdropFilter: "blur(0px)" }}
-          animate={{ backdropFilter: "blur(10px)" }}
-          exit={{ backdropFilter: "blur(0px)" }}
-          transition={{ duration: 0.3 }}
+          onClick={handleBackdropClick}
         />
 
         <motion.div
           ref={modalRef}
           className={styles.modalContent}
-          layoutId={`work-item-${selectedImage}`}
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
-          onClick={handleBackdropClick}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}>
           <button
@@ -118,21 +112,24 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
             aria-label="Close Modal">
             ✕
           </button>
+          <AnimatePresence mode="wait">
+            <motion.div
+              className={styles.imageWrapper}
+              layoutId={selectedImage}>
+              {hasMultipleImages && (
+                <div className={`${styles.direction} ${styles.left}`}>
+                  <DirectionalButton
+                    direction="left"
+                    width={isDevice ? 1.5 : 3}
+                    height={isDevice ? 1.5 : 3}
+                    onClick={handlePrevious}
+                  />
+                </div>
+              )}
 
-          <div className={styles.imageWrapper}>
-            {hasMultipleImages && (
-              <DirectionalButton
-                direction="left"
-                width={isDevice ? 1.5 : 3}
-                height={isDevice ? 1.5 : 3}
-                onClick={handlePrevious}
-                className={styles.leftButton}
-              />
-            )}
-
-            <AnimatePresence mode="wait">
               <motion.div
-                key={currentImageIndex}
+                key={project.images[currentImageIndex] || currentImageIndex}
+                layoutId={selectedImage}
                 className={`${styles.imageTransitionWrapper} ${
                   zoomed ? styles.zoomed : ""
                 }`}
@@ -142,7 +139,7 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
                 transition={{ duration: 0.4, ease: "easeInOut" }}
                 onClick={toggleZoom}>
                 <Image
-                  src={project.images[currentImageIndex]}
+                  src={project?.images[currentImageIndex]}
                   alt={`Project Image ${currentImageIndex + 1}`}
                   width={1200}
                   height={800}
@@ -152,18 +149,19 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
                   priority
                 />
               </motion.div>
-            </AnimatePresence>
 
-            {hasMultipleImages && (
-              <DirectionalButton
-                direction="right"
-                width={isDevice ? 1.5 : 3}
-                height={isDevice ? 1.5 : 3}
-                onClick={handleNext}
-                className={styles.rightButton}
-              />
-            )}
-          </div>
+              {hasMultipleImages && (
+                <div className={`${styles.direction} ${styles.right}`}>
+                  <DirectionalButton
+                    direction="right"
+                    width={isDevice ? 1.5 : 3}
+                    height={isDevice ? 1.5 : 3}
+                    onClick={handleNext}
+                  />
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
 
           {hasMultipleImages && (
             <div className={styles.thumbnailContainer}>

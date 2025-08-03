@@ -16,7 +16,7 @@ export const loadDynamicImports = (basePath, componentNames = []) => {
         () => import(`../components/${basePath}/${name}/${name}`), // Ensure your component name and path match
         {
           ssr: false, // Disabling server-side rendering
-          loading: () => <div>Loading...</div>, // Provide a fallback while loading
+
           // Optionally add error handling logic
           onError: (error) =>
             console.error(`Failed to load component ${name}:`, error),

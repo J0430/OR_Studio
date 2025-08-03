@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNav } from "@contexts/NavContext";
+import { usePreloaderContext } from "@contexts/PreloaderContext";
 import { dynamicImportComponents } from "utils/dynamicImportComponents";
-import { usePathname } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.scss";
-
-import { usePreloaderContext } from "@contexts/PreloaderContext"; // ✅ Import context
-
-import type { FC, KeyboardEvent } from "react";
 
 // Dynamic imports
 const { HamburgerToggleButton, AnimatedLogo } = dynamicImportComponents(
@@ -18,69 +14,63 @@ const { HamburgerToggleButton, AnimatedLogo } = dynamicImportComponents(
 );
 const { NavbarLinks } = dynamicImportComponents("nav", ["NavbarLinks"]);
 
-const Header: FC = () => {
-  const { isPreloaderVisible } = usePreloaderContext();
-  if (isPreloaderVisible) return null;
+const Header = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
-  const pathname = usePathname();
-  console.log("Rendering Header. Preloader visible?", "Loca");
+  const { isNavOpen, setIsNavOpen, pathname } = useNav();
+  const { isPreloaderVisible } = usePreloaderContext();
+  const navRef = useRef(null);
 
-  // ✅ Don't render at all if preloader is visible
-  if (isPreloaderVisible) return null;
-
+  // ESC key closes nav
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent<Document>) => {
+    const handleEsc = (e) => {
       if (e.key === "Escape" && isNavOpen) setIsNavOpen(false);
     };
-    document.addEventListener("keydown", handleEsc as any);
-    return () => document.removeEventListener("keydown", handleEsc as any);
-  }, [isNavOpen]);
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [isNavOpen, setIsNavOpen]);
 
-  useEffect(() => {
-    setIsNavOpen(false);
-  }, [pathname]);
-
-  const toggleNav = () => setIsNavOpen((prev) => !prev);
+  if (isPreloaderVisible) return null;
 
   return (
     <motion.header
       className={styles.navbar}
       data-page={pathname === "/works" ? "works" : undefined}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1, delay: 0.3 }}>
-      <motion.div className={styles.logo}>
-        <Link href="/" passHref>
-          <AnimatedLogo
-            strokeColor="#fffc"
-            size={isMobile ? 50 : 60}
-            priority
-          />
-        </Link>
-      </motion.div>
-
-      <div className={styles.hamburgerWrapper}>
-        <HamburgerToggleButton
-          isOpen={isNavOpen}
-          onToggle={toggleNav}
-          gapBetweenLines={10}
-          lineWidth={30}
-          aria-expanded={isNavOpen}
-          aria-controls="main-navigation"
-        />
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.1 }}>
+      {/* ✅ Show logo only when nav is closed */}
+      <div className={styles.logo}>
+        {!isNavOpen && (
+          <Link href="/" passHref>
+            <AnimatedLogo
+              strokeColor="#fffc"
+              size={isMobile ? 50 : 60}
+              priority
+            />
+          </Link>
+        )}
       </div>
+
+      <HamburgerToggleButton
+        isOpen={isNavOpen}
+        onToggle={() => setIsNavOpen((prev) => !prev)}
+        gapBetweenLines={10}
+        lineWidth={isMobile ? 25 : 30}
+        aria-expanded={isNavOpen}
+        aria-controls="main-navigation"
+      />
 
       <AnimatePresence>
         {isNavOpen && (
           <motion.nav
             id="main-navigation"
-            className={styles.menuOverlay}
+            ref={navRef}
             initial={{ opacity: 0, y: "100%" }}
             animate={{ opacity: 1, y: "0%" }}
             exit={{ opacity: 0, y: "100%" }}
-            transition={{ duration: 1, ease: "easeInOut" }}>
-            <NavbarLinks setIsNavOpen={setIsNavOpen} isNavOpen={isNavOpen} />
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className={styles.menuOverlay}>
+            <NavbarLinks />
           </motion.nav>
         )}
       </AnimatePresence>

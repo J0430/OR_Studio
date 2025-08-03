@@ -2,6 +2,10 @@ const path = require("path");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    unoptimized: true,
+    domains: [],
+  },
   eslint: {
     ignoreDuringBuilds: true, // disable ESLint error on Vercel if unused
   },

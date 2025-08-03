@@ -17,7 +17,7 @@ const { NavbarLinks } = dynamicImportComponents("nav", ["NavbarLinks"]);
 const Header = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const { isNavOpen, setIsNavOpen, pathname } = useNav();
- const {isPreloaderVisible} = usePreloaderContext()
+  const { isPreloaderVisible } = usePreloaderContext();
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -37,17 +37,19 @@ const Header = () => {
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.1 }}>
-      <Link href="/" passHref>
-        <Image
-          src={logos[3]}
-          alt="OR Studio Logo"
-          className={`${styles.logo} ${isNavOpen ? styles.logoHidden : ""}`}
-          width={isMobile ? 25 : 38}
-          height={isMobile ? 30 : 43}
-          priority
-          onClick={() => setIsNavOpen(false)}
-        />
-      </Link>
+      {isNavOpen && (
+        <Link href="/" passHref>
+          <Image
+            src={logos[3]}
+            alt="OR Studio Logo"
+            className={`${styles.logo} ${isNavOpen ? styles.logoHidden : ""}`}
+            width={isMobile ? 25 : 38}
+            height={isMobile ? 30 : 43}
+            priority
+            onClick={() => setIsNavOpen(false)}
+          />
+        </Link>
+      )}
 
       <HamburgerToggleButton
         isOpen={isNavOpen}

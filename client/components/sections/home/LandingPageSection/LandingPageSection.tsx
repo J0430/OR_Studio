@@ -28,7 +28,7 @@ const LandingPageSection: React.FC<LandingPageSectionProps> = ({
     <motion.section className={styles.bannerWrapper}>
       {/* Background Image */}
       <AnimatePresence mode="wait">
-        {images.length > 0 && (
+        {images?.length > 0 && (
           <motion.div
             key={currentImageIndex}
             initial={{ opacity: 0 }}
@@ -40,8 +40,12 @@ const LandingPageSection: React.FC<LandingPageSectionProps> = ({
               src={images[currentImageIndex]}
               alt={`Background Image ${currentImageIndex + 1}`}
               fill
-              priority={currentImageIndex === 0}
+              priority={currentImageIndex === 0} // Preload first image
+              style={{ objectFit: "cover" }}
               className={styles.bannerImage}
+              unoptimized
+              quality={100}
+              aria-label={`Background image number ${currentImageIndex + 1}`}
             />
           </motion.div>
         )}

@@ -144,6 +144,34 @@
       ],
       "storyline": "",
       "views": 84
+    },
+    "up_project7": {
+      "title": "Eco-Innovative Business Hub",
+      "description": "A business hub that combines state-of-the-art office spaces with green, sustainable design elements, offering an innovative workspace for the modern professional.",
+      "images": [
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project7/2 (1).webp",
+          "orientation": "landscape",
+          "width": 3000,
+          "height": 1688
+        }
+      ],
+      "storyline": "",
+      "views": 84
+    },
+    "up_project8": {
+      "title": "Eco-Innovative Business Hub",
+      "description": "A business hub that combines state-of-the-art office spaces with green, sustainable design elements, offering an innovative workspace for the modern professional.",
+      "images": [
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project8/1 (1).webp",
+          "orientation": "landscape",
+          "width": 3000,
+          "height": 1688
+        }
+      ],
+      "storyline": "",
+      "views": 84
     }
   }
 }

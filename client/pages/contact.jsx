@@ -73,7 +73,7 @@ export default function ContactPage() {
             <DynamicForm
               schema={ContactSchema}
               title="Request a Proposal"
-              logo={logos[0]}
+              logo={logos[4]}
             />
           </motion.div>
         </motion.div>
