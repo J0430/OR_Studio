@@ -1,7 +1,15 @@
+export type IconButtonDirection =
+  | "up"
+  | "down"
+  | "left"
+  | "right"
+  | "zoomIn"
+  | "zoomOut";
+
 export interface IconButtonProps {
-  direction?: "up" | "down" | "left" | "right";
-  type?: "arrow" | "zoom-in" | "zoom-out";
-  width?: number;
-  height?: number;
+  direction?: IconButtonDirection;
+  width?: number; // in rem units
+  height?: number; // in rem units
   onClick?: () => void;
+  className?: string;
 }
