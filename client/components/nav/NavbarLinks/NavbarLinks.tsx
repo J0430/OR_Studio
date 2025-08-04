@@ -1,9 +1,8 @@
-//NavbarLinks.tsx:
 import { motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import { useNav } from "@contexts/NavContext"; // ✅ adjust if needed
 import styles from "./NavbarLinks.module.scss";
-import type { NavbarLinksProps } from "./NavbarLinks.types";
 
 const links = ["Home", "Works", "Contact", "About"];
 
@@ -20,24 +19,19 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-const NavbarLinks: React.FC<NavbarLinksProps> = ({
-  setIsNavOpen,
-  isNavOpen,
-}) => {
-  const pathname = usePathname();
+const NavbarLinks: React.FC = () => {
   const router = useRouter();
+  const pathname = usePathname();
+  const { setIsNavOpen } = useNav();
 
   const handleClick = (href: string, isActive: boolean, link: string) => {
     if (isActive && link === "Home") {
-      // Bypass preloader manually
       sessionStorage.setItem("preloaderShown", "true");
-
-      // App router: re-push to same route to trigger scroll without reloading
-      router.push(href);
+      router.push(href); // re-trigger Home scroll
     }
 
-    // Toggle navigation if needed
-    setIsNavOpen(!isNavOpen);
+    // ✅ Always close nav after any link click
+    setIsNavOpen(false);
   };
 
   return (
@@ -67,7 +61,8 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({
                   e.preventDefault();
                   handleClick(href, isActive, link);
                 } else {
-                  setIsNavOpen(!isNavOpen);
+                  // Let normal navigation happen
+                  setIsNavOpen(false);
                 }
               }}
               aria-current={isActive ? "page" : undefined}>

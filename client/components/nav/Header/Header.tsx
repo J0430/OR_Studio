@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNav } from "@contexts/NavContext";
@@ -18,11 +19,15 @@ const Header = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const { isNavOpen, setIsNavOpen, pathname } = useNav();
   const { isPreloaderVisible } = usePreloaderContext();
+  const router = useRouter();
+  const formattedPath = router.pathname
+    .replace("/", "")
+    .replace(/^./, (char) => char.toUpperCase());
   const navRef = useRef(null);
 
   // ESC key closes nav
   useEffect(() => {
-    const handleEsc = (e) => {
+    const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isNavOpen) setIsNavOpen(false);
     };
     document.addEventListener("keydown", handleEsc);
@@ -51,6 +56,10 @@ const Header = () => {
         )}
       </div>
 
+      {/* <motion.div className={styles.leftSide}>
+        <motion.div className={styles.page}> */}
+      {/* <h1>{!router.pathname === "/work" ? "" : formattedPath}</h1> */}
+
       <HamburgerToggleButton
         isOpen={isNavOpen}
         onToggle={() => setIsNavOpen((prev) => !prev)}
@@ -59,6 +68,8 @@ const Header = () => {
         aria-expanded={isNavOpen}
         aria-controls="main-navigation"
       />
+      {/* </motion.div>
+      </motion.div> */}
 
       <AnimatePresence>
         {isNavOpen && (

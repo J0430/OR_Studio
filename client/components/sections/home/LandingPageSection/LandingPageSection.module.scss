@@ -6,6 +6,9 @@
   width: 100vw;
   height: 100dvh;
   overflow: hidden;
+  background-color: var(--background-color);
+
+  /* ✅ GRADIENT BOTTOM */
   background: black;
 
   &::before {
@@ -45,7 +48,6 @@
     );
     animation: fadeInGradient 1.5s ease-in-out;
   }
-  /* Fix Scrollbar Differences */
   &::-webkit-scrollbar {
     width: 0px;
     display: none;
@@ -56,20 +58,30 @@
     width: 0px;
     display: none;
   }
-
-  .sectionContainer {
-    width: 100%;
-    height: 100dvh; /* Dynamic Viewport Height for Windows & Mac */
-    display: flex;
-    @include m.center-flex;
-    position: relative;
-    background-color: var(--background-color);
-    overflow: hidden; // ✅ Prevent image/content overflow
-    flex-shrink: 0;
-    flex-direction: column;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+}
+@keyframes fadeInGradient {
+  0% {
+    opacity: 0;
   }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Fix Scrollbar Differences */
+
+.sectionContainer {
+  width: 100%;
+  height: 100dvh; /* Dynamic Viewport Height for Windows & Mac */
+  display: flex;
+  @include m.center-flex;
+  position: relative;
+  background-color: var(--background-color);
+  overflow: hidden; // ✅ Prevent image/content overflow
+  flex-shrink: 0;
+  flex-direction: column;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 /* Windows Fix for Scroll Smoothing */

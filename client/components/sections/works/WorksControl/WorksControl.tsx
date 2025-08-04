@@ -7,6 +7,8 @@ import type { CategoryTabsProps } from "@common/CategoryTabs/CategoryTabs.types"
 import type { DropdownMenuProps } from "@common/DropdownMenu/DropdownMenu.types";
 import type { WorksControlProps } from "./WorksControl.types";
 
+import { useNav } from "@contexts/NavContext";
+
 import styles from "./WorksControl.module.scss";
 
 const { DropdownMenu, CategoryTabs } = loadDynamicImports("common", [
@@ -22,6 +24,7 @@ const WorksControl: React.FC<WorksControlProps> = ({
   onCategorySelect,
 }) => {
   const [scrolled, setScrolled] = useState(false);
+  const { isNavOpen } = useNav();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,10 +39,6 @@ const WorksControl: React.FC<WorksControlProps> = ({
     <section
       className={`${styles.worksControl} ${scrolled ? styles.blurred : ""}`}
       aria-label="Work Categories">
-      <div className={styles.worksTitleBox}>
-        <h1 className={styles.worksTitle}>Works</h1>
-      </div>
-
       <div className={styles.worksSelectorBox}>
         <nav className={styles.worksSelector} aria-label="Category Navigation">
           <CategoryTabs
@@ -48,12 +47,15 @@ const WorksControl: React.FC<WorksControlProps> = ({
             onCategorySelect={onCategorySelect}
           />
         </nav>
+
         <div className={styles.worksDropdownMobile}>
-          <DropdownMenu
-            categories={categories}
-            selectedCategory={selectedCategory}
-            onCategorySelect={onCategorySelect}
-          />
+          {!isNavOpen && (
+            <DropdownMenu
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onCategorySelect={onCategorySelect}
+            />
+          )}
         </div>
       </div>
     </section>

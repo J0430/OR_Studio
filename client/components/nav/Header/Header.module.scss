@@ -1,10 +1,8 @@
-//NavbarLinks.module.scss:
-
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
 /* =========================== */
-/* Navbar (Main Container)  */
+/* ✅ HEADER BASE STYLES       */
 /* =========================== */
 .navbar {
   position: absolute;
@@ -15,30 +13,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1;
-  padding: 1rem;
+  padding: 1.5vw;
+  padding-left: 2rem;
+  padding-left: 2vw;
+  padding-right: 2vw;
   overflow: visible;
 
-  @media screen and (max-width: 768px) {
+  @media (max-width: 768px) {
     padding: 1rem;
   }
 }
 
 /* =========================== */
-/* Active Nav Item Style    */
-/* =========================== */
-.navItem.active {
-  font-weight: bold;
-  color: var(--text-color);
-  border-bottom: m.rem(2) solid rgba(255, 255, 255, 0.4);
-
-  @media screen and (max-width: 768px) {
-    border-bottom: m.rem(1) solid rgba(255, 255, 255, 0.5);
-  }
-}
-
-/* =========================== */
-/* Logo                        */
+/* ✅ LOGO STYLES              */
 /* =========================== */
 .logo {
   height: m.rem(60);
@@ -50,27 +37,55 @@
     visibility 0.3s ease;
 }
 
-/* =========================== */
-/* Hidden Logo (State Only)    */
-/* =========================== */
 .logoHidden {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
 }
-.hamburgerWrapper {
-  z-index: 99999;
-  pointer-events: auto;
-} // Allows interaction
-
-//   @media (max-width: 768px) {
-//     top: m.rem(16);
-//     right: m.rem(16);
-//   }
-// }
 
 /* =========================== */
-/* Fullscreen Menu Overlay     */
+/* ✅ LEFT SIDE WRAPPER        */
+/* =========================== */
+.leftSide {
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+
+  height: 100%;
+  gap: 1rem;
+  width: fit-content;
+}
+
+/* =========================== */
+/* ✅ PAGE PATH TITLE          */
+/* =========================== */
+.page {
+  h1 {
+    margin-top: 0.5rem;
+    font-size: clamp(1.25rem, 1.5vw, 1.875rem);
+    font-weight: 400;
+    color: var(--text-color);
+    white-space: nowrap;
+    font-family: "Raleway", sans-serif;
+  }
+  @media (max-width: 768px) {
+    font-size: m.rem(16);
+  }
+}
+
+/* =========================== */
+/* ✅ HAMBURGER BUTTON         */
+/* =========================== */
+.hamburger {
+  z-index: 99999;
+  pointer-events: auto;
+  padding-top: m.rem(4); // spacing between text and burger
+}
+
+/* =========================== */
+/* ✅ FULLSCREEN NAV MENU      */
 /* =========================== */
 .menuOverlay {
   position: fixed;
@@ -86,10 +101,8 @@
   align-items: center;
   pointer-events: all;
   backdrop-filter: blur(8px);
-  animation: fadeSlideUp 0.6s ease forwards;
-  clip-path: inset(0 0 100% 0);
-  animation: revealMenu 0.6s ease forwards;
   padding-top: m.rem(80);
+  animation: revealMenu 0.6s ease forwards;
 
   @keyframes revealMenu {
     0% {
@@ -99,18 +112,6 @@
       clip-path: inset(0 0 0% 0);
     }
   }
-
-  @keyframes fadeSlideUp {
-    0% {
-      opacity: 0;
-      transform: translateY(2rem);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  // space to prevent overlap on mobile
 
   @media (max-width: 768px) {
     padding-top: m.rem(80);

@@ -1,4 +1,4 @@
-// components/sections/works/WorksGrid/WorksGrid.types.ts
+// //components/sections/works/WorksGrid/WorksGrid.types.ts
 
 // export interface Work {
 //   frontImage: string;
@@ -18,20 +18,30 @@
 //   onImageClick: (imageSrc: string) => void;
 //   delay?: number;
 // }
-// components/sections/works/WorksGrid/WorksGrid.types.ts
+
+//WorksGrid.types.ts;
 
 export interface WorkImage {
   src: string;
+  orientation?: string;
+  width?: number;
+  height?: number;
 }
 
 export interface Work {
   title: string;
-  images: { src: string }[];
   description?: string;
+  images: WorkImage[];
+  frontImage?: WorkImage;
+  id?: string;
+
+  // add other fields like storyline, views if needed
 }
 
 export interface WorksGridProps {
   works: Work[];
   onImageClick: (work: Work) => void;
   delay?: number;
+  selectedTab?: string;
+  categorySelected?: string;
 }

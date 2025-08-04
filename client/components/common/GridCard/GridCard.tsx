@@ -16,7 +16,7 @@ const GridCard: React.FC<GridCardProps> = ({
   return (
     <motion.article
       className={`${styles.mediaCard} ${className}`}
-      layoutId={layoutId || imageSrc}
+      layoutId={layoutId}
       onClick={onClick}
       tabIndex={0}
       role="button"

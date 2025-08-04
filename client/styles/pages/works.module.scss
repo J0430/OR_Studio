@@ -13,7 +13,6 @@
 
   /* ===== Box Model ===== */
   height: 100dvh;
-  padding: 0 6.7vw;
 
   /* ===== Visual ===== */
   background-color: var(
@@ -37,7 +36,11 @@
   height: 100vh;
   overflow: hidden;
 }
-
+// .scrollContainer {
+//   height: 100dvh;
+//   overflow-y: auto;
+//   scroll-behavior: smooth;
+// }
 .preloaderOverlay {
   position: absolute;
   inset: 0;
@@ -48,7 +51,3 @@
   backdrop-filter: blur(1rem);
   z-index: 20;
 }
-
-/* =========================== */
-/* ✅ Control Panel for Works  */
-/* =========================== */

@@ -1,177 +1,159 @@
 {
-  "category": "Urban Planning",
+  "category": "Office",
   "projects": {
-    "up_project1": {
-      "title": "Sustainable urban Living",
-      "description": "A visionary urban design blending modern residential towers with lush green spaces. It represents the perfect harmony of urban development and environmental sustainability.",
+    "o_project1_1": {
+      "title": "Beacon Towers",
+      "description": "The Beacon Towers is a cutting-edge architectural masterpiece that merges functionality with aesthetics. Featuring a seamless blend of modern glass facades and innovative structural design, the towers redefine urban office spaces. The project embodies sustainable architecture with energy-efficient features, offering a panoramic skyline view while integrating harmoniously into the bustling cityscape. With state-of-the-art facilities and a unique artistic facade, Beacon Towers stands as a beacon of innovation and progress in urban design.",
       "images": [
         {
-          "src": "/assets/works/categories/UrbanPlanning/up_project1/up_p1_i1.webp",
-          "orientation": "landscape",
-          "width": 3000,
-          "height": 1687
-        },
+          "src": "/assets/works/categories/Office/o_project1/09.webp",
+          "orientation": "portrait",
+          "width": 1996,
+          "height": 2281
+        }
+      ],
+      "storyline": "",
+      "views": 68
+    },
+    "o_project1_2": {
+      "title": "Beacon Towers",
+      "description": "The Beacon Towers is a cutting-edge architectural masterpiece that merges functionality with aesthetics. Featuring a seamless blend of modern glass facades and innovative structural design, the towers redefine urban office spaces. The project embodies sustainable architecture with energy-efficient features, offering a panoramic skyline view while integrating harmoniously into the bustling cityscape. With state-of-the-art facilities and a unique artistic facade, Beacon Towers stands as a beacon of innovation and progress in urban design.",
+      "images": [
         {
-          "src": "/assets/works/categories/UrbanPlanning/up_project1/up_p1_i2.webp",
+          "src": "/assets/works/categories/Office/o_project1/051.webp",
           "orientation": "landscape",
-          "width": 3000,
-          "height": 1688
-        },
+          "width": 2404,
+          "height": 1927
+        }
+      ],
+      "storyline": "",
+      "views": 68
+    },
+    "o_project1_3": {
+      "title": "Beacon Towers",
+      "description": "The Beacon Towers is a cutting-edge architectural masterpiece that merges functionality with aesthetics. Featuring a seamless blend of modern glass facades and innovative structural design, the towers redefine urban office spaces. The project embodies sustainable architecture with energy-efficient features, offering a panoramic skyline view while integrating harmoniously into the bustling cityscape. With state-of-the-art facilities and a unique artistic facade, Beacon Towers stands as a beacon of innovation and progress in urban design.",
+      "images": [
         {
-          "src": "/assets/works/categories/Residential/r_project30/6.webp",
+          "src": "/assets/works/categories/Office/o_project1/mushi (1).webp",
+          "orientation": "portrait",
+          "width": 2250,
+          "height": 2725
+        }
+      ],
+      "storyline": "",
+      "views": 68
+    },
+    "o_project1_4": {
+      "title": "Beacon Towers",
+      "description": "The Beacon Towers is a cutting-edge architectural masterpiece that merges functionality with aesthetics. Featuring a seamless blend of modern glass facades and innovative structural design, the towers redefine urban office spaces. The project embodies sustainable architecture with energy-efficient features, offering a panoramic skyline view while integrating harmoniously into the bustling cityscape. With state-of-the-art facilities and a unique artistic facade, Beacon Towers stands as a beacon of innovation and progress in urban design.",
+      "images": [
+        {
+          "src": "/assets/works/categories/Office/o_project1/mushi(2).webp",
+          "orientation": "portrait",
+          "width": 2250,
+          "height": 2725
+        }
+      ],
+      "storyline": "",
+      "views": 68
+    },
+    "o_project2_1": {
+      "title": "Urban Living Complex",
+      "description": "The Urban Living Complex introduces a dynamic residential and retail hub at the heart of the city. The project combines elegant apartments with green spaces and retail outlets, emphasizing community living. With a contemporary design and innovative urban planning, it reflects a perfect balance of comfort and modernity.",
+      "images": [
+        {
+          "src": "/assets/works/categories/Office/o_project2/2.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1666
+        }
+      ],
+      "storyline": "",
+      "views": 71
+    },
+    "o_project2_2": {
+      "title": "Urban Living Complex",
+      "description": "The Urban Living Complex introduces a dynamic residential and retail hub at the heart of the city. The project combines elegant apartments with green spaces and retail outlets, emphasizing community living. With a contemporary design and innovative urban planning, it reflects a perfect balance of comfort and modernity.",
+      "images": [
+        {
+          "src": "/assets/works/categories/Office/o_project2/3.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 2102
+        }
+      ],
+      "storyline": "",
+      "views": 71
+    },
+    "o_project2_3": {
+      "title": "Urban Living Complex",
+      "description": "The Urban Living Complex introduces a dynamic residential and retail hub at the heart of the city. The project combines elegant apartments with green spaces and retail outlets, emphasizing community living. With a contemporary design and innovative urban planning, it reflects a perfect balance of comfort and modernity.",
+      "images": [
+        {
+          "src": "/assets/works/categories/Office/o_project2/6.webp",
           "orientation": "landscape",
           "width": 2500,
           "height": 1406
         }
       ],
       "storyline": "",
-      "views": 149
+      "views": 71
     },
-    "up_project2": {
-      "title": "Community-Centric urban Plan",
-      "description": "Designed to foster community interaction, this urban project features integrated green areas and modern architecture, creating an ideal balance between urban functionality and social connectivity.",
+    "o_project3_1": {
+      "title": "Skyline Tower",
+      "description": "Skyline Tower is an iconic high-rise structure that defines luxury office space in the metropolitan skyline. With a minimalist design, open terraces, and energy-efficient materials, this project showcases the future of urban architecture.",
       "images": [
         {
-          "src": "/assets/works/categories/UrbanPlanning/up_project2/up_p2_i1.webp",
-          "orientation": "landscape",
-          "width": 3000,
-          "height": 1687
-        },
-        {
-          "src": "/assets/works/categories/UrbanPlanning/up_project2/up_p2_i2.webp",
-          "orientation": "landscape",
-          "width": 3500,
-          "height": 1968
-        },
-        {
-          "src": "/assets/works/categories/UrbanPlanning/up_project2/up_p2_i3.webp",
+          "src": "/assets/works/categories/Office/o_project3/3.webp",
           "orientation": "landscape",
           "width": 2500,
-          "height": 1406
-        },
+          "height": 2141
+        }
+      ],
+      "storyline": "",
+      "views": 81
+    },
+    "o_project3_2": {
+      "title": "Skyline Tower",
+      "description": "Skyline Tower is an iconic high-rise structure that defines luxury office space in the metropolitan skyline. With a minimalist design, open terraces, and energy-efficient materials, this project showcases the future of urban architecture.",
+      "images": [
         {
-          "src": "/assets/works/categories/UrbanPlanning/up_project2/up_p2_i4.webp",
+          "src": "/assets/works/categories/Office/o_project3/21.webp",
           "orientation": "landscape",
           "width": 2500,
-          "height": 1406
+          "height": 2049
         }
       ],
       "storyline": "",
-      "views": 149
+      "views": 81
     },
-    "up_project3": {
-      "title": "Eco-Friendly Residential Cluster",
-      "description": "This project emphasizes eco-conscious living by incorporating sustainable materials and energy-efficient designs within a thoughtfully planned residential community.",
+    "o_project4": {
+      "title": "Urban Living Complex",
+      "description": "The Urban Living Complex introduces a dynamic residential and retail hub at the heart of the city. The project combines elegant apartments with green spaces and retail outlets, emphasizing community living. With a contemporary design and innovative urban planning, it reflects a perfect balance of comfort and modernity.",
       "images": [
         {
-          "src": "/assets/works/categories/UrbanPlanning/up_project3/up_p3_i1.webp",
-          "orientation": "landscape",
-          "width": 5280,
-          "height": 2922
-        },
-        {
-          "src": "/assets/works/categories/UrbanPlanning/up_project3/up_p3_i2.webp",
-          "orientation": "landscape",
-          "width": 3000,
-          "height": 1688
-        },
-        {
-          "src": "/assets/works/categories/UrbanPlanning/up_project3/up_p3_i3.webp",
+          "src": "/assets/works/categories/Office/o_project4/GRD.webp",
           "orientation": "landscape",
           "width": 2500,
-          "height": 1406
+          "height": 1666
         }
       ],
       "storyline": "",
-      "views": 73
+      "views": 71
     },
-    "up_project4": {
-      "title": "Urban Forest Integration",
-      "description": "A large-scale urban project that seamlessly integrates forested areas into a modern cityscape, creating a serene environment with a focus on green living.",
+    "o_project5": {
+      "title": "Urban Living Complex",
+      "description": "The Urban Living Complex introduces a dynamic residential and retail hub at the heart of the city. The project combines elegant apartments with green spaces and retail outlets, emphasizing community living. With a contemporary design and innovative urban planning, it reflects a perfect balance of comfort and modernity.",
       "images": [
         {
-          "src": "/assets/works/categories/UrbanPlanning/up_project4/up_p4_i1.webp",
+          "src": "/assets/works/categories/Office/o_project5/City_2.webp",
           "orientation": "landscape",
-          "width": 6000,
-          "height": 3377
-        },
-        {
-          "src": "/assets/works/categories/UrbanPlanning/up_project4/up_p4_i2.webp",
-          "orientation": "landscape",
-          "width": 5760,
-          "height": 3215
+          "width": 2500,
+          "height": 1666
         }
       ],
       "storyline": "",
-      "views": 86
-    },
-    "up_project5": {
-      "title": "Vertical Garden Residences",
-      "description": "A collection of high-rise residential buildings with vertical gardens, aiming to redefine urban living with green, innovative designs and cutting-edge architecture.",
-      "images": [
-        {
-          "src": "/assets/works/categories/UrbanPlanning/up_project5/up_p5_i1.webp",
-          "orientation": "landscape",
-          "width": 4523,
-          "height": 2543
-        },
-        {
-          "src": "/assets/works/categories/UrbanPlanning/up_project5/up_p5_i2.webp",
-          "orientation": "landscape",
-          "width": 4200,
-          "height": 2633
-        }
-      ],
-      "storyline": "",
-      "views": 89
-    },
-    "up_project6": {
-      "title": "Eco-Innovative Business Hub",
-      "description": "A business hub that combines state-of-the-art office spaces with green, sustainable design elements, offering an innovative workspace for the modern professional.",
-      "images": [
-        {
-          "src": "/assets/works/categories/UrbanPlanning/up_project6/up_p6_i1.webp",
-          "orientation": "landscape",
-          "width": 3000,
-          "height": 1688
-        },
-        {
-          "src": "/assets/works/categories/UrbanPlanning/up_project6/up_p6_i2.webp",
-          "orientation": "landscape",
-          "width": 3000,
-          "height": 1688
-        }
-      ],
-      "storyline": "",
-      "views": 84
-    },
-    "up_project7": {
-      "title": "Eco-Innovative Business Hub",
-      "description": "A business hub that combines state-of-the-art office spaces with green, sustainable design elements, offering an innovative workspace for the modern professional.",
-      "images": [
-        {
-          "src": "/assets/works/categories/UrbanPlanning/up_project7/2 (1).webp",
-          "orientation": "landscape",
-          "width": 3000,
-          "height": 1688
-        }
-      ],
-      "storyline": "",
-      "views": 84
-    },
-    "up_project8": {
-      "title": "Eco-Innovative Business Hub",
-      "description": "A business hub that combines state-of-the-art office spaces with green, sustainable design elements, offering an innovative workspace for the modern professional.",
-      "images": [
-        {
-          "src": "/assets/works/categories/UrbanPlanning/up_project8/1 (1).webp",
-          "orientation": "landscape",
-          "width": 3000,
-          "height": 1688
-        }
-      ],
-      "storyline": "",
-      "views": 84
+      "views": 71
     }
   }
 }

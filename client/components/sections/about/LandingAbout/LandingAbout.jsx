@@ -89,7 +89,7 @@ export default function LandingAbout() {
           animate="visible">
           <div className={styles.imageWrapper}>
             <Image
-              src="/assets/works/categories/Office/Project1/mushi(2).webp" // ✅ Uppercase "O"
+              src="/assets/works/categories/Office/o_project1/mushi(2).webp" // ✅ Uppercase "O"
               alt="Main background"
               width={isMobile ? 800 : 1400}
               height={isMobile ? 400 : 1000}
