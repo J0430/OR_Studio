@@ -48,7 +48,12 @@ const DynamicForm = ({ schema, title, logo }) => {
     <form onSubmit={handleSubmit(onSubmit)} className={styles.contactForm}>
       {logo && (
         <div className={styles.logoWrapper}>
-          <Image src={logo} width={100} height={100} alt="Logo" />
+          <Image
+            src="/assets/Logos/or_studio_w.webp"
+            width={100}
+            height={100}
+            alt="Logo"
+          />
         </div>
       )}
 

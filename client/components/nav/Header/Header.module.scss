@@ -18,6 +18,7 @@
   padding-left: 2vw;
   padding-right: 2vw;
   overflow: visible;
+  z-index: 1;
 
   @media (max-width: 768px) {
     padding: 1rem;

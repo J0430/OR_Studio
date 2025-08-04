@@ -10,6 +10,7 @@ const WorksGrid: React.FC<WorksGridProps> = ({
   onImageClick,
   selectedTab,
 }) => {
+  console.log(works);
   return (
     <section className={styles.worksGridWrapper}>
       <div className={styles.worksGrid}>

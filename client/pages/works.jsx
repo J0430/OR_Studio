@@ -196,12 +196,11 @@ import {
 import { loadDynamicImports } from "utils/loadDynamicImports";
 
 import {
-  residentialData,
-  commercialData,
   urbanPlanningData,
+  commercialData,
+  residentialData,
   officeData,
 } from "@public/data";
-
 import styles from "@styles/pages/works.module.scss";
 
 // ✅ Dynamic Import (No SSR) for Modal
@@ -230,22 +229,16 @@ const WorksContent = () => {
 
   const categoryDataMap = useMemo(
     () => ({
-      Residential: shuffleProjectImages(
-        Object.values(residentialData?.projects || {})
-      ),
-      "Urban Planning": shuffleProjectImages(
-        Object.values(urbanPlanningData?.projects || {})
-      ),
-      Commercial: shuffleProjectImages(
-        Object.values(commercialData?.projects || {})
-      ),
-      Office: shuffleProjectImages(Object.values(officeData?.projects || {})),
+      Residential: Object.values(residentialData?.projects || {}),
+      "Urban Planning": Object.values(urbanPlanningData?.projects || {}),
+      Commercial: Object.values(commercialData?.projects || {}),
+      Office: Object.values(officeData?.projects || {}),
     }),
     []
   );
 
   const works = useMemo(
-    () => fisherYatesShuffle(categoryDataMap[state.categorySelected] || []),
+    () => categoryDataMap[state.categorySelected] || [],
     [state.categorySelected, categoryDataMap]
   );
 

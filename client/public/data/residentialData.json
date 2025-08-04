@@ -56,12 +56,6 @@
           "height": 1406
         },
         {
-          "src": "/assets/works/categories/Residential/r_project2/8.webp",
-          "orientation": "landscape",
-          "width": 2500,
-          "height": 1407
-        },
-        {
           "src": "/assets/works/categories/Residential/r_project2/13.webp",
           "orientation": "landscape",
           "width": 2500,
@@ -121,20 +115,30 @@
           "width": 2500,
           "height": 1404
         },
-        {
-          "src": "/assets/works/categories/Residential/r_project5/4 לילה.webp",
-          "orientation": "landscape",
-          "width": 2500,
-          "height": 1406
-        },
+
         {
           "src": "/assets/works/categories/Residential/r_project5/7.webp",
           "orientation": "landscape",
           "width": 2500,
           "height": 1405
-        },
+        }
+      ],
+      "storyline": "",
+      "views": 117
+    },
+    "r_project40": {
+      "title": "Haven House",
+      "description": "",
+      "images": [
         {
-          "src": "/assets/works/categories/Residential/r_project5/יום.webp",
+          "src": "/assets/works/categories/Residential/r_project40/4 לילה.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1406
+        },
+
+        {
+          "src": "/assets/works/categories/Residential/r_project40/יום.webp",
           "orientation": "landscape",
           "width": 2500,
           "height": 1446
@@ -195,6 +199,7 @@
       "storyline": "",
       "views": 69
     },
+
     "r_project8": {
       "title": "Urban Retreat",
       "description": "",
@@ -847,5 +852,25 @@
       "storyline": "",
       "views": 0
     }
+  },
+  "r_project41": {
+    "title": "Greenway Court",
+    "description": "",
+    "images": [
+      {
+        "src": "/assets/works/categories/Residential/r_project40/יום.webp",
+        "orientation": "landscape",
+        "width": 2500,
+        "height": 1406
+      },
+      {
+        "src": "/assets/works/categories/Residential/r_project40/מורדי הגטאות.webp",
+        "orientation": "landscape",
+        "width": 2500,
+        "height": 1431
+      }
+    ],
+    "storyline": "",
+    "views": 69
   }
 }
