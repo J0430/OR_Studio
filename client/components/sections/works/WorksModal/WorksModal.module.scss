@@ -13,6 +13,17 @@
   align-items: center;
   background-color: var(--overlay-background);
   backdrop-filter: blur(10px);
+
+  @media (max-width: 768px) {
+    .modalContent {
+      min-height: auto;
+      height: auto;
+    }
+
+    .modalContainer {
+      overflow-y: auto;
+    }
+  }
 }
 
 .modalBackdrop {
