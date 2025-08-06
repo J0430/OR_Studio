@@ -142,8 +142,13 @@
         .imageWrapper {
           position: relative;
           width: 100%;
-
+          height: fit-content;
           overflow: hidden;
+          .bgImage {
+            width: 100%;
+            height: fit-content;
+            object-fit: cover;
+          }
         }
       }
     }
