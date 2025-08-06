@@ -18,6 +18,7 @@ const DynamicForm = ({ schema, title, logo }) => {
   const [success, setSuccess] = useState(false);
 
   const onSubmit = async (data) => {
+    console.log(data);
     setServerError("");
     setSuccess(false);
     try {

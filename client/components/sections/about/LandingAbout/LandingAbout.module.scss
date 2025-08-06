@@ -142,16 +142,8 @@
         .imageWrapper {
           position: relative;
           width: 100%;
-          height: 55dvh;
-          min-height: 55dvh;
-          max-height: 55svh;
-          height: 55svh;
-          overflow: hidden;
 
-          .bgImage {
-            height: auto;
-            object-fit: cover;
-          }
+          overflow: hidden;
         }
       }
     }
