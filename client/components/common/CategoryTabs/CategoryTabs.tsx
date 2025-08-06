@@ -33,7 +33,10 @@ const CategoryTabs: React.FC<CategoryTabsProps> = ({
   }, [selectedCategory, categories]);
 
   return (
-    <div className={styles.tabsWrapper}>
+    <nav
+      className={styles.tabsWrapper}
+      role="tablist"
+      aria-label="Category Tabs">
       {highlightProps.visible && (
         <motion.div
           className={styles.highlight}
@@ -46,12 +49,15 @@ const CategoryTabs: React.FC<CategoryTabsProps> = ({
           transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
         />
       )}
+
       {categories?.map((category, index) => (
         <button
           key={category}
           ref={(el) => {
             tabsRef.current[index] = el!;
           }}
+          role="tab"
+          aria-selected={selectedCategory === category}
           className={`${styles.categoryTab} ${
             selectedCategory === category ? styles.active : ""
           }`}
@@ -60,7 +66,7 @@ const CategoryTabs: React.FC<CategoryTabsProps> = ({
           <span>{category}</span>
         </button>
       ))}
-    </div>
+    </nav>
   );
 };
 

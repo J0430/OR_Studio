@@ -32,7 +32,6 @@ export interface Work {
   title: string;
   description?: string;
   images: WorkImage[];
-  frontImage?: WorkImage;
   id?: string;
 
   // add other fields like storyline, views if needed
@@ -40,8 +39,9 @@ export interface Work {
 
 export interface WorksGridProps {
   works: Work[];
-  onImageClick: (work: Work) => void;
+  onImageClick: (imageSrc: string) => void;
   delay?: number;
   selectedTab?: string;
   categorySelected?: string;
+  selectedImage?: string;
 }

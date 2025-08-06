@@ -2,19 +2,17 @@
 @use "@styles/partials/mixins" as m;
 
 /* =========================== */
-/* ✅ DESKTOP & MOBILE LAYOUT   */
+/* ✅ Main Wrapper             */
 /* =========================== */
-
 .aboutWrapper {
-  /* Layout & Alignment */
   @include m.center-flex;
   flex-direction: column;
   width: 100%;
-  height: 100dvh; /* Dynamic viewport height */
-  z-index: 0;
+  min-height: 100svh; // ✅ Cross-browser fix for mobile
   background-color: var(--background-color);
-  padding: 0 2rem;
-  position: relative;
+  padding-inline: m.rem(24);
+  padding-block: m.rem(40);
+  box-sizing: border-box;
   overflow: hidden;
 
   /* =========================== */
@@ -23,84 +21,71 @@
   .textContainer {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 65%; /* Control width for larger screens */
+    max-width: 65%;
     text-align: center;
     z-index: 10;
-    margin-bottom: 3rem;
+
+    @media (max-width: 768px) {
+      max-width: 90%;
+    }
 
     /* =========================== */
-    /* ✅ Description Text        */
+    /* ✅ Description              */
     /* =========================== */
     .description {
       color: v.$white;
-      font-size: m.rem(24); /* Font size for larger screens */
+      font-size: m.rem(24);
       font-weight: 500;
       line-height: 1.6;
       margin-bottom: m.rem(32);
       font-family: v.$font-family-base;
       opacity: 0.9;
-    }
-  }
 
-  /* =========================== */
-  /* ✅ Link Wrapper            */
-  /* =========================== */
-  .linkWrapper {
-    display: inline-block;
-    align-self: center;
-    margin-top: m.rem(40);
-
-    /* =========================== */
-    /* ✅ Link Styling            */
-    /* =========================== */
-    .link {
-      padding: m.rem(14) m.rem(28);
-      border: v.$white 0.03rem solid;
-      color: v.$white;
-      font-size: m.rem(18);
-      font-weight: 400;
-      text-decoration: none;
-      transition: all 0.2s ease-in-out;
-      border-radius: m.rem(8);
-      background-color: transparent;
-
-      &:hover {
-        transform: scale(1.08);
-        background-color: rgba(255, 255, 255, 0.1);
+      @media (max-width: 768px) {
+        font-size: m.rem(18);
       }
+    }
+    /* =========================== */
+    /* ✅ Word Animation Span      */
+    /* =========================== */
+    .word {
+      display: inline-block;
+      white-space: nowrap;
     }
   }
 }
-
 /* =========================== */
-/* ✅ RESPONSIVE LAYOUT        */
+/* ✅ Link Wrapper             */
 /* =========================== */
-
-@media (max-width: 768px) {
-  .aboutWrapper {
-    padding: m.rem(1) m.rem(1.2); /* Adjust padding for mobile */
-
-    .textContainer {
-      max-width: 90%; /* Increase width for mobile */
-      .description {
-        font-size: m.rem(16); /* Adjust font size for mobile */
-      }
-      .linkWrapper {
-        margin-top: m.rem(10);
-        .link {
-          font-size: m.rem(16); /* Adjust link font size for mobile */
-        }
-      }
-    }
-  }
-}
-
-/* =========================== */
-/* ✅ WORD ANIMATION CLASS     */
-/* =========================== */
-
-.word {
+.linkWrapper {
   display: inline-block;
-  white-space: nowrap;
+  align-self: center;
+  margin-top: m.rem(40);
+
+  @media (max-width: 768px) {
+    margin-top: m.rem(20);
+    margin-bottom: m.rem(3);
+  }
+
+  .link {
+    padding: m.rem(10) m.rem(22);
+    border: v.$white 0.03rem solid;
+    color: v.$white;
+    font-size: m.rem(16);
+    font-weight: 400;
+    text-decoration: none;
+    border-radius: m.rem(8);
+    background-color: transparent;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.08);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      font-size: m.rem(16);
+      margin-bottom: m.rem(3);
+    }
+  }
 }

@@ -5,7 +5,8 @@ export interface GridCardProps {
   description?: string;
   index?: number;
   layoutId?: string;
-  onClick?: () => void;
+  onClick: (layoutId: string) => void;
   aspectRatio?: number;
   className?: string;
+  selectedImage?: string;
 }

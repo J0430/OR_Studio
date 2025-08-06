@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
@@ -19,13 +19,13 @@ const Header = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const { isNavOpen, setIsNavOpen, pathname } = useNav();
   const { isPreloaderVisible } = usePreloaderContext();
+  const [strokeColor, setStrokeColor] = useState("#ffffff");
   const router = useRouter();
   const formattedPath = router.pathname
     .replace("/", "")
     .replace(/^./, (char) => char.toUpperCase());
   const navRef = useRef(null);
 
-  // ESC key closes nav
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isNavOpen) setIsNavOpen(false);
@@ -48,29 +48,27 @@ const Header = () => {
         {!isNavOpen && (
           <Link href="/" passHref>
             <AnimatedLogo
-              strokeColor="#fffc"
-              size={isMobile ? 50 : 60}
+              strokeColor={strokeColor}
+              size={isMobile ? 40 : 60}
               priority
             />
           </Link>
         )}
       </div>
 
-      {/* <motion.div className={styles.leftSide}>
-        <motion.div className={styles.page}> */}
-      {/* <h1>{!router.pathname === "/work" ? "" : formattedPath}</h1> */}
+      <motion.div className={styles.leftSide}>
+        {/* <motion.div className={styles.page}> * */}
+        {/* <h1>{!router.pathname === "/work" ? "" : formattedPath}</h1> */}
 
-      <HamburgerToggleButton
-        isOpen={isNavOpen}
-        onToggle={() => setIsNavOpen((prev) => !prev)}
-        gapBetweenLines={10}
-        lineWidth={isMobile ? 25 : 30}
-        aria-expanded={isNavOpen}
-        aria-controls="main-navigation"
-      />
-      {/* </motion.div>
-      </motion.div> */}
-
+        <HamburgerToggleButton
+          isOpen={isNavOpen}
+          onToggle={() => setIsNavOpen((prev) => !prev)}
+          gapBetweenLines={isMobile ? 8 : 10}
+          lineWidth={isMobile ? 22 : 30}
+          aria-expanded={isNavOpen}
+          aria-controls="main-navigation"
+        />
+      </motion.div>
       <AnimatePresence>
         {isNavOpen && (
           <motion.nav

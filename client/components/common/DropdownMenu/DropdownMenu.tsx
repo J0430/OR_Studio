@@ -28,16 +28,20 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   }, []);
 
   return (
-    <div className={styles.dropdownContainer} ref={dropdownRef}>
+    <nav
+      className={styles.dropdownContainer}
+      ref={dropdownRef}
+      aria-label="Category Selector">
       <button
         className={styles.dropdownButton}
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
-        aria-haspopup="listbox">
+        aria-haspopup="listbox"
+        aria-controls="category-list">
         <div className={styles.buttonContent}>
-          <span className={styles.categoryText}>
-            {selectedCategory || "Select Category"}
-          </span>
+          <motion.span className={styles.categoryText}>
+            {selectedCategory}
+          </motion.span>
           <motion.span
             className={styles.arrow}
             animate={{ rotate: isOpen ? 180 : 0 }}
@@ -50,6 +54,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
       <AnimatePresence>
         {isOpen && (
           <motion.ul
+            id="category-list"
             className={styles.dropdownContent}
             initial={{ opacity: 0, y: -10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -74,7 +79,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
           </motion.ul>
         )}
       </AnimatePresence>
-    </div>
+    </nav>
   );
 };
 

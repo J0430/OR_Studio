@@ -1,118 +1,61 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-/* =========================== */
-/* ✅ Main Control Wrapper     */
-/* =========================== */
+/* ============================== */
+/* ✅ Works Control Wrapper       */
+/* ============================== */
 .worksControl {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin-bottom: 2rem;
-  margin-top: 3vw;
-
-  &[data-open="true"] {
-    z-index: 0;
-  }
-
-  &.blurred {
-    backdrop-filter: blur(6px);
-    background-color: rgba(var(--background-color-rgb), 0.8);
-    transition: backdrop-filter 0.3s ease;
-  }
-  @media (max-width: 768px) {
-    height: 0;
-    z-index: 1;
-    margin: 0;
-    &[data-open="true"] {
-      z-index: 0;
-    }
-  }
-}
-
-/* =========================== */
-/* ✅ Title Box               */
-/* =========================== */
-.worksTitleBox {
-  width: fit-content;
-  position: relative;
-  bottom: -(m.rem(50));
-
-  .worksTitle {
-    font-size: clamp(m.rem(20), 4vw, m.rem(30));
-    font-weight: 400;
-    color: var(--text-color);
-    white-space: nowrap;
-  }
-}
-
-/* =========================== */
-/* ✅ Selector (Tabs + Dropdown) Box */
-/* =========================== */
-.worksSelectorBox {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 0.5%;
-  padding: 0 m.rem(16);
-  padding-top: m.rem(16);
-  border-top: m.rem(1) solid rgba(var(--border-strong), 0.3);
+  justify-content: center;
+  padding: m.rem(24) m.rem(16);
   z-index: 1;
+  // Optional: Add top margin if needed
+  @media (max-width: 768px) {
+    position: absolute;
+  }
+}
 
-  .worksSelector {
-    width: 100%;
+/* ============================== */
+/* ✅ Desktop Tabs                */
+/* ============================== */
+.worksTabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  .tabsWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    .tabsWrapper {
-      position: relative;
-      display: flex;
-      gap: 2.5rem;
-      justify-content: center;
-      align-items: center;
-      padding: 0.625rem 0;
-      z-index: 1;
-    }
-  }
-  .worksDropdownMobile {
-    display: none;
+    gap: m.rem(32);
   }
 }
 
-/* =========================== */
-/* ✅ Mobile Styles            */
-/* =========================== */
-@media (max-width: 768px) {
-  .worksTitleBox,
-  .worksSelectorBox .worksSelector {
-    display: none;
-  }
+/* ============================== */
+/* ✅ Mobile Dropdown             */
+/* ============================== */
+.worksDropdown {
+  display: none;
 
-  .worksSelectorBox {
-    z-index: 0;
-    height: 0;
-    border-top: none;
+  @media (max-width: 768px) {
+    display: flex;
     justify-content: center;
-
-    .worksDropdownMobile {
-      display: flex;
-
-      position: relative;
-      z-index: 1 !important;
-      transform: translateX(-50%);
-
-      width: fit-content;
-      padding: 0 m.rem(16);
-      background: transparent;
-      pointer-events: all;
-    }
+    align-items: center;
+    width: 100%;
+    padding: 0 m.rem(16);
   }
 }
 
 /* =========================== */
-/* ✅ Responsive Adjustments   */
+/*  Responsive Adjustments   */
 /* =========================== */
 
 // /* Mobile Styles */
@@ -133,7 +76,7 @@
 //       display: none;
 //     }
 //     /* =========================== */
-//     /* ✅ Mobile Dropdown Style Centered on Top */
+//     /*   Mobile Dropdown Style Centered on Top */
 //     /* =========================== */
 //     .worksDropdownMobile {
 //       position: fixed; // Always visible and stays at top

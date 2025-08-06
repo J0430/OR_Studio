@@ -27,6 +27,8 @@ function MyApp({ Component, pageProps }) {
         <PreloaderContextProvider>
           <Header />
           <Component {...pageProps} />
+
+          <div className="pageGradientOverlay" />
         </PreloaderContextProvider>
       </NavProvider>
     </>

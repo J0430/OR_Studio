@@ -1,16 +1,14 @@
-//WorksControl.tsx:
-
 import { useEffect, useState } from "react";
 import { loadDynamicImports } from "utils/loadDynamicImports";
-
-import type { CategoryTabsProps } from "@common/CategoryTabs/CategoryTabs.types";
-import type { DropdownMenuProps } from "@common/DropdownMenu/DropdownMenu.types";
-import type { WorksControlProps } from "./WorksControl.types";
-
 import { useNav } from "@contexts/NavContext";
+
+import type { WorksControlProps } from "./WorksControl.types";
+import type { DropdownMenuProps } from "@common/DropdownMenu/DropdownMenu.types";
+import type { CategoryTabsProps } from "@common/CategoryTabs/CategoryTabs.types";
 
 import styles from "./WorksControl.module.scss";
 
+// ✅ Dynamic imports (typed)
 const { DropdownMenu, CategoryTabs } = loadDynamicImports("common", [
   "DropdownMenu",
   "CategoryTabs",
@@ -18,45 +16,35 @@ const { DropdownMenu, CategoryTabs } = loadDynamicImports("common", [
   DropdownMenu: React.FC<DropdownMenuProps>;
   CategoryTabs: React.FC<CategoryTabsProps>;
 };
+
 const WorksControl: React.FC<WorksControlProps> = ({
   categories = [],
   selectedCategory,
   onCategorySelect,
 }) => {
-  const [scrolled, setScrolled] = useState(false);
   const { isNavOpen } = useNav();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-      setScrolled(scrollY > 100);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <section
-      className={`${styles.worksControl} ${scrolled ? styles.blurred : ""}`}
+      className={styles.worksControl}
+      data-open={isNavOpen}
       aria-label="Work Categories">
-      <div className={styles.worksSelectorBox}>
-        <nav className={styles.worksSelector} aria-label="Category Navigation">
-          <CategoryTabs
-            categories={categories}
-            selectedCategory={selectedCategory}
-            onCategorySelect={onCategorySelect}
-          />
-        </nav>
+      {/* ✅ Desktop Tabs */}
+      <div className={styles.worksTabs} aria-label="Category divigation">
+        <CategoryTabs
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategorySelect={onCategorySelect}
+        />
+      </div>
 
-        <div className={styles.worksDropdownMobile}>
-          {!isNavOpen && (
-            <DropdownMenu
-              categories={categories}
-              selectedCategory={selectedCategory}
-              onCategorySelect={onCategorySelect}
-            />
-          )}
-        </div>
+      {/* ✅ Mobile Dropdown */}
+      <div className={styles.worksDropdown}>
+        <DropdownMenu
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategorySelect={onCategorySelect}
+        />
       </div>
     </section>
   );

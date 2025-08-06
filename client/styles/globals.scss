@@ -61,6 +61,18 @@ html.dark {
   --bg-color: #000000;
   --text-color: #ffffff;
 }
+// styles/globals.scss or similar
+
+.pageGradientOverlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5vh;
+  pointer-events: none;
+  z-index: 9999;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 13%, transparent 100%);
+}
 
 body {
   font-family: v.$font-family-base;
@@ -80,14 +92,27 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0, transparent);
 
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  &::after {
+    background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.65) 0,
+      transparent
+    );
+  }
 
   @include m.scrollbar-style(
     rgba(255, 255, 255, 0.3),
     rgba(255, 255, 255, 0.6)
   );
+
+  @media (max-width: 768px) {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 @supports (-webkit-touch-callout: none) {

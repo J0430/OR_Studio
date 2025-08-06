@@ -5,17 +5,14 @@
 /* ✅ Dropdown Container       */
 /* =========================== */
 .dropdownContainer {
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+
   pointer-events: all;
-
-  @media (max-width: 768px) {
-    position: fixed;
-
-    left: 2rem;
-    transform: translateX(-50%);
-    padding: 0.25rem 1rem;
-    border-radius: m.rem(10);
-  }
+  position: relative;
+  z-index: 2; // ❌ Removed fixed positioning
 }
 
 /* =========================== */
@@ -26,7 +23,6 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: rgba(v.$white, 0.9);
   box-shadow: 0px 5px 20px 1px rgba(0, 0, 0, 0.05);
-
   font-size: 1rem;
   font-weight: 500;
   padding: 0.5rem 1rem;
@@ -39,6 +35,8 @@
   color: rgba(0, 0, 0, 0.8);
   cursor: pointer;
   transition: background 0.3s ease;
+
+  z-index: 1;
 
   &:hover {
     background: rgba(233, 230, 230, 0.85);
@@ -65,11 +63,11 @@
 /* ✅ Dropdown List (ul)       */
 /* =========================== */
 .dropdownContent {
-  margin-top: 0.4rem;
   width: 100%;
   padding: 0.3em;
   background: rgba(v.$white, 0.9);
   border-radius: m.rem(18);
+  margin-top: 0.3rem;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.08);
 }
 
