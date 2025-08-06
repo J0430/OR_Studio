@@ -92,7 +92,7 @@ export default function LandingAbout() {
               src="/assets/works/categories/Office/o_project1/mushi(2).webp" // ✅ Uppercase "O"
               alt="Main background"
               width={isMobile ? 800 : 1400}
-              height={isMobile ? 200 : 1000}
+              height={isMobile ? 400 : 1000}
               className={styles.bgImage}
               priority
             />
