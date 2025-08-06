@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   z-index: 9999;
-  width: 100vw;
+  width: 100%;
   height: 100dvh;
   height: 100vh;
   display: flex;
@@ -19,87 +19,74 @@
   overflow: hidden;
   scrollbar-gutter: stable both-edges;
   contain: layout paint;
-
-  @media (max-width: 768px) {
-    .modalContent {
-      min-height: auto;
-      height: auto;
-    }
-
-    .modalContainer {
-      overflow-y: auto;
-    }
-  }
-}
-
-.modalBackdrop {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: auto;
-}
-
-.modalContent {
-  position: relative;
-  width: 100%;
-  height: fit-content;
-  max-height: fit-content;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  z-index: 2;
-  touch-action: manipulation;
-  user-select: none;
-
-  .closeButton {
+  .modalBackdrop {
     position: absolute;
-    top: 2rem;
-    right: 2rem;
-    border: none;
-    background: none;
-    color: var(--text-color);
-    z-index: 3;
-    font-size: 2rem;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-
-    &:hover {
-      opacity: 0.8;
-    }
-    @media (max-width: 768px) {
-      font-size: 1.3rem;
-      position: fixed;
-      top: 8rem;
-      right: 1rem;
-    }
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: auto;
   }
-}
 
-.imageWrapper {
-  width: 100%;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  .modalContent {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    max-height: fit-content;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    z-index: 2;
+    touch-action: manipulation;
+    user-select: none;
 
-  .direction {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    .closeButton {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      border: none;
+      background: none;
+      color: var(--text-color);
+      z-index: 3;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
 
-    &.left {
-      left: clamp(1rem, 3vw, 4rem);
-      z-index: 10;
+      &:hover {
+        opacity: 0.8;
+      }
+      @media (max-width: 768px) {
+        font-size: 1.3rem;
+        position: fixed;
+        top: 8rem;
+        right: 1rem;
+      }
     }
+    .imageWrapper {
+      width: 100%;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
 
-    &.right {
-      right: clamp(1rem, 3vw, 4rem);
-      z-index: 10;
+      .direction {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        &.left {
+          left: clamp(1rem, 3vw, 4rem);
+          z-index: 10;
+        }
+
+        &.right {
+          right: clamp(1rem, 3vw, 4rem);
+          z-index: 10;
+        }
+      }
     }
   }
 }
@@ -132,14 +119,6 @@
     pointer-events: none;
     backface-visibility: hidden;
   }
-}
-
-.thumbnailContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  z-index: 3;
 }
 
 .thumbnailGallery {

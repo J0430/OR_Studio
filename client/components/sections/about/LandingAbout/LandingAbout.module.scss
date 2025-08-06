@@ -110,17 +110,18 @@
         padding: 0;
 
         h1 {
-          font-size: m.rem(25);
+          font-size: m.rem(23);
           line-height: 1.1;
         }
 
         .description {
-          font-size: m.rem(13);
+          font-size: m.rem(11);
           line-height: 1.6;
+          margin: 0;
         }
 
         .contact {
-          font-size: m.rem(13);
+          font-size: m.rem(11);
           margin-bottom: m.rem(1);
           font-weight: 500;
           display: inline-block;
