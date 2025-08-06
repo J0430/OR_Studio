@@ -3,149 +3,164 @@
 
 .hero {
   display: flex;
+
   padding-left: 2.05rem;
-
+  justify-content: space-between;
   font-family: v.$font-family-base;
-  color: v.$white;
-  align-content: flex-end;
+  padding-left: 2.05rem;
+  width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  font-family: "Raleway", sans-serif;
+  color: #fff;
   overflow: hidden;
-}
-.aboutWrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
 
-  /* ============================== */
-  /* ✅ LEFT BLOCK */
-  /* ============================== */
-  .left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: clamp(2.8rem, 2.8vw, 6rem);
-
-    h1 {
-      font-size: clamp(2.8rem, 2vw, 6rem);
-      line-height: 1.05;
-      font-weight: 300;
-    }
-
-    .description {
-      font-size: m.rem(20);
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.75);
-      max-width: m.rem(420);
-    }
-
-    .contact {
-      font-size: m.rem(16);
-      font-weight: 500;
-      text-decoration: none;
-      color: v.$white;
-      width: fit-content;
-      position: relative;
-
-      &::after {
-        content: "→";
-        margin-left: m.rem(12);
-        transition: transform 0.3s ease;
-      }
-
-      &:hover::after {
-        transform: translateX(4px);
-      }
-    }
-
-    .bottomLeftImage {
-      position: relative;
-      z-index: 3;
-
-      .extraSmallImage {
-        width: clamp(6rem, 6.5vw, 8rem); // smaller minimum and smaller scaling
-      }
-    }
-  }
-
-  /* ============================== */
-  /* ✅ RIGHT BLOCK */
-  /* ============================== */
-  .right {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-
-    .imageWrapper {
-      height: 80dvh;
-      .bgImage {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .hero {
-    padding-right: 1.8rem;
-    padding-left: 1.8rem;
-
-    padding-top: 65px;
-    display: flex;
-    // min-height: 80dvh;
-    // max-height: 80svh;
-    // height: 80svh;
-  }
   .aboutWrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     justify-self: start;
     position: relative;
+    width: 100%;
 
+    /* ✅ LEFT BLOCK */
+    /* ============================== */
     .left {
-      gap: m.rem(4);
-      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(2.8rem, 2.8vw, 6rem);
 
       h1 {
-        font-size: m.rem(20);
-        line-height: 1.1;
+        font-size: clamp(1.5rem, 2vw, 6rem);
+        line-height: 1.05;
+        font-weight: 300;
       }
 
       .description {
-        font-size: m.rem(12);
+        font-size: m.rem(20);
         line-height: 1.6;
-        margin: 0;
+        color: rgba(255, 255, 255, 0.75);
+        max-width: m.rem(420);
       }
 
       .contact {
-        font-size: m.rem(13);
+        font-size: m.rem(18);
         font-weight: 500;
-        display: inline-block;
         text-decoration: none;
         color: v.$white;
+        width: fit-content;
+        position: relative;
+
+        &::after {
+          content: "→";
+          margin-left: m.rem(12);
+          transition: transform 0.3s ease;
+        }
 
         &:hover::after {
           transform: translateX(4px);
         }
       }
+
+      .bottomLeftImage {
+        position: relative;
+        z-index: 3;
+      }
     }
 
+    /* ============================== */
+    /* ✅ RIGHT BLOCK */
+    /* ============================== */
     .right {
-      place-items: start;
-      height: -webkit-fill-available;
-      overflow: hidden;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
 
       .imageWrapper {
-        position: relative;
-        width: 100%;
-        height: 62dvh;
-        min-height: 62dvh;
-        max-height: 62svh;
-        height: 62svh;
+        height: 80dvh;
+        .bgImage {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .hero {
+    padding-right: 1.8rem;
+    padding-left: 1.8rem;
+
+    padding-top: 80px;
+    height: fit-content;
+    max-height: fit-content;
+    // min-height: 80dvh;
+    // max-height: 80svh;
+    // height: 80svh;
+    .aboutWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-self: start;
+      position: relative;
+
+      .left {
+        gap: m.rem(4);
+        padding: 0;
+
+        h1 {
+          font-size: m.rem(25);
+          line-height: 1.1;
+        }
+
+        .description {
+          font-size: m.rem(13);
+          line-height: 1.6;
+        }
+
+        .contact {
+          font-size: m.rem(13);
+          margin-bottom: m.rem(1);
+          font-weight: 500;
+          display: inline-block;
+          text-decoration: none;
+          color: v.$white;
+
+          &:hover::after {
+            transform: translateX(4px);
+          }
+        }
+
+        .bottomLeftImage {
+          position: absolute;
+          left: 17.1rem;
+          bottom: 5rem;
+
+          .extraSmallImage {
+            width: m.rem(120);
+          }
+        }
+      }
+
+      .right {
+        place-items: start;
+        height: -webkit-fill-available;
         overflow: hidden;
 
-        .bgImage {
-          height: auto;
-          object-fit: cover;
+        .imageWrapper {
+          position: relative;
+          width: 100%;
+          height: fit-content;
+          min-height: fit-content;
+          max-height: fit-content;
+          height: fit-content;
+          overflow: hidden;
+
+          .bgImage {
+            height: auto;
+            object-fit: cover;
+          }
         }
       }
     }

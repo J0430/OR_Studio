@@ -73,7 +73,7 @@
     @media (max-width: 768px) {
       font-size: 1.3rem;
       position: fixed;
-      top: 10rem;
+      top: 8rem;
       right: 1rem;
     }
   }
@@ -168,8 +168,8 @@
     }
 
     @media (max-width: 768px) {
-      height: 5.5rem;
-      width: 5.5rem;
+      height: 3.5rem;
+      width: 3.5rem;
       &.activeThumbnail {
         border: 1.5px solid rgb(237, 237, 237);
       }
