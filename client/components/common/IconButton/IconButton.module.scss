@@ -155,8 +155,8 @@
 // }
 .iconButton {
   position: absolute;
-  width: clamp(2.5rem, 6vw, var(--button-width, 3rem));
-  height: clamp(2.5rem, 6vw, var(--button-height, 3rem));
+  width: clamp(2rem, 6vw, var(--button-width, 3rem));
+  height: clamp(2rem, 6vw, var(--button-height, 3rem));
   border: m.rem(0.3) solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.135);
@@ -238,6 +238,10 @@
   pointer-events: none;
   transform-origin: center;
   position: relative;
+  @media (max-width: 768px) {
+    width: m.rem(8);
+    height: m.rem(8);
+  }
 }
 
 .zoomSymbol {
