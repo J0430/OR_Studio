@@ -3,12 +3,12 @@
 
 .hero {
   display: flex;
-  padding-left: clamp(1rem, 5vw, #{m.rem(150)});
+  padding-left: 1.9rem;
+  background-color: var(--background-color);
   font-family: v.$font-family-base;
-  color: var(--text-color);
+  color: v.$white;
   align-content: flex-end;
   overflow: hidden;
-  background-color: var(--background-color);
 }
 .aboutWrapper {
   display: grid;
@@ -57,6 +57,15 @@
         transform: translateX(4px);
       }
     }
+
+    .bottomLeftImage {
+      position: relative;
+      z-index: 3;
+
+      .extraSmallImage {
+        width: clamp(6rem, 6.5vw, 8rem); // smaller minimum and smaller scaling
+      }
+    }
   }
 
   /* ============================== */
@@ -80,6 +89,8 @@
 
 @media screen and (max-width: 768px) {
   .hero {
+    padding-right: 1.9rem;
+    padding-top: 84px;
     display: flex;
     // min-height: 80dvh;
     // max-height: 80svh;

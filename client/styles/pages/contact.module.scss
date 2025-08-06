@@ -4,6 +4,7 @@
 /* =========================== */
 /* ✅ Main Contact Page        */
 /* =========================== */
+
 .contactPage {
   /* Layout & Positioning */
   display: flex;
@@ -18,7 +19,6 @@
   justify-content: flex-start;
   z-index: 0;
   overflow: hidden;
-
   /* ✅ Gradient overlay for desktop */
   &::after {
     content: "";
@@ -32,11 +32,13 @@
     z-index: 1;
   }
 
+  /* ✅ Gradient overlay for desktop */
+
   /* ✅ Desktop Form Content */
   .content {
     display: flex;
     flex-direction: column;
-    color: var(--text-color);
+    color: rgba(255, 255, 255, 0.944);
     width: 45%;
     height: auto;
     align-self: center;

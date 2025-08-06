@@ -71,7 +71,7 @@ html.dark {
   height: 5vh;
   pointer-events: none;
   z-index: 9999;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 13%, transparent 100%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
 }
 
 body {
@@ -96,28 +96,16 @@ body {
 
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-  &::after {
-    background-image: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.65) 0,
-      transparent
-    );
-  }
 
   @include m.scrollbar-style(
     rgba(255, 255, 255, 0.3),
     rgba(255, 255, 255, 0.6)
   );
 
-  @media (max-width: 768px) {
-    margin: 0;
-    padding: 0;
-  }
-}
-
-@supports (-webkit-touch-callout: none) {
-  body {
-    min-height: 100dvh;
+  @supports (-webkit-touch-callout: none) {
+    body {
+      min-height: 100dvh;
+    }
   }
 }
 

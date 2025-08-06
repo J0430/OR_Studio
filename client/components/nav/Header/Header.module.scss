@@ -17,9 +17,7 @@
   padding: 1.5rem;
   overflow: visible;
 
-  @media (max-width: 768px) {
-    padding: 1rem;
-  }
+  //
 }
 
 /* =========================== */
@@ -34,8 +32,9 @@
     opacity 0.3s ease,
     visibility 0.3s ease;
   @media (max-width: 768px) {
-    width: m.rem(41);
-    height: m.rem(41);
+    display: flex;
+    justify-content: center;
+    place-items: center;
   }
 }
 

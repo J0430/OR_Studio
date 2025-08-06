@@ -46,17 +46,6 @@ const DynamicForm = ({ schema, title, logo }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.contactForm}>
-      {logo && (
-        <div className={styles.logoWrapper}>
-          <Image
-            src="/assets/Logos/or_studio_w.webp"
-            width={100}
-            height={100}
-            alt="Logo"
-          />
-        </div>
-      )}
-
       {/* ✅ First + Last Name Row */}
       <div className={styles.formRow}>
         {["firstName", "lastName"].map((field, index) => (

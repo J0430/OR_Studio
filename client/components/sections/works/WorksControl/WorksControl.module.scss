@@ -13,7 +13,7 @@
   padding: m.rem(24) m.rem(16);
   z-index: 1;
   // Optional: Add top margin if needed
-  @media (max-width: 768px) {
+  @media (max-width: 820px) {
     position: absolute;
   }
 }
@@ -27,7 +27,7 @@
   align-items: center;
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 820px) {
     display: none;
   }
 
@@ -45,12 +45,13 @@
 .worksDropdown {
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 820px) {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 0 m.rem(16);
+    padding: 0 m.rem(1);
+    padding-top: m.rem(10);
   }
 }
 
@@ -59,7 +60,7 @@
 /* =========================== */
 
 // /* Mobile Styles */
-// @media (max-width: 768px) {
+// @media (max-width:820px) {
 //   .worksControl {
 //     display: flex;
 //     flex-direction: column;
