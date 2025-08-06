@@ -285,11 +285,14 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
       handlePrevious();
     }
   };
-
   const handleBackdropClick = useCallback(
     (e) => {
       console.log("Backdrop clicked", e.target);
-      if (e.target.classList.contains(styles.modalBackdrop)) {
+      if (
+        e.target.classList.contains(
+          styles.modalBackdrop && styles.modalBackdrop
+        )
+      ) {
         const rect = e.target.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -312,6 +315,7 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}>
+      {" "}
       <div className={styles.modalBackdrop} onClick={handleBackdropClick}>
         {ripples.map((ripple) => (
           <span
@@ -321,7 +325,6 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
           />
         ))}
       </div>
-
       <motion.div
         ref={modalRef}
         className={styles.modalContent}
@@ -336,7 +339,6 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
           aria-label="Close Modal">
           ✕
         </button>
-
         <motion.div className={styles.imageWrapper} layoutId={selectedImage}>
           {hasMultipleImages && (
             <IconButton
@@ -377,8 +379,7 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
               className={styles.rightButton}
             />
           )}
-        </motion.div>
-
+        </motion.div>{" "}
         {hasMultipleImages && (
           <div
             className={styles.thumbnailGallery}
@@ -402,7 +403,7 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
               </button>
             ))}
           </div>
-        )}
+        )}{" "}
       </motion.div>
     </motion.div>
   );
