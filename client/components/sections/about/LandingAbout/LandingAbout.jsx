@@ -57,47 +57,48 @@ export default function LandingAbout() {
   return (
     <section className={styles.hero}>
       {/* LEFT BLOCK */}
+      <div className={styles.aboutWrapper}>
+        <motion.div
+          className={styles.left}
+          variants={parentVariants}
+          initial="hidden"
+          animate="visible">
+          <motion.h1 variants={fadeUp}>
+            Designing <br />
+            spaces that <br />
+            reflect your <br />
+            story
+          </motion.h1>
 
-      <motion.div
-        className={styles.left}
-        variants={parentVariants}
-        initial="hidden"
-        animate="visible">
-        <motion.h1 variants={fadeUp}>
-          Designing <br />
-          spaces that <br />
-          reflect your <br />
-          story
-        </motion.h1>
+          <motion.p className={styles.description} variants={fadeUp}>
+            Architectural animation and visualization go beyond static
+            renderings — they create immersive narratives that bring unbuilt
+            environments to life.
+          </motion.p>
 
-        <motion.p className={styles.description} variants={fadeUp}>
-          Architectural animation and visualization go beyond static renderings
-          — they create immersive narratives that bring unbuilt environments to
-          life.
-        </motion.p>
+          <motion.a className={styles.contact} variants={fadeUp}>
+            <Link href="/contact">Contact us</Link>
+          </motion.a>
+        </motion.div>
 
-        <motion.a className={styles.contact} variants={fadeUp}>
-          <Link href="/contact">Contact us</Link>
-        </motion.a>
-      </motion.div>
-
-      {/* RIGHT BLOCK */}
-      <motion.div
-        className={styles.right}
-        variants={fadeInRight}
-        initial="hidden"
-        animate="visible">
-        <div className={styles.imageWrapper}>
-          <Image
-            src="/assets/works/categories/Office/o_project1/mushi(2).webp" // ✅ Uppercase "O"
-            alt="Main background"
-            width={isMobile ? 800 : 1400}
-            height={isMobile ? 400 : 1000}
-            className={styles.bgImage}
-            priority
-          />
-        </div>
-      </motion.div>
+        {/* RIGHT BLOCK */}
+        <motion.div
+          className={styles.right}
+          variants={fadeInRight}
+          initial="hidden"
+          animate="visible">
+          <div className={styles.imageWrapper}>
+            <Image
+              src="/assets/works/categories/Office/o_project1/mushi(2).webp" // ✅ Uppercase "O"
+              alt="Main background"
+              width={isMobile ? 800 : 1400}
+              height={isMobile ? 400 : 1000}
+              className={styles.bgImage}
+              priority
+            />
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }
