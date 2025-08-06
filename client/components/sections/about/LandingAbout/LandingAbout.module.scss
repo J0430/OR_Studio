@@ -127,8 +127,10 @@
       .imageWrapper {
         position: relative;
         width: 100%;
-
-        overflow: hidden;
+        height: 52dvh;
+        min-height: 52dvh;
+        max-height: 52svh;
+        height: 52svh;idden;
 
         .bgImage {
           height: auto;
