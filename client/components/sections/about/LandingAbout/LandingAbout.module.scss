@@ -3,8 +3,8 @@
 
 .hero {
   display: flex;
-  padding-left: 1.9rem;
-  background-color: var(--background-color);
+  padding-left: 2.05rem;
+
   font-family: v.$font-family-base;
   color: v.$white;
   align-content: flex-end;
@@ -13,10 +13,7 @@
 .aboutWrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 100dvh;
-  max-height: 100svh;
-  height: 100svh;
-  width: 100vw;
+
   /* ============================== */
   /* ✅ LEFT BLOCK */
   /* ============================== */
@@ -27,7 +24,7 @@
     gap: clamp(2.8rem, 2.8vw, 6rem);
 
     h1 {
-      font-size: clamp(2.8rem, 2vw, 6rem);
+      font-size: clamp(1.5rem, 2vw, 6rem);
       line-height: 1.05;
       font-weight: 300;
     }
@@ -40,7 +37,7 @@
     }
 
     .contact {
-      font-size: m.rem(16);
+      font-size: m.rem(18);
       font-weight: 500;
       text-decoration: none;
       color: v.$white;
@@ -61,10 +58,6 @@
     .bottomLeftImage {
       position: relative;
       z-index: 3;
-
-      .extraSmallImage {
-        width: clamp(6rem, 6.5vw, 8rem); // smaller minimum and smaller scaling
-      }
     }
   }
 
@@ -90,7 +83,7 @@
 @media screen and (max-width: 768px) {
   .hero {
     padding-right: 1.9rem;
-    padding-top: 84px;
+    padding-top: 80px;
     display: flex;
     // min-height: 80dvh;
     // max-height: 80svh;
@@ -100,10 +93,8 @@
     display: flex;
     flex-direction: column;
     justify-self: start;
-    min-height: 100dvh;
-    max-height: 100svh;
-    height: 100svh;
-    width: 100vw;
+    min-height: 8%;
+    max-height: 0%;
     position: relative;
 
     .left {
@@ -111,23 +102,22 @@
       padding: 0;
 
       h1 {
-        font-size: m.rem(28);
+        font-size: m.rem(25);
         line-height: 1.1;
       }
 
       .description {
-        font-size: m.rem(15);
+        font-size: m.rem(13);
         line-height: 1.6;
       }
 
       .contact {
-        font-size: m.rem(15);
-        margin-bottom: m.rem(5);
+        font-size: m.rem(13);
+        margin-bottom: m.rem(1);
         font-weight: 500;
         display: inline-block;
         text-decoration: none;
         color: v.$white;
-        margin-top: m.rem(1);
 
         &:hover::after {
           transform: translateX(4px);

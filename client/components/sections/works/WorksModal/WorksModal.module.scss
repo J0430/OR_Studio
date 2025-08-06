@@ -178,7 +178,7 @@
   overflow-x: auto;
 
   @media (max-width: 768px) {
-    margin-bottom: 40%;
+    margin-bottom: 30%;
   }
 
   .thumbnailWrapper {
@@ -191,20 +191,28 @@
     transition: transform 0.3s ease;
     z-index: 10;
 
+    &.activeThumbnail {
+      border: 3px solid rgb(237, 237, 237);
+    }
+
+    @media (max-width: 768px) {
+      height: 5.5rem;
+      width: 5.5rem;
+      &.activeThumbnail {
+        border: 1.5px solid rgb(237, 237, 237);
+      }
+    }
+
     .thumbnailImage {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    &.activeThumbnail {
-      border: 3px solid rgb(237, 237, 237);
-    }
-
-    @media (max-width: 768px) {
-      height: 4rem;
-      width: 4rem;
-    }
+    // @media (max-width: 768px) {
+    //   height: 4rem;
+    //   width: 4rem;
+    // }
   }
 }
 
