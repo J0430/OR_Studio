@@ -325,6 +325,12 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
           />
         ))}
       </div>
+      <button
+        className={styles.closeButton}
+        onClick={onClose}
+        aria-label="Close Modal">
+        ✕
+      </button>
       <motion.div
         ref={modalRef}
         className={styles.modalContent}
@@ -333,12 +339,6 @@ const WorksModal = ({ selectedImage, project, onClose }) => {
         exit={{ scale: 0.95 }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}>
-        <button
-          className={styles.closeButton}
-          onClick={onClose}
-          aria-label="Close Modal">
-          ✕
-        </button>
         <motion.div className={styles.imageWrapper} layoutId={selectedImage}>
           {hasMultipleImages && (
             <IconButton

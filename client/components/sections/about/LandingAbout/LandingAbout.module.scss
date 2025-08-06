@@ -92,8 +92,8 @@
   .hero {
     padding-right: 1.8rem;
     padding-left: 1.8rem;
-
-    padding-top: 80px;
+    padding-bottom: 1.8rem;
+    padding-top: 70px;
     height: fit-content;
     max-height: fit-content;
     // min-height: 80dvh;
@@ -152,10 +152,10 @@
         .imageWrapper {
           position: relative;
           width: 100%;
-          height: fit-content;
-          min-height: fit-content;
-          max-height: fit-content;
-          height: fit-content;
+          height: 48dvh;
+          min-height: 48dvh;
+          max-height: 48svh;
+          height: 48svh;
           overflow: hidden;
 
           .bgImage {

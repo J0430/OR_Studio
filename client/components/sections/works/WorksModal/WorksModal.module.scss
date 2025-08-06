@@ -26,6 +26,28 @@
     z-index: 0;
     pointer-events: auto;
   }
+  .closeButton {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    border: none;
+    background: none;
+    color: var(--text-color);
+    z-index: 3;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+    @media (max-width: 768px) {
+      font-size: 1.3rem;
+
+      top: 8rem;
+      right: 3rem;
+    }
+  }
 
   .modalContent {
     position: relative;
@@ -42,28 +64,6 @@
     touch-action: manipulation;
     user-select: none;
 
-    .closeButton {
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      border: none;
-      background: none;
-      color: var(--text-color);
-      z-index: 3;
-      font-size: 2rem;
-      cursor: pointer;
-      transition: opacity 0.3s ease;
-
-      &:hover {
-        opacity: 0.8;
-      }
-      @media (max-width: 768px) {
-        font-size: 1.3rem;
-        position: fixed;
-        top: 8rem;
-        right: 1rem;
-      }
-    }
     .imageWrapper {
       width: 100%;
       margin-bottom: 1rem;
