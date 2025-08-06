@@ -5,14 +5,19 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100000000000;
+  z-index: 9999;
   width: 100vw;
+  height: 100dvh;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--overlay-background);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+  scrollbar-gutter: stable both-edges;
+  contain: layout paint;
 
   @media (max-width: 768px) {
     .modalContent {
@@ -31,6 +36,7 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  pointer-events: auto;
 }
 
 .modalContent {
@@ -45,6 +51,8 @@
   align-items: center;
   background-color: transparent;
   z-index: 2;
+  touch-action: manipulation;
+  user-select: none;
 
   .closeButton {
     position: absolute;
@@ -64,8 +72,8 @@
     @media (max-width: 768px) {
       font-size: 1.3rem;
       position: fixed;
-      top: 3rem;
-      right: 1rem;
+      top: 4rem;
+      right: 2.5rem;
     }
   }
 }
@@ -95,53 +103,14 @@
   }
 }
 
-// .imageTransitionWrapper {
-//   width: 100%;
-//   height: 100%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-
-//   &.zoomed {
-//     img {
-//       transform: scale(1.8);
-//       transition: transform 0.4s ease;
-//     }
-//   }
-
-//   img {
-//     max-height: 100%;
-//     width: auto;
-//     object-fit: contain;
-//     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-//     transition: transform 0.3s ease;
-//     cursor: none;
-//   }
-
-//   .zoomCursor {
-//     position: absolute;
-//     top: 40%;
-//     left: 50%;
-//     transform: translate(-50%, -50%);
-//     z-index: 99;
-//     pointer-events: auto;
-//     transition:
-//       transform 0.25s ease,
-//       opacity 0.25s ease;
-//     cursor: grab;
-
-//     &:active {
-//       cursor: grabbing;
-//     }
-//   }
-// }
 .imageTransitionWrapper {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: zoom-in; // Default cursor
+  cursor: zoom-in;
+  contain: layout paint;
 
   &.zoomed {
     cursor: zoom-out;
@@ -156,9 +125,11 @@
     max-height: 100%;
     width: auto;
     object-fit: contain;
+    font-family: "object-fit: contain";
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     transition: transform 0.3s ease;
-    pointer-events: none; // ✅ So clicks go to container, not image
+    pointer-events: none;
+    backface-visibility: hidden;
   }
 }
 
@@ -208,15 +179,9 @@
       height: 100%;
       object-fit: cover;
     }
-
-    // @media (max-width: 768px) {
-    //   height: 4rem;
-    //   width: 4rem;
-    // }
   }
 }
 
-// 🔁 Advanced image transitions for minimal directional motion
 .next-enter {
   opacity: 0;
   transform: translateX(50px) scale(0.98);
@@ -242,7 +207,7 @@
     opacity 0.4s ease-out,
     transform 0.4s ease-out;
 }
-// 🔵 Ripple Animation
+
 @keyframes ripple {
   0% {
     transform: scale(0);
@@ -264,6 +229,8 @@
   animation: ripple 0.6s ease-out;
   transform: translate(-50%, -50%);
   z-index: 3;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .modalBackdrop {
@@ -271,5 +238,5 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: auto; // Ensure it's clickable
+  pointer-events: auto;
 }
