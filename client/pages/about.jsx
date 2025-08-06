@@ -7,7 +7,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import SectionWrapper from "@components/common/SectionWrapper/SectionWrapper";
-import styles from "@styles/pages/about.module.scss";
+import styles from "@styles/pages/home.module.scss";
 import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
 
 const { LandingAbout } = loadDynamicImports("sections/about", ["LandingAbout"]);
