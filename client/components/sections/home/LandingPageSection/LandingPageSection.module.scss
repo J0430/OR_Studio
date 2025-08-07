@@ -7,12 +7,25 @@
   height: 100dvh;
   display: flex;
   align-items: self-end;
-  padding-bottom: 5rem;
+  padding-bottom: 7rem;
   padding-left: 1.8rem;
   overflow: hidden;
-  z-index: 2;
-  @media (max-width: 768px) {
-    padding-left: 1.7rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.5) 65%,
+      black 100%
+    );
+    animation: fadeInGradient 1.5s ease-in-out;
   }
 
   &::-webkit-scrollbar {
@@ -38,7 +51,11 @@
 /* Fix Scrollbar Differences */
 
 .bannerTextBelowNav {
-  z-index: 1;
+  position: absolute;
+  bottom: 7%;
+  left: 2.1rem;
+  width: 40%;
+  z-index: 3;
   .bannerTitle {
     font-family: v.$font-family-base;
     font-size: 2.3rem;
@@ -53,23 +70,52 @@
     color: var(--text-color);
     -webkit-font-smoothing: antialiased;
   }
-}
+  @media (max-width: 768px) {
+    .bannerTextBelowNav {
+      width: 60%;
 
-@media screen and (max-width: 1024px) {
-  .bannerTextBelowNav {
-    width: 60%;
+      .bannerTitle {
+        font-size: 22px;
+      }
 
-    .bannerTitle {
-      font-size: 22px;
+      .bannerSubtitle {
+        font-size: 1.4rem;
+      }
     }
+  }
+  @media (max-width: 768px) {
+    .bannerTextBelowNav {
+      width: 60%;
 
-    .bannerSubtitle {
-      font-size: 1.4rem;
+      .bannerTitle {
+        font-size: 22px;
+      }
+
+      .bannerSubtitle {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .bannerTextBelowNav {
+      width: 60%;
+
+      .bannerTitle {
+        font-size: 20px;
+      }
+
+      .bannerSubtitle {
+        font-size: 1rem;
+      }
     }
   }
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 768px) {
   .bannerTextBelowNav {
     width: 60%;
 
@@ -83,7 +129,7 @@
   }
 }
 
-@media screen and (max-width: 480px) {
+@media (max-width: 480px) {
   .bannerTextBelowNav {
     width: 60%;
 
