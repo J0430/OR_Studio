@@ -16,7 +16,7 @@ const { IconButton, SectionWrapper } = loadDynamicImports("common", [
   "SectionWrapper",
 ]);
 const { WorksPreloader } = loadDynamicImports("preloaders", ["WorksPreloader"]);
-console.log("WorksPreloader:", WorksPreloader);
+
 const sectionsConfig = [
   { component: "LandingPageSection", projectKey: "LandingPictures" },
   { component: "AboutBanner" },

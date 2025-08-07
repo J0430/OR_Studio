@@ -35,7 +35,7 @@
     visibility 0.3s ease;
   @media (max-width: 768px) {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     place-items: center;
   }
 }

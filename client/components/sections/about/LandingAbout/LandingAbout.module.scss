@@ -3,7 +3,7 @@
 
 .hero {
   display: flex;
-
+  background-color: var(--background-color);
   padding-left: 2.05rem;
   justify-content: space-between;
   font-family: v.$font-family-base;

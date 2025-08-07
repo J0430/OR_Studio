@@ -33,7 +33,6 @@ const { WorksControl, WorksGrid } = dynamicImportComponents("sections/works", [
 const { WorksPreloader } = dynamicImportComponents("preloaders", [
   "WorksPreloader",
 ]);
-console.log(categories);
 
 // ✅ Main Content
 const WorksContent = () => {
@@ -97,13 +96,6 @@ const WorksContent = () => {
     }));
   }, []);
 
-  useEffect(() => {
-    if (state.selectedImage && state.selectedProject) {
-      console.log("🟢 Updated state:");
-      console.log("Selected image in state:", state.selectedImage);
-      console.log("Selected project in state:", state.selectedProject);
-    }
-  }, [state.selectedImage, state.selectedProject]);
   return (
     <>
       {isPreloaderVisible && <WorksPreloader />}

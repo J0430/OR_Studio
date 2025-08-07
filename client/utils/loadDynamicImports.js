@@ -10,8 +10,6 @@ import dynamic from "next/dynamic";
 export const loadDynamicImports = (basePath, componentNames = []) => {
   return Object.fromEntries(
     componentNames.map((name) => {
-      console.log(name);
-      console.log(componentNames, `../components/${basePath}/${name}/${name}`);
       const Component = dynamic(
         () => import(`../components/${basePath}/${name}/${name}`), // Ensure your component name and path match
         {

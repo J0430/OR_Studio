@@ -13,7 +13,7 @@
 
   /* ===== Box Model ===== */
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 
   /* ===== Flex Alignment ===== */
@@ -37,6 +37,7 @@
     /* ===== Box Model ===== */
     width: m.rem(100);
     height: auto;
+    margin-bottom: 10rem;
 
     /* ===== Visual ===== */
     object-fit: contain;

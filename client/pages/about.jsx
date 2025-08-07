@@ -2,15 +2,18 @@ import { useCallback, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
 import { officeData } from "@public/data";
-import { loadDynamicImports } from "utils/loadDynamicImports";
+import { dynamicImportComponents } from "utils/dynamicImportComponents";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import SectionWrapper from "@components/common/SectionWrapper/SectionWrapper";
 import styles from "@styles/pages/home.module.scss";
 import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
+import { dynamicImportComponents } from "utils/dynamicImportComponents";
 
-const { LandingAbout } = loadDynamicImports("sections/about", ["LandingAbout"]);
+const { LandingAbout } = dynamicImportComponents("sections/about", [
+  "LandingAbout",
+]);
 
 export default function About() {
   const isMobile = useMediaQuery({ maxWidth: 768 });

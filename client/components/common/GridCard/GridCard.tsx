@@ -37,6 +37,7 @@ const GridCard: React.FC<GridCardProps> = ({
         alt={title || "Project Image"}
         fill
         style={{ objectFit: "cover" }}
+        priority
       />
     </motion.article>
   );
