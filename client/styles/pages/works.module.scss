@@ -8,35 +8,12 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background-color: var(--background-color);
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 15%;
-    z-index: 0;
-    pointer-events: none;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.3) 0%,
-      rgba(0, 0, 0, 0.3) 30%,
-      rgba(0, 0, 0, 0) 100%
-    );
-
-    animation: fadeInGradient 1.5s ease-in-out;
-  }
 
   /* ===== Box Model ===== */
-  height: 100dvh;
-
-  /* ===== Visual ===== */
-  background-color: var(
-    --background-color
-  ); // ✅ Transparent overlay background (theme controlled)
+  // ✅ Transparent overlay background (theme controlled)
 
   /* =========================== */
   /* ✅ Responsive Adjustments   */
