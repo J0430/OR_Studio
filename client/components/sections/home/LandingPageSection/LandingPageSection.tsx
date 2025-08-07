@@ -1,31 +1,36 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import styles from "./LandingPageSection.module.scss";
 
-const LandingPage = ({ images }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const intervalRef = useRef(null);
+export interface LandingPageSectionProps {
+  images: string[];
+}
 
-  // Handle image index update for the carousel
+const LandingPageSection: React.FC<LandingPageSectionProps> = ({ images }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Cycle through images every 4 seconds
   const updateImageIndex = useCallback(() => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  }, [images?.length]);
+  }, [images.length]);
 
-  // Set interval to change images every 4 seconds
   useEffect(() => {
-    if (images?.length > 0) {
+    if (images.length > 0) {
       intervalRef.current = setInterval(updateImageIndex, 4000);
     }
 
-    return () => clearInterval(intervalRef.current); // Clear interval on unmount
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, [images, updateImageIndex]);
 
   return (
     <motion.section className={styles.bannerWrapper}>
-      {/* Animate image transition */}
+      {/* Background Image Transition */}
       <AnimatePresence mode="wait">
-        {images?.length > 0 && (
+        {images.length > 0 && (
           <motion.div
             key={currentImageIndex}
             initial={{ opacity: 0 }}
@@ -37,7 +42,7 @@ const LandingPage = ({ images }) => {
               src={images[currentImageIndex]}
               alt={`Background Image ${currentImageIndex + 1}`}
               fill
-              priority={currentImageIndex === 0} // Preload first image
+              priority={currentImageIndex === 0}
               style={{ objectFit: "cover" }}
               className={styles.bannerImage}
               aria-label={`Background image number ${currentImageIndex + 1}`}
@@ -46,6 +51,7 @@ const LandingPage = ({ images }) => {
         )}
       </AnimatePresence>
 
+      {/* Text & Animated Title */}
       <motion.div className={styles.bannerTitleWrapper}>
         <motion.div
           className={styles.titleLineWrapper}
@@ -73,4 +79,4 @@ const LandingPage = ({ images }) => {
   );
 };
 
-export default LandingPage;
+export default LandingPageSection;
