@@ -1,32 +1,29 @@
-// LandingPageSection.tsx
-import { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import styles from "./LandingPageSection.module.scss";
-import type { LandingPageSectionProps } from "./LandingPageSection.types";
 
-const LandingPageSection: React.FC<LandingPageSectionProps> = ({
-  images = [],
-}) => {
+const LandingPage = ({ images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef(null);
 
+  // Handle image index update for the carousel
   const updateImageIndex = useCallback(() => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  }, [images.length]);
+  }, [images?.length]);
 
+  // Set interval to change images every 4 seconds
   useEffect(() => {
-    if (images.length > 0) {
+    if (images?.length > 0) {
       intervalRef.current = setInterval(updateImageIndex, 4000);
     }
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
+
+    return () => clearInterval(intervalRef.current); // Clear interval on unmount
   }, [images, updateImageIndex]);
 
   return (
     <motion.section className={styles.bannerWrapper}>
-      {/* Background Image */}
+      {/* Animate image transition */}
       <AnimatePresence mode="wait">
         {images?.length > 0 && (
           <motion.div
@@ -43,34 +40,37 @@ const LandingPageSection: React.FC<LandingPageSectionProps> = ({
               priority={currentImageIndex === 0} // Preload first image
               style={{ objectFit: "cover" }}
               className={styles.bannerImage}
-              unoptimized
-              quality={100}
               aria-label={`Background image number ${currentImageIndex + 1}`}
             />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* TEXT IS NOW SEPARATED OUT — goes below NavbarLinks */}
-      <div className={styles.bannerTitleWrapper}>
+      <motion.div className={styles.bannerTitleWrapper}>
+        <motion.div
+          className={styles.titleLineWrapper}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        />
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 1 }}
+          transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
           className={styles.bannerTitle}>
           DESIGN DIFFERENT
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 1, ease: "easeOut" }} // 👈 delay > navbar animation
+          transition={{ delay: 1, duration: 1, ease: "easeOut" }}
           className={styles.bannerSubtitle}>
           Architectural animation and visualization digital production by OR
           Studio
         </motion.p>
-      </div>
+      </motion.div>
     </motion.section>
   );
 };
 
-export default LandingPageSection;
+export default LandingPage;
