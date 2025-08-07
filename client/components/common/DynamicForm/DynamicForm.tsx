@@ -246,7 +246,7 @@ export default function DynamicForm<TSchema extends AnyObjectSchema>({
                 {...register(field as any)}
                 onBlur={() => trigger(field as any)}
                 className={`${styles.inputField} ${touchedFields[field as keyof FormValues] && !(errors as any)[field] ? styles.valid : ""} ${hasError ? styles.error : ""}`}
-                placeholder="Enter your message"
+                placeholder="Message"
                 rows={4}
                 aria-invalid={hasError || undefined}
                 aria-describedby={hasError ? `${id}-error` : undefined}
@@ -258,7 +258,7 @@ export default function DynamicForm<TSchema extends AnyObjectSchema>({
                 {...register(field as any)}
                 onBlur={() => trigger(field as any)}
                 className={`${styles.inputField} ${touchedFields[field as keyof FormValues] && !(errors as any)[field] ? styles.valid : ""} ${hasError ? styles.error : ""}`}
-                placeholder={`Enter your ${formatLabel(field).toLowerCase()}`}
+                placeholder={formatLabel(field)}
                 aria-invalid={hasError || undefined}
                 aria-describedby={hasError ? `${id}-error` : undefined}
                 autoComplete="on"

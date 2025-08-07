@@ -58,6 +58,7 @@
         color 0.3s ease-in-out;
       &::placeholder {
         margin-left: m.rem(20);
+        color: rgba(255, 255, 255, 0.672);
       }
       &:focus {
         border-color: #58aae9;
