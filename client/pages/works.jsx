@@ -16,6 +16,7 @@ import {
   residentialData,
   officeData,
 } from "@public/data";
+
 import styles from "@styles/pages/works.module.scss";
 
 // ✅ Dynamic Import (No SSR) for Modal
@@ -38,11 +39,16 @@ const { WorksPreloader } = dynamicImportComponents("preloaders", [
 const WorksContent = () => {
   const { isPreloaderVisible } = useWorksPreloader();
 
+  useEffect(() => {
+    console.log("🌀 isPreloaderVisible:", isPreloaderVisible);
+  }, [isPreloaderVisible]);
+
   const [state, setState] = useState({
     categorySelected: categories[1] || "Residential",
     selectedImage: null,
     selectedProject: null,
   });
+  console.log(isPreloaderVisible);
 
   const categoryDataMap = useMemo(
     () => ({
@@ -99,6 +105,7 @@ const WorksContent = () => {
   return (
     <>
       {isPreloaderVisible && <WorksPreloader />}
+      {/* <WorksPreloader /> */}
       <main className={styles.worksPage}>
         <WorksControl
           categories={Object.keys(categoryDataMap)}

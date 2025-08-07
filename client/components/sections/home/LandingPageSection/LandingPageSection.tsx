@@ -52,7 +52,7 @@ const LandingPageSection: React.FC<LandingPageSectionProps> = ({
       </AnimatePresence>
 
       {/* TEXT IS NOW SEPARATED OUT — goes below NavbarLinks */}
-      <div className={styles.bannerTextBelowNav}>
+      <div className={styles.bannerTitleWrapper}>
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}

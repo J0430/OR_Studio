@@ -40,7 +40,6 @@ export const WorksPreloaderProvider = ({ children }) => {
       return () => clearTimeout(timer);
     }
   }, [router.pathname, imagesLoaded]);
-
   // ✅ Fallback timeout only for "/works"
   useEffect(() => {
     if (router.pathname === "/works") {
