@@ -40,9 +40,10 @@
 .bannerTextBelowNav {
   z-index: 1;
   .bannerTitle {
+    font-family: v.$font-family-base;
     font-size: 2.3rem;
     margin: 0;
-    font-family: "Futura", "Helvetica Neue", sans-serif;
+    // font-family: "Futura", "Helvetica Neue", sans-serif;
     color: var(--text-color);
   }
 
