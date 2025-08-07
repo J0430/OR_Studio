@@ -62,20 +62,6 @@
     margin-top: 0.5rem;
     -webkit-font-smoothing: antialiased;
   }
-  @media screen and (max-width: 1024px) {
-    .bannerTitleWrapper {
-      bottom: 12% !important;
-      width: 60% !important;
-
-      .bannerTitle {
-        font-size: 22px !important;
-      }
-
-      .bannerSubtitle {
-        font-size: 1.4rem !important;
-      }
-    }
-  }
 }
 
 /* =========================== */
