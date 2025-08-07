@@ -46,7 +46,7 @@ const Header = () => {
             <AnimatedLogo
               logoName="OR.svg"
               strokeColor={strokeColor}
-              size={60}
+              size={isMobile ? 40 : 60}
               highRes={true}
               priority
             />

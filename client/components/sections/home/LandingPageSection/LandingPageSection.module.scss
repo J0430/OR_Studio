@@ -37,7 +37,6 @@
   position: relative;
   width: 100%;
   height: 100%;
-  z-index: 0;
 
   .bannerImage {
     object-fit: cover;
@@ -63,26 +62,25 @@
     margin-top: 0.5rem;
     -webkit-font-smoothing: antialiased;
   }
+  @media screen and (max-width: 1024px) {
+    .bannerTitleWrapper {
+      bottom: 12% !important;
+      width: 60% !important;
+
+      .bannerTitle {
+        font-size: 22px !important;
+      }
+
+      .bannerSubtitle {
+        font-size: 1.4rem !important;
+      }
+    }
+  }
 }
 
 /* =========================== */
 /* ✅ RESPONSIVE STYLES        */
 /* =========================== */
-@media screen and (max-width: 1024px) {
-  .bannerTitleWrapper {
-    bottom: 12% !important;
-    width: 60% !important;
-
-    .bannerTitle {
-      font-size: 22px !important;
-    }
-
-    .bannerSubtitle {
-      font-size: 1.4rem !important;
-    }
-  }
-}
-
 @media screen and (max-width: 768px) {
   .bannerTitleWrapper {
     bottom: 12% !important;
