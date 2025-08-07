@@ -9,7 +9,6 @@ import DirectionalButton from "@components/common/DirectionalButton/DirectionalB
 import SectionWrapper from "@components/common/SectionWrapper/SectionWrapper";
 import styles from "@styles/pages/home.module.scss";
 import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
-import { dynamicImportComponents } from "utils/dynamicImportComponents";
 
 const { LandingAbout } = dynamicImportComponents("sections/about", [
   "LandingAbout",
