@@ -1,38 +1,40 @@
 // components/forms/FloatingLabelInput.tsx
-
 import React from "react";
-import { UseFormRegister } from "react-hook-form";
+import { FieldValues, Path, UseFormRegister } from "react-hook-form";
 import styles from "./FloatingLabelInput.module.scss";
 import { FieldDefinition } from "./FloatingLabelInput.type";
 
-interface FloatingLabelInputProps extends FieldDefinition {
-  /** Register function from react-hook-form useForm */
-  register: UseFormRegister<any>;
+interface BaseProps {
   /** Validation error message for this field (if any) */
   error?: string;
   /** Disabled state (e.g., when form is submitting) */
   disabled?: boolean;
 }
 
-export const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
+type FloatingLabelInputProps<TFieldValues extends FieldValues> = BaseProps &
+  FieldDefinition & {
+    /** Register from RHF, typed to the same form */
+    register: UseFormRegister<TFieldValues>;
+    /** Name is strongly typed to your form keys */
+    name: Path<TFieldValues>;
+  };
+
+export function FloatingLabelInput<TFieldValues extends FieldValues>({
   name,
   label,
   type,
   placeholder,
   rows,
   register,
-  error,
   disabled,
-}) => {
-  // Determine if we should use a textarea or a standard input
+  error,
+}: FloatingLabelInputProps<TFieldValues>) {
   const isTextArea = type === "textarea";
-  // Ensure an id is available for accessibility (using name as id)
   const inputId = `fld_${name}`;
 
   return (
     <div
-      className={`${styles.floatingLabelInput} ${error ? styles.error : ""}`}>
-      {/** Render either a textarea or input based on type */}
+      className={`${styles.floatingLabelInput} ${error !== "" && styles.error}`}>
       {isTextArea ? (
         <textarea
           id={inputId}
@@ -54,15 +56,14 @@ export const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
           aria-describedby={error ? `${inputId}-error` : undefined}
         />
       )}
-      {/** The label will float when input is focused or filled */}
+
       <label htmlFor={inputId}>{label}</label>
 
-      {/** Error message for this field, announced to screen readers */}
       {error && (
         <p id={`${inputId}-error`} className={styles.errorText} role="alert">
-          {error}
+          {error && error}{" "}
         </p>
       )}
     </div>
   );
-};
+}

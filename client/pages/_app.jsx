@@ -5,7 +5,6 @@ import Head from "next/head";
 import "@styles/globals.scss";
 
 import { dynamicImportComponents } from "utils/dynamicImportComponents";
-import { PreloaderContextProvider } from "@contexts/PreloaderContext";
 
 const { Header } = dynamicImportComponents("nav", ["Header"]);
 
@@ -24,11 +23,9 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavProvider>
-        <PreloaderContextProvider>
-          <Header />
-          <Component {...pageProps} />
-          <div className="pageGradientOverlay" />1
-        </PreloaderContextProvider>
+        <Header />
+        <Component {...pageProps} />
+        <div className="pageGradientOverlay" />1
       </NavProvider>
     </>
   );

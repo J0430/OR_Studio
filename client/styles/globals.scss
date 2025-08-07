@@ -11,10 +11,12 @@
   --border-strong: #ffffff;
   --text-color-preloader: #a5b7bb;
   --overlay-background: rgba(0, 0, 0, 0.3);
-
   --shadow-color: rgba(0, 0, 0, 0.25); // ✅ clearly defined fallback
-
   --overlay-bg-image: blur(5px);
+  --font-size-base: v.$base-font-size;
+  --line-height: v.$line-height;
+  --font-family-base: v.$font-family-base;
+  --spacing-md: v.$spacing-md;
 }
 
 [data-theme="light"] {

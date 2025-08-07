@@ -1,4 +1,5 @@
 export interface AnimatedLogoProps {
+  logoName: string;
   size?: number;
   strokeColor?: string;
   fillColor?: string;
@@ -6,5 +7,10 @@ export interface AnimatedLogoProps {
   strokeWidth?: number;
   className?: string;
   theme?: string;
-  priority?: boolean;
+  highRes?: boolean; // 🆕 Add this
+}
+
+export interface LogoPathsProps {
+  outerPath: string;
+  innerPaths: string[];
 }

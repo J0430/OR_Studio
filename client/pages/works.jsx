@@ -2,10 +2,7 @@ import { useState, useMemo, useCallback, useEffect } from "react";
 import Head from "next/head";
 import { AnimatePresence } from "framer-motion";
 import { categories } from "utils/globals";
-import {
-  useWorksPreloader,
-  WorksPreloaderProvider,
-} from "@contexts/WorksPreloaderContext";
+
 import dynamic from "next/dynamic";
 
 import { dynamicImportComponents } from "utils/dynamicImportComponents";
@@ -18,6 +15,7 @@ import {
 } from "@public/data";
 
 import styles from "@styles/pages/works.module.scss";
+import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
 
 // ✅ Dynamic Import (No SSR) for Modal
 const WorksModal = dynamic(
@@ -35,20 +33,12 @@ const { WorksPreloader } = dynamicImportComponents("preloaders", [
   "WorksPreloader",
 ]);
 
-// ✅ Main Content
-const WorksContent = () => {
-  const { isPreloaderVisible } = useWorksPreloader();
-
-  useEffect(() => {
-    console.log("🌀 isPreloaderVisible:", isPreloaderVisible);
-  }, [isPreloaderVisible]);
-
+const WorksPage = () => {
   const [state, setState] = useState({
     categorySelected: categories[1] || "Residential",
     selectedImage: null,
     selectedProject: null,
   });
-  console.log(isPreloaderVisible);
 
   const categoryDataMap = useMemo(
     () => ({
@@ -104,8 +94,16 @@ const WorksContent = () => {
 
   return (
     <>
-      {isPreloaderVisible && <WorksPreloader />}
-      {/* <WorksPreloader /> */}
+      <Head>
+        <title>OR Studio | Works</title>
+        <meta
+          name="description"
+          content="Discover OR Studio's Residential, Urban Planning, Commercial and Office Architecture Projects."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
+      <LogoPreloader duration={1.5} />
       <main className={styles.worksPage}>
         <WorksControl
           categories={Object.keys(categoryDataMap)}
@@ -133,23 +131,4 @@ const WorksContent = () => {
     </>
   );
 };
-
-// ✅ Wrapped Export
-export default function WorksPage(props) {
-  return (
-    <>
-      <Head>
-        <title>OR Studio | Works</title>
-        <meta
-          name="description"
-          content="Discover OR Studio's Residential, Urban Planning, Commercial and Office Architecture Projects."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-
-      <WorksPreloaderProvider>
-        <WorksContent {...props} />
-      </WorksPreloaderProvider>
-    </>
-  );
-}
+export default WorksPage;

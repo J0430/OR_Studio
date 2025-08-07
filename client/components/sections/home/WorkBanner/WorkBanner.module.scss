@@ -43,13 +43,11 @@
 /* =========================== */
 .progressContainer {
   position: absolute;
-  z-index: 1;
-  top: 0;
+  z-index: 2;
   width: 100%;
+  top: 0.8rem;
   display: flex;
   justify-content: center;
-  padding: 4px;
-  z-index: 0;
 }
 
 /* =========================== */

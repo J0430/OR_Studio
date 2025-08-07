@@ -5,7 +5,7 @@ import { officeData } from "@public/data";
 import { dynamicImportComponents } from "utils/dynamicImportComponents";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
+import IconButton from "components/common/IconButton/IconButton";
 import SectionWrapper from "@components/common/SectionWrapper/SectionWrapper";
 import styles from "@styles/pages/home.module.scss";
 import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
@@ -53,7 +53,7 @@ export default function About() {
                 <ScrollSectionNavigation
                   sections={sections.map((section) => section.id)}
                 />
-                <DirectionalButton
+                <IconButton
                   direction={index < sections.length - 1 ? "down" : "up"}
                   width={isMobile ? 2.3 : 3}
                   height={isMobile ? 2.3 : 3}

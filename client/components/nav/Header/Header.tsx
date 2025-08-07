@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNav } from "@contexts/NavContext";
-import { usePreloaderContext } from "@contexts/PreloaderContext";
 import { dynamicImportComponents } from "utils/dynamicImportComponents";
 import Link from "next/link";
 import styles from "./Header.module.scss";
@@ -18,7 +17,6 @@ const { NavbarLinks } = dynamicImportComponents("nav", ["NavbarLinks"]);
 const Header = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const { isNavOpen, setIsNavOpen, pathname } = useNav();
-  const { isPreloaderVisible } = usePreloaderContext();
   const [strokeColor, setStrokeColor] = useState("#ffffff");
   const router = useRouter();
   const formattedPath = router.pathname
@@ -34,8 +32,6 @@ const Header = () => {
     return () => document.removeEventListener("keydown", handleEsc);
   }, [isNavOpen, setIsNavOpen]);
 
-  if (isPreloaderVisible) return null;
-
   return (
     <motion.header
       className={styles.navbar}
@@ -48,8 +44,10 @@ const Header = () => {
         {!isNavOpen && (
           <Link href="/" passHref>
             <AnimatedLogo
+              logoName="OR.svg"
               strokeColor={strokeColor}
-              size={isMobile ? 40 : 60}
+              size={60}
+              highRes={true}
               priority
             />
           </Link>

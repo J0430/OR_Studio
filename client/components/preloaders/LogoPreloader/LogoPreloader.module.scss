@@ -1,9 +1,5 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
-
-/* =========================== */
-/* ✅ Preloader Container      */
-/* =========================== */
 .preloaderContainer {
   /* ===== Positioning ===== */
   position: fixed;
@@ -13,7 +9,7 @@
 
   /* ===== Box Model ===== */
   width: 100vw;
-  height: 100dvh;
+  height: 100vh;
   overflow: hidden;
 
   /* ===== Flex Alignment ===== */
@@ -29,20 +25,11 @@
   /* ===== Motion & Interaction ===== */
   pointer-events: none;
   transition: opacity 0.8s ease-in-out;
-
-  /* =========================== */
-  /* ✅ Preloader Logo           */
-  /* =========================== */
   .logo {
-    /* ===== Box Model ===== */
     width: m.rem(100);
     height: auto;
     margin-bottom: 10rem;
-
-    /* ===== Visual ===== */
     object-fit: contain;
-
-    /* ===== Layering ===== */
     z-index: 10;
   }
 }

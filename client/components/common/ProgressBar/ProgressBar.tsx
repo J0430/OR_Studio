@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
-import styles from "../ProgressBar/ProgressBar.module.scss";
+import styles from "./ProgressBar.module.scss";
+import type { ProgressBarProps } from "./ProgressBar.types";
 
-const ProgressBar = ({ isActive, duration, onClick }) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({
+  isActive,
+  duration,
+  onClick,
+}) => {
   return (
     <div className={styles.progressWrapper} onClick={onClick}>
       <motion.div

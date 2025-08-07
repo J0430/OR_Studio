@@ -2,14 +2,11 @@
 import { useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { loadDynamicImports } from "utils/loadDynamicImports";
-import {
-  useWorksPreloader,
-  WorksPreloaderProvider,
-} from "@contexts/WorksPreloaderContext";
 
 import { homeData } from "@public/data";
 import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
+import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
 
 const { IconButton, SectionWrapper } = loadDynamicImports("common", [
   "IconButton",
@@ -29,9 +26,7 @@ const dynamicComponents = loadDynamicImports("sections/home", [
   ...new Set(sectionsConfig.map((s) => s.component)),
 ]);
 
-function HomeContent() {
-  const { isDevice, isPreloaderVisible } = useWorksPreloader();
-
+function HomePage() {
   const sections = useMemo(
     () =>
       sectionsConfig.map(({ component, projectKey }, index) => ({
@@ -54,7 +49,7 @@ function HomeContent() {
         <title>OR Studio | Home</title>
       </Head>
 
-      {isPreloaderVisible && <WorksPreloader />}
+      <LogoPreloader duration={1.5} />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -69,8 +64,8 @@ function HomeContent() {
             {/* ✅ Scroll Button using IconButton */}
             <IconButton
               direction={index < sections.length - 1 ? "down" : "up"}
-              width={isDevice ? 2.3 : 3}
-              height={isDevice ? 2.3 : 3}
+              width={3}
+              height={3}
               onClick={() =>
                 handleScroll(sections[(index + 1) % sections.length].id)
               }
@@ -81,11 +76,4 @@ function HomeContent() {
     </>
   );
 }
-
-export default function HomePage() {
-  return (
-    <WorksPreloaderProvider>
-      <HomeContent />
-    </WorksPreloaderProvider>
-  );
-}
+export default HomePage;

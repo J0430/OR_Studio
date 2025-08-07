@@ -1,17 +1,18 @@
-//FlotatingLabelInput.types.ts
+// components/forms/FloatingLabelInput.type.ts
 export type FieldType =
   | "text"
   | "email"
-  | "password"
-  | "number"
   | "tel"
-  | "url"
-  | "textarea"; // 'textarea' will be handled specially
+  | "password"
+  | "textarea"
+  | "url";
 
 export interface FieldDefinition {
   name: string;
   label: string;
   type: FieldType;
   placeholder?: string;
-  rows?: number; // Only used if type === 'textarea' for multi-line input
+  rows?: number;
+
+  // clicked:boolean
 }
