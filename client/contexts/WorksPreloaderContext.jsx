@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+} from "react";
 import { useRouter } from "next/router";
 
 // Create context
@@ -7,56 +13,73 @@ const WorksPreloaderContext = createContext(null);
 // Provider
 export const WorksPreloaderProvider = ({ children }) => {
   const router = useRouter();
-  const [isPreloaderVisible, setIsPreloaderVisible] = useState(true);
+  const [isPreloaderVisible, setIsPreloaderVisible] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(0);
-  const totalImages = 10; // Adjust as needed
+  const totalImages = 10; // Adjust if needed
 
-  // ✅ Show preloader only on first visit or reload for "/"
+  const pathname = router.pathname;
+  const isHomePath = pathname === "/";
+  const isWorksPath = pathname === "/works";
+
   useEffect(() => {
-    if (typeof window !== "undefined" && router.pathname === "/") {
-      const navigationEntry =
-        performance.getEntriesByType("navigation")[0] || {};
-      const navigationType = navigationEntry.type || "navigate";
+    if (typeof window === "undefined") return;
 
-      const hasVisited = sessionStorage.getItem("hasVisited") || "false";
+    const navEntries = performance.getEntriesByType("navigation");
+    const navType = navEntries[0]?.type || "navigate";
 
-      if (
-        navigationType === "reload" ||
-        navigationType === "navigate" ||
-        hasVisited === "false"
-      ) {
-        sessionStorage.setItem("hasVisited", "true");
+    let timer;
+
+    if (isWorksPath) {
+      // Always show preloader on /works
+      setIsPreloaderVisible(true);
+
+      // Hide after all images load or fallback timer
+      if (imagesLoaded >= totalImages) {
+        timer = setTimeout(() => setIsPreloaderVisible(false), 2000);
+      }
+
+      // Fallback timeout in case images never fully load
+      timer = setTimeout(() => setIsPreloaderVisible(false), 4000);
+    } else if (isHomePath) {
+      // Show preloader only on first visit or reload to "/"
+      const hasShown = sessionStorage.getItem("preloaderShown");
+      const hasUsedShallow = window.history.state?.shallow;
+      const shouldShow =
+        (navType === "navigate" || navType === "reload") &&
+        !hasShown &&
+        !hasUsedShallow;
+
+      if (shouldShow) {
+        sessionStorage.setItem("preloaderShown", "true");
         setIsPreloaderVisible(true);
-      } else {
-        setIsPreloaderVisible(false);
+
+        timer = setTimeout(() => setIsPreloaderVisible(false), 3000);
       }
     }
-  }, [router.pathname]);
 
-  // ✅ Always show preloader on /works until images load
-  useEffect(() => {
-    if (router.pathname === "/works" && imagesLoaded >= totalImages) {
-      const timer = setTimeout(() => setIsPreloaderVisible(false), 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [router.pathname, imagesLoaded]);
-  // ✅ Fallback timeout only for "/works"
-  useEffect(() => {
-    if (router.pathname === "/works") {
-      const timeout = setTimeout(() => setIsPreloaderVisible(false), 2000);
-      return () => clearTimeout(timeout);
-    }
-  }, [router.pathname]);
+    return () => clearTimeout(timer);
+  }, [pathname, imagesLoaded]);
 
-  const onImageLoad = () =>
+  // Prevent body scroll while preloader is visible
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    document.body.style.overflow = isPreloaderVisible ? "hidden" : "";
+  }, [isPreloaderVisible]);
+
+  const onImageLoad = () => {
     setImagesLoaded((prev) => Math.min(prev + 1, totalImages));
+  };
+
+  const contextValue = useMemo(
+    () => ({
+      isPreloaderVisible,
+      onImageLoad,
+    }),
+    [isPreloaderVisible]
+  );
 
   return (
-    <WorksPreloaderContext.Provider
-      value={{
-        isPreloaderVisible,
-        onImageLoad,
-      }}>
+    <WorksPreloaderContext.Provider value={contextValue}>
       {children}
     </WorksPreloaderContext.Provider>
   );
@@ -65,13 +88,11 @@ export const WorksPreloaderProvider = ({ children }) => {
 // Hook
 export const useWorksPreloader = () => {
   const context = useContext(WorksPreloaderContext);
-
   if (!context) {
     console.warn(
       "⚠️ useWorksPreloader must be used within a WorksPreloaderProvider"
     );
     return { isPreloaderVisible: false, onImageLoad: () => {} };
   }
-
   return context;
 };
