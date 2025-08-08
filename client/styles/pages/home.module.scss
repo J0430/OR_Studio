@@ -101,3 +101,138 @@
     scroll-behavior: smooth !important;
   }
 }
+/* =========================== */
+/* ✅ BANNER WRAPPER           */
+/* =========================== */
+.bannerWrapper {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  background: black;
+
+  /* ✅ GRADIENT TOP */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.3) 60%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    animation: fadeInGradient 1.5s ease-in-out;
+  }
+
+  /* ✅ GRADIENT BOTTOM */
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.5) 60%,
+      black 100%
+    );
+    animation: fadeInGradient 1.5s ease-in-out;
+  }
+}
+
+/* =========================== */
+/* ✅ IMAGE WRAPPER            */
+/* =========================== */
+.bannerImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+
+  .bannerImage {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* =========================== */
+/* ✅ TITLE & SUBTITLE WRAPPER */
+/* =========================== */
+.bannerTitleWrapper {
+  position: absolute;
+  bottom: 7%;
+  left: 2.1rem;
+  width: 40%;
+  z-index: 3;
+
+  .bannerTitle {
+    font-size: 2.3rem;
+    margin: 0;
+  }
+
+  .bannerSubtitle {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* =========================== */
+/* ✅ RESPONSIVE STYLES        */
+/* =========================== */
+@media screen and (max-width: 1024px) {
+  .bannerTitleWrapper {
+    bottom: 12% !important;
+    width: 60% !important;
+
+    .bannerTitle {
+      font-size: 22px !important;
+    }
+
+    .bannerSubtitle {
+      font-size: 1.4rem !important;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bannerTitleWrapper {
+    bottom: 12% !important;
+    width: 60% !important;
+
+    .bannerTitle {
+      font-size: 22px !important;
+    }
+
+    .bannerSubtitle {
+      font-size: 1.2rem !important;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .bannerTitleWrapper {
+    bottom: 12% !important;
+    width: 60% !important;
+
+    .bannerTitle {
+      font-size: 20px !important;
+    }
+
+    .bannerSubtitle {
+      font-size: 1rem !important;
+    }
+  }
+}
+
