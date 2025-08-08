@@ -4,9 +4,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import AnimatedLogo from "@components/common/AnimatedLogo/AnimatedLogo";
 import styles from "./LogoPreloader.module.scss";
 import type { LogoPreloaderProps } from "./LogoPreloader.types";
+
 const LogoPreloader: React.FC<LogoPreloaderProps> = ({
   duration = 2,
   logoProps,
+  onFinish,
 }) => {
   const router = useRouter();
   const pathname = router.pathname;
@@ -35,10 +37,14 @@ const LogoPreloader: React.FC<LogoPreloaderProps> = ({
       setIsVisible(true);
       const timer = setTimeout(() => {
         setIsVisible(false);
+        onFinish?.(); // ✅ fire callback after preloader finishes
       }, duration * 1000);
+
       return () => clearTimeout(timer);
+    } else {
+      onFinish?.(); // ✅ immediately trigger if preloader is skipped
     }
-  }, [pathname, duration]);
+  }, [pathname, duration, isHome, onFinish]);
 
   useEffect(() => {
     if (typeof document === "undefined") return;
@@ -60,7 +66,8 @@ const LogoPreloader: React.FC<LogoPreloaderProps> = ({
             duration: 1,
             ease: "easeInOut",
             delay: duration,
-          }}>
+          }}
+        >
           <AnimatedLogo
             logoName="OR.svg"
             size={100}
