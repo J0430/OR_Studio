@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
-import AnimatedLogo from "@components/common/AnimatedLogo/AnimatedLogo";
+import AnimatedLogo from "client/components/common/AnimatedLogo/AnimatedLogo";
 import styles from "./LogoPreloader.module.scss";
 import type { LogoPreloaderProps } from "./LogoPreloader.types";
 
@@ -19,7 +19,9 @@ const LogoPreloader: React.FC<LogoPreloaderProps> = ({
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
+    const navEntry = performance.getEntriesByType(
+      "navigation"
+    )[0] as PerformanceNavigationTiming;
     const navType = navEntry?.type || "navigate";
 
     const shouldShowHomePreloader =
@@ -64,8 +66,7 @@ const LogoPreloader: React.FC<LogoPreloaderProps> = ({
             duration: 1,
             ease: "easeInOut",
             delay: duration,
-          }}
-        >
+          }}>
           <AnimatedLogo
             logoName="OR.svg"
             size={100}

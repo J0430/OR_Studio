@@ -4,56 +4,24 @@
     "allowSyntheticDefaultImports": true, // Allows synthetic default imports
     "moduleResolution": "node", // Use Node's module resolution strategy
     "target": "es5", // Target JS version
-    "lib": [
-      "dom",
-      "esnext"
-    ], // Specify the library files
-    "types": [
-      "react",
-      "react-dom"
-    ], // Specify the types to include
-    "typeRoots": [
-      "./node_modules/@types",
-      "./types"
-    ],
+    "lib": ["dom", "esnext"], // Specify the library files
+    "types": ["react", "react-dom"], // Specify the types to include
+    "typeRoots": ["./node_modules/@types", "./types"],
     "allowJs": true, // Allow JS files in the project
     "jsx": "preserve", // Enable JSX support
     "baseUrl": ".", // Set base directory for resolving paths
     "paths": {
-      "@components/*": [
-        "components/*"
-      ],
-      "@common/*": [
-        "components/common/*"
-      ],
-      "@hooks/*": [
-        "hooks/*"
-      ],
-      "@utils/*": [
-        "utils22/*"
-      ],
-      "@api/*": [
-        "public/api/*"
-      ],
-      "@styles/*": [
-        "styles/*"
-      ],
-      "@contexts/*": [
-        "contexts/*"
-      ],
-      "@public/*": [
-        "public/*"
-      ],
-      "@data/*": [
-        "public/data/*"
-      ],
-      "@pages/*": [
-        "pages/*"
-      ],
-      "typeRoots": [
-        "./node_modules/@types",
-        "./types"
-      ]
+      "@components/*": ["client/components/*"],
+      "@common/*": ["client/components/common/*"],
+      "@hooks/*": ["hooks/*"],
+      "@utils/*": ["utils22/*"],
+      "@api/*": ["public/api/*"],
+      "@styles/*": ["styles/*"],
+      "@contexts/*": ["contexts/*"],
+      "@public/*": ["public/*"],
+      "@data/*": ["public/data/*"],
+      "@pages/*": ["pages/*"],
+      "typeRoots": ["./node_modules/@types", "./types"]
     },
     "skipLibCheck": true,
     "strict": false,
@@ -75,14 +43,12 @@
     "**/*.ts",
     "**/*.tsx",
     "../../../../Downloads/OR_Studio-main/client/components/sections/about/LandingAbout",
-    "components/**/*",
+    "client/components/**/*",
     "hooks/**/*",
     "next-env.d.ts",
     "pages/**/*",
     "utils22/**/*",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

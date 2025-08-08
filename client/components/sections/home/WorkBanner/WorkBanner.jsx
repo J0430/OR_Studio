@@ -2,8 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useMediaQuery } from "react-responsive";
 import { AnimatePresence, motion } from "framer-motion";
 import { loadDynamicImports } from "utils/loadDynamicImports";
-import BannerImage from "@components/common/BannerImage/BannerImage";
-import ProgressBar from "@components/common/ProgressBar/ProgressBar";
+import BannerImage from "client/components/common/BannerImage/BannerImage";
+import ProgressBar from "client/components/common/ProgressBar/ProgressBar";
 import styles from "../WorkBanner/WorkBanner.module.scss";
 
 const { IconButton } = loadDynamicImports("common", ["IconButton"]);
