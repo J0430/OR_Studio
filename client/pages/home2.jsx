@@ -1,37 +1,54 @@
 
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import Head from "next/head";
-import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+import { useCallback, useMemo, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { loadDynamicImports } from "utils/loadDynamicImports";
 
-import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
-import styles from "@styles/pages/home.module.scss";
 import { homeData } from "@public/data";
+import Head from "next/head";
+import styles from "@styles/pages/home.module.scss";
+import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
 
-const homeImages =
-  homeData.projects?.LandingPictures?.images?.map((img) => img.src) || [];
+const { IconButton, SectionWrapper } = loadDynamicImports("common", [
+  "IconButton",
+  "SectionWrapper",
+]);
 
-const LandingPage = () => {
+const sectionsConfig = [
+  { component: "LandingPageSection", projectKey: "LandingPictures" },
+  { component: "AboutBanner" },
+  { component: "WorkBanner", projectKey: "EvenYehuda" },
+  { component: "WorkBanner", projectKey: "Hevron" },
+  { component: "WorkBanner", projectKey: "City69" },
+];
+
+const dynamicComponents = loadDynamicImports("sections/home", [
+  ...new Set(sectionsConfig.map((s) => s.component)),
+]);
+
+function HomePage() {
   const [isPreloaderOn, setIsPreloaderOn] = useState(true);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const intervalRef = useRef(null);
-
-  const updateImageIndex = useCallback(() => {
-    setCurrentImageIndex(
-      (prevIndex) => (prevIndex + 1) % homeImages.length
-    );
-  }, []);
 
   useEffect(() => {
-    if (!isPreloaderOn && homeImages.length > 0) {
-      intervalRef.current = setInterval(updateImageIndex, 4000);
-    }
+    const timer = setTimeout(() => setIsPreloaderOn(false), 2000); // ⏱️ match LogoPreloader duration
+    return () => clearTimeout(timer);
+  }, []);
 
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [isPreloaderOn, updateImageIndex]);
+  const sections = useMemo(
+    () =>
+      sectionsConfig.map(({ component, projectKey }, index) => ({
+        id: `section-${index}`,
+        component: dynamicComponents[component],
+        props: projectKey
+          ? { images: homeData.projects[projectKey]?.images || [] }
+          : {},
+      })),
+    []
+  );
+
+  const handleScroll = useCallback((targetId) => {
+    document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   return (
     <>
@@ -40,62 +57,40 @@ const LandingPage = () => {
       </Head>
 
       {isPreloaderOn && (
-        <LogoPreloader duration={1.5} onFinish={() => setIsPreloaderOn(false)} />
+        <LogoPreloader duration={2} onFinish={() => setIsPreloaderOn(false)} />
       )}
 
       {!isPreloaderOn && (
-        <motion.section className={styles.bannerWrapper}>
-          <AnimatePresence mode="wait">
-            {homeImages.length > 0 && (
-              <motion.div
-                key={currentImageIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.8 }}
-                className={styles.bannerImageWrapper}
-              >
-                <Image
-                  src={homeImages[currentImageIndex]}
-                  alt={`Background Image ${currentImageIndex + 1}`}
-                  fill
-                  priority={currentImageIndex === 0}
-                  style={{ objectFit: "cover" }}
-                  className={styles.bannerImage}
-                  aria-label={`Background image number ${currentImageIndex + 1}`}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, ease: "easeInOut" }}
+          className={styles.homePage}
+        >
+          {sections.map(({ component: SectionComponent, props, id }, index) => (
+            <SectionWrapper key={id} id={id}>
+              <div data-section-id={id} className={styles.sectionContainer}>
+                <SectionComponent
+                  {...(id === "section-0"
+                    ? { ...props, preloaderDone: true }
+                    : props)}
                 />
-              </motion.div>
-            )}
-          </AnimatePresence>
+              </div>
 
-          <motion.div className={styles.bannerTitleWrapper}>
-            <motion.div
-              className={styles.titleLineWrapper}
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-            />
-            <motion.h1
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
-              className={styles.bannerTitle}
-            >
-              DESIGN DIFFERENT
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 1, ease: "easeOut" }}
-              className={styles.bannerSubtitle}
-            >
-              Architectural animation and visualization digital production by OR Studio
-            </motion.p>
-          </motion.div>
-        </motion.section>
+              <IconButton
+                direction={index < sections.length - 1 ? "down" : "up"}
+                width={3}
+                height={3}
+                onClick={() =>
+                  handleScroll(sections[(index + 1) % sections.length].id)
+                }
+              />
+            </SectionWrapper>
+          ))}
+        </motion.div>
       )}
     </>
   );
-};
+}
 
-export default LandingPage;
+export default HomePage;
