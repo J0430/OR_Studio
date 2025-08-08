@@ -1,23 +1,25 @@
 // pages/index.tsx (HomePage)
-import React, { useCallback, useMemo, useState, useEffect } from "react";
-import Head from "next/head";
+import { useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { loadDynamicImports } from "utils/loadDynamicImports";
+
 import { homeData } from "@public/data";
+import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
-import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
 
 const { IconButton, SectionWrapper } = loadDynamicImports("common", [
   "IconButton",
   "SectionWrapper",
 ]);
 
+// Step 1: Add visible version first, original (hidden) at end
 const sectionsConfig = [
-  { component: "LandingPageSection", projectKey: "LandingPictures" },
+  { component: "LandingPageSection", projectKey: "LandingPictures", id: "visible-duplicate" }, // ✅ visible
   { component: "AboutBanner" },
   { component: "WorkBanner", projectKey: "EvenYehuda" },
   { component: "WorkBanner", projectKey: "Hevron" },
   { component: "WorkBanner", projectKey: "City69" },
+  { component: "LandingPageSection", projectKey: "LandingPictures", id: "original" }, // 🚫 hidden
 ];
 
 const dynamicComponents = loadDynamicImports("sections/home", [
@@ -25,27 +27,16 @@ const dynamicComponents = loadDynamicImports("sections/home", [
 ]);
 
 function HomePage() {
-  const [isPreloaderOn, setIsPreloaderOn] = useState(true);
-  const duration = 2.5;
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsPreloaderOn(false);
-    }, duration * 1000);
-    return () => clearTimeout(timer);
+  const sections = useMemo(() => {
+    return sectionsConfig.map(({ component, projectKey, id }, index) => ({
+      id: id || `section-${index}`,
+      component: dynamicComponents[component],
+      props: projectKey
+        ? { images: homeData.projects[projectKey]?.images || [] }
+        : {},
+      isHidden: id === "original", // 👈 flag original
+    }));
   }, []);
-
-  const sections = useMemo(
-    () =>
-      sectionsConfig.map(({ component, projectKey }, index) => ({
-        id: `section-${index}`,
-        component: dynamicComponents[component],
-        props: projectKey
-          ? { images: homeData.projects[projectKey]?.images || [] }
-          : {},
-      })),
-    []
-  );
 
   const handleScroll = useCallback((targetId) => {
     document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
@@ -57,25 +48,23 @@ function HomePage() {
         <title>OR Studio | Home</title>
       </Head>
 
-      {isPreloaderOn && <LogoPreloader duration={duration} />}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, ease: "easeInOut" }}
+        className={styles.homePage}
+      >
+        {sections.map(({ component: SectionComponent, props, id, isHidden }, index) => (
+          <SectionWrapper key={id} id={id}>
+            <div
+              data-section-id={id}
+              className={`${styles.sectionContainer} ${isHidden ? styles.hiddenSection : ""}`}
+              aria-hidden={isHidden ? "true" : "false"}
+            >
+              <SectionComponent {...props} />
+            </div>
 
-      {!isPreloaderOn && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration, ease: "easeInOut" }}
-          className={styles.homePage}
-        >
-          {sections.map(({ component: SectionComponent, props, id }, index) => (
-            <SectionWrapper key={id} id={id}>
-              <div data-section-id={id} className={styles.sectionContainer}>
-                <SectionComponent
-                  {...(id === "section-0"
-                    ? { ...props, preloaderDone: true }
-                    : props)}
-                />
-              </div>
-
+            {!isHidden && (
               <IconButton
                 direction={index < sections.length - 1 ? "down" : "up"}
                 width={3}
@@ -84,10 +73,10 @@ function HomePage() {
                   handleScroll(sections[(index + 1) % sections.length].id)
                 }
               />
-            </SectionWrapper>
-          ))}
-        </motion.div>
-      )}
+            )}
+          </SectionWrapper>
+        ))}
+      </motion.div>
     </>
   );
 }
