@@ -3,26 +3,34 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import styles from "./LandingPageSection.module.scss";
 
-const LandingPage = ({ images }) => {
+// ✅ Import homeData and extract LandingPictures
+import { homeData } from "@public/data";
+
+const homeImages =
+  homeData.projects?.LandingPictures?.images?.map((img) => img.src) || [];
+
+const LandingPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef(null);
 
   const updateImageIndex = useCallback(() => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  }, [images?.length]);
+    setCurrentImageIndex(
+      (prevIndex) => (prevIndex + 1) % homeImages.length
+    );
+  }, []);
 
   useEffect(() => {
-    if (images?.length > 0) {
+    if (homeImages.length > 0) {
       intervalRef.current = setInterval(updateImageIndex, 4000);
     }
 
     return () => clearInterval(intervalRef.current);
-  }, [images, updateImageIndex]);
+  }, [updateImageIndex]);
 
   return (
     <motion.section className={styles.bannerWrapper}>
       <AnimatePresence mode="wait">
-        {images?.length > 0 && (
+        {homeImages.length > 0 && (
           <motion.div
             key={currentImageIndex}
             initial={{ opacity: 0 }}
@@ -32,7 +40,7 @@ const LandingPage = ({ images }) => {
             className={styles.bannerImageWrapper}
           >
             <Image
-              src={images[currentImageIndex]}
+              src={homeImages[currentImageIndex]}
               alt={`Background Image ${currentImageIndex + 1}`}
               fill
               priority={currentImageIndex === 0}
