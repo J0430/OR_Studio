@@ -6,6 +6,7 @@ import { WorksGridProps } from "./WorksGrid.types";
 const { GridCard } = dynamicImportComponents("common", ["GridCard"]);
 
 const WorksGrid: React.FC<WorksGridProps> = ({ works = [], onImageClick }) => {
+  const fallbackImage = "/path/to/fallback-image.webp";
   return (
     <section className={styles.worksGridWrapper}>
       <div className={styles.worksGrid}>
@@ -15,8 +16,7 @@ const WorksGrid: React.FC<WorksGridProps> = ({ works = [], onImageClick }) => {
           </p>
         ) : (
           works.map((work, index) => {
-            // ✅ Correct usage
-
+            const firstImageSrc = work?.images?.[0]?.src || fallbackImage;
             return (
               <GridCard
                 key={`${work.title}-${index}`}
@@ -26,7 +26,7 @@ const WorksGrid: React.FC<WorksGridProps> = ({ works = [], onImageClick }) => {
                 aspectRatio={16 / 9}
                 index={index}
                 layoutId={work?.images[0].src}
-                onClick={() => onImageClick(work?.images[0].src)}
+                onClick={() => onImageClick(firstImageSrc)}
               />
             );
           })
