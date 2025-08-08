@@ -101,7 +101,12 @@
     scroll-behavior: smooth !important;
   }
 }
-
+.hiddenSection {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
 .bannerWrapper {
   position: relative;
   width: 100vw;
