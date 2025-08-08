@@ -1,0 +1,35 @@
+.scrollButton {
+  width: 4.5rem;
+  height: 4.5rem;
+  border: 3px solid rgba(255, 255, 255, 0.7); /* Subtle border for visibility */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent; /* Transparent background */
+  outline: none;
+  position: absolute; /* Absolute to position it relative to the section */
+  bottom: 2rem; /* Adjust position from the bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center accurately */
+  z-index: 10000; /* Ensure it stays above other content */
+}
+
+.scrollButton:hover {
+  background-color: rgba(22, 21, 21, 0.5); /* Slight background on hover */
+}
+
+.arrow {
+  width: 12px; /* Adjust arrow size */
+  height: 12px;
+  border-left: 2px solid white; /* Arrow line styles */
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg); /* Initial arrow angle */
+  transition: all 0.3s ease-in-out;
+}
+
+.scrollButton:hover .arrow {
+  width: 15px; /* Adjust arrow size on hover */
+  height: 15px;
+}
