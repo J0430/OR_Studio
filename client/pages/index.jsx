@@ -1,10 +1,10 @@
 // pages/index.tsx (HomePage)
 import { useCallback, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import Head from "next/head";
 import { loadDynamicImports } from "utils/loadDynamicImports";
 
 import { homeData } from "@public/data";
+import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
 import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
 
@@ -40,7 +40,7 @@ function HomePage() {
     []
   );
 
-  const handleScroll = useCallback((targetId: string) => {
+  const handleScroll = useCallback((targetId) => {
     document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
@@ -63,7 +63,7 @@ function HomePage() {
             <div data-section-id={id} className={styles.sectionContainer}>
               <SectionComponent
                 {...(id === "section-0"
-                  ? { ...props, preloaderDone } // ✅ only LandingPageSection
+                  ? { ...props, preloaderDone } // ✅ Only pass this to LandingPageSection
                   : props)}
               />
             </div>
