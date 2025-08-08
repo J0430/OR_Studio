@@ -13,6 +13,4 @@ export interface FieldDefinition {
   type: FieldType;
   placeholder?: string;
   rows?: number;
-
-  // clicked:boolean
 }

@@ -10,14 +10,6 @@
 !.yarn/releases
 !.yarn/versions
 
-# Ignore everything in the .vscode folder
-.vscode
-
-# Except for project-specific files
-!.vscode/settings.json
-!.vscode/launch.json
-!.vscode/tasks.json
-
 # testing
 /coverage
 
@@ -40,8 +32,6 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
-.env.local
-
 
 # vercel
 .vercel
@@ -49,5 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-/netlify/cache/

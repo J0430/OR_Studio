@@ -6,20 +6,20 @@ import { loadDynamicImports } from "utils/loadDynamicImports";
 import { homeData } from "@public/data";
 import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
+import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
 
 const { IconButton, SectionWrapper } = loadDynamicImports("common", [
   "IconButton",
   "SectionWrapper",
 ]);
+const { WorksPreloader } = loadDynamicImports("preloaders", ["WorksPreloader"]);
 
-// Step 1: Add visible version first, original (hidden) at end
 const sectionsConfig = [
-  { component: "LandingPageSection", projectKey: "LandingPictures", id: "visible-duplicate" }, // ✅ visible
+  { component: "LandingPageSection", projectKey: "LandingPictures" },
   { component: "AboutBanner" },
   { component: "WorkBanner", projectKey: "EvenYehuda" },
   { component: "WorkBanner", projectKey: "Hevron" },
   { component: "WorkBanner", projectKey: "City69" },
-  { component: "LandingPageSection", projectKey: "LandingPictures", id: "original" }, // 🚫 hidden
 ];
 
 const dynamicComponents = loadDynamicImports("sections/home", [
@@ -27,16 +27,17 @@ const dynamicComponents = loadDynamicImports("sections/home", [
 ]);
 
 function HomePage() {
-  const sections = useMemo(() => {
-    return sectionsConfig.map(({ component, projectKey, id }, index) => ({
-      id: id || `section-${index}`,
-      component: dynamicComponents[component],
-      props: projectKey
-        ? { images: homeData.projects[projectKey]?.images || [] }
-        : {},
-      isHidden: id === "original", // 👈 flag original
-    }));
-  }, []);
+  const sections = useMemo(
+    () =>
+      sectionsConfig.map(({ component, projectKey }, index) => ({
+        id: `section-${index}`,
+        component: dynamicComponents[component],
+        props: projectKey
+          ? { images: homeData.projects[projectKey]?.images || [] }
+          : {},
+      })),
+    []
+  );
 
   const handleScroll = useCallback((targetId) => {
     document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
@@ -48,37 +49,31 @@ function HomePage() {
         <title>OR Studio | Home</title>
       </Head>
 
+      <LogoPreloader duration={1.5} />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2, ease: "easeInOut" }}
-        className={styles.homePage}
-      >
-        {sections.map(({ component: SectionComponent, props, id, isHidden }, index) => (
+        className={styles.homePage}>
+        {sections.map(({ component: SectionComponent, props, id }, index) => (
           <SectionWrapper key={id} id={id}>
-            <div
-              data-section-id={id}
-              className={`${styles.sectionContainer} ${isHidden ? styles.hiddenSection : ""}`}
-              aria-hidden={isHidden ? "true" : "false"}
-            >
+            <div data-section-id={id} className={styles.sectionContainer}>
               <SectionComponent {...props} />
             </div>
 
-            {!isHidden && (
-              <IconButton
-                direction={index < sections.length - 1 ? "down" : "up"}
-                width={3}
-                height={3}
-                onClick={() =>
-                  handleScroll(sections[(index + 1) % sections.length].id)
-                }
-              />
-            )}
+            {/* ✅ Scroll Button using IconButton */}
+            <IconButton
+              direction={index < sections.length - 1 ? "down" : "up"}
+              width={3}
+              height={3}
+              onClick={() =>
+                handleScroll(sections[(index + 1) % sections.length].id)
+              }
+            />
           </SectionWrapper>
         ))}
       </motion.div>
     </>
   );
 }
-
 export default HomePage;

@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { loadDynamicImports } from "utils/loadDynamicImports";
 import BannerImage from "@components/common/BannerImage/BannerImage";
 import ProgressBar from "@components/common/ProgressBar/ProgressBar";
-// import DirectionalButton from "@components/common/DirectionalButton/DirectionalButton";
 import styles from "../WorkBanner/WorkBanner.module.scss";
 
 const { IconButton } = loadDynamicImports("common", ["IconButton"]);

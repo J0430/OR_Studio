@@ -6,6 +6,7 @@ import React, {
   ReactNode,
 } from "react";
 import { usePathname } from "next/navigation";
+// import {handdleToggle}from "utils/utils/"
 import type { NavContextState } from "./NavContext.types";
 
 // Create context with undefined initial value

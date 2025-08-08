@@ -118,6 +118,7 @@ import { useState, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { dynamicImportComponents } from "utils/dynamicImportComponents";
 import type { AnyObjectSchema, InferType } from "yup";
 import Image from "next/image";
 import styles from "./DynamicForm.module.scss";
@@ -146,6 +147,7 @@ function inputTypeFor(
   if (f.includes("name")) return "text";
   return "text";
 }
+const { SendButton } = dynamicImportComponents("common", ["SendButton"]);
 
 export default function DynamicForm<TSchema extends AnyObjectSchema>({
   schema,
@@ -283,6 +285,13 @@ export default function DynamicForm<TSchema extends AnyObjectSchema>({
         aria-busy={isSubmitting || undefined}>
         <span>{isSubmitting ? "Sending..." : "Send"}</span>
       </motion.button>
+      {/* <SendButton
+        isSubmitting={isSubmitting}
+        disabled={isSubmitting}
+        submit
+        direction="up"
+        aria-busy={isSubmitting || undefined}
+      /> */}
 
       {/* Server Errors & Success */}
       {serverError && <p className={styles.errorMessage}>{serverError}</p>}

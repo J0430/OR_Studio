@@ -7,7 +7,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import IconButton from "components/common/IconButton/IconButton";
 import SectionWrapper from "@components/common/SectionWrapper/SectionWrapper";
-import styles from "@styles/pages/home.module.scss";
+import styles from "@styles/pages/about.module.scss";
 import ScrollSectionNavigation from "@components/common/ScrollSectionNavigator/ScrollSectionNavigator";
 
 const { LandingAbout } = dynamicImportComponents("sections/about", [
