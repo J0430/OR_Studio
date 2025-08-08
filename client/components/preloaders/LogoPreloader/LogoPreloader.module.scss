@@ -1,3 +1,39 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+.preloaderContainer {
+  /* ===== Positioning ===== */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000000;
+
+  /* ===== Box Model ===== */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  /* ===== Flex Alignment ===== */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* ===== Visual ===== */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px); // ✅ Safari support
+  background-color: var(--overlay-background);
+
+  /* ===== Motion & Interaction ===== */
+  pointer-events: none;
+  transition: opacity 0.8s ease-in-out;
+  .logo {
+    width: m.rem(100);
+    height: auto;
+    margin-bottom: 10rem;
+    object-fit: contain;
+    z-index: 10;
+  }
+}
+
 .preloaderContainer {
   position: fixed;
   top: 0;
