@@ -3,25 +3,16 @@ import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
 import AnimatedLogo from "@components/common/AnimatedLogo/AnimatedLogo";
 import styles from "./LogoPreloader.module.scss";
-import type { LogoPreloaderProps } from "./LogoPreloader.types";
 
-const LogoPreloader: React.FC<LogoPreloaderProps> = ({
-  duration = 2,
-  logoProps,
-  onFinish,
-}) => {
+const LogoPreloader = ({ duration = 2, logoProps = {}, onFinish }) => {
   const router = useRouter();
-  const pathname = router.pathname;
-  const isHome = pathname === "/";
-
+  const isHome = router.pathname === "/";
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const navEntry = performance.getEntriesByType(
-      "navigation"
-    )[0] as PerformanceNavigationTiming;
+    const navEntry = performance.getEntriesByType("navigation")[0];
     const navType = navEntry?.type || "navigate";
 
     const shouldShowHomePreloader =
@@ -37,14 +28,14 @@ const LogoPreloader: React.FC<LogoPreloaderProps> = ({
       setIsVisible(true);
       const timer = setTimeout(() => {
         setIsVisible(false);
-        onFinish?.(); // ✅ fire callback after preloader finishes
+        onFinish?.();
       }, duration * 1000);
 
       return () => clearTimeout(timer);
     } else {
-      onFinish?.(); // ✅ immediately trigger if preloader is skipped
+      onFinish?.();
     }
-  }, [pathname, duration, isHome, onFinish]);
+  }, [isHome, duration, onFinish]);
 
   useEffect(() => {
     if (typeof document === "undefined") return;
