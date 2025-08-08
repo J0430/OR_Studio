@@ -1,7 +1,5 @@
 
 
-
-
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import Head from "next/head";
 import { AnimatePresence, motion } from "framer-motion";
@@ -11,25 +9,28 @@ import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
 import styles from "@styles/pages/home.module.scss";
 import { homeData } from "@public/data";
 
-// ✅ Extract image URLs
 const homeImages =
   homeData.projects?.LandingPictures?.images?.map((img) => img.src) || [];
 
 const LandingPage = () => {
   const [isPreloaderOn, setIsPreloaderOn] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef(null);
 
   const updateImageIndex = useCallback(() => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % homeImages.length);
+    setCurrentImageIndex(
+      (prevIndex) => (prevIndex + 1) % homeImages.length
+    );
   }, []);
 
   useEffect(() => {
     if (!isPreloaderOn && homeImages.length > 0) {
-      intervalRef.current = setInterval(updateImageIndex, 2500);
+      intervalRef.current = setInterval(updateImageIndex, 4000);
     }
 
-    return () => clearInterval(intervalRef.current as NodeJS.Timeout);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, [isPreloaderOn, updateImageIndex]);
 
   return (
@@ -88,8 +89,7 @@ const LandingPage = () => {
               transition={{ delay: 1, duration: 1, ease: "easeOut" }}
               className={styles.bannerSubtitle}
             >
-              Architectural animation and visualization digital production by OR
-              Studio
+              Architectural animation and visualization digital production by OR Studio
             </motion.p>
           </motion.div>
         </motion.section>
@@ -99,4 +99,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
