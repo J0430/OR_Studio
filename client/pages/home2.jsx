@@ -3,7 +3,7 @@
 
 
 import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
-
+import Head from "next/head";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
