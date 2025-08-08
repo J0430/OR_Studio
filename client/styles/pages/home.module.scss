@@ -102,16 +102,16 @@
   }
 }
 .bannerWrapper {
+  position: relative;
   width: 100vw;
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; // ⬅️ Push content (text) to bottom
-  background: black;
+  justify-content: flex-end; // ⬅️ Push title/subtitle to the bottom
   overflow: hidden;
-  position: relative;
+  background: black;
 
-  /* Gradient Top */
+  /* ✅ Top gradient */
   &::before {
     content: "";
     position: absolute;
@@ -130,7 +130,7 @@
     animation: fadeInGradient 1.5s ease-in-out;
   }
 
-  /* Gradient Bottom */
+  /* ✅ Bottom gradient */
   &::after {
     content: "";
     position: absolute;
@@ -150,8 +150,9 @@
   }
 }
 
+/* ✅ Background Image wrapper (behind everything) */
 .bannerImageWrapper {
-  position: absolute; // ✅ This remains to fill background
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -165,10 +166,10 @@
   }
 }
 
-/* ✅ No longer absolutely positioned */
+/* ✅ Title/Sub wrapper — not absolute */
 .bannerTitleWrapper {
   width: 100%;
-  padding: 0 2rem 4rem 2rem; // ⬅️ Padding for spacing from edges
+  padding: 0 2rem 4rem 2rem;
   z-index: 1;
   color: white;
 
@@ -181,5 +182,51 @@
     font-size: 1.5rem;
     margin-top: 0.5rem;
     -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* =========================== */
+/* ✅ RESPONSIVE STYLES BELOW  */
+/* =========================== */
+
+@media screen and (max-width: 1024px) {
+  .bannerTitleWrapper {
+    padding: 0 1.5rem 3rem 1.5rem;
+
+    .bannerTitle {
+      font-size: 2.1rem;
+    }
+
+    .bannerSubtitle {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bannerTitleWrapper {
+    padding: 0 1.2rem 2.5rem 1.2rem;
+
+    .bannerTitle {
+      font-size: 1.9rem;
+    }
+
+    .bannerSubtitle {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .bannerTitleWrapper {
+    padding: 0 1rem 2rem 1rem;
+
+    .bannerTitle {
+      font-size: 1.6rem;
+    }
+
+    .bannerSubtitle {
+      font-size: 1rem;
+    }
   }
 }
