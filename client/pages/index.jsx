@@ -1,9 +1,8 @@
 // pages/index.tsx (HomePage)
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState, useEffect } from "react";
 import Head from "next/head";
 import { motion } from "framer-motion";
 import { loadDynamicImports } from "utils/loadDynamicImports";
-
 import { homeData } from "@public/data";
 import styles from "@styles/pages/home.module.scss";
 import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
@@ -25,8 +24,16 @@ const dynamicComponents = loadDynamicImports("sections/home", [
   ...new Set(sectionsConfig.map((s) => s.component)),
 ]);
 
-const HomePage = () => {
+function HomePage() {
   const [isPreloaderOn, setIsPreloaderOn] = useState(true);
+  const duration = 2.5;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsPreloaderOn(false);
+    }, duration * 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const sections = useMemo(
     () =>
@@ -50,15 +57,13 @@ const HomePage = () => {
         <title>OR Studio | Home</title>
       </Head>
 
-      {isPreloaderOn && (
-        <LogoPreloader duration={2.5} onFinish={() => setIsPreloaderOn(false)} />
-      )}
+      {isPreloaderOn && <LogoPreloader duration={duration} />}
 
       {!isPreloaderOn && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 2, ease: "easeInOut" }}
+          transition={{ duration, ease: "easeInOut" }}
           className={styles.homePage}
         >
           {sections.map(({ component: SectionComponent, props, id }, index) => (
@@ -85,6 +90,6 @@ const HomePage = () => {
       )}
     </>
   );
-};
+}
 
 export default HomePage;
