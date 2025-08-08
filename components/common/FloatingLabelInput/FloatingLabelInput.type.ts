@@ -14,5 +14,5 @@ export interface FieldDefinition {
   placeholder?: string;
   rows?: number;
 
-  // clicked:boolean
+  clicked: boolean;
 }
