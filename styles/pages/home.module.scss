@@ -1,12 +1,9 @@
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
-/* =========================== */
-/* ✅ PAGE WRAPPER             */
-/* =========================== */
 .homePage {
   width: 100%;
-  height: 100dvh;
+  height: 100dvh; /* Dynamic Viewport Height Fix */
   display: flex;
   flex-direction: column;
   position: relative;
@@ -20,28 +17,63 @@
   padding: 0;
   z-index: 0;
 
+  // &::before {
+  //   content: "";
+  //   position: absolute;
+  //   top: 6rem;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 15%;
+  //   z-index: 2;
+  //   pointer-events: none;
+  //   background: linear-gradient(
+  //     to bottom,
+  //     rgba(0, 0, 0, 0.3) 0%,
+  //     rgba(0, 0, 0, 0.3) 30%,
+  //     rgba(0, 0, 0, 0) 100%
+  //   );
+
+  //   animation: fadeInGradient 1.5s ease-in-out;
+  // }
+
+  // /* ✅ GRADIENT BOTTOM */
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   bottom: -8rem;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 35%;
+  //   z-index: 0;
+  //   pointer-events: none;
+  //   background: linear-gradient(
+  //     to bottom,
+  //     rgba(0, 0, 0, 0) 0%,
+  //     rgba(0, 0, 0, 0.5) 60%,
+  //     black 100%
+  //   );
+  //   animation: fadeInGradient 1.5s ease-in-out;
+  // }
+
+  /* Fix Scrollbar Differences */
   &::-webkit-scrollbar {
     width: 0px;
     display: none;
   }
 
-  /* =========================== */
-  /* ✅ SECTION CONTAINER        */
-  /* =========================== */
   .sectionContainer {
     width: 100%;
-    height: 100dvh;
+    height: 100dvh; /* Dynamic Viewport Height for Windows & Mac */
     display: flex;
     @include m.center-flex;
     position: relative;
     background-color: var(--tbackground-color);
-    overflow: hidden;
+    overflow: hidden; // ✅ Prevent image/content overflow
     flex-shrink: 0;
     flex-direction: column;
     scroll-snap-align: start;
     scroll-snap-stop: always;
 
-    /* Top Gradient Overlay */
     &::before {
       content: "";
       position: absolute;
@@ -57,132 +89,15 @@
         rgba(0, 0, 0, 0.3) 30%,
         rgba(0, 0, 0, 0) 100%
       );
+
       animation: fadeInGradient 1.5s ease-in-out;
     }
   }
 }
 
-/* =========================== */
-/* ✅ WINDOWS SCROLL FIX       */
-/* =========================== */
+/* Windows Fix for Scroll Smoothing */
 @supports (-ms-ime-align: auto) {
   .homePage {
     scroll-behavior: smooth !important;
-  }
-}
-
-/* =========================== */
-/* ✅ HIDDEN SECTION STYLE     */
-/* =========================== */
-.hiddenSection {
-  opacity: 0 !important;
-  pointer-events: none !important;
-  height: 0 !important;
-  overflow: hidden !important;
-}
-
-/* =========================== */
-/* ✅ HERO / BANNER WRAPPER    */
-/* =========================== */
-.bannerWrapper {
-  position: relative;
-  width: 100vw;
-  height: 100dvh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-
-  /* Gradient Top */
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 15%;
-    z-index: 2;
-    pointer-events: none;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.7) 0%,
-      rgba(0, 0, 0, 0.3) 60%,
-      rgba(0, 0, 0, 0) 100%
-    );
-    animation: fadeInGradient 1.5s ease-in-out;
-  }
-
-  /* Gradient Bottom */
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 35%;
-    z-index: 2;
-    pointer-events: none;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.5) 60%,
-      black 100%
-    );
-    animation: fadeInGradient 1.5s ease-in-out;
-  }
-}
-
-/* =========================== */
-/* ✅ BANNER IMAGE             */
-/* =========================== */
-.bannerImageWrapper {
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-
-  .bannerImage {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-}
-
-/* =========================== */
-/* ✅ TITLE & SUBTITLE         */
-/* =========================== */
-.bannerTitleWrapper {
-  position: relative;
-  bottom: 7%;
-  left: 2.1rem;
-  width: 40%;
-  z-index: 1;
-
-  .bannerTitle {
-    font-size: 2.3rem;
-    margin: 0;
-  }
-
-  .bannerSubtitle {
-    font-size: 1.5rem;
-    margin-top: 0.5rem;
-    -webkit-font-smoothing: antialiased;
-  }
-}
-
-/* =========================== */
-/* ✅ RESPONSIVE               */
-/* =========================== */
-@media screen and (max-width: 1024px) {
-  .bannerTitleWrapper {
-    bottom: 12% !important;
-    width: 60% !important;
-
-    .bannerTitle {
-      font-size: 22px !important;
-    }
-
-    .bannerSubtitle {
-      font-size: 1.4rem !important;
-    }
   }
 }
