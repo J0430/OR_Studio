@@ -102,18 +102,17 @@
   }
 }
 
-
 .bannerWrapper {
+  position: relative;
   width: 100vw;
   height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end; // ⬅️ Push content (text) to bottom
-  background: black;
   overflow: hidden;
-  position: relative;
 
-  /* Gradient Top */
+display: flex;
+  flex-direction: column;
+  justify-content: flex-end; 
+
+  /* ✅ GRADIENT TOP */
   &::before {
     content: "";
     position: absolute;
@@ -121,7 +120,7 @@
     left: 0;
     width: 100%;
     height: 15%;
-    z-index: 0;
+    z-index: 2;
     pointer-events: none;
     background: linear-gradient(
       to bottom,
@@ -132,7 +131,7 @@
     animation: fadeInGradient 1.5s ease-in-out;
   }
 
-  /* Gradient Bottom */
+  /* ✅ GRADIENT BOTTOM */
   &::after {
     content: "";
     position: absolute;
@@ -140,7 +139,7 @@
     left: 0;
     width: 100%;
     height: 35%;
-    z-index: 0;
+    z-index: 2;
     pointer-events: none;
     background: linear-gradient(
       to bottom,
@@ -152,13 +151,14 @@
   }
 }
 
+/* =========================== */
+/* ✅ IMAGE WRAPPER            */
+/* =========================== */
 .bannerImageWrapper {
-  position: absolute; // ✅ This remains to fill background
-  top: 0;
-  left: 0;
+ 
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0;
 
   .bannerImage {
     object-fit: cover;
@@ -167,12 +167,15 @@
   }
 }
 
-/* ✅ No longer absolutely positioned */
+/* =========================== */
+/* ✅ TITLE & SUBTITLE WRAPPER */
+/* =========================== */
 .bannerTitleWrapper {
-  width: 100%;
-  padding: 0 2rem 4rem 2rem; // ⬅️ Padding for spacing from edges
+ position:relative;
+  bottom: 7%;
+  left: 2.1rem;
+  width: 40%;
   z-index: 1;
-  color: white;
 
   .bannerTitle {
     font-size: 2.3rem;
@@ -200,36 +203,6 @@
 
     .bannerSubtitle {
       font-size: 1.4rem !important;
-    }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .bannerTitleWrapper {
-    bottom: 12% !important;
-    width: 60% !important;
-
-    .bannerTitle {
-      font-size: 22px !important;
-    }
-
-    .bannerSubtitle {
-      font-size: 1.2rem !important;
-    }
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .bannerTitleWrapper {
-    bottom: 12% !important;
-    width: 60% !important;
-
-    .bannerTitle {
-      font-size: 20px !important;
-    }
-
-    .bannerSubtitle {
-      font-size: 1rem !important;
     }
   }
 }
