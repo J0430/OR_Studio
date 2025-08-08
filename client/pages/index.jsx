@@ -1,5 +1,5 @@
 // pages/index.tsx (HomePage)
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { loadDynamicImports } from "utils/loadDynamicImports";
 
@@ -26,7 +26,15 @@ const dynamicComponents = loadDynamicImports("sections/home", [
 ]);
 
 function HomePage() {
-  const [preloaderDone, setPreloaderDone] = useState(false);
+  const [isPreloaderOn, setIsPreloaderOn] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsPreloaderOn(false);
+    }, 2500); // 2.5 seconds
+
+    return () => clearTimeout(timer); // Cleanup
+  }, []);
 
   const sections = useMemo(
     () =>
@@ -50,37 +58,40 @@ function HomePage() {
         <title>OR Studio | Home</title>
       </Head>
 
-      <LogoPreloader duration={1.5} onFinish={() => setPreloaderDone(true)} />
+      {isPreloaderOn ? (
+        <LogoPreloader duration={2.5} />
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, ease: "easeInOut" }}
+          className={styles.homePage}
+        >
+          {sections.map(({ component: SectionComponent, props, id }, index) => (
+            <SectionWrapper key={id} id={id}>
+              <div data-section-id={id} className={styles.sectionContainer}>
+                <SectionComponent
+                  {...(id === "section-0"
+                    ? { ...props, preloaderDone: true } // now hardcoded as true
+                    : props)}
+                />
+              </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 2, ease: "easeInOut" }}
-        className={styles.homePage}
-      >
-        {sections.map(({ component: SectionComponent, props, id }, index) => (
-          <SectionWrapper key={id} id={id}>
-            <div data-section-id={id} className={styles.sectionContainer}>
-              <SectionComponent
-                {...(id === "section-0"
-                  ? { ...props, preloaderDone } // ✅ Only pass this to LandingPageSection
-                  : props)}
+              <IconButton
+                direction={index < sections.length - 1 ? "down" : "up"}
+                width={3}
+                height={3}
+                onClick={() =>
+                  handleScroll(sections[(index + 1) % sections.length].id)
+                }
               />
-            </div>
-
-            <IconButton
-              direction={index < sections.length - 1 ? "down" : "up"}
-              width={3}
-              height={3}
-              onClick={() =>
-                handleScroll(sections[(index + 1) % sections.length].id)
-              }
-            />
-          </SectionWrapper>
-        ))}
-      </motion.div>
+            </SectionWrapper>
+          ))}
+        </motion.div>
+      )}
     </>
   );
 }
+
 
 export default HomePage;
