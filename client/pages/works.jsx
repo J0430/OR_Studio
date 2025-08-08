@@ -15,11 +15,11 @@ import {
 } from "@public/data";
 
 import styles from "@styles/pages/works.module.scss";
-import LogoPreloader from "client/components/preloaders/LogoPreloader/LogoPreloader";
+import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
 
 // ✅ Dynamic Import (No SSR) for Modal
 const WorksModal = dynamic(
-  () => import("client/components/sections/works/WorksModal/WorksModal"),
+  () => import("@components/sections/works/WorksModal/WorksModal"),
   { ssr: false }
 );
 

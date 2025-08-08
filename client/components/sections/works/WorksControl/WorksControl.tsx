@@ -3,8 +3,8 @@ import { loadDynamicImports } from "utils/loadDynamicImports";
 import { useNav } from "@contexts/NavContext";
 
 import type { WorksControlProps } from "./WorksControl.types";
-import type { DropdownMenuProps } from "client/components/common/DropdownMenu/DropdownMenu.types";
-import type { CategoryTabsProps } from "client/components/common/CategoryTabs/CategoryTabs.types";
+import type { DropdownMenuProps } from "components/common/DropdownMenu/DropdownMenu.types";
+import type { CategoryTabsProps } from "components/common/CategoryTabs/CategoryTabs.types";
 
 import styles from "./WorksControl.module.scss";
 

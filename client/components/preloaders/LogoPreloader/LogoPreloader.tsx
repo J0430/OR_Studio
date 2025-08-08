@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
-import AnimatedLogo from "client/components/common/AnimatedLogo/AnimatedLogo";
+import AnimatedLogo from "components/common/AnimatedLogo/AnimatedLogo";
 import styles from "./LogoPreloader.module.scss";
 import type { LogoPreloaderProps } from "./LogoPreloader.types";
-
 const LogoPreloader: React.FC<LogoPreloaderProps> = ({
   duration = 2,
   logoProps,
-  onFinish,
 }) => {
   const router = useRouter();
   const pathname = router.pathname;
@@ -37,14 +35,10 @@ const LogoPreloader: React.FC<LogoPreloaderProps> = ({
       setIsVisible(true);
       const timer = setTimeout(() => {
         setIsVisible(false);
-        onFinish?.(); // ✅ fire callback after preloader finishes
       }, duration * 1000);
-
       return () => clearTimeout(timer);
-    } else {
-      onFinish?.(); // ✅ immediately trigger if preloader is skipped
     }
-  }, [pathname, duration, isHome, onFinish]);
+  }, [pathname, duration]);
 
   useEffect(() => {
     if (typeof document === "undefined") return;

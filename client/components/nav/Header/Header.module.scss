@@ -108,7 +108,7 @@
   backdrop-filter: blur(8px);
   padding-top: m.rem(80);
   animation: revealMenu 0.6s ease forwards;
-  z-index: 3;
+  z-index: 1000;
 
   @keyframes revealMenu {
     0% {

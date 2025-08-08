@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
       <NavProvider>
         <Header />
         <Component {...pageProps} />
-        <div className="pageGradientOverlay" />1
+        <div className="pageGradientOverlay" />
       </NavProvider>
     </>
   );

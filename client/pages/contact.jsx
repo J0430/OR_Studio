@@ -2,8 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import styles from "@styles/pages/contact.module.scss";
-import DynamicForm from "client/components/common/DynamicForm/DynamicForm";
-import ContactHeader from "client/components/sections/contact/ContactHeader/ContactHeader";
+import DynamicForm from "components/common/DynamicForm/DynamicForm";
+import ContactHeader from "components/sections/contact/ContactHeader/ContactHeader";
 import { logos } from "utils/globals";
 import * as yup from "yup";
 

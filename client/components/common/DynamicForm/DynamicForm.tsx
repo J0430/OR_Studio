@@ -118,8 +118,12 @@ import { useState, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+
 import { dynamicImportComponents } from "utils/dynamicImportComponents";
-import type { AnyObjectSchema, InferType } from "yup";
+import { AnyObjectSchema, InferType } from "yup";
+import { FloatingLabelInput } from "../FloatingLabelInput/FloatingLabelInput";
+import { FieldType } from "../FloatingLabelInput/FloatingLabelInput.type";
+
 import Image from "next/image";
 import styles from "./DynamicForm.module.scss";
 

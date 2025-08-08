@@ -6,7 +6,7 @@ import { loadDynamicImports } from "utils/loadDynamicImports";
 import { homeData } from "@public/data";
 import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
-import LogoPreloader from "client/components/preloaders/LogoPreloader/LogoPreloader";
+import LogoPreloader from "components/preloaders/LogoPreloader/LogoPreloader";
 
 const { IconButton, SectionWrapper } = loadDynamicImports("common", [
   "IconButton",
