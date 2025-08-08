@@ -1,10 +1,10 @@
 // pages/index.tsx (HomePage)
-import { useCallback, useMemo, useState, useEffect } from "react";
+import React, { useState, useCallback, useMemo } from "react";
+import Head from "next/head";
 import { motion } from "framer-motion";
 import { loadDynamicImports } from "utils/loadDynamicImports";
 
 import { homeData } from "@public/data";
-import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
 import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
 
@@ -25,16 +25,8 @@ const dynamicComponents = loadDynamicImports("sections/home", [
   ...new Set(sectionsConfig.map((s) => s.component)),
 ]);
 
-function HomePage() {
+const HomePage = () => {
   const [isPreloaderOn, setIsPreloaderOn] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsPreloaderOn(false);
-    }, 2500); // 2.5 seconds
-
-    return () => clearTimeout(timer); // Cleanup
-  }, []);
 
   const sections = useMemo(
     () =>
@@ -58,9 +50,11 @@ function HomePage() {
         <title>OR Studio | Home</title>
       </Head>
 
-      {isPreloaderOn ? (
-        <LogoPreloader duration={2.5} />
-      ) : (
+      {isPreloaderOn && (
+        <LogoPreloader duration={2.5} onFinish={() => setIsPreloaderOn(false)} />
+      )}
+
+      {!isPreloaderOn && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -72,7 +66,7 @@ function HomePage() {
               <div data-section-id={id} className={styles.sectionContainer}>
                 <SectionComponent
                   {...(id === "section-0"
-                    ? { ...props, preloaderDone: true } // now hardcoded as true
+                    ? { ...props, preloaderDone: true }
                     : props)}
                 />
               </div>
@@ -91,7 +85,6 @@ function HomePage() {
       )}
     </>
   );
-}
-
+};
 
 export default HomePage;
