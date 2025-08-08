@@ -285,13 +285,13 @@ export default function DynamicForm<TSchema extends AnyObjectSchema>({
         aria-busy={isSubmitting || undefined}>
         <span>{isSubmitting ? "Sending..." : "Send"}</span>
       </motion.button>
-      <SendButton
+      {/* <SendButton
         isSubmitting={isSubmitting}
         disabled={isSubmitting}
         submit
         direction="up"
         aria-busy={isSubmitting || undefined}
-      />
+      /> */}
 
       {/* Server Errors & Success */}
       {serverError && <p className={styles.errorMessage}>{serverError}</p>}
