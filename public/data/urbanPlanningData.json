@@ -1,0 +1,177 @@
+{
+  "category": "Urban Planning",
+  "projects": {
+    "up_project1": {
+      "title": "Sustainable urban Living",
+      "description": "A visionary urban design blending modern residential towers with lush green spaces. It represents the perfect harmony of urban development and environmental sustainability.",
+      "images": [
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project1/up_p1_i1.webp",
+          "orientation": "landscape",
+          "width": 3000,
+          "height": 1687
+        },
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project1/up_p1_i2.webp",
+          "orientation": "landscape",
+          "width": 3000,
+          "height": 1688
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project30/6.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1405
+        }
+      ],
+      "storyline": "",
+      "views": 149
+    },
+    "up_project2": {
+      "title": "Community-Centric urban Plan",
+      "description": "Designed to foster community interaction, this urban project features integrated green areas and modern architecture, creating an ideal balance between urban functionality and social connectivity.",
+      "images": [
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project2/up_p2_i1.webp",
+          "orientation": "landscape",
+          "width": 3000,
+          "height": 1687
+        },
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project2/up_p2_i2.webp",
+          "orientation": "landscape",
+          "width": 3500,
+          "height": 1968
+        },
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project2/up_p2_i3.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1406
+        },
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project2/up_p2_i4.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1406
+        }
+      ],
+      "storyline": "",
+      "views": 149
+    },
+    "up_project3": {
+      "title": "Eco-Friendly Residential Cluster",
+      "description": "This project emphasizes eco-conscious living by incorporating sustainable materials and energy-efficient designs within a thoughtfully planned residential community.",
+      "images": [
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project3/up_p3_i1.webp",
+          "orientation": "landscape",
+          "width": 5280,
+          "height": 2922
+        },
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project3/up_p3_i2.webp",
+          "orientation": "landscape",
+          "width": 3000,
+          "height": 1688
+        },
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project3/up_p3_i3.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1406
+        }
+      ],
+      "storyline": "",
+      "views": 73
+    },
+    "up_project4": {
+      "title": "Urban Forest Integration",
+      "description": "A large-scale urban project that seamlessly integrates forested areas into a modern cityscape, creating a serene environment with a focus on green living.",
+      "images": [
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project4/up_p4_i1.webp",
+          "orientation": "landscape",
+          "width": 6000,
+          "height": 3377
+        },
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project4/up_p4_i2.webp",
+          "orientation": "landscape",
+          "width": 5760,
+          "height": 3215
+        }
+      ],
+      "storyline": "",
+      "views": 86
+    },
+    "up_project5": {
+      "title": "Vertical Garden Residences",
+      "description": "A collection of high-rise residential buildings with vertical gardens, aiming to redefine urban living with green, innovative designs and cutting-edge architecture.",
+      "images": [
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project5/up_p5_i1.webp",
+          "orientation": "landscape",
+          "width": 4523,
+          "height": 2543
+        },
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project5/up_p5_i2.webp",
+          "orientation": "landscape",
+          "width": 4200,
+          "height": 2633
+        }
+      ],
+      "storyline": "",
+      "views": 89
+    },
+    "up_project6": {
+      "title": "Eco-Innovative Business Hub",
+      "description": "A business hub that combines state-of-the-art office spaces with green, sustainable design elements, offering an innovative workspace for the modern professional.",
+      "images": [
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project6/up_p6_i1.webp",
+          "orientation": "landscape",
+          "width": 3000,
+          "height": 1688
+        },
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project6/up_p6_i2.webp",
+          "orientation": "landscape",
+          "width": 3000,
+          "height": 1688
+        }
+      ],
+      "storyline": "",
+      "views": 84
+    },
+    "up_project7": {
+      "title": "Eco-Innovative Business Hub",
+      "description": "A business hub that combines state-of-the-art office spaces with green, sustainable design elements, offering an innovative workspace for the modern professional.",
+      "images": [
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project7/2 (1).webp",
+          "orientation": "landscape",
+          "width": 2125,
+          "height": 1195
+        }
+      ],
+      "storyline": "",
+      "views": 84
+    },
+    "up_project8": {
+      "title": "Eco-Innovative Business Hub",
+      "description": "A business hub that combines state-of-the-art office spaces with green, sustainable design elements, offering an innovative workspace for the modern professional.",
+      "images": [
+        {
+          "src": "/assets/works/categories/UrbanPlanning/up_project8/1 (1).webp",
+          "orientation": "landscape",
+          "width": 2125,
+          "height": 1195
+        }
+      ],
+      "storyline": "",
+      "views": 84
+    }
+  }
+}

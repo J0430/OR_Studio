@@ -1,0 +1,111 @@
+//NavbarLinks.module.scss:
+
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+/* =========================== */
+/* ✅ Navbar Main Container    */
+/* =========================== */
+.navContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  z-index: 110;
+  pointer-events: all;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+
+  @media screen and (max-width: 768px) {
+    padding: 1rem;
+  }
+
+  &[data-open="true"] {
+    z-index: 0;
+  }
+
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* =========================== */
+/* ✅ Navbar List              */
+/* =========================== */
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: m.rem(24);
+  z-index: 10; // stays above blurred layer
+  position: relative;
+
+  @media screen and (max-width: 768px) {
+    margin-top: m.rem(25);
+    gap: m.rem(20);
+  }
+}
+
+/* =========================== */
+/* ✅ Navbar Item Styling      */
+/* =========================== */
+.navItem {
+  font-size: m.rem(30);
+  font-weight: 400;
+  color: var(--tex-color);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  animation: fadeInUp 0.3s ease forwards;
+
+  &:hover {
+    transform: scale(1.05);
+    color: v.$hover-bg;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: m.rem(22);
+  }
+}
+.navItem {
+  animation: fadeInUp 0.3s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================== */
+/* ✅ Active Nav Item Style    */
+/* =========================== */
+.active {
+  font-weight: bold;
+  border-bottom: m.rem(2) solid rgba(255, 255, 255, 0.4);
+
+  @media screen and (max-width: 768px) {
+    border-bottom: m.rem(1) solid rgba(255, 255, 255, 0.4);
+  }
+}

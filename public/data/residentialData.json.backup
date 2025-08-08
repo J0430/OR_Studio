@@ -1,0 +1,827 @@
+{
+  "category": "Residential",
+  "projects": {
+    "r_project1": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project1/residential_r_project1_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project1/4.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project1/5.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project1/6.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project2": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project2/residential_r_project2_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project2/2.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/3.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/6.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/7.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/8.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/13.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project3": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project3/residential_r_project3_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project3/חזית.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project3/פינה.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project4": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project4/residential_r_project4_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project4/1 (1).webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project4/4 (3).webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project5": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project5/residential_r_project5_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project5/3 (1).webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project5/4 לילה.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project5/7.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project5/יום.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project6": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project6/residential_r_project6_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project6/3.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project6/5.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project7": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project7/residential_r_project7_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project7/image1.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project7/יום.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project7/מורדי הגטאות.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project7/ערב.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project8": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project8/residential_r_project8_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project8/2.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project8/3.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project9": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project9/residential_r_project9_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project9/4 (2).webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project9/ARN.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project10": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project10/residential_r_project10_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project10/3.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project10/7.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project11": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project11/residential_r_project11_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project11/1.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project11/2.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project11/3.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project12": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project12/residential_r_project12_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project12/4.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project13": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project13/residential_r_project13_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project13/11.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project13/12.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project14": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project14/residential_r_project14_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project14/1.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project14/2.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project15": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project15/residential_r_project15_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project15/5.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project15/6.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project15/9.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project16": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project16/residential_r_project16_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project16/4.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project16/5.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project16/6.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project16/8.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project16/78.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project17": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project17/residential_r_project17_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project17/3.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project17/4.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project18": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project18/residential_r_project18_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project18/4.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project18/6.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project18/7.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project19": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project19/residential_r_project19_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project19/יום.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project19/ערב.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project20": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project20/residential_r_project20_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project20/5.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project21": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project21/residential_r_project21_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project21/6.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project21/7.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project22": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project22/residential_r_project22_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project22/8.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project22/10.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project23": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project23/residential_r_project23_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project23/3.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project24": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project24/residential_r_project24_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project24/3.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project24/7.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project24/82.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project25": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project25/residential_r_project25_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project25/2.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project25/4.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project26": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project26/residential_r_project26_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project26/3.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project27": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project27/residential_r_project27_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project27/2.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project28": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project28/residential_r_project28_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project28/1.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project28/7.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project29": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project29/residential_r_project29_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project29/1.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project29/2.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project29/4.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    },
+    "r_project30": {
+      "title": "",
+      "frontImage": {
+        "src": "/assets/works/categories/Residential/r_project30/residential_r_project30_front.webp",
+        "orientation": "landscape",
+        "width": 1920,
+        "height": 1080
+      },
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project30/6.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project30/8.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "storyline": ""
+    }
+  }
+}

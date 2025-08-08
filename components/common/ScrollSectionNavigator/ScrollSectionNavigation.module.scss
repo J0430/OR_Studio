@@ -1,0 +1,113 @@
+/* =========================== */
+/* ✅ ScrollSectionNavigation Styles      */
+/* =========================== */
+
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+/* =========================== */
+/* ✅ Navigation Wrapper        */
+/* =========================== */
+.scrollNavWrapper {
+  /* ===== Positioning ===== */
+  position: fixed;
+  top: 50%;
+  right: m.rem(0);
+  transform: translateY(-50%);
+  z-index: 9999;
+
+  /* ===== Layout ===== */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+  padding-right: m.rem(20);
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    right: m.rem(10);
+    padding-right: 0;
+  }
+}
+
+/* =========================== */
+/* ✅ Dots Container            */
+/* =========================== */
+.scrollNavDots {
+  /* ===== Layout ===== */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: all;
+}
+
+/* =========================== */
+/* ✅ Dot Wrapper               */
+/* =========================== */
+.dotWrapper {
+  /* ===== Layout ===== */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: m.rem(7);
+
+  /* ===== Typography ===== */
+  font-size: m.rem(25);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+
+  /* ===== Animation ===== */
+  transition: all 0.3s ease-in-out;
+  opacity: 0.3;
+
+  &.active {
+    color: var(--text-color);
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    font-size: m.rem(14);
+  }
+}
+
+/* =========================== */
+/* ✅ Dot Styles                */
+/* =========================== */
+.dot {
+  /* ===== Button Reset & Visual ===== */
+  all: unset;
+  cursor: pointer;
+  font-size: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* =========================== */
+/* ✅ Dot Line                  */
+/* =========================== */
+.dotLine {
+  /* ===== Visual ===== */
+  width: m.rem(60);
+  height: 1px;
+  background-color: var(--text-color);
+  transition: width 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    width: m.rem(24);
+  }
+}
+
+/* =========================== */
+/* ✅ Inactive Dot              */
+/* =========================== */
+.inactive {
+  /* ===== Interaction ===== */
+  pointer-events: auto;
+}

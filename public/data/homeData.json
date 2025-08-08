@@ -1,0 +1,169 @@
+{
+  "category": "Home",
+  "projects": {
+    "LandingPictures": {
+      "title": "Landing Pictures",
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/home/HomePictures/Front 3.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/home/HomePictures/Front Page 1.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/home/HomePictures/Front Page 2.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/home/HomePictures/Front Page 5.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    "EvenYehuda": {
+      "title": "Even Yehuda",
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/home/EvenYehuda/4.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/home/EvenYehuda/5.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/home/EvenYehuda/7.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/home/EvenYehuda/8.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    "Hevron8PenthouseRooftop": {
+      "title": "Hevron 8 Penthouse Rooftop",
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/home/Hevron8PenthouseRooftop/Hevron_003-View2_PS.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/home/Hevron8PenthouseRooftop/Hevron_003-View3_PS.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/home/Hevron8PenthouseRooftop/Hevron_003-View4_PS.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/home/Hevron8PenthouseRooftop/Hevron_003-View5_PS.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    "City69": {
+      "title": "City69",
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/home/City69/13.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/home/City69/10.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/home/City69/11.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "/assets/home/City69/12.webp",
+          "orientation": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    "Hevron": {
+      "title": "Elevate House",
+      "description": "",
+      "images": [
+        {
+          "src": "/assets/works/categories/Residential/r_project2/13.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1406
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/8.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1407
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/2.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1407
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/3.webp",
+          "orientation": "landscape",
+          "width": 2442,
+          "height": 1414
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/6.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1406
+        },
+        {
+          "src": "/assets/works/categories/Residential/r_project2/7.webp",
+          "orientation": "landscape",
+          "width": 2500,
+          "height": 1406
+        }
+      ],
+      "storyline": "",
+      "views": 121
+    }
+  }
+}

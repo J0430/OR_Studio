@@ -1,0 +1,125 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+/* =========================== */
+/* ✅ HEADER BASE STYLES       */
+/* =========================== */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: all;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1.5rem;
+  overflow: visible;
+  @media (max-width: 768px) {
+    padding: 1.2rem;
+  }
+  //
+}
+
+/* =========================== */
+/* ✅ LOGO STYLES              */
+/* =========================== */
+.logo {
+  height: m.rem(60);
+  width: m.rem(60);
+  z-index: 1100;
+  cursor: pointer;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: flex-start;
+    place-items: center;
+  }
+}
+
+.logoHidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================== */
+/* ✅ LEFT SIDE WRAPPER        */
+/* =========================== */
+.leftSide {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+
+  height: 100%;
+  gap: 1rem;
+  width: fit-content;
+  @media (max-width: 768px) {
+    margin-right: 0.3rem;
+  }
+}
+
+/* =========================== */
+/* ✅ PAGE PATH TITLE          */
+/* =========================== */
+.page {
+  h1 {
+    margin-top: 0.5rem;
+    font-size: clamp(1.25rem, 1.5vw, 1.875rem);
+    font-weight: 400;
+    color: var(--text-color);
+    white-space: nowrap;
+    font-family: "Raleway", sans-serif;
+  }
+  @media (max-width: 768px) {
+    font-size: m.rem(16);
+  }
+}
+
+/* =========================== */
+/* ✅ HAMBURGER BUTTON         */
+/* =========================== */
+.hamburger {
+  z-index: 99999;
+  pointer-events: auto;
+  padding-top: m.rem(4); // spacing between text and burger
+}
+
+/* =========================== */
+/* ✅ FULLSCREEN NAV MENU      */
+/* =========================== */
+.menuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: all;
+  backdrop-filter: blur(8px);
+  padding-top: m.rem(80);
+  animation: revealMenu 0.6s ease forwards;
+  z-index: 3;
+
+  @keyframes revealMenu {
+    0% {
+      clip-path: inset(0 0 100% 0);
+    }
+    100% {
+      clip-path: inset(0 0 0% 0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding-top: m.rem(80);
+  }
+}

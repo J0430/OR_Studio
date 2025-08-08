@@ -1,0 +1,93 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+/* =========================== */
+/* ✅ Dropdown Container       */
+/* =========================== */
+.dropdownContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+
+  pointer-events: all;
+  position: relative;
+  z-index: 2; // ❌ Removed fixed positioning
+}
+
+/* =========================== */
+/* ✅ Dropdown Button          */
+/* =========================== */
+.dropdownButton {
+  border-radius: m.rem(18);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(v.$white, 0.9);
+  box-shadow: 0px 5px 20px 1px rgba(0, 0, 0, 0.05);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  width: 12rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  z-index: 1;
+
+  &:hover {
+    background: rgba(233, 230, 230, 0.85);
+  }
+
+  .buttonContent {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .categoryText {
+      margin-left: 0.7rem;
+    }
+
+    .arrow {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+/* =========================== */
+/* ✅ Dropdown List (ul)       */
+/* =========================== */
+.dropdownContent {
+  width: 100%;
+  padding: 0.3em;
+  background: rgba(v.$white, 0.9);
+  border-radius: m.rem(18);
+  margin-top: 0.3rem;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================== */
+/* ✅ Dropdown Item (li)       */
+/* =========================== */
+.dropdownItem {
+  padding: m.rem(6) m.rem(12);
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease-in-out;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.activeItem {
+  background-color: rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+}

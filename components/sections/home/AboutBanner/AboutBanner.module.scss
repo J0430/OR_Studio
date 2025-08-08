@@ -1,0 +1,91 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+/* =========================== */
+/* ✅ Main Wrapper             */
+/* =========================== */
+.aboutWrapper {
+  @include m.center-flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100svh; // ✅ Cross-browser fix for mobile
+  background-color: var(--background-color);
+  padding-inline: m.rem(24);
+  padding-block: m.rem(40);
+  box-sizing: border-box;
+  overflow: hidden;
+
+  /* =========================== */
+  /* ✅ Text Container           */
+  /* =========================== */
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 65%;
+    text-align: center;
+    z-index: 10;
+
+    @media (max-width: 768px) {
+      max-width: 90%;
+    }
+
+    /* =========================== */
+    /* ✅ Description              */
+    /* =========================== */
+    .description {
+      color: v.$white;
+      font-size: m.rem(24);
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: m.rem(32);
+      font-family: v.$font-family-base;
+      opacity: 0.9;
+
+      @media (max-width: 768px) {
+        font-size: m.rem(18);
+      }
+    }
+    /* =========================== */
+    /* ✅ Word Animation Span      */
+    /* =========================== */
+    .word {
+      display: inline-block;
+      white-space: nowrap;
+    }
+  }
+}
+/* =========================== */
+/* ✅ Link Wrapper             */
+/* =========================== */
+.linkWrapper {
+  display: inline-block;
+  align-self: center;
+  margin-top: m.rem(40);
+
+  @media (max-width: 768px) {
+    margin-top: m.rem(20);
+    margin-bottom: m.rem(3);
+  }
+
+  .link {
+    padding: m.rem(10) m.rem(22);
+    border: v.$white 0.03rem solid;
+    color: v.$white;
+    font-size: m.rem(16);
+    font-weight: 400;
+    text-decoration: none;
+    border-radius: m.rem(8);
+    background-color: transparent;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.08);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      font-size: m.rem(16);
+      margin-bottom: m.rem(3);
+    }
+  }
+}

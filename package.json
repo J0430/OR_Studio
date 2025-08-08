@@ -1,0 +1,74 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "clean": "rm -rf .next out",
+    "analyze": "ANALYZE=true next build",
+    "test": "jest --config jest.config.js",
+    "test:ci": "jest --ci"
+  },
+  "dependencies": {
+    "@ant-design/colors": "^7.2.0",
+    "@ant-design/fast-color": "^2.0.6",
+    "@ant-design/icons": "^5.6.1",
+    "@babel/runtime": "^7.26.9",
+    "@heroui/react": "^2.7.6",
+    "@heroui/scroll-shadow": "^2.3.11",
+    "@hookform/resolvers": "^4.1.2",
+    "@testing-library/user-event": "^14.6.1",
+    "file-loader": "^6.2.0",
+    "framer-motion": "^11.16.4",
+    "glob": "11.0.1",
+    "gsap": "^3.12.7",
+    "next": "^15.3.1",
+    "next-themes": "^0.4.6",
+    "next-transpile-modules": "^10.0.1",
+    "nodemailer": "^6.10.0",
+    "path-browserify": "^1.0.1",
+    "react": "^18.3.1",
+    "react-blur": "^1.1.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.54.2",
+    "react-icons": "^4.2.0",
+    "react-intersection-observer": "^9.15.0",
+    "react-lazy-load-image-component": "^1.6.3",
+    "react-responsive": "^10.0.0",
+    "rimraf": "^6.0.1",
+    "sass": "^1.85.1",
+    "uuid": "^11.1.0",
+    "yup": "^1.6.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.26.9",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^22.14.1",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "babel-loader": "^9.2.1",
+    "eslint": "^9.25.1",
+    "eslint-config-next": "^15.3.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "prettier": "^3.4.2",
+    "ts-jest": "^29.3.2",
+    "typescript": "^5.8.3"
+  },
+  "resolutions": {
+    "glob": "11.0.1"
+  },
+  "jest": {
+    "preset": "react",
+    "testEnvironment": "jsdom",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx"
+    ]
+  }
+}
