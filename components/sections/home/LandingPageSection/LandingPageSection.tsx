@@ -1,7 +1,6 @@
-import {
-  React, useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Imagen from "next/Image"
+import Imagen from "next/image";
 import styles from "./LandingPageSection.module.scss";
 import type { LandingPageSectionProps } from "./LandingPageSection.types";
 
@@ -58,7 +57,7 @@ const LandingPageSection: React.FC<LandingPageSectionProps> = ({ images }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
             className={styles.bannerImageWrapper}>
-            <Image
+            <Imagen
               src={images[currentImageIndex]}
               alt={`Background Image ${currentImageIndex + 1}`}
               fill
