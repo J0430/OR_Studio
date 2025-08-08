@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import {
+  React, useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+import Imagen from "next/Image"
 import styles from "./LandingPageSection.module.scss";
 import type { LandingPageSectionProps } from "./LandingPageSection.types";
 
