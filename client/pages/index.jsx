@@ -1,10 +1,10 @@
 // pages/index.tsx (HomePage)
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import Head from "next/head";
 import { loadDynamicImports } from "utils/loadDynamicImports";
 
 import { homeData } from "@public/data";
-import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
 import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
 
@@ -12,7 +12,6 @@ const { IconButton, SectionWrapper } = loadDynamicImports("common", [
   "IconButton",
   "SectionWrapper",
 ]);
-const { WorksPreloader } = loadDynamicImports("preloaders", ["WorksPreloader"]);
 
 const sectionsConfig = [
   { component: "LandingPageSection", projectKey: "LandingPictures" },
@@ -27,6 +26,8 @@ const dynamicComponents = loadDynamicImports("sections/home", [
 ]);
 
 function HomePage() {
+  const [preloaderDone, setPreloaderDone] = useState(false);
+
   const sections = useMemo(
     () =>
       sectionsConfig.map(({ component, projectKey }, index) => ({
@@ -39,7 +40,7 @@ function HomePage() {
     []
   );
 
-  const handleScroll = useCallback((targetId) => {
+  const handleScroll = useCallback((targetId: string) => {
     document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
@@ -49,19 +50,24 @@ function HomePage() {
         <title>OR Studio | Home</title>
       </Head>
 
-      <LogoPreloader duration={1.5} />
+      <LogoPreloader duration={1.5} onFinish={() => setPreloaderDone(true)} />
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2, ease: "easeInOut" }}
-        className={styles.homePage}>
+        className={styles.homePage}
+      >
         {sections.map(({ component: SectionComponent, props, id }, index) => (
           <SectionWrapper key={id} id={id}>
             <div data-section-id={id} className={styles.sectionContainer}>
-              <SectionComponent {...props} />
+              <SectionComponent
+                {...(id === "section-0"
+                  ? { ...props, preloaderDone } // ✅ only LandingPageSection
+                  : props)}
+              />
             </div>
 
-            {/* ✅ Scroll Button using IconButton */}
             <IconButton
               direction={index < sections.length - 1 ? "down" : "up"}
               width={3}
@@ -76,4 +82,5 @@ function HomePage() {
     </>
   );
 }
+
 export default HomePage;
