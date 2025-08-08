@@ -3,4 +3,5 @@ import type { AnimatedLogoProps } from "@components/common/AnimatedLogo/Animated
 export interface LogoPreloaderProps {
   duration?: number;
   logoProps?: AnimatedLogoProps;
-}
+  onFinish?: () => void; // ✅ new optional callback
+    }
