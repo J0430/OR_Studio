@@ -14,23 +14,24 @@ import { loadDynamicImports } from "utils/loadDynamicImports";
 import { homeData } from "@public/data";
 import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
 
-// ✅ Extract homeImages
+// ✅ Prepare image list
 const homeImages =
   homeData.projects?.LandingPictures?.images?.map((img) => img.src) || [];
 
-// ✅ Load other dynamic components
+// ✅ Load shared components
 const { IconButton, SectionWrapper } = loadDynamicImports("common", [
   "IconButton",
   "SectionWrapper",
 ]);
 
+// ✅ Load other dynamic sections
 const dynamicComponents = loadDynamicImports("sections/home", [
   "AboutBanner",
   "WorkBanner",
 ]);
 
-// ✅ Inline LandingSection instead of dynamic import
-const LandingSection = () => {
+// ✅ Inline LandingSection
+const LandingSection = ({ preloaderDone }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef(null);
 
@@ -45,7 +46,9 @@ const LandingSection = () => {
       intervalRef.current = setInterval(updateImageIndex, 4000);
     }
 
-    return () => clearInterval(intervalRef.current);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, [updateImageIndex]);
 
   return (
@@ -94,16 +97,17 @@ const LandingSection = () => {
           transition={{ delay: 1, duration: 1, ease: "easeOut" }}
           className={styles.bannerSubtitle}
         >
-          Architectural animation and visualization digital production by OR Studio
+          Architectural animation and visualization digital production by OR
+          Studio
         </motion.p>
       </motion.div>
     </motion.section>
   );
 };
 
-// ✅ Set up the section config, injecting the inlined LandingSection directly
+// ✅ Section list, first one is the inline LandingSection
 const sectionsConfig = [
-  { component: LandingSection }, // ← Not a string, but a component reference
+  { component: LandingSection },
   { component: dynamicComponents["AboutBanner"] },
   { component: dynamicComponents["WorkBanner"], projectKey: "EvenYehuda" },
   { component: dynamicComponents["WorkBanner"], projectKey: "Hevron" },
@@ -113,17 +117,15 @@ const sectionsConfig = [
 function HomePage() {
   const [preloaderDone, setPreloaderDone] = useState(false);
 
-  const sections = useMemo(
-    () =>
-      sectionsConfig.map(({ component, projectKey }, index) => ({
-        id: `section-${index}`,
-        component,
-        props: projectKey
-          ? { images: homeData.projects[projectKey]?.images || [] }
-          : {},
-      })),
-    []
-  );
+  const sections = useMemo(() => {
+    return sectionsConfig.map(({ component, projectKey }, index) => ({
+      id: `section-${index}`,
+      component,
+      props: projectKey
+        ? { images: homeData.projects[projectKey]?.images || [] }
+        : {},
+    }));
+  }, []);
 
   const handleScroll = useCallback((targetId) => {
     document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
