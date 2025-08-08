@@ -3,28 +3,31 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import styles from "@styles/pages/home.module.scss";
 
-// ✅ Constants
-const title = "DESIGN DIFFERENT";
-const subtitle = "Architectural animation and visualization digital production by OR Studio";
-
-// ✅ Interface
+// ✅ Types
 interface LandingSectionProps {
-  images: string[];
+  images?: string[];
   title?: string;
   subtitle?: string;
 }
 
+// ✅ Default title and subtitle
+const defaultTitle = "DESIGN DIFFERENT";
+const defaultSubtitle =
+  "Architectural animation and visualization digital production by OR Studio";
+
 const LandingSection: React.FC<LandingSectionProps> = ({
-  images,
-  title = "DESIGN DIFFERENT",
-  subtitle = "Architectural animation and visualization digital production by OR Studio",
+  images = [],
+  title = defaultTitle,
+  subtitle = defaultSubtitle,
 }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const updateImageIndex = useCallback(() => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  }, [images.length]);
+    setCurrentImageIndex((prevIndex) =>
+      images.length > 0 ? (prevIndex + 1) % images.length : 0
+    );
+  }, [images]);
 
   useEffect(() => {
     if (images.length > 0) {
@@ -39,7 +42,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({
   return (
     <motion.section className={styles.bannerWrapper}>
       <AnimatePresence mode="wait">
-        {images.length > 0 && (
+        {Array.isArray(images) && images.length > 0 && (
           <motion.div
             key={currentImageIndex}
             initial={{ opacity: 0 }}
