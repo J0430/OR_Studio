@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import styles from "./LandingPageSection.module.scss";
+import styles from "@styles/pages/home.module.scss";
 
 // ✅ Import homeData and extract LandingPictures
 import { homeData } from "@public/data";
