@@ -84,4 +84,3 @@ const LogoPreloader: React.FC<LogoPreloaderProps> = ({
 };
 
 export default LogoPreloader;
-export default LogoPreloader;
