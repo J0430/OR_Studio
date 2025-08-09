@@ -3,8 +3,8 @@
 // import * as yup from "yup";
 // import { useForm, SubmitHandler } from "react-hook-form";
 // import { yupResolver } from "@hookform/resolvers/yup";
-// import { FieldDefinition } from "@common/FloatingLabelInput/FloatingLabelInput.type";
-// import { FloatingLabelInput } from "@common/FloatingLabelInput/FloatingLabelInput";
+// import { FieldDefinition } from "components/common/FloatingLabelInput/FloatingLabelInput.type";
+// import { FieldType } from "components/common/FloatingLabelInput/FloatingLabelInput.type";
 // import styles from "./DynamicForm.module.scss";
 // import { BaseFormData } from "./DynamicForm.types";
 
@@ -28,13 +28,12 @@
 //   const {
 //     register,
 //     handleSubmit,
-//     formState: { errors },
+//     formState: { errors, isSubmitted },
 //     setError,
 //     reset,
 //   } = useForm<FormData>({
-//     // ✅ TypeScript-compatible fix
 //     resolver: yupResolver(schema) as any,
-//     mode: "onSubmit",
+//     mode: "onSubmit", // ✅ only validate on submit
 //   });
 
 //   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -68,7 +67,7 @@
 //   if (isSuccess) {
 //     return (
 //       <div className={styles.successMessage} aria-live="polite">
-//         {successMessage || "Success! Your submission has been received."}
+//         {successMessage || "Message sent successfully!"}
 //       </div>
 //     );
 //   }
@@ -76,16 +75,18 @@
 //   return (
 //     <form
 //       onSubmit={handleSubmit(handleFormSubmit)}
-//       className={styles.dynamicForm}>
+//       className={styles.contactForm} // ✅ uses your v1 style
+//     >
 //       {logoSrc && <img src={logoSrc} alt="Form logo" className={styles.logo} />}
 //       {title && <h2 className={styles.title}>{title}</h2>}
 
 //       {serverError && (
-//         <p className={styles.errorText} role="alert">
+//         <p className={styles.errorMessage} role="alert">
 //           {serverError}
 //         </p>
 //       )}
 
+//       {/* Map dynamic fields */}
 //       {fields.map((field) => (
 //         <FloatingLabelInput
 //           key={field.name}
@@ -96,7 +97,9 @@
 //           rows={field.rows}
 //           register={register}
 //           disabled={isSubmitting}
-//           error={errors[field.name]?.message as string}
+//           error={
+//             isSubmitted ? (errors[field.name]?.message as string) : "" // ✅ only show after submit
+//           }
 //         />
 //       ))}
 
@@ -105,7 +108,7 @@
 //         className={styles.submitButton}
 //         disabled={isSubmitting}
 //         aria-disabled={isSubmitting ? "true" : "false"}>
-//         {isSubmitting ? "Submitting..." : "Submit"}
+//         {isSubmitting ? "Sending..." : "Send"}
 //       </button>
 //     </form>
 //   );

@@ -1,0 +1,48 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+.spinner {
+  /* configurable via inline style */
+  --size: 1.25rem;
+  --thickness: 2px;
+
+  width: var(--size);
+  height: var(--size);
+  border-radius: 9999px;
+
+  /* subtle ring with blue accent (matches your UI) */
+  border: var(--thickness) solid rgba(255, 255, 255, 0.22);
+  border-top-color: #0a84ff;
+
+  animation: spin 0.9s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+  will-change: transform;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* A11y: visually hidden helper */
+.visuallyHidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; border: 0; padding: 0; margin: -1px;
+}
+
+/* Optional subtle overlay (centers spinner, respects rounded parents) */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(2px);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+}

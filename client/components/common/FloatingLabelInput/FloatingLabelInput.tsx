@@ -5,36 +5,59 @@ import styles from "./FloatingLabelInput.module.scss";
 import { FieldDefinition } from "./FloatingLabelInput.type";
 
 interface BaseProps {
-  /** Validation error message for this field (if any) */
   error?: string;
-  /** Disabled state (e.g., when form is submitting) */
   disabled?: boolean;
 }
 
 type FloatingLabelInputProps<TFieldValues extends FieldValues> = BaseProps &
   FieldDefinition & {
-    /** Register from RHF, typed to the same form */
     register: UseFormRegister<TFieldValues>;
-    /** Name is strongly typed to your form keys */
     name: Path<TFieldValues>;
   };
 
 export function FloatingLabelInput<TFieldValues extends FieldValues>({
   name,
   label,
-  type,
+  type = "text",
   placeholder,
   rows,
   register,
-  disabled,
   error,
+  disabled,
+  autoComplete,
+  inputMode,
 }: FloatingLabelInputProps<TFieldValues>) {
   const isTextArea = type === "textarea";
   const inputId = `fld_${name}`;
+  const hasVisibleError = Boolean(error);
+
+  // sensible defaults by field name
+  const n = String(name).toLowerCase();
+  const defaultAutoComplete =
+    autoComplete ??
+    (n.includes("first")
+      ? "given-name"
+      : n.includes("last")
+        ? "family-name"
+        : n.includes("email")
+          ? "email"
+          : n.includes("phone")
+            ? "tel"
+            : n.includes("message")
+              ? "off"
+              : "on");
+
+  const defaultInputMode =
+    inputMode ??
+    (type === "tel" || n.includes("phone")
+      ? "tel"
+      : type === "email"
+        ? "email"
+        : undefined);
 
   return (
     <div
-      className={`${styles.floatingLabelInput} ${error !== "" && styles.error}`}>
+      className={`${styles.floatingLabelInput} ${hasVisibleError ? styles.invalid : ""}`}>
       {isTextArea ? (
         <textarea
           id={inputId}
@@ -42,8 +65,10 @@ export function FloatingLabelInput<TFieldValues extends FieldValues>({
           placeholder={placeholder || " "}
           rows={rows || 3}
           disabled={disabled}
-          aria-invalid={error ? "true" : "false"}
-          aria-describedby={error ? `${inputId}-error` : undefined}
+          aria-invalid={hasVisibleError ? "true" : "false"}
+          aria-describedby={hasVisibleError ? `${inputId}-error` : undefined}
+          // textarea: no inputMode/autoComplete needed, but you can pass "off"
+          autoComplete={defaultAutoComplete}
         />
       ) : (
         <input
@@ -52,18 +77,17 @@ export function FloatingLabelInput<TFieldValues extends FieldValues>({
           {...register(name)}
           placeholder={placeholder || " "}
           disabled={disabled}
-          aria-invalid={error ? "true" : "false"}
-          aria-describedby={error ? `${inputId}-error` : undefined}
+          aria-invalid={hasVisibleError ? "true" : "false"}
+          aria-describedby={hasVisibleError ? `${inputId}-error` : undefined}
+          autoComplete={defaultAutoComplete}
+          inputMode={defaultInputMode}
         />
       )}
 
       <label htmlFor={inputId}>{label}</label>
-
-      {error && (
-        <p id={`${inputId}-error`} className={styles.errorText} role="alert">
-          {error && error}{" "}
-        </p>
-      )}
+      <p id={`${inputId}-error`} className={styles.errorText} role="alert">
+        {error || ""}
+      </p>
     </div>
   );
 }

@@ -13,7 +13,7 @@ export default async function handler(
   if (!firstName || !lastName || !email || !message) {
     return res.status(400).json({ error: "Missing required fields" });
   }
-
+  console.log(req.body);
   const name = `${firstName} ${lastName}`;
 
   try {

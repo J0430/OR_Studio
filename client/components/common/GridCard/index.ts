@@ -1,3 +1,2 @@
-// components/common/MediaCard/index.tsx
-export { default } from "./GridCard";
+export { default as GridCard } from "./GridCard";
 export type { GridCardProps } from "./GridCard.types";

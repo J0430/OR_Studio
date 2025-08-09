@@ -15,15 +15,14 @@ import {
 } from "@public/data";
 
 import styles from "@styles/pages/works.module.scss";
-import LogoPreloader from "@components/preloaders/LogoPreloader/LogoPreloader";
+import LogoPreloader from "components/preloaders/LogoPreloader/LogoPreloader";
 
 // ✅ Dynamic Import (No SSR) for Modal
 const WorksModal = dynamic(
-  () => import("@components/sections/works/WorksModal/WorksModal"),
+  () => import("components/sections/works/WorksModal/WorksModal"),
   { ssr: false }
 );
 
-// ✅ Lazy-load rest
 const { WorksControl, WorksGrid } = dynamicImportComponents("sections/works", [
   "WorksControl",
   "WorksGrid",
@@ -38,7 +37,12 @@ const WorksPage = () => {
     categorySelected: categories[1] || "Residential",
     selectedImage: null,
     selectedProject: null,
+    hasOpened: null,
   });
+
+  // for first-open behavior
+
+  const closeModal = useCallback(() => setSelected(null), []);
 
   const categoryDataMap = useMemo(
     () => ({
@@ -49,23 +53,13 @@ const WorksPage = () => {
     }),
     []
   );
-
   const works = useMemo(
     () => categoryDataMap[state.categorySelected] || [],
     [state.categorySelected, categoryDataMap]
   );
 
-  const handleCategoryClick = useCallback((categoryName) => {
-    setState((prevState) => ({
-      ...prevState,
-      categorySelected: categoryName,
-      selectedImage: null,
-      selectedProject: null,
-    }));
-  }, []);
-
   const handleImageClick = useCallback(
-    (imageSrc) => {
+    (imageSrc, layoutId) => {
       const currentProjects = categoryDataMap[state.categorySelected] || [];
 
       const matchedProject = currentProjects.find((project) =>
@@ -73,10 +67,12 @@ const WorksPage = () => {
       );
 
       if (matchedProject) {
+        console.log(imageSrc, state.categorySelected);
         setState((prevState) => ({
           ...prevState,
           selectedImage: imageSrc,
           selectedProject: matchedProject,
+          hasOpened: true,
         }));
       } else {
         console.warn("❌ No matching project found for:", imageSrc);
@@ -84,9 +80,21 @@ const WorksPage = () => {
     },
     [categoryDataMap, state.categorySelected]
   );
+  const handleCategoryClick = useCallback((categoryName) => {
+    setState((prevState) => ({
+      ...prevState,
+      categorySelected: categoryName,
+      selectedImage: null,
+      selectedProject: null,
+    }));
+    console.log(state, "state");
+  }, []);
+
+  console.log(state.categorySelected, "state.categorySelected");
   const handleCloseModal = useCallback(() => {
     setState((prevState) => ({
       ...prevState,
+
       selectedImage: null,
       selectedProject: null,
     }));
@@ -114,16 +122,20 @@ const WorksPage = () => {
         <WorksGrid
           works={works}
           selectedImage={state.selectedImage}
+          categorySelected={state.categorySelected}
           onImageClick={handleImageClick}
+          hasOpened={state.hasOpened}
         />
 
         <AnimatePresence mode="wait">
           {state.selectedImage && state.selectedProject && (
             <WorksModal
               state={state}
+              layoutId={state.selectedImage}
               selectedImage={state.selectedImage}
               project={state.selectedProject}
               onClose={handleCloseModal}
+              firstOpen={!state.hasOpened}
             />
           )}
         </AnimatePresence>

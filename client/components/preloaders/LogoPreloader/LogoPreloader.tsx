@@ -64,8 +64,8 @@ const LogoPreloader: React.FC<LogoPreloaderProps> = ({
           <AnimatedLogo
             logoName="OR.svg"
             size={100}
-            strokeColor="#a3b6bd"
-            fillColor="#a2b5bb"
+            strokeColor="white"
+            fillColor="white"
             strokeWidth={2}
             animateFill
             className={styles.logo}

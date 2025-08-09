@@ -1,10 +1,16 @@
-/* components/forms/DynamicForm.module.scss */
-.dynamicForm {
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+.contactForm {
+  padding: 2rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(61, 68, 77, 0.7);
+  background-color: rgba(21, 27, 35, 0.87);
   width: 100%;
-  max-width: 500px; /* example: limit form width for better readability */
-  padding: 1.5rem;
-  background: rgba(0, 0, 0, 0.8); /* example: dark translucent background */
-  border-radius: 8px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 
   .logo {
     display: block;
@@ -18,40 +24,38 @@
     color: #fff;
   }
 
-  .errorText {
-    background: #330; /* light red background */
-    color: #f88;
-    padding: 0.75rem 1rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-  }
-
-  .successMessage {
-    background: #e6ffe6; /* light green background */
-    color: #2d662d;
-    padding: 1rem;
-    border-radius: 4px;
-    text-align: center;
-    font-weight: 500;
-  }
-
   .submitButton {
-    display: block;
-    width: 100%;
-    padding: 0.75rem;
+    position: relative;
+    margin-top: 0.5rem;
     font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    background: #000;
-    border: none;
-    border-radius: 4px;
+    padding: 0.45rem;
+    width: 30%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    background-color: rgb(0, 0, 0);
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 500;
     cursor: pointer;
-    text-align: center;
+
+    &:hover {
+      background: rgba(v.$white, 0.15);
+      color: white;
+    }
 
     &:disabled,
     &[aria-disabled="true"] {
       opacity: 0.6;
       cursor: not-allowed;
     }
+  }
+
+  .errorMessage {
+    color: rgba(255, 0, 0, 0.7);
+    text-align: center;
+  }
+
+  .successMessage {
+    color: rgb(156, 210, 156);
+    text-align: center;
   }
 }

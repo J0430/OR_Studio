@@ -4,6 +4,7 @@ import { NavProvider } from "@contexts/NavContext";
 import Head from "next/head";
 import "@styles/globals.scss";
 
+import ToastMount from "components/common/Toast/Toast";
 import { dynamicImportComponents } from "utils/dynamicImportComponents";
 
 const { Header } = dynamicImportComponents("nav", ["Header"]);
@@ -24,6 +25,8 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <NavProvider>
         <Header />
+
+        <ToastMount />
         <Component {...pageProps} />
         <div className="pageGradientOverlay" />
       </NavProvider>

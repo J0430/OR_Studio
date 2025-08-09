@@ -1,16 +1,12 @@
 // components/forms/FloatingLabelInput.type.ts
-export type FieldType =
-  | "text"
-  | "email"
-  | "tel"
-  | "password"
-  | "textarea"
-  | "url";
+// components/forms/FloatingLabelInput.type.ts
+export type FieldType = "text" | "email" | "tel" | "textarea";
 
 export interface FieldDefinition {
-  name: string;
   label: string;
-  type: FieldType;
+  type?: FieldType;
   placeholder?: string;
   rows?: number;
+  autoComplete?: string;
+  inputMode?: React.InputHTMLAttributes<HTMLInputElement>["inputMode"];
 }

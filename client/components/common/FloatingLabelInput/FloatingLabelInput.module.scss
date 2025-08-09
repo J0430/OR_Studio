@@ -1,86 +1,336 @@
+// @use "@styles/partials/variables" as v;
+// @use "@styles/partials/mixins" as m;
+
+// .floatingLabelInput {
+//   position: relative;
+//   display: block;
+//   margin-bottom: m.rem(16);
+
+//   input,
+//   textarea {
+//     width: 100%;
+//     padding: m.rem(12) m.rem(16);
+//     font-size: v.$font-size-md;
+//     line-height: 1.25;
+//     color: v.$white;
+//     background: rgba(0, 0, 0, 0.68);
+//     border: 1px solid rgba(255, 255, 255, 0.3);
+//     border-radius: m.rem(18);
+//     outline: none;
+//     transition: border-color 0.2s ease;
+
+//     &::placeholder {
+//       color: transparent;
+//     }
+
+//     &:focus {
+//       border-color: #0a84ffab;
+//     }
+
+//     &:disabled {
+//       opacity: 0.6;
+//       cursor: not-allowed;
+//     }
+//   }
+
+//   label {
+//     position: absolute;
+//     left: m.rem(16);
+//     top: 30%;
+//     transform: translateY(-50%) scale(1);
+//     transform-origin: left center;
+//     color: #0a84ff;
+//     pointer-events: none;
+//     padding: 0 m.rem(6);
+//     background: var(--field-bg);
+//     border-radius: m.rem(999);
+//     line-height: 1;
+//     transition:
+//       transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+//       top 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+//       color 200ms ease,
+//       opacity 200ms ease;
+//     opacity: 0.95;
+//   }
+
+//   input:focus + label,
+//   input:not(:placeholder-shown) + label,
+//   textarea:focus + label,
+//   textarea:not(:placeholder-shown) + label {
+//     top: m.rem(-18);
+//     left: -0.1rem;
+//     transform: translateY(0) scale(0.86);
+//     opacity: 1;
+//   }
+
+//   /* Reserve error space; hidden by default */
+//   .errorText {
+//     min-height: m.rem(18);
+//     font-size: v.$font-size-sm;
+//     margin-top: m.rem(5);
+//     opacity: 0;
+//     color: rgba(255, 0, 0, 0.4);
+//     transition: opacity 0.2s ease;
+//   }
+// }
+
+// /* Show red only after submit attempt (when parent passes a non-empty error) */
+// .invalid {
+//   input,
+//   textarea {
+//     border-color: rgba(255, 0, 0, 0.5);
+//   }
+//   label {
+//     color: rgba(255, 0, 0, 0.6);
+//   }
+//   .errorText {
+//     opacity: 1;
+//   }
+// }
+/* FloatingLabelInput.module.scss */
 @use "@styles/partials/variables" as v;
 @use "@styles/partials/mixins" as m;
 
 .floatingLabelInput {
+  /* Fluid tokens */
+  --fld-height: clamp(48px, 7vh, 64px);
+  --pad-x: clamp(14px, 2vw, 18px);
+  --pad-y: clamp(12px, 1.8vh, 16px);
+  --radius: #{m.rem(18)};
+  --font: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
+  --label-scale: 0.86;
+
+  /* This is the color used to "cut" the top border under the label. 
+     Set it to your form surface/background so it doesn't look like a chip. */
+  --surface: var(--background-color);
+
   position: relative;
   display: block;
-  margin-bottom: m.rem(16);
+  margin-bottom: 0.9rem;
 
-  /* If you toggle theme classes on <html> or <body>, this will follow */
-
-  /* Input / Textarea */
   input,
   textarea {
     width: 100%;
-    padding: m.rem(14) m.rem(16);
-    font-size: v.$font-size-md;
+    min-height: var(--fld-height);
+    padding: var(--pad-y) var(--pad-x);
+    font-size: var(--font);
     line-height: 1.25;
-    color: v.$white;
-    background-color: transparent;
+    color: var(--text-color);
+    background: rgba(0, 0, 0, 0.68);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: m.rem(18);
+    border-radius: var(--radius);
     outline: none;
-    transition: border-color 180ms ease;
+    caret-color: var(--text-color);
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
 
-    &::placeholder {
-      color: transparent;
-    } /* required for :placeholder-shown trick */
-    &:focus {
-      border-color: #0a84ff;
-    }
     &:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
+    &::placeholder {
+      color: transparent;
+    } /* needed for :placeholder-shown */
   }
 
-  /* Label (pill + masking chip to hide the border under it) */
+  /* Base label sits centered vertically inside the field */
   label {
     position: absolute;
-    left: m.rem(16);
-    top: 50%;
+    left: var(--pad-x);
+    top: 40%;
     transform: translateY(-50%) scale(1);
     transform-origin: left center;
-    color: #0a84ff;
+    color: var(--text-color);
+    line-height: 1;
+    font-weight: 200;
     pointer-events: none;
-    padding: 0 m.rem(6);
-
-    background: var(--field-bg); /* <- masks the blue border line */
-    border-radius: m.rem(999); /* smooth capsule */
-    line-height: 1; /* keeps chip tight */
-    transition:
-      transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
-      top 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
-      color 200ms ease,
-      opacity 200ms ease;
-    /* optional subtle fade on move */
     opacity: 0.95;
+    transition:
+      transform 750ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      top 750ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      color 0.4s ease,
+      font 0.5s ease,
+      opacity 0.2s ease;
+    z-index: 2; /* above the input’s border */
+
+    /* When floated, we add a tiny invisible “notch” mask behind text */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      margin: 0 -0.35rem; /* pad left/right so the border gap is wider than text */
+      background: var(--surface);
+      /* Blur to blend with your glass panel (optional) */
+      backdrop-filter: var(--overlay-bg-image);
+      z-index: -1; /* behind the label text, still above input border */
+      opacity: 1; /* visible enough to hide the border line */
+      border-radius: 4px;
+      transform: translateZ(0); /* avoid artifacts */
+      display: none; /* only when floated */
+    }
   }
 
-  /* Float state: focus OR has content */
+  /* === FLOAT to the top-left border === */
   input:focus + label,
   input:not(:placeholder-shown) + label,
+  input:-webkit-autofill + label,
   textarea:focus + label,
-  textarea:not(:placeholder-shown) + label {
-    top: m.rem(-18);
-    left: m.rem(-4);
-    transform: translateY(0) scale(1); /* smoother than shrinking font-size */
+  textarea:not(:placeholder-shown) + label,
+  textarea:-webkit-autofill + label,
+  :focus-within > label {
+    /* sit ON the top border, slightly inset */
+    top: 0;
+    left: calc(var(--pad-x) - 2px);
+    transform: translateY(-50%) scale(var(--label-scale));
+    color: var(--border-strong);
     opacity: 1;
   }
 
-  &.error {
-    input,
-    textarea {
-      border-color: rgba(255, 0, 0, 0.7);
-      label {
-        color: rgba(255, 0, 0, 0.7);
-      }
-    }
+  /* show the notch mask only in the floated state */
+  input:focus + label::after,
+  input:not(:placeholder-shown) + label::after,
+  input:-webkit-autofill + label::after,
+  textarea:focus + label::after,
+  textarea:not(:placeholder-shown) + label::after,
+  textarea:-webkit-autofill + label::after,
+  :focus-within > label::after {
+    display: block;
+  }
 
-    .errorText {
-      .error .errorText {
-        opacity: 1; // show without layout shift
-      }
-    }
+  /* textarea: slightly different visual alignment */
+  &:has(textarea) label {
+    transform-origin: left center;
+  }
+
+  /* Autofill theming inside the field */
+  input:-webkit-autofill,
+  textarea:-webkit-autofill {
+    box-shadow: 0 0 0 1000px var(--background-color) inset !important;
+    -webkit-text-fill-color: var(--text-color) !important;
+    caret-color: var(--text-color);
+    transition: background-color 9999s ease-in-out 0s; /* kill yellow flash */
+    border: 1px solid var(--border-strong);
+  }
+
+  /* Error styles (your component adds .invalid) */
+  &.invalid input,
+  &.invalid textarea {
+    border-color: rgba(255, 107, 107, 0.55);
+  }
+  &.invalid label {
+    color: rgba(255, 107, 107, 0.5);
+  }
+
+  .errorText {
+    min-height: 0.9rem;
+    margin: 4px 6px 0;
+    font-size: clamp(0.8rem, 0.75rem + 0.15vw, 0.9rem);
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: var(--border-strong);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
   }
 }
+
+/* Optional tighter sizing on small screens */
+@media (max-width: 480px) {
+  .floatingLabelInput {
+    --fld-height: clamp(44px, 7.5vh, 58px);
+    --pad-x: 14px;
+    --pad-y: 12px;
+  }
+}
+
+/* components/common/FloatingLabelInput/FloatingLabelInput.module.scss */
+// @use "@styles/partials/mixins" as m;
+
+// .floatingLabelInput {
+//   position: relative;
+//   display: block;
+//   margin-bottom: m.rem(16);
+
+//   /* input + textarea */
+//   .control {
+//     width: 100%;
+//     padding: m.rem(12) m.rem(16);
+//     font-size: 1rem;
+//     line-height: 1.25;
+//     color: var(--text-on-dark);
+//     background: var(--field-bg);
+//     border: 1px solid var(--field-border);
+//     border-radius: m.rem(18);
+//     outline: none;
+//     transition:
+//       border-color 0.2s ease,
+//       box-shadow 0.2s ease;
+
+//     &::placeholder {
+//       color: transparent;
+//     }
+
+//     &:focus {
+//       border-color: var(--field-border-focus);
+//       box-shadow: 0 0 0 3px
+//         color-mix(in srgb, var(--field-border-focus) 20%, transparent);
+//     }
+
+//     &:disabled {
+//       opacity: 0.6;
+//       cursor: not-allowed;
+//     }
+//   }
+
+//   /* label chip */
+//   .label {
+//     position: absolute;
+//     left: m.rem(16);
+//     top: 50%;
+//     transform: translateY(-50%) scale(1);
+//     transform-origin: left center;
+//     color: var(--field-border-focus);
+//     pointer-events: none;
+//     padding: 0 m.rem(6);
+//     background: var(--field-bg);
+//     border-radius: 999px;
+//     line-height: 1;
+//     transition:
+//       transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+//       top 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+//       color 200ms ease,
+//       opacity 200ms ease;
+//     opacity: 0.95;
+//   }
+
+//   /* float when focused or has content */
+//   &.isFloating .label {
+//     top: -12%;
+//     left: 8px;
+//     backdrop-filter: blur(5px);
+//     -webkit-backdrop-filter: blur(5px);
+//     transform: translateY(0) scale(0.86);
+//     opacity: 1;
+//   }
+
+//   /* error */
+//   &.hasError .control {
+//     border-color: var(--error);
+//   }
+//   &.hasError .label {
+//     color: var(--error);
+//   }
+
+//   .error {
+//     min-height: m.rem(18); /* reserve space */
+//     margin-top: m.rem(6);
+//   }
+
+//   .errorText {
+//     font-size: 0.85rem;
+//     color: var(--error);
+//     opacity: 1; /* you can set 0 before submit if you want */
+//   }
+// }

@@ -1,18 +1,18 @@
-// pages/index.tsx (HomePage)
 import { useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
-import { loadDynamicImports } from "utils/loadDynamicImports";
+import { dynamicImportComponents } from "utils/dynamicImportComponents";
 
 import { homeData } from "@public/data";
 import Head from "next/head";
 import styles from "@styles/pages/home.module.scss";
-import LogoPreloader from "components/preloaders/LogoPreloader/LogoPreloader";
 
-const { IconButton, SectionWrapper } = loadDynamicImports("common", [
+const { IconButton, SectionWrapper } = dynamicImportComponents("common", [
   "IconButton",
   "SectionWrapper",
 ]);
-const { WorksPreloader } = loadDynamicImports("preloaders", ["WorksPreloader"]);
+const { LogoPreloader } = dynamicImportComponents("preloaders", [
+  "LogoPreloader",
+]);
 
 const sectionsConfig = [
   { component: "LandingPageSection", projectKey: "LandingPictures" },
@@ -22,7 +22,7 @@ const sectionsConfig = [
   { component: "WorkBanner", projectKey: "City69" },
 ];
 
-const dynamicComponents = loadDynamicImports("sections/home", [
+const dynamicComponents = dynamicImportComponents("sections/home", [
   ...new Set(sectionsConfig.map((s) => s.component)),
 ]);
 

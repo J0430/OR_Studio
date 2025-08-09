@@ -1,0 +1,155 @@
+@use "@styles/partials/variables" as v;
+@use "@styles/partials/mixins" as m;
+
+/* ---------- Button shell (glassy, like your IconButton) ---------- */
+.sendButton {
+  /* CSS vars are set inline from TS */
+  --h: 2.5rem;
+  --w-collapsed: var(--h);
+  --w-expanded: 7rem;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: var(--w-collapsed);
+  height: var(--h);
+
+  border: m.rem(0.3) solid rgba(255, 255, 255, 0.3);
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.135);
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+
+  transition:
+    width 0.28s cubic-bezier(0.2, 0.6, 0.4, 1),
+    background-color 0.3s ease,
+    border-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible,
+  &[data-expanded="true"] {
+    width: var(--w-expanded);
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+/* Inner content */
+.content {
+  display: inline-flex;
+  align-items: center;
+  gap: m.rem(9);
+  padding-inline: m.rem(14);
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Label reveals when expanded/hover/focus */
+.label {
+  color: v.$white;
+  font-size: m.rem(15);
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+
+  opacity: 0;
+  transform: translateX(m.rem(6));
+  clip-path: inset(0 100% 0 0);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease,
+    clip-path 0.22s ease;
+}
+
+.sendButton:hover .label,
+.sendButton:focus-visible .label,
+.sendButton[data-expanded="true"] .label {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0% 0 0);
+}
+
+/* Focus ring — visible for keyboard users */
+.focusRing {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(10, 132, 255, 0);
+}
+.sendButton:focus-visible .focusRing {
+  box-shadow: 0 0 0 m.rem(2) rgba(10, 132, 255, 0.7);
+  transition: box-shadow 0.15s ease;
+}
+
+/* ---------- 3-line arrow (no animation) ---------- */
+.arrow3 {
+  --arrow-size: 1.1rem;
+  --arrow-thickness: 2px;
+  /* default dark arrow like the screenshot; override if needed */
+  --arrow-color: #121212;
+
+  position: relative;
+  display: inline-block;
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  pointer-events: none;
+}
+
+/* common stroke styles */
+.stem,
+.armL,
+.armR {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--arrow-color);
+  border-radius: 999px;
+}
+
+/* vertical stem */
+.stem {
+  top: 22%;
+  width: var(--arrow-thickness);
+  height: 58%;
+}
+
+/* arms */
+.armL,
+.armR {
+  top: 12%;
+  width: var(--arrow-thickness);
+  height: 42%;
+  transform-origin: bottom center;
+}
+.armL { transform: translateX(-50%) rotate(-45deg); }
+.armR { transform: translateX(-50%) rotate(45deg); }
+
+/* rotate whole glyph for direction */
+.dir_up    { transform: rotate(0deg); }
+.dir_down  { transform: rotate(180deg); }
+.dir_left  { transform: rotate(-90deg); }
+.dir_right { transform: rotate(90deg); }
+
+/* Reduced motion: label stays visible to avoid abrupt pop */
+@media (prefers-reduced-motion: reduce) {
+  .label {
+    opacity: 1;
+    clip-path: none;
+    transform: none;
+    transition: none;
+  }
+}

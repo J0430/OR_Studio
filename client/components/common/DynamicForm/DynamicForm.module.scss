@@ -5,17 +5,17 @@
 /* ✅ General Form Styling     */
 /* =========================== */
 .contactForm {
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 0.375rem;
   border: 1px solid rgba(61, 68, 77, 0.7);
-  background-color: rgba(21, 27, 35, 0.87);
+  background-color: rgba(21, 27, 35, 0.8);
   width: 100%;
   max-width: 600px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   box-sizing: border-box;
-
+  border-radius: 1.375rem;
   /* Logo wrapper */
   .logoWrapper {
     margin-bottom: 1rem;
@@ -114,36 +114,124 @@
   }
 }
 
-/* =========================== */
-/* ✅ Mobile Adjustments       */
-/* =========================== */
-@media screen and (max-width: 768px) {
-  .contactForm {
-    padding: 1rem;
-    /* Mobile: Reduce padding */
-    text-align: left; /* Left align text for better reading */
+/* DynamicForm.module.scss */
+// @use "@styles/partials/variables" as v;
+// @use "@styles/partials/mixins" as m;
 
-    .logoWrapper {
-      margin-bottom: 0.5rem; /* Less spacing for mobile */
-    }
+// .contactForm {
+//   width: 100%;
+//   max-width: 620px;
+//   margin: 0 auto;
+//   padding: clamp(1rem, 3vw, 2rem);
+//   border-radius: 1.375rem;
+//   border: 1px solid rgba(61, 68, 77, 0.7);
+//   background-color: rgba(21, 27, 35, 0.87);
+//   width: 100%;
+//   max-width: 600px;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 0.5rem;
+//   box-sizing: border-box;
+// }
 
-    .formRow {
-      flex-direction: column; /* Stack inputs vertically */
-      gap: 0.5rem; /* Less gap on mobile */
+// .formRow {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   gap: clamp(0.75rem, 2vw, 1rem);
+// }
 
-      .formGroup {
-        width: 100%; /* Full width on mobile */
-      }
-    }
+// .formGroup {
+//   width: 100%;
+// }
 
-    .submitButton {
-      width: 25%; /* Full width button on mobile */
-      padding: 0.3rem 0; /* Adjust padding for mobile */
-    }
-  }
-}
+// /* Submit button */
+// .submitButton {
+//   align-self: flex-start;
+//   min-height: 44px;
+//   padding: 0.6rem 1.1rem;
+//   border-radius: 14px;
+//   border: 1px solid rgba(255, 255, 255, 0.18);
+//   background: #000;
+//   color: rgba(255, 255, 255, 0.85);
+//   font-weight: 600;
+//   letter-spacing: 0.2px;
+//   cursor: pointer;
+//   transition:
+//     transform 0.06s ease,
+//     background 0.25s ease,
+//     color 0.25s ease,
+//     box-shadow 0.25s ease;
+//   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 
-.successMessage {
-  color: rgb(156, 210, 156);
-  text-align: center;
-}
+//   &:hover {
+//     background: rgba(255, 255, 255, 0.12);
+//   }
+//   &:focus-visible {
+//     outline: none;
+//     box-shadow: 0 0 0 2px #58aae9 0 0 0 6px rgba(88, 170, 233, 0.35);
+//   }
+//   &:disabled {
+//     opacity: 0.7;
+//     cursor: not-allowed;
+//   }
+// }
+
+// /* Messages */
+// .errorMessage {
+//   color: rgba(255, 0, 0, 0.4);
+//   text-align: left;
+//   margin-top: 0.25rem;
+// }
+// .successMessage {
+//   color: #9cd29c;
+//   text-align: left;
+//   margin-top: 0.25rem;
+// }
+
+// /* Mobile */
+// @media (max-width: 768px) {
+//   .formRow {
+//     grid-template-columns: 1fr;
+//   }
+//   .submitButton {
+//     width: 100%;
+//   }
+// }
+
+// /* Respect users who prefer less motion */
+// @media (prefers-reduced-motion: reduce) {
+//   .submitButton {
+//     transition: none;
+//   }
+// }
+
+// @media screen and (max-width: 768px) {
+//   .contactForm {
+//     padding: 1rem;
+//     /* Mobile: Reduce padding */
+//     text-align: left; /* Left align text for better reading */
+
+//     .logoWrapper {
+//       margin-bottom: 0.5rem; /* Less spacing for mobile */
+//     }
+
+//     .formRow {
+//       flex-direction: column; /* Stack inputs vertically */
+//       gap: 0.5rem; /* Less gap on mobile */
+
+//       .formGroup {
+//         width: 100%; /* Full width on mobile */
+//       }
+//     }
+
+//     .submitButton {
+//       width: 25%; /* Full width button on mobile */
+//       padding: 0.3rem 0; /* Adjust padding for mobile */
+//     }
+//   }
+// }
+
+// .successMessage {
+//   color: rgb(156, 210, 156);
+//   text-align: center;
+// }
